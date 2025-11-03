@@ -20,10 +20,11 @@ export default withData(
       <>
         <h2>Stats</h2>
         {table(
-          ["", "Base stat"],
+          [undefined, "Base stat", "Effort"],
           pokemon.stats.map((pokemonStat) => [
             Pokedex.formatName(pokemonStat.stat.name),
             pokemonStat.base_stat,
+            pokemonStat.effort,
           ]),
           <tr>
             <th>Min / Max / Total</th>
@@ -34,7 +35,19 @@ export default withData(
                 pokemonBaseStats.reduce((a, b) => a + b, 0),
               ].join(" / ")}
             </td>
+            <td />
           </tr>
+        )}
+        <h2>Abilities</h2>
+        {table(
+          [undefined, "Hidden", "Slot"],
+          pokemon.abilities.map((pokemonAbility) => [
+            Pokedex.formatName(pokemonAbility.ability.name),
+            pokemonAbility.is_hidden && (
+              <input readOnly type="checkbox" checked />
+            ),
+            pokemonAbility.slot,
+          ])
         )}
       </>
     );

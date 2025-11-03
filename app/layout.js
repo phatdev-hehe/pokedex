@@ -1,14 +1,13 @@
 import { RootProvider } from "fumadocs-ui/provider/next";
 import "fumadocs-ui/style.css";
-import { Inter } from "next/font/google";
+import { Geist } from "next/font/google";
 
-const inter = Inter({
-  subsets: ["latin"],
-});
+const font = Geist();
 
 export default ({ children }) => (
-  <html lang="en" className={inter.className} suppressHydrationWarning>
+  <html lang="en" className={font.className} suppressHydrationWarning>
     <body
+      // https://fumadocs.dev/docs/ui/manual-installation/next#root-layout
       style={{
         display: "flex",
         flexDirection: "column",

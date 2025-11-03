@@ -1,5 +1,5 @@
 import { capitalCase } from "change-case";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
 import "server-only";
 
@@ -20,7 +20,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
         async ({ params }) => {
           const { name } = await params;
 
-          if (!names.includes(name)) redirect("/");
+          if (!names.includes(name)) notFound();
 
           try {
             const data = await Pokedex[getData](name);
@@ -36,7 +36,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
               </>
             );
           } catch {
-            redirect("/");
+            notFound();
           }
         },
     };
