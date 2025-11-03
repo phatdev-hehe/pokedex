@@ -1,3 +1,5 @@
+import logoSrc from "@/logo.gif";
+import { Image } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 
@@ -14,9 +16,10 @@ const createDocsLayoutTree = async ([getList, path]) => {
   };
 };
 
-const DocsLayoutTree1 = await Promise.all(
-  [["getPokemonsList", "pokemon"]].map(createDocsLayoutTree)
-);
+const DocsLayoutTree1 = await createDocsLayoutTree([
+  "getPokemonsList",
+  "pokemon",
+]);
 
 const DocsLayoutTree2 = await Promise.all(
   [
@@ -32,10 +35,13 @@ const DocsLayoutTree2 = await Promise.all(
 
 export default ({ children }) => (
   <DocsLayout
+    nav={{
+      title: <Image width={80} src={logoSrc} />,
+    }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
-        ...DocsLayoutTree1,
+        ...DocsLayoutTree1.children,
         { type: "separator", name: "NOT_AVAILABLE" },
         ...DocsLayoutTree2,
       ],
