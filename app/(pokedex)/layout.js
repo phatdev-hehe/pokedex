@@ -1,28 +1,30 @@
-import { Pokedex } from "@/pokedex-promise-v2";
+import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 
-const pokemonsList = await Pokedex.getPokemonsList();
-const itemsList = await Pokedex.getItemsList();
-const movesList = await Pokedex.getMovesList();
+const DocsLayoutTree = await Promise.all(
+  [
+    ["getPokemonsList", "pokemon"],
+    ["getItemsList", "item"],
+    ["getMovesList", "move"],
+    ["getStatsList", "stat"],
+  ].map(async ([getList, path]) => {
+    const data = await Pokedex[getList]();
 
-const createNode = (data, path) => ({
-  name: `${data.count} ${path}`,
-  type: "folder",
-  children: data.results.map(({ name }) => ({
-    name: Pokedex.formatName(name),
-    url: `/${path}/${name}`,
-  })),
-});
+    return {
+      name: `${data.count} ${path}`,
+      type: "folder",
+      children: data.results.map(({ name }) => ({
+        name: Pokedex.formatName(name),
+        url: `/${path}/${name}`,
+      })),
+    };
+  })
+);
 
 export default ({ children }) => (
   <DocsLayout
-    tree={{
-      children: [
-        createNode(pokemonsList, "pokemon"),
-        createNode(itemsList, "item"),
-        createNode(movesList, "move"),
-      ],
-    }}
+    githubUrl="https://www.youtube.com/watch?v=00Qvn3MoYOI"
+    tree={{ children: DocsLayoutTree }}
   >
     <div
       className="prose" // https://fumadocs.dev/docs/ui/theme#typography
