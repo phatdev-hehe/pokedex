@@ -36,7 +36,7 @@ const DocsLayoutTree2 = await Promise.all(
 export default ({ children }) => (
   <DocsLayout
     nav={{
-      title: <Image width={80} src={logoSrc} />,
+      title: <Image width={40} src={logoSrc} />,
     }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
