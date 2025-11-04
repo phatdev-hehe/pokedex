@@ -55,7 +55,25 @@ export default withData(
               </DescriptionList>,
               pokemon.height,
             ],
+            [
+              <DescriptionList term="Weight">
+                The weight of this Pokémon in hectograms.
+              </DescriptionList>,
+              pokemon.weight,
+            ],
           ]
+        )}
+        <DescriptionList term={<h2>Sprites</h2>}>
+          A set of sprites used to depict this Pokémon in the game. A visual
+          representation of the various sprites can be found at PokeAPI/sprites
+        </DescriptionList>
+        {table.fromObject(
+          [undefined, "Value"],
+          pokemon.sprites,
+          Pokedex.formatName,
+          (src) => (
+            <Pokedex.Image src={src} />
+          )
         )}
         <DescriptionList term={<h2>Stats</h2>}>
           A list of base stat values for this Pokémon.
@@ -99,6 +117,16 @@ export default withData(
           Object.entries(pokemon.cries).map(([input, src]) => [
             Pokedex.formatName(input),
             <Audio src={src} />,
+          ])
+        )}
+        <DescriptionList term={<h2>Types</h2>}>
+          A list of details showing types this Pokémon has.
+        </DescriptionList>
+        {table(
+          ["Slot", undefined],
+          pokemon.types.map((pokemonType) => [
+            pokemonType.slot,
+            Pokedex.formatName(pokemonType.type.name),
           ])
         )}
         <DescriptionList term={<h2>Held Items</h2>}>

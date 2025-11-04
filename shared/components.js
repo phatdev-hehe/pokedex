@@ -1,26 +1,43 @@
+import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
 import { Children, useId } from "react";
 
-export const table = (thead, tbody, tfoot) => (
-  <table>
-    <thead>
-      <tr>
-        {thead.map((value, key) => (
-          <th key={key}>{value}</th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>
-      {tbody.map((value, key) => (
-        <tr key={key}>
-          {value.map((value, key) => (
-            <td key={key}>{value}</td>
+export const table = Object.assign(
+  (thead, tbody, tfoot) => (
+    <table>
+      <thead>
+        <tr>
+          {thead.map((value, key) => (
+            <th key={key}>{value}</th>
           ))}
         </tr>
-      ))}
-    </tbody>
-    <tfoot>{tfoot}</tfoot>
-  </table>
+      </thead>
+      <tbody>
+        {tbody.map((value, key) => (
+          <tr key={key}>
+            {value.map((value, key) => (
+              <td key={key}>{value}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>{tfoot}</tfoot>
+    </table>
+  ),
+  {
+    fromObject: (thead, tbody, formatKey, formatValue) => {
+      if (isPlainObject(tbody))
+        return table(
+          thead,
+          Object.entries(tbody).map(([key, value]) => [
+            formatKey(key),
+            table.fromObject(thead, value, formatKey, formatValue),
+          ])
+        );
+
+      return formatValue(tbody);
+    },
+  }
 );
 
 export const Audio = (props) => <audio controls {...props} />;

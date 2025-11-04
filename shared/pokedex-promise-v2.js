@@ -5,6 +5,9 @@ import "server-only";
 
 export const Pokedex = Object.assign(new PokeAPI(), {
   formatName: capitalCase,
+  Image: ({ style, ...props }) => (
+    <img style={{ maxWidth: 100, ...style }} {...props} />
+  ),
   buildPage: async ({ getList, getData, metadataTitleSuffix }) => {
     const names = (await Pokedex[getList]()).results.map(({ name }) => name);
 
@@ -39,9 +42,8 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                   position: "relative",
                 }}
               >
-                <img
+                <Pokedex.Image
                   style={{
-                    maxWidth: 100,
                     alignSelf: "center",
                     position: "fixed",
                   }}
