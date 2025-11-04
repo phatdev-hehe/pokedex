@@ -25,7 +25,12 @@ export const table = Object.assign(
     </table>
   ),
   {
-    fromObject: (thead, tbody, formatKey, formatValue) => {
+    fromObject: (
+      thead,
+      tbody,
+      formatKey = JSON.stringify,
+      formatValue = JSON.stringify
+    ) => {
       if (isPlainObject(tbody))
         return table(
           thead,

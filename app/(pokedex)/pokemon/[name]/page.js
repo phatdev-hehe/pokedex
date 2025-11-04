@@ -12,9 +12,14 @@ export { generateMetadata, generateStaticParams };
 
 export default withData(
   /** @param {{ data: Pokemon }} */
-  ({ data: pokemon }) => {
+  async ({ data: pokemon }) => {
     const pokemonBaseStats = pokemon.stats.map(
       (statElement) => statElement.base_stat
+    );
+
+    /** @type PokemonEncounter[] */
+    const pokemonLocationAreaEncounters = await Pokedex.getResource(
+      pokemon.location_area_encounters
     );
 
     return (
@@ -129,6 +134,43 @@ export default withData(
             Pokedex.formatName(pokemonType.type.name),
           ])
         )}
+        <DescriptionList term={<h2>Location Area Encounters</h2>}>
+          Encounter details pertaining to specific versions.
+        </DescriptionList>
+        {table(
+          [undefined, "Version Details"],
+          pokemonLocationAreaEncounters.map((pokemonEncounter) => [
+            Pokedex.formatName(pokemonEncounter.location_area.name),
+            table(
+              [undefined, "Max Chance", "Encounter Details"],
+              pokemonEncounter.version_details.map((versionEncounterDetail) => [
+                Pokedex.formatName(versionEncounterDetail.version.name),
+                versionEncounterDetail.max_chance,
+                table(
+                  [
+                    undefined,
+                    "Chance",
+                    "Min Level",
+                    "Max Level",
+                    "Condition Values",
+                  ],
+                  versionEncounterDetail.encounter_details.map((encounter) => [
+                    Pokedex.formatName(encounter.method.name),
+                    encounter.chance,
+                    encounter.min_level,
+                    encounter.max_level,
+                    table(
+                      ["Name"],
+                      encounter.condition_values.map(({ name }) => [
+                        Pokedex.formatName(name),
+                      ])
+                    ),
+                  ])
+                ),
+              ])
+            ),
+          ])
+        )}
         <DescriptionList term={<h2>Held Items</h2>}>
           A list of items this Pokémon may be holding when encountered.
         </DescriptionList>
@@ -153,6 +195,15 @@ export default withData(
           pokemon.game_indices.map(({ game_index, version }) => [
             game_index,
             Pokedex.formatName(version.name),
+          ])
+        )}
+        <DescriptionList term={<h2>Forms</h2>}>
+          A list of forms this Pokémon can take on.
+        </DescriptionList>
+        {table(
+          ["Name"],
+          pokemon.forms.map((pokemonFrom) => [
+            Pokedex.formatName(pokemonFrom.name),
           ])
         )}
         <DescriptionList term={<h2>Moves</h2>}>

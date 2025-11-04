@@ -42,6 +42,15 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                   position: "relative",
                 }}
               >
+                <small
+                  style={{
+                    alignSelf: "end",
+                    position: "fixed",
+                  }}
+                >
+                  {names.findIndex((value) => value === name) + 1} /{" "}
+                  {names.length}
+                </small>
                 <Pokedex.Image
                   style={{
                     alignSelf: "center",
@@ -59,7 +68,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                   <div
                     style={{ backgroundColor: "var(--color-fd-background)" }}
                   >
-                    {children({ data })}
+                    {await children({ data })}
                   </div>
                 </div>
               </div>
