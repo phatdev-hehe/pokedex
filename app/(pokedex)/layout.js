@@ -1,4 +1,4 @@
-import logoSrc from "@/logo.gif";
+import logoSrc from "@/logo.jpg";
 import { Image } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
@@ -36,7 +36,7 @@ const DocsLayoutTree2 = await Promise.all(
 export default ({ children }) => (
   <DocsLayout
     nav={{
-      title: <Image width={40} src={logoSrc} />,
+      title: <Image width={50} src={logoSrc} />,
     }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{

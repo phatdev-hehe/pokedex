@@ -113,6 +113,30 @@ export default withData(
             Pokedex.formatName(version.name),
           ])
         )}
+        <DescriptionList term={<h2>Moves</h2>}>
+          A list of moves along with learn methods and level details pertaining
+          to specific version groups.
+        </DescriptionList>
+        {table(
+          [undefined, "Version Group Details"],
+          pokemon.moves.map((moveElement) => [
+            Pokedex.formatName(moveElement.move.name),
+            table(
+              [
+                "Order",
+                "Level Learned At",
+                "Move Learn Method",
+                "Version Group",
+              ],
+              moveElement.version_group_details.map((versionGroupDetail) => [
+                versionGroupDetail.order, // ??
+                versionGroupDetail.level_learned_at,
+                Pokedex.formatName(versionGroupDetail.move_learn_method.name),
+                Pokedex.formatName(versionGroupDetail.version_group.name),
+              ])
+            ),
+          ])
+        )}
       </>
     );
   }

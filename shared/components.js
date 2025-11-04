@@ -38,10 +38,12 @@ export const Image = (props) => {
 export const DescriptionList = ({ term, children }) => (
   <dl>
     <dt>{term}</dt>
-    <blockquote style={{ fontWeight: "initial" }}>
+    <dd>
       {Children.map(children, (children) => (
-        <dd>{children}</dd>
+        <blockquote style={{ fontWeight: "initial", fontStyle: "initial" }}>
+          {children}
+        </blockquote>
       ))}
-    </blockquote>
+    </dd>
   </dl>
 );
