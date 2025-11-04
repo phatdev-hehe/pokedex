@@ -5,15 +5,21 @@ import "server-only";
 
 export const Pokedex = Object.assign(new PokeAPI(), {
   formatName: capitalCase,
-  buildPage: async ({ getList, getData }) => {
+  buildPage: async ({ getList, getData, metadataTitleSuffix }) => {
     const names = (await Pokedex[getList]()).results.map(({ name }) => name);
 
     return {
       generateStaticParams: () => names.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
-        const { name } = await params;
+        let { name } = await params;
 
-        return { title: Pokedex.formatName(name) };
+        name = Pokedex.formatName(name);
+
+        return {
+          title: metadataTitleSuffix
+            ? `${name} (${metadataTitleSuffix})`
+            : name,
+        };
       },
       withData:
         (children) =>
@@ -26,14 +32,35 @@ export const Pokedex = Object.assign(new PokeAPI(), {
             const data = await Pokedex[getData](name);
 
             return (
-              <>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "relative",
+                }}
+              >
                 <img
-                  style={{ maxWidth: 100 }}
+                  style={{
+                    maxWidth: 100,
+                    alignSelf: "center",
+                    position: "fixed",
+                  }}
                   src={data.sprites?.default ?? data.sprites?.front_default}
                 />
-                <h1>{Pokedex.formatName(data.name)}</h1>
-                {children({ data })}
-              </>
+                <div
+                  style={{
+                    position: "relative",
+                    top: "10rem",
+                  }}
+                >
+                  <h1>{Pokedex.formatName(data.name)}</h1>
+                  <div
+                    style={{ backgroundColor: "var(--color-fd-background)" }}
+                  >
+                    {children({ data })}
+                  </div>
+                </div>
+              </div>
             );
           } catch {
             notFound();

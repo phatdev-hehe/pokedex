@@ -1,4 +1,4 @@
-import logoSrc from "@/logo.jpg";
+import logoSrc from "@/logo.gif";
 import { Image } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";

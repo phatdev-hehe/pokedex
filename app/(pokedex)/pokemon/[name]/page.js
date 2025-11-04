@@ -5,6 +5,7 @@ const { generateMetadata, generateStaticParams, withData } =
   await Pokedex.buildPage({
     getList: "getPokemonsList",
     getData: "getPokemonByName",
+    metadataTitleSuffix: "Pokémon",
   });
 
 export { generateMetadata, generateStaticParams };
@@ -22,6 +23,19 @@ export default withData(
           [undefined, "Value"],
           [
             ["Id", pokemon.id],
+            [
+              <DescriptionList term="Species">
+                The species this Pokémon belongs to.
+              </DescriptionList>,
+              Pokedex.formatName(pokemon.species.name),
+            ],
+            [
+              <DescriptionList term="Order">
+                Order for sorting. Almost national order, except families are
+                grouped together.
+              </DescriptionList>,
+              pokemon.order,
+            ],
             [
               <DescriptionList term="Default">
                 Set for exactly one Pokémon used as the default for each
@@ -51,7 +65,7 @@ export default withData(
           pokemon.stats.map((statElement) => [
             Pokedex.formatName(statElement.stat.name),
             statElement.base_stat,
-            !!statElement.effort && statElement.effort,
+            statElement.effort,
           ]),
           <tr>
             <th>Min / Max / Total</th>

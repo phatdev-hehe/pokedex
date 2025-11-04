@@ -1,6 +1,7 @@
 import { RootProvider } from "fumadocs-ui/provider/next";
 import "fumadocs-ui/style.css";
 import { Geist } from "next/font/google";
+import "./globals.css";
 
 const font = Geist();
 
