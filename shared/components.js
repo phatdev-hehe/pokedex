@@ -1,6 +1,6 @@
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
-import { Children, useId } from "react";
+import { Children, Fragment, useId } from "react";
 
 export const table = Object.assign(
   (thead, tbody, tfoot) => (
@@ -44,6 +44,14 @@ export const table = Object.assign(
     },
   }
 );
+
+export const sections = (...sections) =>
+  sections.map(([title, description, content], key) => (
+    <Fragment key={key}>
+      <DescriptionList term={<h2>{title}</h2>}>{description}</DescriptionList>
+      {content}
+    </Fragment>
+  ));
 
 export const Audio = (props) => <audio controls {...props} />;
 
