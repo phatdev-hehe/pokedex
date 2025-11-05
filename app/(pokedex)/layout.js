@@ -16,10 +16,12 @@ const createDocsLayoutTree = async ([getList, path]) => {
   };
 };
 
-const DocsLayoutTree1 = await createDocsLayoutTree([
-  "getPokemonsList",
-  "pokemon",
-]);
+const DocsLayoutTree1 = await Promise.all(
+  [
+    ["getPokemonsList", "pokemon"],
+    ["getPokemonSpeciesList", "pokemon-species"],
+  ].map(createDocsLayoutTree)
+);
 
 const DocsLayoutTree2 = await Promise.all(
   [
@@ -41,7 +43,7 @@ export default ({ children }) => (
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
-        ...DocsLayoutTree1.children,
+        ...DocsLayoutTree1,
         { type: "separator", name: "NOT_AVAILABLE" },
         ...DocsLayoutTree2,
       ],

@@ -1,10 +1,4 @@
-import {
-  Audio,
-  Checkbox,
-  DescriptionList,
-  sections,
-  table,
-} from "@/shared/components";
+import { Audio, Checkbox, sections, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 
 const { generateMetadata, generateStaticParams, withData } =
@@ -30,50 +24,20 @@ export default withData(
 
     return (
       <>
-        {table(
-          [undefined, "Value"],
-          [
-            ["Id", pokemon.id],
+        {
+          // pokemon.is_default
+          table(
+            [undefined, "Value"],
             [
-              <DescriptionList term="Species">
-                The species this Pokémon belongs to.
-              </DescriptionList>,
-              Pokedex.formatName(pokemon.species.name),
-            ],
-            [
-              <DescriptionList term="Order">
-                Order for sorting. Almost national order, except families are
-                grouped together.
-              </DescriptionList>,
-              pokemon.order,
-            ],
-            [
-              <DescriptionList term="Default">
-                Set for exactly one Pokémon used as the default for each
-                species.
-              </DescriptionList>,
-              <Checkbox checked={pokemon.is_default} />,
-            ],
-            [
-              <DescriptionList term="Base Experience">
-                The base experience gained for defeating this Pokémon.
-              </DescriptionList>,
-              pokemon.base_experience,
-            ],
-            [
-              <DescriptionList term="Height">
-                The height of this Pokémon in decimetres.
-              </DescriptionList>,
-              pokemon.height,
-            ],
-            [
-              <DescriptionList term="Weight">
-                The weight of this Pokémon in hectograms.
-              </DescriptionList>,
-              pokemon.weight,
-            ],
-          ]
-        )}
+              ["Id", pokemon.id],
+              ["Species", Pokedex.formatName(pokemon.species.name)],
+              ["Order", pokemon.order],
+              ["Base Experience", pokemon.base_experience],
+              ["Height", pokemon.height],
+              ["Weight", pokemon.weight],
+            ]
+          )
+        }
         {sections(
           [
             "Sprites",
