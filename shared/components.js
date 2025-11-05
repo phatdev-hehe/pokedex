@@ -1,3 +1,5 @@
+import { kebabCase } from "change-case";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
 import { Children, Fragment, useId } from "react";
@@ -45,13 +47,30 @@ export const table = Object.assign(
   }
 );
 
+export const tabs = (items, tabs) => (
+  <Tabs updateAnchor items={items}>
+    {tabs.map((tab, index) => {
+      const item = items[index];
+
+      return (
+        <Tab id={kebabCase(item)} value={item} key={item}>
+          {tab}
+        </Tab>
+      );
+    })}
+  </Tabs>
+);
+
 export const sections = (...sections) =>
-  sections.map(([title, description, content], key) => (
-    <Fragment key={key}>
-      <DescriptionList term={<h2>{title}</h2>}>{description}</DescriptionList>
-      {content}
-    </Fragment>
-  ));
+  tabs(
+    sections.map(([item]) => item),
+    sections.map(([, description, content], key) => (
+      <Fragment key={key}>
+        <DescriptionList>{description}</DescriptionList>
+        {content}
+      </Fragment>
+    ))
+  );
 
 export const Audio = (props) => <audio controls {...props} />;
 

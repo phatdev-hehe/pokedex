@@ -1,5 +1,6 @@
 import { Audio, Checkbox, sections, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import Link from "next/link";
 
 const { generateMetadata, generateStaticParams, withData } =
   await Pokedex.createPage({
@@ -30,9 +31,20 @@ export default withData(
             [undefined, "Value"],
             [
               ["Id", pokemon.id],
-              ["Species", Pokedex.formatName(pokemon.species.name)],
-              ["Order", pokemon.order],
-              ["Base Experience", pokemon.base_experience],
+              [
+                "Species",
+                <Link href={`/pokemon-species/${pokemon.species.name}`}>
+                  {Pokedex.formatName(pokemon.species.name)}
+                </Link>,
+              ],
+              [
+                "Order for sorting. Almost national order, except families are grouped together.",
+                pokemon.order,
+              ],
+              [
+                "The base experience gained for defeating this Pokémon.",
+                pokemon.base_experience,
+              ],
               ["Height", pokemon.height],
               ["Weight", pokemon.weight],
             ]

@@ -6,7 +6,7 @@ import "server-only";
 export const Pokedex = Object.assign(new PokeAPI(), {
   formatName: capitalCase,
   Image: ({ style, ...props }) => (
-    <img style={{ maxWidth: 100, ...style }} {...props} />
+    <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
   createPage: async ({ getList, getData, metadataTitleSuffix }) => {
     const names = (await Pokedex[getList]()).results.map(({ name }) => name);

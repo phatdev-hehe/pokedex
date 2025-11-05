@@ -37,6 +37,7 @@ const DocsLayoutTree2 = await Promise.all(
 
 export default ({ children }) => (
   <DocsLayout
+    sidebar={{ prefetch: false }}
     nav={{
       title: <Image width={50} src={logoSrc} />,
     }}
