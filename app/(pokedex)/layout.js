@@ -20,6 +20,7 @@ const DocsLayoutTree1 = await Promise.all(
   [
     ["getPokemonsList", "pokemon"],
     ["getPokemonSpeciesList", "pokemon-species"],
+    ["getStatsList", "stat"],
   ].map(createDocsLayoutTree)
 );
 
@@ -29,7 +30,6 @@ const DocsLayoutTree2 = await Promise.all(
     ["getGendersList", "gender"],
     ["getItemsList", "item"],
     ["getMovesList", "move"],
-    ["getStatsList", "stat"],
     ["getTypesList", "type"],
     ["getNaturesList", "nature"],
   ].map(createDocsLayoutTree)
@@ -37,7 +37,6 @@ const DocsLayoutTree2 = await Promise.all(
 
 export default ({ children }) => (
   <DocsLayout
-    sidebar={{ prefetch: false }}
     nav={{
       title: <Image width={50} src={logoSrc} />,
     }}

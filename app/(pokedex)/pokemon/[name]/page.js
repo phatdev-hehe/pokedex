@@ -2,16 +2,16 @@ import { Audio, Checkbox, sections, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import Link from "next/link";
 
-const { generateMetadata, generateStaticParams, withData } =
-  await Pokedex.createPage({
-    getList: "getPokemonsList",
-    getData: "getPokemonByName",
-    titleSuffix: "Pokémon",
-  });
+const page = await Pokedex.createPage({
+  getList: "getPokemonsList",
+  getData: "getPokemonByName",
+  titleSuffix: "Pokémon",
+});
 
-export { generateMetadata, generateStaticParams };
+export const generateMetadata = page.generateMetadata;
+export const generateStaticParams = page.generateStaticParams;
 
-export default withData(async ({ data }) => {
+export default page.withData(async ({ data }) => {
   /** @type Pokemon */
   const pokemon = data;
 
@@ -68,7 +68,9 @@ export default withData(async ({ data }) => {
           table(
             [undefined, "Base stat", "Effort"],
             pokemon.stats.map((statElement) => [
-              Pokedex.formatName(statElement.stat.name),
+              <Link href={`/stat/${statElement.stat.name}`}>
+                {Pokedex.formatName(statElement.stat.name)}
+              </Link>,
               statElement.base_stat,
               statElement.effort,
             ]),

@@ -2,23 +2,21 @@ import { Checkbox, sections, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import Link from "next/link";
 
-const { generateMetadata, generateStaticParams, withData } =
-  await Pokedex.createPage({
-    getList: "getPokemonSpeciesList",
-    getData: "getPokemonSpeciesByName",
-    titleSuffix: "Pokémon Species",
-  });
+const page = await Pokedex.createPage({
+  getList: "getPokemonSpeciesList",
+  getData: "getPokemonSpeciesByName",
+  titleSuffix: "Pokémon Species",
+});
 
-export { generateMetadata, generateStaticParams };
+export const generateMetadata = page.generateMetadata;
+export const generateStaticParams = page.generateStaticParams;
 
-export default withData(({ data }) => {
+export default page.withData(({ data }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = data;
 
   const previousPokemonSpeciesName =
     pokemonSpecies.evolves_from_species?.name ?? "";
-
-  console.log(pokemonSpecies);
 
   return (
     <>
@@ -164,10 +162,10 @@ export default withData(({ data }) => {
           ),
         ],
         [
-          "Pokedex Numbers",
+          "Pokédex Numbers",
           "A list of Pokedexes and the indexes reserved within them for this Pokémon species.",
           table(
-            [undefined, "Pokedex"],
+            [undefined, "Pokédex"],
             pokemonSpecies.pokedex_numbers.map((pokedexNumber) => [
               pokedexNumber.entry_number,
               Pokedex.formatName(pokedexNumber.pokedex.name),
