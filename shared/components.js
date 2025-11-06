@@ -66,7 +66,7 @@ export const sections = (...sections) =>
     sections.map(([item]) => item),
     sections.map(([, description, content], key) => (
       <Fragment key={key}>
-        <DescriptionList>{description}</DescriptionList>
+        {description && <DescriptionList>{description}</DescriptionList>}
         {content}
       </Fragment>
     ))

@@ -45,7 +45,7 @@ export default ({ children }) => (
     tree={{
       children: [
         ...DocsLayoutTree1,
-        { type: "separator", name: "NOT_AVAILABLE" },
+        { type: "separator", name: "UNAVAILABLE" },
         ...DocsLayoutTree2,
       ],
     }}

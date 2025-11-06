@@ -8,21 +8,21 @@ export const Pokedex = Object.assign(new PokeAPI(), {
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
-  createPage: async ({ getList, getData, metadataTitleSuffix }) => {
+  createPage: async ({ getList, getData, titleSuffix }) => {
     const names = (await Pokedex[getList]()).results.map(({ name }) => name);
+
+    const createTitle = (title) => {
+      title = Pokedex.formatName(title);
+
+      return titleSuffix ? `${title} (${titleSuffix})` : title;
+    };
 
     return {
       generateStaticParams: () => names.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
-        let { name } = await params;
+        const { name } = await params;
 
-        name = Pokedex.formatName(name);
-
-        return {
-          title: metadataTitleSuffix
-            ? `${name} (${metadataTitleSuffix})`
-            : name,
-        };
+        return { title: createTitle(name) };
       },
       withData:
         (render) =>
@@ -66,7 +66,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                     top: "10rem",
                   }}
                 >
-                  <h1>{Pokedex.formatName(data.name)}</h1>
+                  <h1>{createTitle(name)}</h1>
                   <div
                     style={{ backgroundColor: "var(--color-fd-background)" }}
                   >
