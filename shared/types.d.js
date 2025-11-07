@@ -3,4 +3,5 @@
  * @typedef {import('pokedex-promise-v2').PokemonEncounter} PokemonEncounter
  * @typedef {import('pokedex-promise-v2').PokemonSpecies} PokemonSpecies
  * @typedef {import('pokedex-promise-v2').Stat} Stat
+ * @typedef {import('pokedex-promise-v2').Type} Type
  */
