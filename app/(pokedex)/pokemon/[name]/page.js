@@ -32,28 +32,29 @@ export default page.withData(async ({ data }) => {
 
   return (
     <>
-      {
-        // pokemon.is_default
-        table(undefined, [
-          ["Id", pokemon.id],
-          [
-            "Species",
-            <Link href={`/pokemon-species/${pokemon.species.name}`}>
-              {Pokedex.formatName(pokemon.species.name)}
-            </Link>,
-          ],
-          [
-            "Order for sorting. Almost national order, except families are grouped together.",
-            pokemon.order,
-          ],
-          [
-            "The base experience gained for defeating this Pokémon.",
-            pokemon.base_experience,
-          ],
-          ["Height", pokemon.height],
-          ["Weight", pokemon.weight],
-        ])
-      }
+      {table(undefined, [
+        ["Id", pokemon.id],
+        [
+          "Species",
+          <Link href={`/pokemon-species/${pokemon.species.name}`}>
+            {Pokedex.formatName(pokemon.species.name)}
+          </Link>,
+        ],
+        [
+          "Set for exactly one Pokémon used as the default for each species.",
+          <Checkbox checked={pokemon.is_default} />,
+        ],
+        [
+          "Order for sorting. Almost national order, except families are grouped together.",
+          pokemon.order,
+        ],
+        [
+          "The base experience gained for defeating this Pokémon.",
+          pokemon.base_experience,
+        ],
+        ["Height", pokemon.height],
+        ["Weight", pokemon.weight],
+      ])}
       {page.sections(
         [
           "Sprites",

@@ -1,5 +1,6 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
-import { capitalCase } from "change-case";
+import { capitalCase, split } from "change-case";
+import deromanize from "deromanize";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
 import { Fragment } from "react";
@@ -17,9 +18,9 @@ const sections = Object.assign(
       ))
     ),
   {
-    names: (names) => [
+    names: (names, description) => [
       "Names",
-      undefined,
+      description,
       table(
         ["Language", undefined],
         names.map(({ language, name }) => [language.name, name])
@@ -29,7 +30,12 @@ const sections = Object.assign(
 );
 
 export const Pokedex = Object.assign(new PokeAPI(), {
-  formatName: capitalCase,
+  formatName: (input) =>
+    split(capitalCase(input))
+      .map((word) =>
+        Number.isNaN(deromanize(word)) ? word : word.toUpperCase()
+      )
+      .join(" "),
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
