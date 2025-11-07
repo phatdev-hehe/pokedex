@@ -20,69 +20,66 @@ export default page.withData(({ data }) => {
 
   return (
     <>
-      {table(
-        [undefined, "Value"],
+      {table(undefined, [
+        ["Id", pokemonSpecies.id],
         [
-          ["Id", pokemonSpecies.id],
-          [
-            "The Pokémon species that evolves into this Pokemon_species.",
-            <Link href={`/pokemon-species/${previousPokemonSpeciesName}`}>
-              {Pokedex.formatName(previousPokemonSpeciesName)}
-            </Link>,
-          ],
-          [
-            "The generation this Pokémon species was introduced in.",
-            Pokedex.formatName(pokemonSpecies.generation.name),
-          ],
-          ["Baby", <Checkbox checked={pokemonSpecies.is_baby} />],
-          ["Legendary", <Checkbox checked={pokemonSpecies.is_legendary} />],
-          ["Mythical", <Checkbox checked={pokemonSpecies.is_mythical} />],
-          [
-            "The order in which species should be sorted. Based on National Dex order, except families are grouped together and sorted by stage.",
-            pokemonSpecies.order,
-          ],
-          [
-            "The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.",
-            pokemonSpecies.base_happiness,
-          ],
-          [
-            "The base capture rate; up to 255. The higher the number, the easier the catch.",
-            pokemonSpecies.capture_rate,
-          ],
-          [
-            "The color of this Pokémon for Pokédex search.",
-            Pokedex.formatName(pokemonSpecies.color.name),
-          ],
-          [
-            "The rate at which this Pokémon species gains levels.",
-            Pokedex.formatName(pokemonSpecies.growth_rate.name),
-          ],
-          [
-            "Whether or not this Pokémon has multiple forms and can switch between them.",
-            <Checkbox checked={pokemonSpecies.forms_switchable} />,
-          ],
-          [
-            "The chance of this Pokémon being female, in eighths; or -1 for genderless.",
-            pokemonSpecies.gender_rate,
-          ],
-          [
-            "The habitat this Pokémon species can be encountered in.",
-            Pokedex.formatName(pokemonSpecies.habitat?.name ?? ""), // ??
-          ],
-          [
-            "Whether or not this Pokémon has visual gender differences.",
-            <Checkbox checked={pokemonSpecies.has_gender_differences} />,
-          ],
-          [
-            `Initial hatch counter: one must walk Y × (hatch_counter + 1) steps before this Pokémon's egg hatches, unless utilizing bonuses like Flame Body's. Y varies per generation. In Generations II, III, and VII, Egg cycles are 256 steps long. In Generation IV, Egg cycles are 255 steps long. In Pokémon Brilliant Diamond and Shining Pearl, Egg cycles are also 255 steps long, but are shorter on special dates. In Generations V and VI, Egg cycles are 257 steps long. In Pokémon Sword and Shield, and in Pokémon Scarlet and Violet, Egg cycles are 128 steps long.`,
-            pokemonSpecies.hatch_counter,
-          ],
-          [
-            "The shape of this Pokémon for Pokédex search.",
-            Pokedex.formatName(pokemonSpecies.shape.name),
-          ],
-        ]
-      )}
+          "The Pokémon species that evolves into this Pokemon_species.",
+          <Link href={`/pokemon-species/${previousPokemonSpeciesName}`}>
+            {Pokedex.formatName(previousPokemonSpeciesName)}
+          </Link>,
+        ],
+        [
+          "The generation this Pokémon species was introduced in.",
+          Pokedex.formatName(pokemonSpecies.generation.name),
+        ],
+        ["Baby", <Checkbox checked={pokemonSpecies.is_baby} />],
+        ["Legendary", <Checkbox checked={pokemonSpecies.is_legendary} />],
+        ["Mythical", <Checkbox checked={pokemonSpecies.is_mythical} />],
+        [
+          "The order in which species should be sorted. Based on National Dex order, except families are grouped together and sorted by stage.",
+          pokemonSpecies.order,
+        ],
+        [
+          "The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.",
+          pokemonSpecies.base_happiness,
+        ],
+        [
+          "The base capture rate; up to 255. The higher the number, the easier the catch.",
+          pokemonSpecies.capture_rate,
+        ],
+        [
+          "The color of this Pokémon for Pokédex search.",
+          Pokedex.formatName(pokemonSpecies.color.name),
+        ],
+        [
+          "The rate at which this Pokémon species gains levels.",
+          Pokedex.formatName(pokemonSpecies.growth_rate.name),
+        ],
+        [
+          "Whether or not this Pokémon has multiple forms and can switch between them.",
+          <Checkbox checked={pokemonSpecies.forms_switchable} />,
+        ],
+        [
+          "The chance of this Pokémon being female, in eighths; or -1 for genderless.",
+          pokemonSpecies.gender_rate,
+        ],
+        [
+          "The habitat this Pokémon species can be encountered in.",
+          Pokedex.formatName(pokemonSpecies.habitat?.name ?? ""), // ??
+        ],
+        [
+          "Whether or not this Pokémon has visual gender differences.",
+          <Checkbox checked={pokemonSpecies.has_gender_differences} />,
+        ],
+        [
+          `Initial hatch counter: one must walk Y × (hatch_counter + 1) steps before this Pokémon's egg hatches, unless utilizing bonuses like Flame Body's. Y varies per generation. In Generations II, III, and VII, Egg cycles are 256 steps long. In Generation IV, Egg cycles are 255 steps long. In Pokémon Brilliant Diamond and Shining Pearl, Egg cycles are also 255 steps long, but are shorter on special dates. In Generations V and VI, Egg cycles are 257 steps long. In Pokémon Sword and Shield, and in Pokémon Scarlet and Violet, Egg cycles are 128 steps long.`,
+          pokemonSpecies.hatch_counter,
+        ],
+        [
+          "The shape of this Pokémon for Pokédex search.",
+          Pokedex.formatName(pokemonSpecies.shape.name),
+        ],
+      ])}
       {page.sections(
         [
           "Varieties",

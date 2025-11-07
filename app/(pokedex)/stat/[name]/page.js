@@ -16,21 +16,18 @@ export default page.withData(({ data }) => {
 
   return (
     <>
-      {table(
-        [undefined, "Value"],
+      {table(undefined, [
+        ["Id", stat.id],
+        ["ID the games use for this stat.", stat.game_index],
         [
-          ["Id", stat.id],
-          ["ID the games use for this stat.", stat.game_index],
-          [
-            "Whether this stat only exists within a battle.",
-            <Checkbox checked={stat.is_battle_only} />,
-          ],
-          [
-            "The class of damage this stat is directly related to.",
-            Pokedex.formatName(stat.move_damage_class?.name ?? ""),
-          ],
-        ]
-      )}
+          "Whether this stat only exists within a battle.",
+          <Checkbox checked={stat.is_battle_only} />,
+        ],
+        [
+          "The class of damage this stat is directly related to.",
+          Pokedex.formatName(stat.move_damage_class?.name ?? ""),
+        ],
+      ])}
       {page.sections(
         page.sections.names(stat.names),
         [
@@ -47,7 +44,7 @@ export default page.withData(({ data }) => {
           "Affecting Moves",
           "A detail of moves which affect this stat positively or negatively.",
           table(
-            [undefined, "Value"],
+            undefined,
             Object.entries(stat.affecting_moves).map(([key, value]) => [
               Pokedex.formatName(key),
               table(
@@ -64,7 +61,7 @@ export default page.withData(({ data }) => {
           "Affecting Natures",
           "A detail of natures which affect this stat positively or negatively.",
           table(
-            [undefined, "Value"],
+            undefined,
             Object.entries(stat.affecting_natures).map(([key, value]) => [
               Pokedex.formatName(key),
               table(

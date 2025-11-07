@@ -7,13 +7,15 @@ import { Children, useId } from "react";
 export const table = Object.assign(
   (thead, tbody, tfoot) => (
     <table>
-      <thead>
-        <tr>
-          {thead.map((value, key) => (
-            <th key={key}>{value}</th>
-          ))}
-        </tr>
-      </thead>
+      {thead === undefined || (
+        <thead>
+          <tr>
+            {thead.map((value, key) => (
+              <th key={key}>{value}</th>
+            ))}
+          </tr>
+        </thead>
+      )}
       <tbody>
         {tbody.map((value, key) => (
           <tr key={key}>

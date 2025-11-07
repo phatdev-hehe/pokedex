@@ -17,15 +17,18 @@ const createDocsLayoutTree = async ([getList, path]) => {
 };
 
 const DocsLayoutTree1 = await Promise.all(
+  [["getPokemonsList", "pokemon"]].map(createDocsLayoutTree)
+);
+
+const DocsLayoutTree2 = await Promise.all(
   [
-    ["getPokemonsList", "pokemon"],
     ["getPokemonSpeciesList", "pokemon-species"],
     ["getStatsList", "stat"],
     ["getTypesList", "type"],
   ].map(createDocsLayoutTree)
 );
 
-const DocsLayoutTree2 = await Promise.all(
+const DocsLayoutTree3 = await Promise.all(
   [
     ["getBerriesList", "bery"],
     ["getGendersList", "gender"],
@@ -44,8 +47,10 @@ export default ({ children }) => (
     tree={{
       children: [
         ...DocsLayoutTree1,
-        { type: "separator", name: "UNAVAILABLE" },
+        { type: "separator", name: "More" },
         ...DocsLayoutTree2,
+        { type: "separator", name: "Unavailable" },
+        ...DocsLayoutTree3,
       ],
     }}
   >

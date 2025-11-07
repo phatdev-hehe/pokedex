@@ -33,7 +33,12 @@ export const Pokedex = Object.assign(new PokeAPI(), {
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
-  createPage: async ({ getList, getData, titleSuffix }) => {
+  createPage: async ({
+    getList,
+    getData,
+    titleSuffix,
+    getAvatar = () => {},
+  }) => {
     const names = (await Pokedex[getList]()).results.map(({ name }) => name);
 
     const createTitle = (title) => {
@@ -58,7 +63,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
           if (!names.includes(name)) notFound();
 
           try {
-            const data = await Pokedex[getData](name);
+            const context = { data: await Pokedex[getData](name) };
 
             return (
               <div
@@ -85,7 +90,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                     alignSelf: "center",
                     position: "fixed",
                   }}
-                  src={data.sprites?.default ?? data.sprites?.front_default}
+                  src={getAvatar(context)}
                 />
                 <div
                   style={{
@@ -97,7 +102,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                   <div
                     style={{ backgroundColor: "var(--color-fd-background)" }}
                   >
-                    {await render({ data })}
+                    {await render(context)}
                   </div>
                 </div>
               </div>

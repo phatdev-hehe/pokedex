@@ -6,6 +6,12 @@ const page = await Pokedex.createPage({
   getList: "getPokemonsList",
   getData: "getPokemonByName",
   titleSuffix: "Pokémon",
+  getAvatar: ({ data }) => {
+    /** @type Pokemon */
+    const pokemon = data;
+
+    return pokemon.sprites.front_default;
+  },
 });
 
 export const generateMetadata = page.generateMetadata;
@@ -28,35 +34,32 @@ export default page.withData(async ({ data }) => {
     <>
       {
         // pokemon.is_default
-        table(
-          [undefined, "Value"],
+        table(undefined, [
+          ["Id", pokemon.id],
           [
-            ["Id", pokemon.id],
-            [
-              "Species",
-              <Link href={`/pokemon-species/${pokemon.species.name}`}>
-                {Pokedex.formatName(pokemon.species.name)}
-              </Link>,
-            ],
-            [
-              "Order for sorting. Almost national order, except families are grouped together.",
-              pokemon.order,
-            ],
-            [
-              "The base experience gained for defeating this Pokémon.",
-              pokemon.base_experience,
-            ],
-            ["Height", pokemon.height],
-            ["Weight", pokemon.weight],
-          ]
-        )
+            "Species",
+            <Link href={`/pokemon-species/${pokemon.species.name}`}>
+              {Pokedex.formatName(pokemon.species.name)}
+            </Link>,
+          ],
+          [
+            "Order for sorting. Almost national order, except families are grouped together.",
+            pokemon.order,
+          ],
+          [
+            "The base experience gained for defeating this Pokémon.",
+            pokemon.base_experience,
+          ],
+          ["Height", pokemon.height],
+          ["Weight", pokemon.weight],
+        ])
       }
       {page.sections(
         [
           "Sprites",
           "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites",
           table.fromObject(
-            [undefined, "Value"],
+            undefined,
             pokemon.sprites,
             Pokedex.formatName,
             (src) => <Pokedex.Image src={src} />
