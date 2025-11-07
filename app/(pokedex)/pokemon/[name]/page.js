@@ -121,7 +121,9 @@ export default page.withData(async ({ data }) => {
             ["Slot", undefined],
             pokemon.types.map((pokemonType) => [
               pokemonType.slot,
-              Pokedex.formatName(pokemonType.type.name),
+              <Link href={`/type/${pokemonType.type.name}`}>
+                {Pokedex.formatName(pokemonType.type.name)}
+              </Link>,
             ])
           ),
         ],

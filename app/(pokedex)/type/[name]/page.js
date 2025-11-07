@@ -10,7 +10,8 @@ const page = await Pokedex.createPage({
     /** @type Type */
     const type = data;
 
-    return type.sprites["generation-ix"]["scarlet-violet"].name_icon;
+    return type.sprites["generation-vii"]["lets-go-pikachu-lets-go-eevee"]
+      .name_icon;
   },
 });
 
