@@ -1,4 +1,4 @@
-import { Audio, Checkbox, sections, table } from "@/shared/components";
+import { Audio, Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import Link from "next/link";
 
@@ -51,7 +51,7 @@ export default page.withData(async ({ data }) => {
           ]
         )
       }
-      {sections(
+      {page.sections(
         [
           "Sprites",
           "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites",

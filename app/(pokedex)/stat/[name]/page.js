@@ -1,4 +1,4 @@
-import { Checkbox, sections, table } from "@/shared/components";
+import { Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 
 const page = await Pokedex.createPage({
@@ -31,15 +31,8 @@ export default page.withData(({ data }) => {
           ],
         ]
       )}
-      {sections(
-        [
-          "Names",
-          undefined,
-          table(
-            ["Language", undefined],
-            stat.names.map((name) => [name.language.name, name.name])
-          ),
-        ],
+      {page.sections(
+        page.sections.names(stat.names),
         [
           "Affecting Items",
           undefined,

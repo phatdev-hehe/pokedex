@@ -51,7 +51,7 @@ export default ({ children }) => (
   >
     <div
       className="prose" // https://fumadocs.dev/docs/ui/theme#typography
-      style={{ width: "100%", padding: "2rem" }}
+      style={{ width: "100%" }}
     >
       {children}
     </div>

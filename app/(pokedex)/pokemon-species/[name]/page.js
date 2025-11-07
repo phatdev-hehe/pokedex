@@ -1,4 +1,4 @@
-import { Checkbox, sections, table } from "@/shared/components";
+import { Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import Link from "next/link";
 
@@ -83,7 +83,7 @@ export default page.withData(({ data }) => {
           ],
         ]
       )}
-      {sections(
+      {page.sections(
         [
           "Varieties",
           "A list of the Pokémon that exist within this Pokémon species.",
@@ -97,14 +97,7 @@ export default page.withData(({ data }) => {
             ])
           ),
         ],
-        [
-          "Names",
-          undefined,
-          table(
-            ["Language", undefined],
-            pokemonSpecies.names.map((name) => [name.language.name, name.name])
-          ),
-        ],
+        page.sections.names(pokemonSpecies.names),
         [
           "Egg Groups",
           "A list of egg groups this Pokémon species is a member of.",

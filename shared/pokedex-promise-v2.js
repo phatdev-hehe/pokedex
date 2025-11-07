@@ -1,7 +1,32 @@
+import { DescriptionList, table, tabs } from "@/shared/components";
 import { capitalCase } from "change-case";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
+import { Fragment } from "react";
 import "server-only";
+
+const sections = Object.assign(
+  (...sections) =>
+    tabs(
+      sections.map(([item]) => item),
+      sections.map(([, description, content], key) => (
+        <Fragment key={key}>
+          {description && <DescriptionList>{description}</DescriptionList>}
+          {content}
+        </Fragment>
+      ))
+    ),
+  {
+    names: (names) => [
+      "Names",
+      undefined,
+      table(
+        ["Language", undefined],
+        names.map(({ language, name }) => [language.name, name])
+      ),
+    ],
+  }
+);
 
 export const Pokedex = Object.assign(new PokeAPI(), {
   formatName: capitalCase,
@@ -18,6 +43,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
     };
 
     return {
+      sections,
       generateStaticParams: () => names.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
         const { name } = await params;
@@ -40,6 +66,7 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                   display: "flex",
                   flexDirection: "column",
                   position: "relative",
+                  padding: "2rem",
                 }}
               >
                 <small
