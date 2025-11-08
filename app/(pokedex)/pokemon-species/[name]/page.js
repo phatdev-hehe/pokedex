@@ -32,9 +32,15 @@ export default page.withData(({ data }) => {
           "The generation this Pokémon species was introduced in.",
           Pokedex.formatName(pokemonSpecies.generation.name),
         ],
-        ["Baby", <Checkbox checked={pokemonSpecies.is_baby} />],
-        ["Legendary", <Checkbox checked={pokemonSpecies.is_legendary} />],
-        ["Mythical", <Checkbox checked={pokemonSpecies.is_mythical} />],
+        [undefined, <Checkbox checked={pokemonSpecies.is_baby}>Baby</Checkbox>],
+        [
+          undefined,
+          <Checkbox checked={pokemonSpecies.is_legendary}>Legendary</Checkbox>,
+        ],
+        [
+          undefined,
+          <Checkbox checked={pokemonSpecies.is_mythical}>Mythical</Checkbox>,
+        ],
         [
           "The order in which species should be sorted. Based on National Dex order, except families are grouped together and sorted by stage.",
           pokemonSpecies.order,
@@ -99,7 +105,7 @@ export default page.withData(({ data }) => {
           "Egg Groups",
           "A list of egg groups this Pokémon species is a member of.",
           table(
-            ["Name"],
+            undefined,
             pokemonSpecies.egg_groups.map((eggGroups) => [
               Pokedex.formatName(eggGroups.name),
             ])
@@ -109,11 +115,11 @@ export default page.withData(({ data }) => {
           "Flavor Text Entries",
           "A list of flavor text entries for this Pokémon species.",
           table(
-            ["Language", "Version", undefined],
+            [undefined, "Language", "Version"],
             pokemonSpecies.flavor_text_entries.map((flavorText) => [
+              flavorText.flavor_text,
               flavorText.language.name,
               Pokedex.formatName(flavorText.version.name), // ??
-              flavorText.flavor_text,
             ])
           ),
         ],
@@ -121,10 +127,10 @@ export default page.withData(({ data }) => {
           "Form Descriptions",
           "Descriptions of different forms Pokémon take on within the Pokémon species.",
           table(
-            ["Language", undefined],
+            [undefined, "Language"],
             pokemonSpecies.form_descriptions.map((description) => [
-              description.language.name,
               description.description,
+              description.language.name,
             ])
           ),
         ],
@@ -132,10 +138,10 @@ export default page.withData(({ data }) => {
           "Genera",
           "The genus of this Pokémon species listed in multiple languages.",
           table(
-            ["Language", undefined],
+            [undefined, "Language"],
             pokemonSpecies.genera.map((genus) => [
-              genus.language.name,
               genus.genus,
+              genus.language.name,
             ])
           ),
         ],
@@ -155,10 +161,10 @@ export default page.withData(({ data }) => {
           "Pokédex Numbers",
           "A list of Pokedexes and the indexes reserved within them for this Pokémon species.",
           table(
-            [undefined, "Pokédex"],
+            [undefined, "Index"],
             pokemonSpecies.pokedex_numbers.map((pokedexNumber) => [
-              pokedexNumber.entry_number,
               Pokedex.formatName(pokedexNumber.pokedex.name),
+              pokedexNumber.entry_number,
             ])
           ),
         ]

@@ -64,7 +64,7 @@ export default page.withData(({ data }) => {
           "Moves",
           "A list of moves that have this type.",
           table(
-            ["Name"],
+            undefined,
             type.moves.map((move) => [Pokedex.formatName(move.name)])
           ),
         ],
@@ -76,10 +76,10 @@ export default page.withData(({ data }) => {
             Object.entries(type.damage_relations).map(([key, value]) => [
               Pokedex.formatName(key),
               table(
-                ["Name"],
-                value.map(({ name }) => [
-                  <Link href={`/type/${name}`}>
-                    {Pokedex.formatName(name)}
+                ["Type"],
+                value.map((type) => [
+                  <Link href={`/type/${type.name}`}>
+                    {Pokedex.formatName(type.name)}
                   </Link>,
                 ])
               ),
@@ -90,7 +90,7 @@ export default page.withData(({ data }) => {
           "Game Indices",
           undefined,
           table(
-            [undefined, "Generation"],
+            undefined,
             type.game_indices.map((generationGameIndex) => [
               generationGameIndex.game_index,
               Pokedex.formatName(generationGameIndex.generation.name),

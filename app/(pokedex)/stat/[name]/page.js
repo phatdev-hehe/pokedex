@@ -34,7 +34,7 @@ export default page.withData(({ data }) => {
           "Affecting Items",
           undefined,
           table(
-            ["Name"],
+            undefined,
             stat.affecting_items.map((affectingItem) => [
               Pokedex.formatName(affectingItem.name),
             ])
@@ -44,11 +44,11 @@ export default page.withData(({ data }) => {
           "Affecting Moves",
           "A detail of moves which affect this stat positively or negatively.",
           table(
-            undefined,
+            ["Set", undefined],
             Object.entries(stat.affecting_moves).map(([key, value]) => [
               Pokedex.formatName(key),
               table(
-                ["Move", "Change"],
+                [undefined, "Change"],
                 Object.values(value).map(({ change, move }) => [
                   Pokedex.formatName(move.name),
                   change,
@@ -61,11 +61,11 @@ export default page.withData(({ data }) => {
           "Affecting Natures",
           "A detail of natures which affect this stat positively or negatively.",
           table(
-            undefined,
+            ["Set", undefined],
             Object.entries(stat.affecting_natures).map(([key, value]) => [
               Pokedex.formatName(key),
               table(
-                ["Name"],
+                undefined,
                 Object.values(value).map(({ name }) => [
                   Pokedex.formatName(name),
                 ])

@@ -2,6 +2,10 @@
 
 :root {
   /* --fd-layout-width: 100%; */
+
+  [role="tablist"] + [role="tabpanel"] {
+    overflow: auto;
+  }
 }
 
 @theme {

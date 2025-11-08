@@ -5,29 +5,30 @@ import Image1 from "next/image";
 import { Children, useId } from "react";
 
 export const table = Object.assign(
-  (thead, tbody, tfoot) => (
-    <table>
-      {thead === undefined || (
-        <thead>
-          <tr>
-            {thead.map((value, key) => (
-              <th key={key}>{value}</th>
+  (thead = [], tbody = thead, tfoot) => {
+    if (thead.length || tbody.length)
+      return (
+        <table>
+          <thead>
+            <tr>
+              {thead.map((value, key) => (
+                <th key={key}>{value}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tbody.map((value, key) => (
+              <tr key={key}>
+                {value.map((value, key) => (
+                  <td key={key}>{value}</td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        </thead>
-      )}
-      <tbody>
-        {tbody.map((value, key) => (
-          <tr key={key}>
-            {value.map((value, key) => (
-              <td key={key}>{value}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-      <tfoot>{tfoot}</tfoot>
-    </table>
-  ),
+          </tbody>
+          <tfoot>{tfoot}</tfoot>
+        </table>
+      );
+  },
   {
     fromObject: (
       thead,
@@ -65,9 +66,27 @@ export const tabs = (items, tabs) => (
 
 export const Audio = (props) => <audio controls {...props} />;
 
-export const Checkbox = ({ checked }) => (
-  <input disabled={!checked} readOnly type="checkbox" checked={checked} />
-);
+export const Checkbox = ({ checked, children }) => {
+  const id = useId();
+
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        gap: "1ch",
+      }}
+    >
+      <input
+        id={id}
+        disabled={!checked}
+        readOnly
+        type="checkbox"
+        checked={checked}
+      />
+      <label htmlFor={id}>{children}</label>
+    </div>
+  );
+};
 
 export const Image = (props) => {
   const id = useId();

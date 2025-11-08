@@ -22,8 +22,8 @@ const sections = Object.assign(
       "Names",
       description,
       table(
-        ["Language", undefined],
-        names.map(({ language, name }) => [language.name, name])
+        [undefined, "Language"],
+        names.map(({ language, name }) => [name, language.name])
       ),
     ],
   }
@@ -80,17 +80,6 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                   padding: "2rem",
                 }}
               >
-                <small
-                  style={{
-                    alignSelf: "end",
-                    position: "fixed",
-                  }}
-                >
-                  {[
-                    names.findIndex((value) => value === name) + 1,
-                    names.length,
-                  ].join(" / ")}
-                </small>
                 <Pokedex.Image
                   style={{
                     alignSelf: "center",
@@ -101,12 +90,31 @@ export const Pokedex = Object.assign(new PokeAPI(), {
                 <div
                   style={{
                     position: "relative",
-                    top: "10rem",
+                    top: "11rem",
                   }}
                 >
-                  <h1>{createTitle(name)}</h1>
                   <div
-                    style={{ backgroundColor: "var(--color-fd-background)" }}
+                    style={{
+                      position: "sticky",
+                      top: "1rem",
+                      display: "flex",
+                      alignItems: "baseline",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <h1>{createTitle(name)}</h1>
+                    <small>
+                      {[
+                        names.findIndex((value) => value === name) + 1,
+                        names.length,
+                      ].join(" / ")}
+                    </small>
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: "var(--color-fd-background)",
+                      position: "inherit",
+                    }}
                   >
                     {await render(context)}
                   </div>

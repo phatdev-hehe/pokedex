@@ -10,7 +10,12 @@ const page = await Pokedex.createPage({
     /** @type Pokemon */
     const pokemon = data;
 
-    return pokemon.sprites.front_default;
+    return (
+      pokemon.sprites.versions["generation-v"]["black-white"].animated
+        .front_default ??
+      pokemon.sprites.other.showdown.front_default ??
+      pokemon.sprites.front_default
+    );
   },
 });
 
@@ -107,7 +112,7 @@ export default page.withData(async ({ data }) => {
           "Cries",
           "A set of cries used to depict this Pokémon in the game. A visual representation of the various cries can be found at PokeAPI/cries",
           table(
-            [undefined, "Audio"],
+            undefined,
             Object.entries(pokemon.cries).map(([input, src]) => [
               Pokedex.formatName(input),
               <Audio src={src} />,
@@ -118,12 +123,12 @@ export default page.withData(async ({ data }) => {
           "Types",
           "A list of details showing types this Pokémon has.",
           table(
-            ["Slot", undefined],
+            [undefined, "Slot"],
             pokemon.types.map((pokemonType) => [
-              pokemonType.slot,
               <Link href={`/type/${pokemonType.type.name}`}>
                 {Pokedex.formatName(pokemonType.type.name)}
               </Link>,
+              pokemonType.slot,
             ])
           ),
         ],
@@ -155,10 +160,14 @@ export default page.withData(async ({ data }) => {
                           encounter.min_level,
                           encounter.max_level,
                           table(
-                            ["Name"],
-                            encounter.condition_values.map(({ name }) => [
-                              Pokedex.formatName(name),
-                            ])
+                            undefined,
+                            encounter.condition_values.map(
+                              (encounterConditionValue) => [
+                                Pokedex.formatName(
+                                  encounterConditionValue.name
+                                ),
+                              ]
+                            )
                           ),
                         ]
                       )
@@ -201,7 +210,7 @@ export default page.withData(async ({ data }) => {
           "Forms",
           "A list of forms this Pokémon can take on.",
           table(
-            ["Name"],
+            undefined,
             pokemon.forms.map((pokemonFrom) => [
               Pokedex.formatName(pokemonFrom.name),
             ])
