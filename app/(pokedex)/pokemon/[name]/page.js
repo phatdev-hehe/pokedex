@@ -31,7 +31,7 @@ export default page.withData(async ({ data }) => {
   );
 
   /** @type PokemonEncounter[] */
-  const pokemonLocationAreaEncounters = await Pokedex.getResource(
+  const pokemonLocationAreaEncounters = await Pokedex.api.getResource(
     pokemon.location_area_encounters
   );
 

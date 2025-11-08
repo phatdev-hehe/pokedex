@@ -4,7 +4,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 
 const createDocsLayoutTree = async ([getList, path]) => {
-  const data = await Pokedex[getList]();
+  const data = await Pokedex.api[getList]();
 
   return {
     name: `${data.count} ${path}`,
@@ -29,15 +29,6 @@ const DocsLayoutTree2 = await Promise.all(
   ].map(createDocsLayoutTree)
 );
 
-const DocsLayoutTree3 = await Promise.all(
-  [
-    ["getBerriesList", "bery"],
-    ["getGendersList", "gender"],
-    ["getItemsList", "item"],
-    ["getNaturesList", "nature"],
-  ].map(createDocsLayoutTree)
-);
-
 export default ({ children }) => (
   <DocsLayout
     nav={{
@@ -49,8 +40,6 @@ export default ({ children }) => (
         ...DocsLayoutTree1,
         { type: "separator", name: "More" },
         ...DocsLayoutTree2,
-        { type: "separator", name: "Unavailable" },
-        ...DocsLayoutTree3,
       ],
     }}
   >

@@ -1,9 +1,10 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
 import { capitalCase, split } from "change-case";
+import delay from "delay";
 import deromanize from "deromanize";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
-import { Fragment } from "react";
+import { cache, Fragment } from "react";
 import "server-only";
 
 const sections = Object.assign(
@@ -29,7 +30,34 @@ const sections = Object.assign(
   }
 );
 
-export const Pokedex = Object.assign(new PokeAPI(), {
+const pokeAPI = new PokeAPI();
+
+export const Pokedex = {
+  api: [
+    "getMoveByName",
+    "getMovesList",
+    "getPokemonByName",
+    "getPokemonsList",
+    "getPokemonSpeciesByName",
+    "getPokemonSpeciesList",
+    "getResource",
+    "getStatByName",
+    "getStatsList",
+    "getTypeByName",
+    "getTypesList",
+  ].reduce((a, b) => {
+    a[b] = cache(async (...args) => {
+      if (process.env.NODE_ENV === "production") await delay(3000);
+
+      try {
+        return await pokeAPI[b](...args);
+      } catch {
+        notFound();
+      }
+    });
+
+    return a;
+  }, {}),
   formatName: (input) =>
     split(capitalCase(input))
       .map((word) =>
@@ -45,7 +73,9 @@ export const Pokedex = Object.assign(new PokeAPI(), {
     titleSuffix,
     getAvatar = () => {},
   }) => {
-    const names = (await Pokedex[getList]()).results.map(({ name }) => name);
+    const names = (await Pokedex.api[getList]()).results.map(
+      ({ name }) => name
+    );
 
     const createTitle = (title) => {
       title = Pokedex.formatName(title);
@@ -68,63 +98,62 @@ export const Pokedex = Object.assign(new PokeAPI(), {
 
           if (!names.includes(name)) notFound();
 
-          try {
-            const context = { data: await Pokedex[getData](name) };
+          const context = {
+            data: await Pokedex.api[getData](name),
+            names,
+          };
 
-            return (
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+                padding: "2rem",
+              }}
+            >
+              <Pokedex.Image
+                style={{
+                  alignSelf: "center",
+                  position: "fixed",
+                }}
+                src={getAvatar(context)}
+              />
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
                   position: "relative",
-                  padding: "2rem",
+                  top: "11rem",
                 }}
               >
-                <Pokedex.Image
-                  style={{
-                    alignSelf: "center",
-                    position: "fixed",
-                  }}
-                  src={getAvatar(context)}
-                />
                 <div
                   style={{
-                    position: "relative",
-                    top: "11rem",
+                    position: "sticky",
+                    top: "1rem",
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "space-between",
                   }}
                 >
-                  <div
-                    style={{
-                      position: "sticky",
-                      top: "1rem",
-                      display: "flex",
-                      alignItems: "baseline",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <h1>{createTitle(name)}</h1>
-                    <small>
-                      {[
-                        names.findIndex((value) => value === name) + 1,
-                        names.length,
-                      ].join(" / ")}
-                    </small>
-                  </div>
-                  <div
-                    style={{
-                      backgroundColor: "var(--color-fd-background)",
-                      position: "inherit",
-                    }}
-                  >
-                    {await render(context)}
-                  </div>
+                  <h1>{createTitle(name)}</h1>
+                  <small>
+                    {[
+                      names.findIndex((value) => value === name) + 1,
+                      names.length,
+                    ].join(" / ")}
+                  </small>
+                </div>
+                <div
+                  style={{
+                    backgroundColor: "var(--color-fd-background)",
+                    position: "inherit",
+                  }}
+                >
+                  {await render(context)}
                 </div>
               </div>
-            );
-          } catch {
-            notFound();
-          }
+            </div>
+          );
         },
     };
   },
-});
+};

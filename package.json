@@ -11,6 +11,7 @@
   "devDependencies": {
     "babel-plugin-react-compiler": "^1.0.0",
     "change-case": "^5.4.4",
+    "delay": "^7.0.0",
     "deromanize": "^1.0.0",
     "fumadocs-ui": "^16.0.7",
     "is-plain-obj": "^4.1.0",
