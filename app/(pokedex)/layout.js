@@ -25,6 +25,7 @@ const DocsLayoutTree2 = await Promise.all(
     ["getPokemonSpeciesList", "pokemon-species"],
     ["getStatsList", "stat"],
     ["getTypesList", "type"],
+    ["getMovesList", "move"],
   ].map(createDocsLayoutTree)
 );
 
@@ -33,7 +34,6 @@ const DocsLayoutTree3 = await Promise.all(
     ["getBerriesList", "bery"],
     ["getGendersList", "gender"],
     ["getItemsList", "item"],
-    ["getMovesList", "move"],
     ["getNaturesList", "nature"],
   ].map(createDocsLayoutTree)
 );
