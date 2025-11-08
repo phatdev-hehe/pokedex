@@ -58,7 +58,7 @@ export const Pokedex = {
 
     return a;
   }, {}),
-  formatName: (input) =>
+  formatName: (input = "") =>
     split(capitalCase(input))
       .map((word) =>
         Number.isNaN(deromanize(word)) ? word : word.toUpperCase()

@@ -25,7 +25,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The class of damage this stat is directly related to.",
-          Pokedex.formatName(stat.move_damage_class?.name ?? ""),
+          Pokedex.formatName(stat.move_damage_class?.name), // ??
         ],
       ])}
       {page.sections(

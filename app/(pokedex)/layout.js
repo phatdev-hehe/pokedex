@@ -22,10 +22,10 @@ const DocsLayoutTree1 = await Promise.all(
 
 const DocsLayoutTree2 = await Promise.all(
   [
+    ["getMovesList", "move"],
     ["getPokemonSpeciesList", "pokemon-species"],
     ["getStatsList", "stat"],
     ["getTypesList", "type"],
-    ["getMovesList", "move"],
   ].map(createDocsLayoutTree)
 );
 

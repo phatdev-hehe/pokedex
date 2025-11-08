@@ -10,8 +10,7 @@ const page = await Pokedex.createPage({
     /** @type Type */
     const type = data;
 
-    return type.sprites["generation-vii"]["lets-go-pikachu-lets-go-eevee"]
-      .name_icon;
+    return type.sprites["generation-ix"]["scarlet-violet"].name_icon;
   },
 });
 
@@ -32,7 +31,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The class of damage inflicted by this type.",
-          Pokedex.formatName(type.move_damage_class.name),
+          Pokedex.formatName(type.move_damage_class?.name), // ??
         ],
       ])}
       {page.sections(

@@ -14,9 +14,7 @@ export const generateStaticParams = page.generateStaticParams;
 export default page.withData(({ data }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = data;
-
-  const previousPokemonSpeciesName =
-    pokemonSpecies.evolves_from_species?.name ?? "";
+  const previousPokemonSpeciesName = pokemonSpecies.evolves_from_species?.name; // ??
 
   return (
     <>
@@ -71,7 +69,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The habitat this Pokémon species can be encountered in.",
-          Pokedex.formatName(pokemonSpecies.habitat?.name ?? ""), // ??
+          Pokedex.formatName(pokemonSpecies.habitat?.name), // ??
         ],
         [
           "Whether or not this Pokémon has visual gender differences.",
