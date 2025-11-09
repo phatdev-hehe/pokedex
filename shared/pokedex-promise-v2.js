@@ -132,9 +132,12 @@ export const Pokedex = {
                     display: "flex",
                     alignItems: "baseline",
                     justifyContent: "space-between",
+                    gap: "1rem",
                   }}
                 >
-                  <h1>{createTitle(name)}</h1>
+                  <h1 style={{ letterSpacing: "-.09ch" }}>
+                    {createTitle(name)}
+                  </h1>
                   <small>
                     {[
                       names.findIndex((value) => value === name) + 1,

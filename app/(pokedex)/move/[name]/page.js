@@ -1,5 +1,6 @@
 import { table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import Link from "next/link";
 
 const page = await Pokedex.createPage({
   getList: "getMovesList",
@@ -21,6 +22,33 @@ export default page.withData(({ data }) => {
           "The percent value of how likely this move is to be successful.",
           move.accuracy,
         ],
+      ])}
+      {page.sections([
+        "Contest Combos",
+        "A detail of normal and super contest combos that require this move.",
+        table(
+          ["Set", "Detail"],
+          Object.entries(
+            move?.contest_combos ?? [] // ??
+          ).map(([key, value]) => [
+            Pokedex.formatName(key),
+            table(
+              undefined,
+              Object.entries(value).map(([key, moves]) => [
+                Pokedex.formatName(key),
+                moves &&
+                  table(
+                    ["Move"],
+                    moves.map((move) => [
+                      <Link href={`/move/${move.name}`}>
+                        {Pokedex.formatName(move.name)}
+                      </Link>,
+                    ])
+                  ),
+              ])
+            ),
+          ])
+        ),
       ])}
     </>
   );
