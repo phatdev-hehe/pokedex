@@ -36,7 +36,7 @@ export default page.withData(({ data }) => {
           move.effect_chance,
         ],
       ])}
-      {page.sections(
+      {page.tabs(
         [
           "contest_combos",
           "A detail of normal and super contest combos that require this move.",

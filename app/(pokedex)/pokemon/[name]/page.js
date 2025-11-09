@@ -61,8 +61,8 @@ export default page.withData(async ({ data }) => {
         ["Height", pokemon.height],
         ["Weight", pokemon.weight],
       ])}
-      {page.sections(
-        page.sections.sprites(
+      {page.tabs(
+        page.tabs.sprites(
           pokemon.sprites,
           "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites"
         ),

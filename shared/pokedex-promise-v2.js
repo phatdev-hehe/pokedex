@@ -54,11 +54,11 @@ export const Pokedex = {
     };
 
     return {
-      sections: Object.assign(
-        (...sections) =>
+      tabs: Object.assign(
+        (...data) =>
           tabs(
-            sections.map(([item]) => item),
-            sections.map(([, description, content], key) => (
+            data.map(([item]) => item),
+            data.map(([, description, content], key) => (
               <Fragment key={key}>
                 {description && (
                   <DescriptionList>{description}</DescriptionList>

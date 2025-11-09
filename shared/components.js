@@ -99,7 +99,7 @@ export const Image = (props) => {
 
 export const DescriptionList = ({ term, children }) => (
   <dl>
-    <dt>{term}</dt>
+    <dt>{titleCase(term)}</dt>
     <dd>
       {Children.map(children, (children) => (
         <blockquote style={{ fontWeight: "initial", fontStyle: "initial" }}>

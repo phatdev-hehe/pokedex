@@ -35,9 +35,9 @@ export default page.withData(({ data }) => {
           titleCase(type.move_damage_class?.name), // ??
         ],
       ])}
-      {page.sections(
-        page.sections.sprites(type.sprites),
-        page.sections.names(type.names),
+      {page.tabs(
+        page.tabs.sprites(type.sprites),
+        page.tabs.names(type.names),
         [
           "pokemon",
           "A list of details of Pokémon that have this type.",

@@ -85,7 +85,7 @@ export default page.withData(({ data }) => {
           titleCase(pokemonSpecies.shape.name),
         ],
       ])}
-      {page.sections(
+      {page.tabs(
         [
           "varieties",
           "A list of the Pokémon that exist within this Pokémon species.",
@@ -99,7 +99,7 @@ export default page.withData(({ data }) => {
             ])
           ),
         ],
-        page.sections.names(pokemonSpecies.names),
+        page.tabs.names(pokemonSpecies.names),
         [
           "egg_groups",
           "A list of egg groups this Pokémon species is a member of.",

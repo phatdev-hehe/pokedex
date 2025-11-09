@@ -29,8 +29,8 @@ export default page.withData(({ data }) => {
           titleCase(stat.move_damage_class?.name), // ??
         ],
       ])}
-      {page.sections(
-        page.sections.names(stat.names),
+      {page.tabs(
+        page.tabs.names(stat.names),
         [
           "affecting_items",
           undefined,
