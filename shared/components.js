@@ -1,3 +1,4 @@
+import { titleCase } from "@/shared/utils";
 import { kebabCase } from "change-case";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
@@ -52,12 +53,13 @@ export const table = Object.assign(
 );
 
 export const tabs = (items, tabs) => (
-  <Tabs updateAnchor items={items}>
+  <Tabs updateAnchor items={items.map(titleCase)}>
     {tabs.map((tab, index) => {
       const item = items[index];
+      const id = kebabCase(removeAccents(item));
 
       return (
-        <Tab id={kebabCase(removeAccents(item))} value={item} key={item}>
+        <Tab id={id} value={titleCase(item)} key={id}>
           {tab}
         </Tab>
       );

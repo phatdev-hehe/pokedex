@@ -6,36 +6,6 @@ import PokeAPI from "pokedex-promise-v2";
 import { cache, Fragment } from "react";
 import "server-only";
 
-const sections = Object.assign(
-  (...sections) =>
-    tabs(
-      sections.map(([item]) => item),
-      sections.map(([, description, content], key) => (
-        <Fragment key={key}>
-          {description && <DescriptionList>{description}</DescriptionList>}
-          {content}
-        </Fragment>
-      ))
-    ),
-  {
-    sprites: (sprites, description) => [
-      "Sprites",
-      description,
-      table.fromObject(undefined, sprites, titleCase, (src) => (
-        <Pokedex.Image src={src} />
-      )),
-    ],
-    names: (names, description) => [
-      "Names",
-      description,
-      table(
-        [undefined, "Language"],
-        names.map(({ language, name }) => [name, language.name])
-      ),
-    ],
-  }
-);
-
 const pokeAPI = new PokeAPI();
 
 export const Pokedex = {
@@ -84,7 +54,37 @@ export const Pokedex = {
     };
 
     return {
-      sections,
+      sections: Object.assign(
+        (...sections) =>
+          tabs(
+            sections.map(([item]) => item),
+            sections.map(([, description, content], key) => (
+              <Fragment key={key}>
+                {description && (
+                  <DescriptionList>{description}</DescriptionList>
+                )}
+                {content}
+              </Fragment>
+            ))
+          ),
+        {
+          sprites: (sprites, description) => [
+            "sprites",
+            description,
+            table.fromObject(undefined, sprites, titleCase, (src) => (
+              <Pokedex.Image src={src} />
+            )),
+          ],
+          names: (names, description) => [
+            "names",
+            description,
+            table(
+              [undefined, "Language"],
+              names.map(({ language, name }) => [name, language.name])
+            ),
+          ],
+        }
+      ),
       generateStaticParams: () => names.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
         const { name } = await params;

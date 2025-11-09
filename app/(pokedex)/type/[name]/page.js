@@ -39,7 +39,7 @@ export default page.withData(({ data }) => {
         page.sections.sprites(type.sprites),
         page.sections.names(type.names),
         [
-          "Pokémon",
+          "pokemon",
           "A list of details of Pokémon that have this type.",
           table(
             [undefined, "Slot"],
@@ -52,7 +52,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Moves",
+          "moves",
           "A list of moves that have this type.",
           table(
             undefined,
@@ -60,7 +60,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Damage Relations",
+          "damage_relations",
           "A detail of how effective this type is toward others and vice versa.",
           table(
             undefined,
@@ -78,7 +78,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Game Indices",
+          "game_indices",
           undefined,
           table(
             undefined,

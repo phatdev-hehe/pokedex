@@ -32,7 +32,7 @@ export default page.withData(({ data }) => {
       {page.sections(
         page.sections.names(stat.names),
         [
-          "Affecting Items",
+          "affecting_items",
           undefined,
           table(
             undefined,
@@ -42,7 +42,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Affecting Moves",
+          "affecting_moves",
           "A detail of moves which affect this stat positively or negatively.",
           table(
             ["Set", undefined],
@@ -59,7 +59,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Affecting Natures",
+          "affecting_natures",
           "A detail of natures which affect this stat positively or negatively.",
           table(
             ["Set", undefined],

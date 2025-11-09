@@ -87,7 +87,7 @@ export default page.withData(({ data }) => {
       ])}
       {page.sections(
         [
-          "Varieties",
+          "varieties",
           "A list of the Pokémon that exist within this Pokémon species.",
           table(
             [undefined, "Default"],
@@ -101,7 +101,7 @@ export default page.withData(({ data }) => {
         ],
         page.sections.names(pokemonSpecies.names),
         [
-          "Egg Groups",
+          "egg_groups",
           "A list of egg groups this Pokémon species is a member of.",
           table(
             undefined,
@@ -111,7 +111,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Flavor Text Entries",
+          "flavor_text_entries",
           "A list of flavor text entries for this Pokémon species.",
           table(
             [undefined, "Language", "Version"],
@@ -123,7 +123,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Form Descriptions",
+          "form_descriptions",
           "Descriptions of different forms Pokémon take on within the Pokémon species.",
           table(
             [undefined, "Language"],
@@ -134,7 +134,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Genera",
+          "genera",
           "The genus of this Pokémon species listed in multiple languages.",
           table(
             [undefined, "Language"],
@@ -145,7 +145,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Pal Park Encounters",
+          "pal_park_encounters",
           "A list of encounters that can be had with this Pokémon species in pal park.",
           table(
             ["Area", "Base Score", "Rate"],
@@ -157,7 +157,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Pokédex Numbers",
+          "pokedex_numbers",
           "A list of Pokedexes and the indexes reserved within them for this Pokémon species.",
           table(
             [undefined, "Index"],

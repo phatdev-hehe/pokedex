@@ -67,7 +67,7 @@ export default page.withData(async ({ data }) => {
           "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites"
         ),
         [
-          "Stats",
+          "stats",
           "A list of base stat values for this Pokémon.",
           table(
             [undefined, "Base stat", "Effort"],
@@ -92,7 +92,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Abilities",
+          "abilities",
           "A list of abilities this Pokémon could potentially have.",
           table(
             [undefined, "Slot", "Hidden"],
@@ -104,7 +104,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Cries",
+          "cries",
           "A set of cries used to depict this Pokémon in the game. A visual representation of the various cries can be found at PokeAPI/cries",
           table(
             undefined,
@@ -115,7 +115,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Types",
+          "types",
           "A list of details showing types this Pokémon has.",
           table(
             [undefined, "Slot"],
@@ -128,7 +128,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Location Area Encounters",
+          "location_area_encounters",
           "Encounter details pertaining to specific versions.",
           table(
             [undefined, "Version Details"],
@@ -172,7 +172,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Held Items",
+          "held_items",
           "A list of items this Pokémon may be holding when encountered.",
           table(
             [undefined, "Version Details"],
@@ -189,7 +189,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Game Indices",
+          "game_indices",
           "A list of game indices relevent to Pokémon item by generation.",
           table(
             [undefined, "Version"],
@@ -200,7 +200,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Forms",
+          "forms",
           "A list of forms this Pokémon can take on.",
           table(
             undefined,
@@ -208,7 +208,7 @@ export default page.withData(async ({ data }) => {
           ),
         ],
         [
-          "Moves",
+          "moves",
           "A list of moves along with learn methods and level details pertaining to specific version groups.",
           table(
             [undefined, "Version Group Details"],

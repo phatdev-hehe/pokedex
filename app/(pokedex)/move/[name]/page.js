@@ -38,7 +38,7 @@ export default page.withData(({ data }) => {
       ])}
       {page.sections(
         [
-          "Contest Combos",
+          "contest_combos",
           "A detail of normal and super contest combos that require this move.",
           table(
             ["Set", "Detail"],
@@ -65,7 +65,7 @@ export default page.withData(({ data }) => {
           ),
         ],
         [
-          "Effect Changes",
+          "effect_changes",
           "The list of previous effects this move has had across version groups of the games.",
           table(
             ["Version Group", "Effect Entries"],

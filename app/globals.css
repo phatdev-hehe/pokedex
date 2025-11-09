@@ -14,11 +14,12 @@
   }
 
   .prose {
-    --tw-prose-links: #0070f3;
+    --tw-prose-links: blue;
   }
 
   &.dark {
     .prose {
+      --tw-prose-links: cornflowerblue;
     }
   }
 }

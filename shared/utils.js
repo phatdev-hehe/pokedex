@@ -1,10 +1,20 @@
-import { split } from "change-case";
+import { noCase, split } from "change-case";
 import deromanize from "deromanize";
+import removeAccents from "remove-accents";
 import { titleCase as titleCase1 } from "title-case";
 
+const options = { wordSeparators: new Set(["_"]) };
+
 export const titleCase = (input = "") =>
-  split(titleCase1(input))
-    .map((word) => (Number.isNaN(deromanize(word)) ? word : word.toUpperCase()))
+  split(titleCase1(input, options))
+    .map((word) =>
+      Number.isNaN(deromanize(word))
+        ? {
+            pokemon: "Pokémon",
+            pokedex: "Pokédex",
+          }[noCase(removeAccents(word))] ?? word
+        : word.toUpperCase()
+    )
     .join(" ");
 
 export const randomItem =
