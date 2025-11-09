@@ -6,7 +6,7 @@ import Link from "next/link";
 const Page = await Pokedex.createPage({
   getList: "getTypesList",
   getData: "getTypeByName",
-  titleSuffix: "Type",
+  titleSuffix: "type",
   getAvatar: ({ data }) => {
     /** @type Type */
     const type = data;

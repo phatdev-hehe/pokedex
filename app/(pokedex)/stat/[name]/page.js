@@ -5,7 +5,7 @@ import { titleCase } from "@/shared/utils";
 const Page = await Pokedex.createPage({
   getList: "getStatsList",
   getData: "getStatByName",
-  titleSuffix: "Stat",
+  titleSuffix: "stat",
 });
 
 export const generateMetadata = Page.generateMetadata;

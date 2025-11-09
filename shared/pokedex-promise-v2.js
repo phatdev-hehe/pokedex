@@ -50,7 +50,7 @@ export const Pokedex = {
     const createTitle = (title) => {
       title = titleCase(title);
 
-      return titleSuffix ? `${title} (${titleSuffix})` : title;
+      return titleSuffix ? `${title} (${titleCase(titleSuffix)})` : title;
     };
 
     return {

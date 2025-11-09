@@ -6,7 +6,7 @@ import Link from "next/link";
 const Page = await Pokedex.createPage({
   getList: "getPokemonSpeciesList",
   getData: "getPokemonSpeciesByName",
-  titleSuffix: "Pokémon Species",
+  titleSuffix: "pokemon species",
 });
 
 export const generateMetadata = Page.generateMetadata;
