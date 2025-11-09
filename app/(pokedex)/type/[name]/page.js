@@ -1,5 +1,6 @@
 import { table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
 const page = await Pokedex.createPage({
@@ -27,11 +28,11 @@ export default page.withData(({ data }) => {
         ["Id", type.id],
         [
           "The generation this type was introduced in.",
-          Pokedex.formatName(type.generation.name),
+          titleCase(type.generation.name),
         ],
         [
           "The class of damage inflicted by this type.",
-          Pokedex.formatName(type.move_damage_class?.name), // ??
+          titleCase(type.move_damage_class?.name), // ??
         ],
       ])}
       {page.sections(
@@ -44,7 +45,7 @@ export default page.withData(({ data }) => {
             [undefined, "Slot"],
             type.pokemon.map((typePokemon) => [
               <Link href={`/pokemon/${typePokemon.pokemon.name}`}>
-                {Pokedex.formatName(typePokemon.pokemon.name)}
+                {titleCase(typePokemon.pokemon.name)}
               </Link>,
               typePokemon.slot,
             ])
@@ -55,7 +56,7 @@ export default page.withData(({ data }) => {
           "A list of moves that have this type.",
           table(
             undefined,
-            type.moves.map((move) => [Pokedex.formatName(move.name)])
+            type.moves.map((move) => [titleCase(move.name)])
           ),
         ],
         [
@@ -64,12 +65,12 @@ export default page.withData(({ data }) => {
           table(
             undefined,
             Object.entries(type.damage_relations).map(([key, value]) => [
-              Pokedex.formatName(key),
+              titleCase(key),
               table(
                 ["Type"],
                 value.map((type) => [
                   <Link href={`/type/${type.name}`}>
-                    {Pokedex.formatName(type.name)}
+                    {titleCase(type.name)}
                   </Link>,
                 ])
               ),
@@ -83,7 +84,7 @@ export default page.withData(({ data }) => {
             undefined,
             type.game_indices.map((generationGameIndex) => [
               generationGameIndex.game_index,
-              Pokedex.formatName(generationGameIndex.generation.name),
+              titleCase(generationGameIndex.generation.name),
             ])
           ),
         ]

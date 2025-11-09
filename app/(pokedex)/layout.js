@@ -1,6 +1,7 @@
 import logoSrc from "@/logo.gif";
 import { Image } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { titleCase } from "@/shared/utils";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 
 const createDocsLayoutTree = async ([getList, path]) => {
@@ -10,7 +11,7 @@ const createDocsLayoutTree = async ([getList, path]) => {
     name: `${data.count} ${path}`,
     type: "folder",
     children: data.results.map(({ name }) => ({
-      name: Pokedex.formatName(name),
+      name: titleCase(name),
       url: `/${path}/${name}`,
     })),
   };

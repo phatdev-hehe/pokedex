@@ -1,7 +1,6 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
-import { capitalCase, split } from "change-case";
+import { titleCase } from "@/shared/utils";
 import delay from "delay";
-import deromanize from "deromanize";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
 import { cache, Fragment } from "react";
@@ -22,7 +21,7 @@ const sections = Object.assign(
     sprites: (sprites, description) => [
       "Sprites",
       description,
-      table.fromObject(undefined, sprites, Pokedex.formatName, (src) => (
+      table.fromObject(undefined, sprites, titleCase, (src) => (
         <Pokedex.Image src={src} />
       )),
     ],
@@ -65,12 +64,6 @@ export const Pokedex = {
 
     return a;
   }, {}),
-  formatName: (input = "") =>
-    split(capitalCase(input))
-      .map((word) =>
-        Number.isNaN(deromanize(word)) ? word : word.toUpperCase()
-      )
-      .join(" "),
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
@@ -85,7 +78,7 @@ export const Pokedex = {
     );
 
     const createTitle = (title) => {
-      title = Pokedex.formatName(title);
+      title = titleCase(title);
 
       return titleSuffix ? `${title} (${titleSuffix})` : title;
     };

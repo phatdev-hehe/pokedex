@@ -1,5 +1,6 @@
 import { Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
 const page = await Pokedex.createPage({
@@ -23,12 +24,12 @@ export default page.withData(({ data }) => {
         [
           "The Pokémon species that evolves into this Pokemon_species.",
           <Link href={`/pokemon-species/${previousPokemonSpeciesName}`}>
-            {Pokedex.formatName(previousPokemonSpeciesName)}
+            {titleCase(previousPokemonSpeciesName)}
           </Link>,
         ],
         [
           "The generation this Pokémon species was introduced in.",
-          Pokedex.formatName(pokemonSpecies.generation.name),
+          titleCase(pokemonSpecies.generation.name),
         ],
         [undefined, <Checkbox checked={pokemonSpecies.is_baby}>Baby</Checkbox>],
         [
@@ -53,11 +54,11 @@ export default page.withData(({ data }) => {
         ],
         [
           "The color of this Pokémon for Pokédex search.",
-          Pokedex.formatName(pokemonSpecies.color.name),
+          titleCase(pokemonSpecies.color.name),
         ],
         [
           "The rate at which this Pokémon species gains levels.",
-          Pokedex.formatName(pokemonSpecies.growth_rate.name),
+          titleCase(pokemonSpecies.growth_rate.name),
         ],
         [
           "Whether or not this Pokémon has multiple forms and can switch between them.",
@@ -69,7 +70,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The habitat this Pokémon species can be encountered in.",
-          Pokedex.formatName(pokemonSpecies.habitat?.name), // ??
+          titleCase(pokemonSpecies.habitat?.name), // ??
         ],
         [
           "Whether or not this Pokémon has visual gender differences.",
@@ -81,7 +82,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The shape of this Pokémon for Pokédex search.",
-          Pokedex.formatName(pokemonSpecies.shape.name),
+          titleCase(pokemonSpecies.shape.name),
         ],
       ])}
       {page.sections(
@@ -92,7 +93,7 @@ export default page.withData(({ data }) => {
             [undefined, "Default"],
             pokemonSpecies.varieties.map((variety) => [
               <Link href={`/pokemon/${variety.pokemon.name}`}>
-                {Pokedex.formatName(variety.pokemon.name)}
+                {titleCase(variety.pokemon.name)}
               </Link>,
               <Checkbox checked={variety.is_default} />,
             ])
@@ -105,7 +106,7 @@ export default page.withData(({ data }) => {
           table(
             undefined,
             pokemonSpecies.egg_groups.map((eggGroups) => [
-              Pokedex.formatName(eggGroups.name),
+              titleCase(eggGroups.name),
             ])
           ),
         ],
@@ -117,7 +118,7 @@ export default page.withData(({ data }) => {
             pokemonSpecies.flavor_text_entries.map((flavorText) => [
               flavorText.flavor_text,
               flavorText.language.name,
-              Pokedex.formatName(flavorText.version.name), // ??
+              titleCase(flavorText.version.name), // ??
             ])
           ),
         ],
@@ -149,7 +150,7 @@ export default page.withData(({ data }) => {
           table(
             ["Area", "Base Score", "Rate"],
             pokemonSpecies.pal_park_encounters.map((palParkEncounter) => [
-              Pokedex.formatName(palParkEncounter.area.name),
+              titleCase(palParkEncounter.area.name),
               palParkEncounter.base_score,
               palParkEncounter.rate,
             ])
@@ -161,7 +162,7 @@ export default page.withData(({ data }) => {
           table(
             [undefined, "Index"],
             pokemonSpecies.pokedex_numbers.map((pokedexNumber) => [
-              Pokedex.formatName(pokedexNumber.pokedex.name),
+              titleCase(pokedexNumber.pokedex.name),
               pokedexNumber.entry_number,
             ])
           ),

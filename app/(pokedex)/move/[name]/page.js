@@ -1,5 +1,6 @@
 import { table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
 const page = await Pokedex.createPage({
@@ -24,11 +25,11 @@ export default page.withData(({ data }) => {
         ],
         [
           "The type of appeal this move gives a Pokémon when used in a contest.",
-          Pokedex.formatName(move.contest_type.name),
+          titleCase(move.contest_type.name),
         ],
         [
           "The type of damage the move inflicts on the target.",
-          Pokedex.formatName(move.damage_class.name),
+          titleCase(move.damage_class.name),
         ],
         [
           "The percent value of how likely it is this moves effect will happen.",
@@ -44,17 +45,17 @@ export default page.withData(({ data }) => {
             Object.entries(
               move?.contest_combos ?? [] // ??
             ).map(([key, value]) => [
-              Pokedex.formatName(key),
+              titleCase(key),
               table(
                 undefined,
                 Object.entries(value).map(([key, moves]) => [
-                  Pokedex.formatName(key),
+                  titleCase(key),
                   moves &&
                     table(
                       ["Move"],
                       moves.map((move) => [
                         <Link href={`/move/${move.name}`}>
-                          {Pokedex.formatName(move.name)}
+                          {titleCase(move.name)}
                         </Link>,
                       ])
                     ),
@@ -69,7 +70,7 @@ export default page.withData(({ data }) => {
           table(
             ["Version Group", "Effect Entries"],
             move.effect_changes.map((effectChange) => [
-              Pokedex.formatName(effectChange.version_group.name),
+              titleCase(effectChange.version_group.name),
               table(
                 [undefined, "Language"],
                 effectChange.effect_entries.map((effect) => [

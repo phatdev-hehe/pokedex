@@ -1,5 +1,6 @@
 import { Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { titleCase } from "@/shared/utils";
 
 const page = await Pokedex.createPage({
   getList: "getStatsList",
@@ -25,7 +26,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The class of damage this stat is directly related to.",
-          Pokedex.formatName(stat.move_damage_class?.name), // ??
+          titleCase(stat.move_damage_class?.name), // ??
         ],
       ])}
       {page.sections(
@@ -36,7 +37,7 @@ export default page.withData(({ data }) => {
           table(
             undefined,
             stat.affecting_items.map((affectingItem) => [
-              Pokedex.formatName(affectingItem.name),
+              titleCase(affectingItem.name),
             ])
           ),
         ],
@@ -46,11 +47,11 @@ export default page.withData(({ data }) => {
           table(
             ["Set", undefined],
             Object.entries(stat.affecting_moves).map(([key, value]) => [
-              Pokedex.formatName(key),
+              titleCase(key),
               table(
                 [undefined, "Change"],
                 Object.values(value).map(({ change, move }) => [
-                  Pokedex.formatName(move.name),
+                  titleCase(move.name),
                   change,
                 ])
               ),
@@ -63,12 +64,10 @@ export default page.withData(({ data }) => {
           table(
             ["Set", undefined],
             Object.entries(stat.affecting_natures).map(([key, value]) => [
-              Pokedex.formatName(key),
+              titleCase(key),
               table(
                 undefined,
-                Object.values(value).map(({ name }) => [
-                  Pokedex.formatName(name),
-                ])
+                Object.values(value).map(({ name }) => [titleCase(name)])
               ),
             ])
           ),

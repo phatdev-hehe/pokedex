@@ -1,5 +1,6 @@
 import { Audio, Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
 const page = await Pokedex.createPage({
@@ -42,7 +43,7 @@ export default page.withData(async ({ data }) => {
         [
           "Species",
           <Link href={`/pokemon-species/${pokemon.species.name}`}>
-            {Pokedex.formatName(pokemon.species.name)}
+            {titleCase(pokemon.species.name)}
           </Link>,
         ],
         [
@@ -72,7 +73,7 @@ export default page.withData(async ({ data }) => {
             [undefined, "Base stat", "Effort"],
             pokemon.stats.map((statElement) => [
               <Link href={`/stat/${statElement.stat.name}`}>
-                {Pokedex.formatName(statElement.stat.name)}
+                {titleCase(statElement.stat.name)}
               </Link>,
               statElement.base_stat,
               statElement.effort,
@@ -96,7 +97,7 @@ export default page.withData(async ({ data }) => {
           table(
             [undefined, "Slot", "Hidden"],
             pokemon.abilities.map((pokemonAbility) => [
-              Pokedex.formatName(pokemonAbility.ability.name),
+              titleCase(pokemonAbility.ability.name),
               pokemonAbility.slot,
               <Checkbox checked={pokemonAbility.is_hidden} />,
             ])
@@ -108,7 +109,7 @@ export default page.withData(async ({ data }) => {
           table(
             undefined,
             Object.entries(pokemon.cries).map(([input, src]) => [
-              Pokedex.formatName(input),
+              titleCase(input),
               <Audio src={src} />,
             ])
           ),
@@ -120,7 +121,7 @@ export default page.withData(async ({ data }) => {
             [undefined, "Slot"],
             pokemon.types.map((pokemonType) => [
               <Link href={`/type/${pokemonType.type.name}`}>
-                {Pokedex.formatName(pokemonType.type.name)}
+                {titleCase(pokemonType.type.name)}
               </Link>,
               pokemonType.slot,
             ])
@@ -132,12 +133,12 @@ export default page.withData(async ({ data }) => {
           table(
             [undefined, "Version Details"],
             pokemonLocationAreaEncounters.map((pokemonEncounter) => [
-              Pokedex.formatName(pokemonEncounter.location_area.name),
+              titleCase(pokemonEncounter.location_area.name),
               table(
                 [undefined, "Max Chance", "Encounter Details"],
                 pokemonEncounter.version_details.map(
                   (versionEncounterDetail) => [
-                    Pokedex.formatName(versionEncounterDetail.version.name),
+                    titleCase(versionEncounterDetail.version.name),
                     versionEncounterDetail.max_chance,
                     table(
                       [
@@ -149,7 +150,7 @@ export default page.withData(async ({ data }) => {
                       ],
                       versionEncounterDetail.encounter_details.map(
                         (encounter) => [
-                          Pokedex.formatName(encounter.method.name),
+                          titleCase(encounter.method.name),
                           encounter.chance,
                           encounter.min_level,
                           encounter.max_level,
@@ -157,9 +158,7 @@ export default page.withData(async ({ data }) => {
                             undefined,
                             encounter.condition_values.map(
                               (encounterConditionValue) => [
-                                Pokedex.formatName(
-                                  encounterConditionValue.name
-                                ),
+                                titleCase(encounterConditionValue.name),
                               ]
                             )
                           ),
@@ -178,11 +177,11 @@ export default page.withData(async ({ data }) => {
           table(
             [undefined, "Version Details"],
             pokemon.held_items.map((heldItem) => [
-              Pokedex.formatName(heldItem.item.name),
+              titleCase(heldItem.item.name),
               table(
                 [undefined, "Rarity"],
                 heldItem.version_details.map((rarityVersion) => [
-                  Pokedex.formatName(rarityVersion.version.name),
+                  titleCase(rarityVersion.version.name),
                   rarityVersion.rarity,
                 ])
               ),
@@ -196,7 +195,7 @@ export default page.withData(async ({ data }) => {
             [undefined, "Version"],
             pokemon.game_indices.map((versionGameIndex) => [
               versionGameIndex.game_index,
-              Pokedex.formatName(versionGameIndex.version.name),
+              titleCase(versionGameIndex.version.name),
             ])
           ),
         ],
@@ -205,9 +204,7 @@ export default page.withData(async ({ data }) => {
           "A list of forms this Pokémon can take on.",
           table(
             undefined,
-            pokemon.forms.map((pokemonFrom) => [
-              Pokedex.formatName(pokemonFrom.name),
-            ])
+            pokemon.forms.map((pokemonFrom) => [titleCase(pokemonFrom.name)])
           ),
         ],
         [
@@ -216,7 +213,7 @@ export default page.withData(async ({ data }) => {
           table(
             [undefined, "Version Group Details"],
             pokemon.moves.map((moveElement) => [
-              Pokedex.formatName(moveElement.move.name),
+              titleCase(moveElement.move.name),
               table(
                 [
                   "Order",
@@ -227,8 +224,8 @@ export default page.withData(async ({ data }) => {
                 moveElement.version_group_details.map((versionGroupDetail) => [
                   versionGroupDetail.order, // ??
                   versionGroupDetail.level_learned_at,
-                  Pokedex.formatName(versionGroupDetail.move_learn_method.name),
-                  Pokedex.formatName(versionGroupDetail.version_group.name),
+                  titleCase(versionGroupDetail.move_learn_method.name),
+                  titleCase(versionGroupDetail.version_group.name),
                 ])
               ),
             ])
