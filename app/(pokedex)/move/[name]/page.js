@@ -25,7 +25,7 @@ export default page.withData(({ data }) => {
         ],
         [
           "The type of appeal this move gives a Pokémon when used in a contest.",
-          titleCase(move.contest_type.name),
+          titleCase(move.contest_type?.name), // ??
         ],
         [
           "The type of damage the move inflicts on the target.",
