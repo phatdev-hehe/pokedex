@@ -3,6 +3,7 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
 import { Children, useId } from "react";
+import removeAccents from "remove-accents";
 
 export const table = Object.assign(
   (thead = [], tbody = thead, tfoot) => {
@@ -31,7 +32,7 @@ export const table = Object.assign(
   },
   {
     fromObject: (
-      thead,
+      thead, // ??
       tbody,
       formatKey = JSON.stringify,
       formatValue = JSON.stringify
@@ -39,7 +40,7 @@ export const table = Object.assign(
       if (isPlainObject(tbody))
         return table(
           thead,
-          Object.entries(tbody).map(([key, value]) => [
+          Object.entries(tbody).map(([key, value], index) => [
             formatKey(key),
             table.fromObject(thead, value, formatKey, formatValue),
           ])
@@ -56,7 +57,7 @@ export const tabs = (items, tabs) => (
       const item = items[index];
 
       return (
-        <Tab id={kebabCase(item)} value={item} key={item}>
+        <Tab id={kebabCase(removeAccents(item))} value={item} key={item}>
           {tab}
         </Tab>
       );

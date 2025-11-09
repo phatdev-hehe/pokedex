@@ -22,34 +22,65 @@ export default page.withData(({ data }) => {
           "The percent value of how likely this move is to be successful.",
           move.accuracy,
         ],
+        [
+          "The type of appeal this move gives a Pokémon when used in a contest.",
+          Pokedex.formatName(move.contest_type.name),
+        ],
+        [
+          "The type of damage the move inflicts on the target.",
+          Pokedex.formatName(move.damage_class.name),
+        ],
+        [
+          "The percent value of how likely it is this moves effect will happen.",
+          move.effect_chance,
+        ],
       ])}
-      {page.sections([
-        "Contest Combos",
-        "A detail of normal and super contest combos that require this move.",
-        table(
-          ["Set", "Detail"],
-          Object.entries(
-            move?.contest_combos ?? [] // ??
-          ).map(([key, value]) => [
-            Pokedex.formatName(key),
-            table(
-              undefined,
-              Object.entries(value).map(([key, moves]) => [
-                Pokedex.formatName(key),
-                moves &&
-                  table(
-                    ["Move"],
-                    moves.map((move) => [
-                      <Link href={`/move/${move.name}`}>
-                        {Pokedex.formatName(move.name)}
-                      </Link>,
-                    ])
-                  ),
-              ])
-            ),
-          ])
-        ),
-      ])}
+      {page.sections(
+        [
+          "Contest Combos",
+          "A detail of normal and super contest combos that require this move.",
+          table(
+            ["Set", "Detail"],
+            Object.entries(
+              move?.contest_combos ?? [] // ??
+            ).map(([key, value]) => [
+              Pokedex.formatName(key),
+              table(
+                undefined,
+                Object.entries(value).map(([key, moves]) => [
+                  Pokedex.formatName(key),
+                  moves &&
+                    table(
+                      ["Move"],
+                      moves.map((move) => [
+                        <Link href={`/move/${move.name}`}>
+                          {Pokedex.formatName(move.name)}
+                        </Link>,
+                      ])
+                    ),
+                ])
+              ),
+            ])
+          ),
+        ],
+        [
+          "Effect Changes",
+          "The list of previous effects this move has had across version groups of the games.",
+          table(
+            ["Version Group", "Effect Entries"],
+            move.effect_changes.map((effectChange) => [
+              Pokedex.formatName(effectChange.version_group.name),
+              table(
+                [undefined, "Language"],
+                effectChange.effect_entries.map((effect) => [
+                  effect.effect,
+                  effect.language.name,
+                ])
+              ),
+            ])
+          ),
+        ]
+      )}
     </>
   );
 });

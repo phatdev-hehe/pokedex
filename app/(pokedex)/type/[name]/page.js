@@ -35,16 +35,7 @@ export default page.withData(({ data }) => {
         ],
       ])}
       {page.sections(
-        [
-          "Sprites",
-          undefined,
-          table.fromObject(
-            undefined,
-            type.sprites,
-            Pokedex.formatName,
-            (src) => <Pokedex.Image src={src} />
-          ),
-        ],
+        page.sections.sprites(type.sprites),
         page.sections.names(type.names),
         [
           "Pokémon",

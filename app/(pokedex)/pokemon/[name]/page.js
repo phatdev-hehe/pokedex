@@ -61,16 +61,10 @@ export default page.withData(async ({ data }) => {
         ["Weight", pokemon.weight],
       ])}
       {page.sections(
-        [
-          "Sprites",
-          "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites",
-          table.fromObject(
-            undefined,
-            pokemon.sprites,
-            Pokedex.formatName,
-            (src) => <Pokedex.Image src={src} />
-          ),
-        ],
+        page.sections.sprites(
+          pokemon.sprites,
+          "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites"
+        ),
         [
           "Stats",
           "A list of base stat values for this Pokémon.",

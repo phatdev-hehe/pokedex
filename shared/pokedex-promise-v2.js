@@ -19,6 +19,13 @@ const sections = Object.assign(
       ))
     ),
   {
+    sprites: (sprites, description) => [
+      "Sprites",
+      description,
+      table.fromObject(undefined, sprites, Pokedex.formatName, (src) => (
+        <Pokedex.Image src={src} />
+      )),
+    ],
     names: (names, description) => [
       "Names",
       description,
