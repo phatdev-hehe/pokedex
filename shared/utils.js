@@ -1,12 +1,14 @@
 import { noCase, split } from "change-case";
 import deromanize from "deromanize";
 import removeAccents from "remove-accents";
-import { titleCase as titleCase1 } from "title-case";
+import { titleCase as titleCase1, WORD_SEPARATORS } from "title-case";
 
-const options = { wordSeparators: new Set(["_"]) };
+const titleCaseOptions = {
+  wordSeparators: new Set(["_", ...WORD_SEPARATORS]),
+};
 
 export const titleCase = (input = "") =>
-  split(titleCase1(input, options))
+  split(titleCase1(input, titleCaseOptions))
     .map((word) =>
       Number.isNaN(deromanize(word))
         ? {

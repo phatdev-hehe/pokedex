@@ -3,7 +3,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const page = await Pokedex.createPage({
+const Page = await Pokedex.createPage({
   getList: "getTypesList",
   getData: "getTypeByName",
   titleSuffix: "Type",
@@ -15,15 +15,15 @@ const page = await Pokedex.createPage({
   },
 });
 
-export const generateMetadata = page.generateMetadata;
-export const generateStaticParams = page.generateStaticParams;
+export const generateMetadata = Page.generateMetadata;
+export const generateStaticParams = Page.generateStaticParams;
 
-export default page.withData(({ data }) => {
+export default Page.withData(({ data }) => {
   /** @type Type */
   const type = data;
 
   return (
-    <>
+    <Page.Root>
       {table(undefined, [
         ["Id", type.id],
         [
@@ -35,9 +35,9 @@ export default page.withData(({ data }) => {
           titleCase(type.move_damage_class?.name), // ??
         ],
       ])}
-      {page.tabs(
-        page.tabs.sprites(type.sprites),
-        page.tabs.names(type.names),
+      {Page.tabs(
+        Page.tabs.sprites(type.sprites),
+        Page.tabs.names(type.names),
         [
           "pokemon",
           "A list of details of Pokémon that have this type.",
@@ -89,6 +89,6 @@ export default page.withData(({ data }) => {
           ),
         ]
       )}
-    </>
+    </Page.Root>
   );
 });

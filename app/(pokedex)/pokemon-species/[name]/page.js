@@ -3,22 +3,22 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const page = await Pokedex.createPage({
+const Page = await Pokedex.createPage({
   getList: "getPokemonSpeciesList",
   getData: "getPokemonSpeciesByName",
   titleSuffix: "Pokémon Species",
 });
 
-export const generateMetadata = page.generateMetadata;
-export const generateStaticParams = page.generateStaticParams;
+export const generateMetadata = Page.generateMetadata;
+export const generateStaticParams = Page.generateStaticParams;
 
-export default page.withData(({ data }) => {
+export default Page.withData(({ data }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = data;
   const previousPokemonSpeciesName = pokemonSpecies.evolves_from_species?.name; // ??
 
   return (
-    <>
+    <Page.Root>
       {table(undefined, [
         ["Id", pokemonSpecies.id],
         [
@@ -85,7 +85,7 @@ export default page.withData(({ data }) => {
           titleCase(pokemonSpecies.shape.name),
         ],
       ])}
-      {page.tabs(
+      {Page.tabs(
         [
           "varieties",
           "A list of the Pokémon that exist within this Pokémon species.",
@@ -99,7 +99,7 @@ export default page.withData(({ data }) => {
             ])
           ),
         ],
-        page.tabs.names(pokemonSpecies.names),
+        Page.tabs.names(pokemonSpecies.names),
         [
           "egg_groups",
           "A list of egg groups this Pokémon species is a member of.",
@@ -168,6 +168,6 @@ export default page.withData(({ data }) => {
           ),
         ]
       )}
-    </>
+    </Page.Root>
   );
 });

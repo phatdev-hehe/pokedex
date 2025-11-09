@@ -3,7 +3,7 @@ import { titleCase } from "@/shared/utils";
 import delay from "delay";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
-import { cache, Fragment } from "react";
+import { cache, Children, Fragment } from "react";
 import "server-only";
 
 const pokeAPI = new PokeAPI();
@@ -85,6 +85,17 @@ export const Pokedex = {
           ],
         }
       ),
+      Root: ({ children }) =>
+        Children.map(children, (children) => (
+          <div
+            style={{
+              position: "sticky",
+              top: "var(--sticky-offset)",
+            }}
+          >
+            {children}
+          </div>
+        )),
       generateStaticParams: () => names.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
         const { name } = await params;
@@ -121,6 +132,8 @@ export const Pokedex = {
               />
               <div
                 style={{
+                  "--sticky-offset": "1rem",
+
                   position: "relative",
                   top: "11rem",
                 }}
@@ -128,7 +141,7 @@ export const Pokedex = {
                 <div
                   style={{
                     position: "sticky",
-                    top: "1rem",
+                    top: "var(--sticky-offset)",
                     display: "flex",
                     alignItems: "baseline",
                     justifyContent: "space-between",
@@ -148,7 +161,7 @@ export const Pokedex = {
                 <div
                   style={{
                     backgroundColor: "var(--color-fd-background)",
-                    position: "inherit",
+                    position: "relative",
                   }}
                 >
                   {await render(context)}

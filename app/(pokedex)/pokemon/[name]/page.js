@@ -3,7 +3,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const page = await Pokedex.createPage({
+const Page = await Pokedex.createPage({
   getList: "getPokemonsList",
   getData: "getPokemonByName",
   titleSuffix: "Pokémon",
@@ -20,10 +20,10 @@ const page = await Pokedex.createPage({
   },
 });
 
-export const generateMetadata = page.generateMetadata;
-export const generateStaticParams = page.generateStaticParams;
+export const generateMetadata = Page.generateMetadata;
+export const generateStaticParams = Page.generateStaticParams;
 
-export default page.withData(async ({ data }) => {
+export default Page.withData(async ({ data }) => {
   /** @type Pokemon */
   const pokemon = data;
 
@@ -37,7 +37,7 @@ export default page.withData(async ({ data }) => {
   );
 
   return (
-    <>
+    <Page.Root>
       {table(undefined, [
         ["Id", pokemon.id],
         [
@@ -61,8 +61,8 @@ export default page.withData(async ({ data }) => {
         ["Height", pokemon.height],
         ["Weight", pokemon.weight],
       ])}
-      {page.tabs(
-        page.tabs.sprites(
+      {Page.tabs(
+        Page.tabs.sprites(
           pokemon.sprites,
           "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites"
         ),
@@ -232,6 +232,6 @@ export default page.withData(async ({ data }) => {
           ),
         ]
       )}
-    </>
+    </Page.Root>
   );
 });

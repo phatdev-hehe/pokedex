@@ -2,21 +2,21 @@ import { Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
-const page = await Pokedex.createPage({
+const Page = await Pokedex.createPage({
   getList: "getStatsList",
   getData: "getStatByName",
   titleSuffix: "Stat",
 });
 
-export const generateMetadata = page.generateMetadata;
-export const generateStaticParams = page.generateStaticParams;
+export const generateMetadata = Page.generateMetadata;
+export const generateStaticParams = Page.generateStaticParams;
 
-export default page.withData(({ data }) => {
+export default Page.withData(({ data }) => {
   /** @type Stat */
   const stat = data;
 
   return (
-    <>
+    <Page.Root>
       {table(undefined, [
         ["Id", stat.id],
         ["ID the games use for this stat.", stat.game_index],
@@ -29,8 +29,8 @@ export default page.withData(({ data }) => {
           titleCase(stat.move_damage_class?.name), // ??
         ],
       ])}
-      {page.tabs(
-        page.tabs.names(stat.names),
+      {Page.tabs(
+        Page.tabs.names(stat.names),
         [
           "affecting_items",
           undefined,
@@ -73,6 +73,6 @@ export default page.withData(({ data }) => {
           ),
         ]
       )}
-    </>
+    </Page.Root>
   );
 });

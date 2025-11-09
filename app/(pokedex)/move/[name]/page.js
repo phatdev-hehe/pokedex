@@ -3,21 +3,21 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const page = await Pokedex.createPage({
+const Page = await Pokedex.createPage({
   getList: "getMovesList",
   getData: "getMoveByName",
   titleSuffix: "Move",
 });
 
-export const generateMetadata = page.generateMetadata;
-export const generateStaticParams = page.generateStaticParams;
+export const generateMetadata = Page.generateMetadata;
+export const generateStaticParams = Page.generateStaticParams;
 
-export default page.withData(({ data }) => {
+export default Page.withData(({ data }) => {
   /** @type Move */
   const move = data;
 
   return (
-    <>
+    <Page.Root>
       {table(undefined, [
         [
           "The percent value of how likely this move is to be successful.",
@@ -36,7 +36,7 @@ export default page.withData(({ data }) => {
           move.effect_chance,
         ],
       ])}
-      {page.tabs(
+      {Page.tabs(
         [
           "contest_combos",
           "A detail of normal and super contest combos that require this move.",
@@ -82,6 +82,6 @@ export default page.withData(({ data }) => {
           ),
         ]
       )}
-    </>
+    </Page.Root>
   );
 });
