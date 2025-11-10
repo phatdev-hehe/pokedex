@@ -68,6 +68,21 @@ export const Pokedex = {
             ))
           ),
         {
+          flavorTextEntries: (flavor_text_entries, description) => [
+            "flavor_text_entries",
+            description,
+            table(
+              [undefined, "language", "version", "version_group"],
+              flavor_text_entries.map((flavorText) => [
+                flavorText.flavor_text,
+                flavorText.language.name,
+
+                // ??
+                titleCase(flavorText.version?.name),
+                titleCase(flavorText.version_group?.name),
+              ])
+            ),
+          ],
           sprites: (sprites, description) => [
             "sprites",
             description,

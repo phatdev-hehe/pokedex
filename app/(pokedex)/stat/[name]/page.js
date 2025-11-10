@@ -1,6 +1,7 @@
 import { Checkbox, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
+import Link from "next/link";
 
 const Page = await Pokedex.createPage({
   getList: "getStatsList",
@@ -51,7 +52,9 @@ export default Page.withData(({ data }) => {
               table(
                 [undefined, "change"],
                 Object.values(value).map(({ change, move }) => [
-                  titleCase(move.name),
+                  <Link href={`/move/${move.name}`}>
+                    {titleCase(move.name)}
+                  </Link>,
                   change,
                 ])
               ),

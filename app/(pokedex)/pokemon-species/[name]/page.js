@@ -110,18 +110,10 @@ export default Page.withData(({ data }) => {
             ])
           ),
         ],
-        [
-          "flavor_text_entries",
-          "A list of flavor text entries for this Pokémon species.",
-          table(
-            [undefined, "language", "version"],
-            pokemonSpecies.flavor_text_entries.map((flavorText) => [
-              flavorText.flavor_text,
-              flavorText.language.name,
-              titleCase(flavorText.version.name), // ??
-            ])
-          ),
-        ],
+        Page.tabs.flavorTextEntries(
+          pokemonSpecies.flavor_text_entries,
+          "A list of flavor text entries for this Pokémon species."
+        ),
         [
           "form_descriptions",
           "Descriptions of different forms Pokémon take on within the Pokémon species.",

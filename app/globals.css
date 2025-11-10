@@ -17,6 +17,12 @@
     accent-color: var(--tw-prose-links);
   }
 
+  table {
+    th {
+      text-wrap: nowrap;
+    }
+  }
+
   .prose {
     --tw-prose-links: blue;
   }

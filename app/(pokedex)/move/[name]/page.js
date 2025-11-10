@@ -16,9 +16,13 @@ export default Page.withData(({ data }) => {
   /** @type Move */
   const move = data;
 
+  move.machines;
+  move.super_contest_effect;
+
   return (
     <Page.Root>
       {table(undefined, [
+        ["Id", move.id],
         [
           "The percent value of how likely this move is to be successful.",
           move.accuracy,
@@ -35,8 +39,63 @@ export default Page.withData(({ data }) => {
           "The percent value of how likely it is this moves effect will happen.",
           move.effect_chance,
         ],
+        [
+          "The generation in which this move was introduced.",
+          titleCase(move.generation.name),
+        ],
+        [
+          "The base power of this move with a value of 0 if it does not have a base power.",
+          move.power,
+        ],
+        ["Power points. The number of times this move can be used.", move.pp],
+        [
+          "A value between -8 and 8. Sets the order in which moves are executed during battle.",
+          move.priority,
+        ],
+        [
+          "The type of target that will receive the effects of the attack.",
+          titleCase(move.target.name),
+        ],
+        [
+          "The elemental type of this move.",
+          <Link href={`/type/${move.type.name}`}>
+            {titleCase(move.type.name)}
+          </Link>,
+        ],
       ])}
       {Page.tabs(
+        [
+          "meta",
+          "Metadata about this move",
+          table(undefined, [
+            ["Ailment Chance", move.meta.ailment_chance],
+            ["Ailment", titleCase(move.meta.ailment.name)],
+            ["Category", titleCase(move.meta.category.name)],
+            ["Crit Rate", move.meta.crit_rate],
+            ["Drain", move.meta.drain],
+            ["Flinch Chance", move.meta.flinch_chance],
+            ["Healing", move.meta.healing],
+            ["Max Hits", move.meta.max_hits],
+            ["Max Turns", move.meta.max_turns],
+            ["Min Hits", move.meta.min_hits],
+            ["Min Turns", move.meta.min_turns],
+            ["Stat Chance", move.meta.stat_chance],
+          ]),
+        ],
+        Page.tabs.names(move.names),
+        [
+          "stat_changes",
+          "A list of stats this moves effects and how much it effects them.",
+          table(
+            ["stat", "change"],
+            move.stat_changes.map((statChange) => [
+              <Link href={`/stat/${statChange.stat.name}`}>
+                {titleCase(statChange.stat.name)}
+              </Link>,
+              statChange.change,
+            ])
+          ),
+        ],
         [
           "contest_combos",
           "A detail of normal and super contest combos that require this move.",
@@ -78,6 +137,33 @@ export default Page.withData(({ data }) => {
                   effect.language.name,
                 ])
               ),
+            ])
+          ),
+        ],
+        [
+          "effect_entries",
+          "The effect of this move listed in different languages.",
+          table(
+            [undefined, "language"],
+            move.effect_entries.map((verboseEffect) => [
+              verboseEffect.effect,
+              verboseEffect.language.name,
+            ])
+          ),
+        ],
+        Page.tabs.flavorTextEntries(
+          move.flavor_text_entries,
+          "The flavor text of this move listed in different languages."
+        ),
+        [
+          "learned_by_pokemon",
+          "List of Pokemon that can learn the move",
+          table(
+            undefined,
+            move.learned_by_pokemon.map((pokemon) => [
+              <Link href={`/pokemon/${pokemon.name}`}>
+                {titleCase(pokemon.name)}
+              </Link>,
             ])
           ),
         ]

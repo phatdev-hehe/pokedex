@@ -213,7 +213,9 @@ export default Page.withData(async ({ data }) => {
           table(
             [undefined, "version_group_details"],
             pokemon.moves.map((moveElement) => [
-              titleCase(moveElement.move.name),
+              <Link href={`/move/${moveElement.move.name}`}>
+                {titleCase(moveElement.move.name)}
+              </Link>,
               table(
                 [
                   "order",

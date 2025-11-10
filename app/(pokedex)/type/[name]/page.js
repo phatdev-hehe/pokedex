@@ -56,7 +56,9 @@ export default Page.withData(({ data }) => {
           "A list of moves that have this type.",
           table(
             undefined,
-            type.moves.map((move) => [titleCase(move.name)])
+            type.moves.map((move) => [
+              <Link href={`/move/${move.name}`}>{titleCase(move.name)}</Link>,
+            ])
           ),
         ],
         [
@@ -81,7 +83,7 @@ export default Page.withData(({ data }) => {
           "game_indices",
           undefined,
           table(
-            undefined,
+            [undefined, "generation"],
             type.game_indices.map((generationGameIndex) => [
               generationGameIndex.game_index,
               titleCase(generationGameIndex.generation.name),
