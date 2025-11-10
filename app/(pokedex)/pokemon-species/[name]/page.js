@@ -154,7 +154,9 @@ export default Page.withData(({ data }) => {
           table(
             ["pokedex", "entry_number"],
             pokemonSpecies.pokedex_numbers.map((pokedexNumber) => [
-              titleCase(pokedexNumber.pokedex.name),
+              <Link href={`/pokedex/${pokedexNumber.pokedex.name}`}>
+                {titleCase(pokedexNumber.pokedex.name)}
+              </Link>,
               pokedexNumber.entry_number,
             ])
           ),

@@ -26,7 +26,7 @@ export default Page.withData(({ data }) => {
         ],
         [
           "The region this Pokédex catalogues Pokémon for.",
-          titleCase(pokedex.region.name),
+          titleCase(pokedex.region?.name), // ??
         ],
       ])}
       {Page.tabs(
