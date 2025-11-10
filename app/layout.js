@@ -1,5 +1,6 @@
 import { RootProvider } from "fumadocs-ui/provider/next";
 import "fumadocs-ui/style.css";
+import { ReactLenis } from "lenis/react";
 import { Geist } from "next/font/google";
 import "./globals.css";
 
@@ -15,7 +16,9 @@ export default ({ children }) => (
         minHeight: "100vh",
       }}
     >
-      <RootProvider search={{ enabled: false }}>{children}</RootProvider>
+      <RootProvider search={{ enabled: false }}>
+        <ReactLenis root>{children}</ReactLenis>
+      </RootProvider>
     </body>
   </html>
 );
