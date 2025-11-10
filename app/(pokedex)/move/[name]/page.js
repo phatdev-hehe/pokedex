@@ -41,7 +41,7 @@ export default Page.withData(({ data }) => {
           "contest_combos",
           "A detail of normal and super contest combos that require this move.",
           table(
-            ["Set", "Detail"],
+            ["set", "detail"],
             Object.entries(
               move?.contest_combos ?? [] // ??
             ).map(([key, value]) => [
@@ -52,7 +52,7 @@ export default Page.withData(({ data }) => {
                   titleCase(key),
                   moves &&
                     table(
-                      ["Move"],
+                      ["move"],
                       moves.map((move) => [
                         <Link href={`/move/${move.name}`}>
                           {titleCase(move.name)}
@@ -68,11 +68,11 @@ export default Page.withData(({ data }) => {
           "effect_changes",
           "The list of previous effects this move has had across version groups of the games.",
           table(
-            ["Version Group", "Effect Entries"],
+            ["version_group", "effect_entries"],
             move.effect_changes.map((effectChange) => [
               titleCase(effectChange.version_group.name),
               table(
-                [undefined, "Language"],
+                [undefined, "language"],
                 effectChange.effect_entries.map((effect) => [
                   effect.effect,
                   effect.language.name,

@@ -45,11 +45,11 @@ export default Page.withData(({ data }) => {
           "affecting_moves",
           "A detail of moves which affect this stat positively or negatively.",
           table(
-            ["Set", undefined],
+            ["set", undefined],
             Object.entries(stat.affecting_moves).map(([key, value]) => [
               titleCase(key),
               table(
-                [undefined, "Change"],
+                [undefined, "change"],
                 Object.values(value).map(({ change, move }) => [
                   titleCase(move.name),
                   change,
@@ -62,7 +62,7 @@ export default Page.withData(({ data }) => {
           "affecting_natures",
           "A detail of natures which affect this stat positively or negatively.",
           table(
-            ["Set", undefined],
+            ["set", undefined],
             Object.entries(stat.affecting_natures).map(([key, value]) => [
               titleCase(key),
               table(

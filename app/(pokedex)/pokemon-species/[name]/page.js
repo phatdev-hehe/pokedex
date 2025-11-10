@@ -90,7 +90,7 @@ export default Page.withData(({ data }) => {
           "varieties",
           "A list of the Pokémon that exist within this Pokémon species.",
           table(
-            [undefined, "Default"],
+            [undefined, "default"],
             pokemonSpecies.varieties.map((variety) => [
               <Link href={`/pokemon/${variety.pokemon.name}`}>
                 {titleCase(variety.pokemon.name)}
@@ -114,7 +114,7 @@ export default Page.withData(({ data }) => {
           "flavor_text_entries",
           "A list of flavor text entries for this Pokémon species.",
           table(
-            [undefined, "Language", "Version"],
+            [undefined, "language", "version"],
             pokemonSpecies.flavor_text_entries.map((flavorText) => [
               flavorText.flavor_text,
               flavorText.language.name,
@@ -126,7 +126,7 @@ export default Page.withData(({ data }) => {
           "form_descriptions",
           "Descriptions of different forms Pokémon take on within the Pokémon species.",
           table(
-            [undefined, "Language"],
+            [undefined, "language"],
             pokemonSpecies.form_descriptions.map((description) => [
               description.description,
               description.language.name,
@@ -137,7 +137,7 @@ export default Page.withData(({ data }) => {
           "genera",
           "The genus of this Pokémon species listed in multiple languages.",
           table(
-            [undefined, "Language"],
+            [undefined, "language"],
             pokemonSpecies.genera.map((genus) => [
               genus.genus,
               genus.language.name,
@@ -148,7 +148,7 @@ export default Page.withData(({ data }) => {
           "pal_park_encounters",
           "A list of encounters that can be had with this Pokémon species in pal park.",
           table(
-            ["Area", "Base Score", "Rate"],
+            ["area", "base_score", "rate"],
             pokemonSpecies.pal_park_encounters.map((palParkEncounter) => [
               titleCase(palParkEncounter.area.name),
               palParkEncounter.base_score,
@@ -160,7 +160,7 @@ export default Page.withData(({ data }) => {
           "pokedex_numbers",
           "A list of Pokedexes and the indexes reserved within them for this Pokémon species.",
           table(
-            [undefined, "Index"],
+            ["pokedex", "entry_number"],
             pokemonSpecies.pokedex_numbers.map((pokedexNumber) => [
               titleCase(pokedexNumber.pokedex.name),
               pokedexNumber.entry_number,

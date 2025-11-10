@@ -14,7 +14,7 @@ export const table = Object.assign(
           <thead>
             <tr>
               {thead.map((value, key) => (
-                <th key={key}>{value}</th>
+                <th key={key}>{titleCase(value)}</th>
               ))}
             </tr>
           </thead>

@@ -42,7 +42,7 @@ export default Page.withData(({ data }) => {
           "pokemon",
           "A list of details of Pokémon that have this type.",
           table(
-            [undefined, "Slot"],
+            [undefined, "slot"],
             type.pokemon.map((typePokemon) => [
               <Link href={`/pokemon/${typePokemon.pokemon.name}`}>
                 {titleCase(typePokemon.pokemon.name)}
@@ -67,7 +67,7 @@ export default Page.withData(({ data }) => {
             Object.entries(type.damage_relations).map(([key, value]) => [
               titleCase(key),
               table(
-                ["Type"],
+                ["type"],
                 value.map((type) => [
                   <Link href={`/type/${type.name}`}>
                     {titleCase(type.name)}

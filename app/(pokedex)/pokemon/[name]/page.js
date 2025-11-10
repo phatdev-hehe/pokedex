@@ -70,7 +70,7 @@ export default Page.withData(async ({ data }) => {
           "stats",
           "A list of base stat values for this Pokémon.",
           table(
-            [undefined, "Base stat", "Effort"],
+            [undefined, "base_stat", "effort"],
             pokemon.stats.map((statElement) => [
               <Link href={`/stat/${statElement.stat.name}`}>
                 {titleCase(statElement.stat.name)}
@@ -95,7 +95,7 @@ export default Page.withData(async ({ data }) => {
           "abilities",
           "A list of abilities this Pokémon could potentially have.",
           table(
-            [undefined, "Slot", "Hidden"],
+            [undefined, "slot", "hidden"],
             pokemon.abilities.map((pokemonAbility) => [
               titleCase(pokemonAbility.ability.name),
               pokemonAbility.slot,
@@ -118,7 +118,7 @@ export default Page.withData(async ({ data }) => {
           "types",
           "A list of details showing types this Pokémon has.",
           table(
-            [undefined, "Slot"],
+            [undefined, "slot"],
             pokemon.types.map((pokemonType) => [
               <Link href={`/type/${pokemonType.type.name}`}>
                 {titleCase(pokemonType.type.name)}
@@ -131,11 +131,11 @@ export default Page.withData(async ({ data }) => {
           "location_area_encounters",
           "Encounter details pertaining to specific versions.",
           table(
-            [undefined, "Version Details"],
+            [undefined, "version_details"],
             pokemonLocationAreaEncounters.map((pokemonEncounter) => [
               titleCase(pokemonEncounter.location_area.name),
               table(
-                [undefined, "Max Chance", "Encounter Details"],
+                [undefined, "max_chance", "encounter_details"],
                 pokemonEncounter.version_details.map(
                   (versionEncounterDetail) => [
                     titleCase(versionEncounterDetail.version.name),
@@ -143,10 +143,10 @@ export default Page.withData(async ({ data }) => {
                     table(
                       [
                         undefined,
-                        "Chance",
-                        "Min Level",
-                        "Max Level",
-                        "Condition Values",
+                        "chance",
+                        "min_level",
+                        "max_level",
+                        "condition_values",
                       ],
                       versionEncounterDetail.encounter_details.map(
                         (encounter) => [
@@ -175,11 +175,11 @@ export default Page.withData(async ({ data }) => {
           "held_items",
           "A list of items this Pokémon may be holding when encountered.",
           table(
-            [undefined, "Version Details"],
+            [undefined, "version_details"],
             pokemon.held_items.map((heldItem) => [
               titleCase(heldItem.item.name),
               table(
-                [undefined, "Rarity"],
+                [undefined, "rarity"],
                 heldItem.version_details.map((rarityVersion) => [
                   titleCase(rarityVersion.version.name),
                   rarityVersion.rarity,
@@ -192,7 +192,7 @@ export default Page.withData(async ({ data }) => {
           "game_indices",
           "A list of game indices relevent to Pokémon item by generation.",
           table(
-            [undefined, "Version"],
+            [undefined, "version"],
             pokemon.game_indices.map((versionGameIndex) => [
               versionGameIndex.game_index,
               titleCase(versionGameIndex.version.name),
@@ -211,15 +211,15 @@ export default Page.withData(async ({ data }) => {
           "moves",
           "A list of moves along with learn methods and level details pertaining to specific version groups.",
           table(
-            [undefined, "Version Group Details"],
+            [undefined, "version_group_details"],
             pokemon.moves.map((moveElement) => [
               titleCase(moveElement.move.name),
               table(
                 [
-                  "Order",
-                  "Level Learned At",
-                  "Move Learn Method",
-                  "Version Group",
+                  "order",
+                  "level_learned_at",
+                  "move_learn_method",
+                  "version_group",
                 ],
                 moveElement.version_group_details.map((versionGroupDetail) => [
                   versionGroupDetail.order, // ??
