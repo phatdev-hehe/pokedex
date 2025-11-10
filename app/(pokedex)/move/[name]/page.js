@@ -67,27 +67,31 @@ export default Page.withData(({ data }) => {
         [
           "meta",
           "Metadata about this move",
-          table(undefined, [
-            ["Ailment Chance", move.meta.ailment_chance],
-            ["Ailment", titleCase(move.meta.ailment.name)],
-            ["Category", titleCase(move.meta.category.name)],
-            ["Crit Rate", move.meta.crit_rate],
-            ["Drain", move.meta.drain],
-            ["Flinch Chance", move.meta.flinch_chance],
-            ["Healing", move.meta.healing],
-            ["Max Hits", move.meta.max_hits],
-            ["Max Turns", move.meta.max_turns],
-            ["Min Hits", move.meta.min_hits],
-            ["Min Turns", move.meta.min_turns],
-            ["Stat Chance", move.meta.stat_chance],
-          ]),
+          table(
+            undefined,
+            // ??
+            [
+              ["Ailment Chance", move.meta?.ailment_chance],
+              ["Ailment", titleCase(move.meta?.ailment.name)],
+              ["Category", titleCase(move.meta?.category.name)],
+              ["Crit Rate", move.meta?.crit_rate],
+              ["Drain", move.meta?.drain],
+              ["Flinch Chance", move.meta?.flinch_chance],
+              ["Healing", move.meta?.healing],
+              ["Max Hits", move.meta?.max_hits],
+              ["Max Turns", move.meta?.max_turns],
+              ["Min Hits", move.meta?.min_hits],
+              ["Min Turns", move.meta?.min_turns],
+              ["Stat Chance", move.meta?.stat_chance],
+            ]
+          ),
         ],
         Page.tabs.names(move.names),
         [
           "stat_changes",
           "A list of stats this moves effects and how much it effects them.",
           table(
-            ["stat", "change"],
+            [undefined, "change"],
             move.stat_changes.map((statChange) => [
               <Link href={`/stat/${statChange.stat.name}`}>
                 {titleCase(statChange.stat.name)}
