@@ -12,6 +12,8 @@ export const Pokedex = {
   api: [
     "getMoveByName",
     "getMovesList",
+    "getPokedexByName",
+    "getPokedexList",
     "getPokemonByName",
     "getPokemonsList",
     "getPokemonSpeciesByName",

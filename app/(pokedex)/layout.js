@@ -24,6 +24,7 @@ const DocsLayoutTree1 = await Promise.all(
 const DocsLayoutTree2 = await Promise.all(
   [
     ["getMovesList", "move"],
+    ["getPokedexList", "pokedex"],
     ["getPokemonSpeciesList", "pokemon-species"],
     ["getStatsList", "stat"],
     ["getTypesList", "type"],
