@@ -11,8 +11,7 @@ export const { GET } = createSearchAPI("simple", {
         const data = await Pokedex.api[fnName]();
 
         return data.results.map((item) => ({
-          breadcrumbs: [titleCase(path)],
-          title: titleCase(item.name),
+          title: `[${titleCase(path)}] ${titleCase(item.name)}`,
           url: `/${path}/${item.name}`,
         }));
       })

@@ -98,9 +98,9 @@ export const Pokedex = {
             description,
             table(
               [undefined, "language"],
-              names.map(({ language, name }) => [
-                name,
-                getLanguageName(language.name),
+              names.map((name) => [
+                name.name,
+                getLanguageName(name.language.name),
               ])
             ),
           ],
