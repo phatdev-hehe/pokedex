@@ -9,8 +9,7 @@ const Page = await Pokedex.createPage({
   titleSuffix: "pokedex",
 });
 
-export const generateMetadata = Page.generateMetadata;
-export const generateStaticParams = Page.generateStaticParams;
+export const { generateMetadata, generateStaticParams } = Page;
 
 export default Page.withData(({ data }) => {
   /** @type Pokedex */

@@ -24,8 +24,7 @@ const Page = await Pokedex.createPage({
   },
 });
 
-export const generateMetadata = Page.generateMetadata;
-export const generateStaticParams = Page.generateStaticParams;
+export const { generateMetadata, generateStaticParams } = Page;
 
 export default Page.withData(async ({ data }) => {
   /** @type Pokemon */
