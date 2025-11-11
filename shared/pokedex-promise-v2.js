@@ -37,7 +37,7 @@ export const Pokedex = {
     return a;
   }, {}),
   Image: ({ style, ...props }) => (
-    <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
+    <img alt=" " style={{ maxWidth: 60, ...style }} {...props} />
   ),
   createPage: async ({
     getList,
@@ -158,11 +158,12 @@ export const Pokedex = {
                   <h1 style={{ letterSpacing: "-.09ch" }}>
                     {createTitle(name)}
                   </h1>
-                  <small>
-                    {[
-                      names.findIndex((value) => value === name) + 1,
-                      names.length,
-                    ].join(" / ")}
+                  <small style={{ color: "var(--color-fd-muted-foreground)" }}>
+                    <span style={{ color: "var(--color-fd-foreground)" }}>
+                      {names.findIndex((value) => value === name) + 1}
+                    </span>
+                    {" / "}
+                    {names.length}
                   </small>
                 </div>
                 <div

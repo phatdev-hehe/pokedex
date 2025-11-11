@@ -15,7 +15,7 @@ export default ({ children }) => (
         minHeight: "100vh",
       }}
     >
-      <RootProvider search={{ enabled: false }}>{children}</RootProvider>
+      <RootProvider>{children}</RootProvider>
     </body>
   </html>
 );

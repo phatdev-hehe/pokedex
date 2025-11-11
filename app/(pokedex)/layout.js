@@ -1,49 +1,15 @@
 import logoSrc from "@/logo.gif";
 import { Image } from "@/shared/components";
-import { Pokedex } from "@/shared/pokedex-promise-v2";
-import { titleCase } from "@/shared/utils";
+import { navigation } from "@/shared/navigation";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
-
-const createDocsLayoutTree = async ([getList, path]) => {
-  const data = await Pokedex.api[getList]();
-
-  return {
-    name: `${data.count} ${path}`,
-    type: "folder",
-    children: data.results.map(({ name }) => ({
-      name: titleCase(name),
-      url: `/${path}/${name}`,
-    })),
-  };
-};
-
-const DocsLayoutTree1 = await Promise.all(
-  [["getPokemonsList", "pokemon"]].map(createDocsLayoutTree)
-);
-
-const DocsLayoutTree2 = await Promise.all(
-  [
-    ["getMovesList", "move"],
-    ["getPokedexList", "pokedex"],
-    ["getPokemonSpeciesList", "pokemon-species"],
-    ["getStatsList", "stat"],
-    ["getTypesList", "type"],
-  ].map(createDocsLayoutTree)
-);
 
 export default ({ children }) => (
   <DocsLayout
     nav={{
-      title: <Image width={50} src={logoSrc} />,
+      title: <Image width={40} src={logoSrc} />,
     }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
-    tree={{
-      children: [
-        ...DocsLayoutTree1,
-        { type: "separator", name: "More" },
-        ...DocsLayoutTree2,
-      ],
-    }}
+    tree={navigation.tree}
   >
     <div
       className="prose" // https://fumadocs.dev/docs/ui/theme#typography

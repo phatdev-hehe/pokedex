@@ -23,6 +23,18 @@
     }
   }
 
+  /* SearchDialog */
+  [role="dialog"] {
+    [data-empty] button p[class="min-w-0 truncate font-medium"] {
+      color: var(--color-fd-muted-foreground);
+
+      span[class="text-fd-primary underline"] {
+        text-decoration: none;
+        color: var(--color-fd-foreground);
+      }
+    }
+  }
+
   .prose {
     --tw-prose-links: blue;
   }
