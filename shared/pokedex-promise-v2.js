@@ -11,6 +11,8 @@ const pokeAPI = new PokeAPI();
 
 export const Pokedex = {
   api: [
+    "getAbilitiesList",
+    "getAbilityByName",
     "getMoveByName",
     "getMovesList",
     "getPokedexByName",

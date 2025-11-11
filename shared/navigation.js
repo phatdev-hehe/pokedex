@@ -20,6 +20,7 @@ const createTreeFolders = async (...values) =>
 const sections = [
   [["getPokemonsList", "pokemon"]],
   [
+    ["getAbilitiesList", "ability"],
     ["getMovesList", "move"],
     ["getPokedexList", "pokedex"],
     ["getPokemonSpeciesList", "pokemon-species"],
