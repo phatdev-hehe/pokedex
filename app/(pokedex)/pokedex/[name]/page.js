@@ -1,4 +1,5 @@
 import { Checkbox, table } from "@/shared/components";
+import { getLanguageName } from "@/shared/get-language-name";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default Page.withData(({ data }) => {
             [undefined, "language"],
             pokedex.descriptions.map((description) => [
               description.description,
-              description.language.name,
+              getLanguageName(description.language.name),
             ])
           ),
         ],

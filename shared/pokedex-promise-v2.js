@@ -1,4 +1,5 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
+import { getLanguageName } from "@/shared/get-language-name";
 import { titleCase } from "@/shared/utils";
 import delay from "delay";
 import { notFound } from "next/navigation";
@@ -37,7 +38,7 @@ export const Pokedex = {
     return a;
   }, {}),
   Image: ({ style, ...props }) => (
-    <img alt=" " style={{ maxWidth: 60, ...style }} {...props} />
+    <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
   createPage: async ({
     getList,
@@ -77,7 +78,7 @@ export const Pokedex = {
               [undefined, "language", "version", "version_group"],
               flavor_text_entries.map((flavorText) => [
                 flavorText.flavor_text,
-                flavorText.language.name,
+                getLanguageName(flavorText.language.name),
 
                 // ??
                 titleCase(flavorText.version?.name),
@@ -97,7 +98,10 @@ export const Pokedex = {
             description,
             table(
               [undefined, "language"],
-              names.map(({ language, name }) => [name, language.name])
+              names.map(({ language, name }) => [
+                name,
+                getLanguageName(language.name),
+              ])
             ),
           ],
         }

@@ -1,4 +1,5 @@
 import { table } from "@/shared/components";
+import { getLanguageName } from "@/shared/get-language-name";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
@@ -137,7 +138,7 @@ export default Page.withData(({ data }) => {
                 [undefined, "language"],
                 effectChange.effect_entries.map((effect) => [
                   effect.effect,
-                  effect.language.name,
+                  getLanguageName(effect.language.name),
                 ])
               ),
             ])
@@ -150,7 +151,7 @@ export default Page.withData(({ data }) => {
             [undefined, "language"],
             move.effect_entries.map((verboseEffect) => [
               verboseEffect.effect,
-              verboseEffect.language.name,
+              getLanguageName(verboseEffect.language.name),
             ])
           ),
         ],
