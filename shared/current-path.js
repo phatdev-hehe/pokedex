@@ -1,10 +1,20 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { use } from "react";
 
-export const CurrentPath = () => {
+const defaultSearchParams = new URLSearchParams();
+
+export const CurrentPath = ({
+  // https://nextjs.org/docs/app/api-reference/functions/use-search-params
+  // https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+  searchParams,
+}) => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+
+  searchParams = searchParams
+    ? new URLSearchParams(use(searchParams))
+    : defaultSearchParams;
 
   return searchParams.toString() ? `${pathname}?${searchParams}` : pathname;
 };
