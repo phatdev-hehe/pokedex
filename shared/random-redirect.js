@@ -1,13 +1,27 @@
 "use client";
 
 import { randomItem } from "@/shared/utils";
+import { Callout } from "fumadocs-ui/components/callout";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 export const RandomRedirect = ({ path, items }) => {
   const router = useRouter();
+  const [state, setState] = useState();
 
   useEffect(() => {
-    router.push(`/${path}/${randomItem(items)}`);
+    setState(`/${path}/${randomItem(items)}`);
   }, []);
+
+  const effectEvent = useEffectEvent(() => {
+    if (state) router.push(state);
+  });
+
+  useEffect(effectEvent);
+
+  return (
+    <Callout type="warn" title="Redirecting to">
+      {state}
+    </Callout>
+  );
 };

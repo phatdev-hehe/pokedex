@@ -1,5 +1,4 @@
 import { table } from "@/shared/components";
-import { getLanguageName } from "@/shared/get-language-name";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
@@ -127,34 +126,14 @@ export default Page.withData(({ data }) => {
             ])
           ),
         ],
-        [
-          "effect_changes",
-          "The list of previous effects this move has had across version groups of the games.",
-          table(
-            ["version_group", "effect_entries"],
-            move.effect_changes.map((effectChange) => [
-              titleCase(effectChange.version_group.name),
-              table(
-                [undefined, "language"],
-                effectChange.effect_entries.map((effect) => [
-                  effect.effect,
-                  getLanguageName(effect.language.name),
-                ])
-              ),
-            ])
-          ),
-        ],
-        [
-          "effect_entries",
-          "The effect of this move listed in different languages.",
-          table(
-            [undefined, "language"],
-            move.effect_entries.map((verboseEffect) => [
-              verboseEffect.effect,
-              getLanguageName(verboseEffect.language.name),
-            ])
-          ),
-        ],
+        Page.tabs.effectChanges(
+          move.effect_changes,
+          "The list of previous effects this move has had across version groups of the games."
+        ),
+        Page.tabs.effectEntries(
+          move.effect_entries,
+          "The effect of this move listed in different languages."
+        ),
         Page.tabs.flavorTextEntries(
           move.flavor_text_entries,
           "The flavor text of this move listed in different languages."

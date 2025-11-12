@@ -2,12 +2,29 @@ import { DescriptionList, table, tabs } from "@/shared/components";
 import { getLanguageName } from "@/shared/get-language-name";
 import { titleCase } from "@/shared/utils";
 import delay from "delay";
+import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
 import { cache, Fragment } from "react";
 import "server-only";
 
 const pokeAPI = new PokeAPI();
+
+const LastUpdate = () => {
+  const date = new Date();
+
+  return (
+    <span>
+      Last updated on{" "}
+      <time
+        style={{ color: "var(--color-fd-foreground)" }}
+        dateTime={date.toString()}
+      >
+        {date.toLocaleDateString()}
+      </time>
+    </span>
+  );
+};
 
 export const Pokedex = {
   api: [
@@ -73,6 +90,36 @@ export const Pokedex = {
             ))
           ),
         {
+          effectChanges: (effect_changes, description) => [
+            "effect_changes",
+            description,
+            table(
+              ["version_group", "effect_entries"],
+              effect_changes.map((effectChange) => [
+                titleCase(effectChange.version_group.name),
+                table(
+                  [undefined, "language"],
+                  effectChange.effect_entries.map((effect) => [
+                    effect.effect,
+                    getLanguageName(effect.language.name),
+                  ])
+                ),
+              ])
+            ),
+          ],
+          effectEntries: (effect_entries, description) => [
+            "effect_entries",
+            description,
+            table(
+              [undefined, "language"],
+              effect_entries.map((verboseEffect) => [
+                <div title={verboseEffect.effect}>
+                  {verboseEffect.short_effect}
+                </div>,
+                getLanguageName(verboseEffect.language.name),
+              ])
+            ),
+          ],
           flavorTextEntries: (flavor_text_entries, description) => [
             "flavor_text_entries",
             description,
@@ -128,14 +175,7 @@ export const Pokedex = {
           };
 
           return (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                position: "relative",
-                padding: "2rem",
-              }}
-            >
+            <>
               <Pokedex.Image
                 style={{
                   alignSelf: "center",
@@ -146,6 +186,7 @@ export const Pokedex = {
               <div
                 style={{
                   "--sticky-offset": "1rem",
+                  "--letter-spacing": "-.09ch",
 
                   position: "relative",
                   top: "11rem",
@@ -155,33 +196,38 @@ export const Pokedex = {
                   style={{
                     position: "sticky",
                     top: "var(--sticky-offset)",
-                    display: "flex",
-                    alignItems: "baseline",
-                    justifyContent: "space-between",
-                    gap: "1rem",
                   }}
                 >
-                  <h1 style={{ letterSpacing: "-.09ch" }}>
+                  <DocsTitle style={{ letterSpacing: "var(--letter-spacing)" }}>
                     {createTitle(name)}
-                  </h1>
-                  <small style={{ color: "var(--color-fd-muted-foreground)" }}>
-                    <span style={{ color: "var(--color-fd-foreground)" }}>
+                  </DocsTitle>
+                  <DocsDescription
+                    style={{
+                      letterSpacing: "var(--letter-spacing)",
+                      display: "flex",
+                      flexDirection: "column",
+                      fontSize: "medium",
+                    }}
+                  >
+                    <span>
                       {names.findIndex((value) => value === name) + 1}
+                      {" / "}
+                      {names.length}
                     </span>
-                    {" / "}
-                    {names.length}
-                  </small>
+                    <LastUpdate />
+                  </DocsDescription>
                 </div>
-                <div
+                <DocsBody
                   style={{
                     backgroundColor: "var(--color-fd-background)",
                     position: "relative",
+                    paddingBottom: "1rem",
                   }}
                 >
                   {await render(context)}
-                </div>
+                </DocsBody>
               </div>
-            </div>
+            </>
           );
         },
     };

@@ -2,6 +2,7 @@ import logoSrc from "@/logo.gif";
 import { Image } from "@/shared/components";
 import { navigation } from "@/shared/navigation";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
+import { DocsPage } from "fumadocs-ui/page";
 
 export default ({ children }) => (
   <DocsLayout
@@ -15,7 +16,7 @@ export default ({ children }) => (
       className="prose" // https://fumadocs.dev/docs/ui/theme#typography
       style={{ width: "100%" }}
     >
-      {children}
+      <DocsPage>{children}</DocsPage>
     </div>
   </DocsLayout>
 );
