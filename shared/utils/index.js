@@ -22,3 +22,17 @@ export const titleCase = (input = "") =>
 export const randomItem =
   // https://1loc.completejavascript.com/snippets/random/get-a-random-item-from-an-array
   (arr) => arr[(Math.random() * arr.length) | 0];
+
+export const uniqBy = (array = [], getValue) => {
+  const set = new Set();
+
+  return array.filter((item) => {
+    const value = getValue(item);
+
+    if (set.has(value)) return;
+
+    set.add(value);
+
+    return true;
+  });
+};

@@ -1,8 +1,9 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
-import { titleCase } from "@/shared/utils";
+import { titleCase, uniqBy } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import delay from "delay";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
+import isPlainObject from "is-plain-obj";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
 import { cache, Fragment } from "react";
@@ -30,6 +31,8 @@ export const Pokedex = {
   api: [
     "getAbilitiesList",
     "getAbilityByName",
+    "getItemByName",
+    "getItemsList",
     "getMoveByName",
     "getMovesList",
     "getPokedexByName",
@@ -48,7 +51,24 @@ export const Pokedex = {
       if (process.env.NODE_ENV === "production") await delay(3000);
 
       try {
-        return await pokeAPI[b](...args);
+        const data = await pokeAPI[b](...args);
+
+        if (
+          isPlainObject(data) &&
+          ["count", "next", "previous", "results"].every((key) => key in data)
+        ) {
+          const [result] = data.results;
+
+          if (
+            isPlainObject(result) &&
+            ["name", "url"].every((key) => key in result)
+          ) {
+            data.results = uniqBy(data.results, (item) => item.name);
+            data.count = data.results.length;
+          }
+        }
+
+        return data;
       } catch {
         notFound();
       }

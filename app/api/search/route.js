@@ -7,11 +7,12 @@ import { createSearchAPI } from "fumadocs-core/search/server";
 export const { GET } = createSearchAPI("simple", {
   indexes: (
     await Promise.all(
-      navigation.sections.flatMap(async ([[fnName, path]]) => {
+      navigation.sections.flat().map(async ([fnName, path]) => {
         const data = await Pokedex.api[fnName]();
 
         return data.results.map((item) => ({
-          title: `[${titleCase(path)}] ${titleCase(item.name)}`,
+          breadcrumbs: [titleCase(path)],
+          title: titleCase(item.name),
           url: `/${path}/${item.name}`,
         }));
       })
