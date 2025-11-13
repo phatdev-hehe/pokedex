@@ -17,9 +17,9 @@ const Page = await Pokedex.createPage({
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page.withData(({ data }) => {
+export default Page.withContext((context) => {
   /** @type Type */
-  const type = data;
+  const type = context.data;
 
   return (
     <Page.Root>

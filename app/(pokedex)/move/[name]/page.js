@@ -11,9 +11,9 @@ const Page = await Pokedex.createPage({
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page.withData(({ data }) => {
+export default Page.withContext((context) => {
   /** @type Move */
-  const move = data;
+  const move = context.data;
 
   move.machines;
   move.super_contest_effect;

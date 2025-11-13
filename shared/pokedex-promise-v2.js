@@ -46,7 +46,7 @@ export const Pokedex = {
     "getTypesList",
   ].reduce((a, b) => {
     a[b] = cache(async (...args) => {
-      if (process.env.NODE_ENV === "production") await delay(2000);
+      if (process.env.NODE_ENV === "production") await delay(1000);
 
       try {
         const data = await pokeAPI[b](...args);
@@ -180,7 +180,7 @@ export const Pokedex = {
 
         return { title: createTitle(name) };
       },
-      withData:
+      withContext:
         (render) =>
         async ({ params }) => {
           const { name } = await params;
@@ -195,11 +195,11 @@ export const Pokedex = {
 
           return (
             <>
-              <meta property="og:title" content={context.title} />
+              {/* <meta property="og:title" content={context.title} />
               <meta
                 property="og:image"
                 content={`https://nextjs.org/api/docs-og?title=${context.title}`}
-              />
+              /> */}
               <Pokedex.Image
                 style={{
                   alignSelf: "center",
