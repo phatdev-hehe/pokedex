@@ -48,7 +48,7 @@ export const Pokedex = {
     "getTypesList",
   ].reduce((a, b) => {
     a[b] = cache(async (...args) => {
-      if (process.env.NODE_ENV === "production") await delay(3000);
+      if (process.env.NODE_ENV === "production") await delay(2000);
 
       try {
         const data = await pokeAPI[b](...args);
