@@ -31,8 +31,6 @@ export const Pokedex = {
   api: [
     "getAbilitiesList",
     "getAbilityByName",
-    "getItemByName",
-    "getItemsList",
     "getMoveByName",
     "getMovesList",
     "getPokedexByName",
