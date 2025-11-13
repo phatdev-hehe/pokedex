@@ -1,7 +1,7 @@
 import { Checkbox, table } from "@/shared/components";
-import { getLanguageName } from "@/shared/get-language-name";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
+import { getLanguageName } from "@/shared/utils/get-language-name";
 import Link from "next/link";
 
 const Page = await Pokedex.createPage({

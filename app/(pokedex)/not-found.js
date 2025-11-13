@@ -1,4 +1,4 @@
-import { RouterActions } from "@/shared/router-actions";
+import { RouterActions } from "@/shared/components/router-actions";
 import { Callout } from "fumadocs-ui/components/callout";
 import { DocsBody } from "fumadocs-ui/page";
 

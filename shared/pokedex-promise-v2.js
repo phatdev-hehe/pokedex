@@ -1,6 +1,6 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
-import { getLanguageName } from "@/shared/get-language-name";
 import { titleCase } from "@/shared/utils";
+import { getLanguageName } from "@/shared/utils/get-language-name";
 import delay from "delay";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
