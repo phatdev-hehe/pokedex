@@ -19,7 +19,7 @@ const LastUpdate = () => {
       Last updated on{" "}
       <time
         style={{ color: "var(--color-fd-foreground)" }}
-        dateTime={date.toString()}
+        dateTime={date.toISOString()}
       >
         {date.toLocaleDateString()}
       </time>
@@ -87,8 +87,8 @@ export const Pokedex = {
       ({ name }) => name
     );
 
-    const createTitle = (title) => {
-      title = titleCase(title);
+    const createTitle = (input) => {
+      const title = titleCase(input);
 
       return titleSuffix ? `${title} (${titleCase(titleSuffix)})` : title;
     };
@@ -190,10 +190,16 @@ export const Pokedex = {
           const context = {
             data: await Pokedex.api[getData](name),
             names,
+            title: createTitle(name),
           };
 
           return (
             <>
+              <meta property="og:title" content={context.title} />
+              <meta
+                property="og:image"
+                content={`https://nextjs.org/api/docs-og?title=${context.title}`}
+              />
               <Pokedex.Image
                 style={{
                   alignSelf: "center",
@@ -217,7 +223,7 @@ export const Pokedex = {
                   }}
                 >
                   <DocsTitle style={{ letterSpacing: "var(--letter-spacing)" }}>
-                    {createTitle(name)}
+                    {context.title}
                   </DocsTitle>
                   <DocsDescription
                     style={{
