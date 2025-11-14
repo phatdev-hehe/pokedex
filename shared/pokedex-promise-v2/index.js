@@ -53,7 +53,8 @@ export const Pokedex = {
         }
 
         return data;
-      } catch {
+      } catch (error) {
+        console.error(error);
         notFound();
       }
     });
