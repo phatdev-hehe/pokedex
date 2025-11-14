@@ -21,6 +21,7 @@ const sections = [
   [["getPokemonsList", "pokemon"]],
   [
     ["getAbilitiesList", "ability"],
+    ["getItemsList", "item"],
     ["getMovesList", "move"],
     ["getPokedexList", "pokedex"],
     ["getPokemonSpeciesList", "pokemon-species"],

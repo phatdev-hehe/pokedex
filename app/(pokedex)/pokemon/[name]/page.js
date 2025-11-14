@@ -7,9 +7,9 @@ const Page = await Pokedex.createDetailPage({
   getList: "getPokemonsList",
   getData: "getPokemonByName",
   path: "pokemon",
-  getAvatar: ({ data }) => {
+  getAvatar: (context) => {
     /** @type Pokemon */
-    const pokemon = data;
+    const pokemon = context.data;
 
     return (
       pokemon.sprites.versions["generation-v"]["black-white"].animated
@@ -23,8 +23,6 @@ const Page = await Pokedex.createDetailPage({
     );
   },
 });
-
-export const { generateMetadata, generateStaticParams } = Page;
 
 export default Page.withContext(async (context) => {
   /** @type Pokemon */

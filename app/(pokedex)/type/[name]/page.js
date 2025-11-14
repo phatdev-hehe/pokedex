@@ -7,15 +7,13 @@ const Page = await Pokedex.createDetailPage({
   getList: "getTypesList",
   getData: "getTypeByName",
   path: "type",
-  getAvatar: ({ data }) => {
+  getAvatar: (context) => {
     /** @type Type */
-    const type = data;
+    const type = context.data;
 
     return type.sprites["generation-ix"]["scarlet-violet"].name_icon;
   },
 });
-
-export const { generateMetadata, generateStaticParams } = Page;
 
 export default Page.withContext((context) => {
   /** @type Type */

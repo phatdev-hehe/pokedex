@@ -74,8 +74,8 @@ export const Pokedex = {
       ({ name }) => name
     );
 
-    const chunks = chunk(names, chunkSize);
     const title = `${titleCase(`list of ${path}`)}(s)`;
+    const chunks = chunk(names, chunkSize);
 
     return Object.assign(
       () => (
@@ -93,7 +93,9 @@ export const Pokedex = {
                     <span>
                       {index1 * chunkSize + 1}
                       <span
-                        style={{ color: "var(--color-fd-muted-foreground)" }}
+                        style={{
+                          color: "var(--color-fd-muted-foreground)",
+                        }}
                       >
                         {" - "}
                         {index1 * chunkSize + names.length}
@@ -107,7 +109,9 @@ export const Pokedex = {
                       icon={
                         <span
                           key={index2} // ??
-                          style={{ color: "var(--color-fd-muted-foreground)" }}
+                          style={{
+                            color: "var(--color-fd-muted-foreground)",
+                          }}
                         >
                           {index1 * chunkSize + index2 + 1}
                         </span>
