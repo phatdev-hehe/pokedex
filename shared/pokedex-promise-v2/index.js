@@ -70,49 +70,57 @@ export const Pokedex = {
     );
 
     const chunks = chunk(names, chunkSize);
+    const title = `${titleCase(`list of ${path}`)}(s)`;
 
-    return () => (
-      <Page title={<>{titleCase(`list of ${path}`)}(s)</>}>
-        <Files>
-          <Folder
-            defaultOpen
-            name={`${names.length} items, ${chunks.length} groups`}
-          >
-            {chunks.map((names, index1) => (
-              <Folder
-                key={index1}
-                defaultOpen={!index1}
-                name={
-                  <span>
-                    {index1 * chunkSize + 1}
-                    <span style={{ color: "var(--color-fd-muted-foreground)" }}>
-                      {" - "}
-                      {index1 * chunkSize + names.length}
-                    </span>
-                  </span>
-                }
-              >
-                {names.map((name, index2) => (
-                  <File
-                    key={index2}
-                    icon={
+    return Object.assign(
+      () => (
+        <Page title={title}>
+          <Files>
+            <Folder
+              defaultOpen
+              name={`${names.length} items, ${chunks.length} groups`}
+            >
+              {chunks.map((names, index1) => (
+                <Folder
+                  key={index1}
+                  defaultOpen={!index1}
+                  name={
+                    <span>
+                      {index1 * chunkSize + 1}
                       <span
-                        key={index2} // ??
                         style={{ color: "var(--color-fd-muted-foreground)" }}
                       >
-                        {index1 * chunkSize + index2 + 1}
+                        {" - "}
+                        {index1 * chunkSize + names.length}
                       </span>
-                    }
-                    name={
-                      <Link href={`/${path}/${name}`}>{titleCase(name)}</Link>
-                    }
-                  />
-                ))}
-              </Folder>
-            ))}
-          </Folder>
-        </Files>
-      </Page>
+                    </span>
+                  }
+                >
+                  {names.map((name, index2) => (
+                    <File
+                      key={index2}
+                      icon={
+                        <span
+                          key={index2} // ??
+                          style={{ color: "var(--color-fd-muted-foreground)" }}
+                        >
+                          {index1 * chunkSize + index2 + 1}
+                        </span>
+                      }
+                      name={
+                        <Link href={`/${path}/${name}`}>{titleCase(name)}</Link>
+                      }
+                    />
+                  ))}
+                </Folder>
+              ))}
+            </Folder>
+          </Files>
+        </Page>
+      ),
+      {
+        generateMetadata: () => ({ title }),
+      }
     );
   },
   createPage: async ({ getList, getData, path, getAvatar = () => {} }) => {
@@ -228,11 +236,6 @@ export const Pokedex = {
 
           return (
             <>
-              <meta property="og:title" content={context.title} />
-              <meta
-                property="og:image"
-                content={`https://nextjs.org/api/docs-og?title=${context.title}`}
-              />
               <Pokedex.Image
                 style={{
                   alignSelf: "center",

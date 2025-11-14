@@ -16,8 +16,13 @@ const LastUpdate = () => {
   );
 };
 
-export default ({ top, title, description, children }) => {
-  return (
+export default ({ top = 0, title, description, children }) => (
+  <>
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:image"
+      content={`https://nextjs.org/api/docs-og?title=${title}`}
+    />
     <div
       style={{
         "--sticky-offset": "1rem",
@@ -50,5 +55,5 @@ export default ({ top, title, description, children }) => {
       </div>
       <DocsBody>{children}</DocsBody>
     </div>
-  );
-};
+  </>
+);
