@@ -3,7 +3,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const Page = await Pokedex.createPage({
+const Page = await Pokedex.createDetailPage({
   getList: "getAbilitiesList",
   getData: "getAbilityByName",
   path: "ability",

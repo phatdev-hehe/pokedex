@@ -1,70 +1,75 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
-import { chunk, titleCase, uniqBy } from "@/shared/utils";
+import { chunk, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
-import delay from "delay";
 import { File, Files, Folder } from "fumadocs-ui/components/files";
-import isPlainObject from "is-plain-obj";
+import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PokeAPI from "pokedex-promise-v2";
-import { cache, Fragment } from "react";
-import "server-only";
-import Page from "./page";
+import { Fragment } from "react";
+import api from "./api";
 
-const pokeAPI = new PokeAPI();
+const Page = ({ top = 0, title, description, children }) => {
+  const date = new Date();
+
+  return (
+    <>
+      <meta property="og:type" content="article" />
+      <meta property="article:modified_time" content={date.toISOString()} />
+      <meta property="og:title" content={title} />
+      <meta
+        property="og:image"
+        content={`https://nextjs.org/api/docs-og?title=${title}`}
+      />
+      <div
+        style={{
+          "--sticky-offset": "1rem",
+          "--letter-spacing": "-.09ch",
+
+          position: "relative",
+          top: `${top}rem`,
+        }}
+      >
+        <div
+          style={{
+            position: "sticky",
+            top: "var(--sticky-offset)",
+          }}
+        >
+          <DocsTitle style={{ letterSpacing: "var(--letter-spacing)" }}>
+            {title}
+          </DocsTitle>
+          <DocsDescription
+            style={{
+              letterSpacing: "var(--letter-spacing)",
+              display: "flex",
+              flexDirection: "column",
+              fontSize: "medium",
+            }}
+          >
+            {description}
+            <span>
+              Last updated on{" "}
+              <time
+                style={{ color: "var(--color-fd-foreground)" }}
+                dateTime={date.toISOString()}
+              >
+                {date.toLocaleDateString()}
+              </time>
+            </span>
+          </DocsDescription>
+        </div>
+        <DocsBody>{children}</DocsBody>
+      </div>
+    </>
+  );
+};
 
 export const Pokedex = {
-  api: [
-    "getAbilitiesList",
-    "getAbilityByName",
-    "getMoveByName",
-    "getMovesList",
-    "getPokedexByName",
-    "getPokedexList",
-    "getPokemonByName",
-    "getPokemonsList",
-    "getPokemonSpeciesByName",
-    "getPokemonSpeciesList",
-    "getResource",
-    "getStatByName",
-    "getStatsList",
-    "getTypeByName",
-    "getTypesList",
-  ].reduce((a, b) => {
-    a[b] = cache(async (...args) => {
-      if (process.env.NODE_ENV === "production") await delay(1000);
-
-      try {
-        const data = await pokeAPI[b](...args);
-
-        if (
-          isPlainObject(data) &&
-          ["count", "next", "previous", "results"].every((key) => key in data)
-        ) {
-          const [result] = data.results;
-
-          if (
-            isPlainObject(result) &&
-            ["name", "url"].every((key) => key in result)
-          ) {
-            data.results = uniqBy(data.results, (item) => item.name);
-            data.count = data.results.length;
-          }
-        }
-
-        return data;
-      } catch (error) {
-        console.error(error);
-        notFound();
-      }
-    });
-
-    return a;
-  }, {}),
+  api,
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
-  createListPage: async ({ path, getList, chunkSize = 100 }) => {
+  createCollectionPage: async ({ path, getList, chunkSize = 100 }) => {
     const names = (await Pokedex.api[getList]()).results.map(
       ({ name }) => name
     );
@@ -123,7 +128,12 @@ export const Pokedex = {
       }
     );
   },
-  createPage: async ({ getList, getData, path, getAvatar = () => {} }) => {
+  createDetailPage: async ({
+    getList,
+    getData,
+    path,
+    getAvatar = () => {},
+  }) => {
     const names = (await Pokedex.api[getList]()).results.map(
       ({ name }) => name
     );
