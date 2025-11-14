@@ -1,31 +1,17 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
-import { titleCase, uniqBy } from "@/shared/utils";
+import { chunk, titleCase, uniqBy } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import delay from "delay";
-import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
+import { File, Files, Folder } from "fumadocs-ui/components/files";
 import isPlainObject from "is-plain-obj";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import PokeAPI from "pokedex-promise-v2";
 import { cache, Fragment } from "react";
 import "server-only";
+import Page from "./page";
 
 const pokeAPI = new PokeAPI();
-
-const LastUpdate = () => {
-  const date = new Date();
-
-  return (
-    <span>
-      Last updated on{" "}
-      <time
-        style={{ color: "var(--color-fd-foreground)" }}
-        dateTime={date.toISOString()}
-      >
-        {date.toLocaleDateString()}
-      </time>
-    </span>
-  );
-};
 
 export const Pokedex = {
   api: [
@@ -77,12 +63,58 @@ export const Pokedex = {
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
-  createPage: async ({
-    getList,
-    getData,
-    titleSuffix,
-    getAvatar = () => {},
-  }) => {
+  createListPage: async ({ path, getList, chunkSize = 100 }) => {
+    const names = (await Pokedex.api[getList]()).results.map(
+      ({ name }) => name
+    );
+
+    const chunks = chunk(names, chunkSize);
+
+    return () => (
+      <Page title={<>{titleCase(`list of ${path}`)}(s)</>}>
+        <Files>
+          <Folder
+            defaultOpen
+            name={`${names.length} items, ${chunks.length} groups`}
+          >
+            {chunks.map((names, index1) => (
+              <Folder
+                key={index1}
+                defaultOpen={!index1}
+                name={
+                  <span>
+                    {index1 * chunkSize + 1}
+                    <span style={{ color: "var(--color-fd-muted-foreground)" }}>
+                      {" - "}
+                      {index1 * chunkSize + names.length}
+                    </span>
+                  </span>
+                }
+              >
+                {names.map((name, index2) => (
+                  <File
+                    key={index2}
+                    icon={
+                      <span
+                        key={index2} // ??
+                        style={{ color: "var(--color-fd-muted-foreground)" }}
+                      >
+                        {index1 * chunkSize + index2 + 1}
+                      </span>
+                    }
+                    name={
+                      <Link href={`/${path}/${name}`}>{titleCase(name)}</Link>
+                    }
+                  />
+                ))}
+              </Folder>
+            ))}
+          </Folder>
+        </Files>
+      </Page>
+    );
+  },
+  createPage: async ({ getList, getData, path, getAvatar = () => {} }) => {
     const names = (await Pokedex.api[getList]()).results.map(
       ({ name }) => name
     );
@@ -90,7 +122,7 @@ export const Pokedex = {
     const createTitle = (input) => {
       const title = titleCase(input);
 
-      return titleSuffix ? `${title} (${titleCase(titleSuffix)})` : title;
+      return path ? `${title} (${titleCase(path)})` : title;
     };
 
     return {
@@ -195,11 +227,11 @@ export const Pokedex = {
 
           return (
             <>
-              {/* <meta property="og:title" content={context.title} />
+              <meta property="og:title" content={context.title} />
               <meta
                 property="og:image"
                 content={`https://nextjs.org/api/docs-og?title=${context.title}`}
-              /> */}
+              />
               <Pokedex.Image
                 style={{
                   alignSelf: "center",
@@ -207,50 +239,20 @@ export const Pokedex = {
                 }}
                 src={getAvatar(context)}
               />
-              <div
-                style={{
-                  "--sticky-offset": "1rem",
-                  "--letter-spacing": "-.09ch",
-
-                  position: "relative",
-                  top: "11rem",
-                }}
+              <Page
+                top={5}
+                title={context.title}
+                description={
+                  <span>
+                    {names.findIndex((value) => value === name) + 1}
+                    {" / "}
+                    {names.length}
+                  </span>
+                }
               >
-                <div
-                  style={{
-                    position: "sticky",
-                    top: "var(--sticky-offset)",
-                  }}
-                >
-                  <DocsTitle style={{ letterSpacing: "var(--letter-spacing)" }}>
-                    {context.title}
-                  </DocsTitle>
-                  <DocsDescription
-                    style={{
-                      letterSpacing: "var(--letter-spacing)",
-                      display: "flex",
-                      flexDirection: "column",
-                      fontSize: "medium",
-                    }}
-                  >
-                    <span>
-                      {names.findIndex((value) => value === name) + 1}
-                      {" / "}
-                      {names.length}
-                    </span>
-                    <LastUpdate />
-                  </DocsDescription>
-                </div>
-                <DocsBody
-                  style={{
-                    backgroundColor: "var(--color-fd-background)",
-                    position: "relative",
-                    paddingBottom: "1rem",
-                  }}
-                >
-                  {await render(context)}
-                </DocsBody>
-              </div>
+                {await render(context)}
+                <div style={{ height: "1rem" }} />
+              </Page>
             </>
           );
         },

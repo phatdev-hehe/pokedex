@@ -7,7 +7,7 @@ import Link from "next/link";
 const Page = await Pokedex.createPage({
   getList: "getPokemonSpeciesList",
   getData: "getPokemonSpeciesByName",
-  titleSuffix: "pokemon species",
+  path: "pokemon-species",
 });
 
 export const { generateMetadata, generateStaticParams } = Page;

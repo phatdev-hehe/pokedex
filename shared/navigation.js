@@ -32,12 +32,17 @@ const sections = [
 export const navigation = {
   tree: {
     children: [
-      ...(await createTreeFolders(...sections[0])),
+      // ...(await createTreeFolders(...sections[0])),
+      // ...(await createTreeFolders(...sections[1])),
       {
-        type: "separator",
-        name: "More",
+        defaultOpen: true,
+        name: "List of",
+        type: "folder",
+        children: sections.flat().map(([, value]) => ({
+          name: titleCase(value),
+          url: `/${value}`,
+        })),
       },
-      ...(await createTreeFolders(...sections[1])),
     ],
   },
   sections,

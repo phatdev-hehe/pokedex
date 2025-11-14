@@ -6,7 +6,7 @@ import Link from "next/link";
 const Page = await Pokedex.createPage({
   getList: "getMovesList",
   getData: "getMoveByName",
-  titleSuffix: "move",
+  path: "move",
 });
 
 export const { generateMetadata, generateStaticParams } = Page;
