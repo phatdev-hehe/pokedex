@@ -18,5 +18,5 @@ export default Page.withContext((context) => {
   /** @type Item */
   const item = context.data;
 
-  return <Page.Root></Page.Root>;
+  return <Page.Root />;
 });
