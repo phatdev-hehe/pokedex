@@ -1,6 +1,7 @@
 import { table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
+import Link from "next/link";
 
 const Page = await Pokedex.createDetailPage("item", (context) => {
   /** @type Item */
@@ -15,9 +16,12 @@ export default Page.withContext((context) => {
   /** @type Item */
   const item = context.data;
 
+  item.machines;
+
   return (
     <>
       {table(undefined, [
+        ["Id", item.id],
         [
           "The category of items this item falls into.",
           titleCase(item.category.name),
@@ -33,6 +37,7 @@ export default Page.withContext((context) => {
         ],
       ])}
       {Page.tabs(
+        Page.tabs.names(item.names),
         [
           "attributes",
           "A list of attributes this item has.",
@@ -43,14 +48,31 @@ export default Page.withContext((context) => {
             ])
           ),
         ],
-        Page.tabs.effectEntries(
-          item.effect_entries,
-          "The effect of this ability listed in different languages."
+        Page.tabs.effectEntries(item.effect_entries),
+        Page.tabs.flavorTextEntries(item.flavor_text_entries),
+        Page.tabs.gameIndices(
+          item.game_indices,
+          "A list of game indices relevent to this item by generation."
         ),
-        Page.tabs.flavorTextEntries(
-          item.flavor_text_entries,
-          "The flavor text of this ability listed in different languages."
-        )
+        [
+          "held_by_pokemon",
+          "A list of Pokémon that might be found in the wild holding this item.",
+          table(
+            [undefined, "version_details"],
+            item.held_by_pokemon.map((heldByPokemon) => [
+              <Link href={`/pokemon/${heldByPokemon.pokemon.name}`}>
+                {titleCase(heldByPokemon.pokemon.name)}
+              </Link>,
+              table(
+                [undefined, "rarity"],
+                heldByPokemon.version_details.map((rarityVersion) => [
+                  titleCase(rarityVersion.version.name),
+                  rarityVersion.rarity,
+                ])
+              ),
+            ])
+          ),
+        ]
       )}
     </>
   );

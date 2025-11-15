@@ -186,17 +186,10 @@ export default Page.withContext(async (context) => {
             ])
           ),
         ],
-        [
-          "game_indices",
-          "A list of game indices relevent to Pokémon item by generation.",
-          table(
-            [undefined, "version"],
-            pokemon.game_indices.map((versionGameIndex) => [
-              versionGameIndex.game_index,
-              titleCase(versionGameIndex.version.name),
-            ])
-          ),
-        ],
+        Page.tabs.gameIndices(
+          pokemon.game_indices,
+          "A list of game indices relevent to Pokémon item by generation."
+        ),
         [
           "forms",
           "A list of forms this Pokémon can take on.",

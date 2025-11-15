@@ -102,7 +102,18 @@ export const Pokedex = {
           <Files>
             <Folder
               defaultOpen
-              name={`${names.length} items, ${chunks.length} groups`}
+              name={
+                <span>
+                  {names.length} items
+                  <span
+                    style={{
+                      color: "var(--color-fd-muted-foreground)",
+                    }}
+                  >
+                    , {chunks.length} groups
+                  </span>
+                </span>
+              }
             >
               {chunks.map((names, index1) => (
                 <Folder
@@ -179,6 +190,20 @@ export const Pokedex = {
             ))
           ),
         {
+          gameIndices: (game_indices, description) => [
+            "game_indices",
+            description,
+            table(
+              [undefined, "generation", "version"],
+              game_indices.map(({ game_index, version, generation }) => [
+                game_index,
+
+                // ??
+                titleCase(generation?.name),
+                titleCase(version?.name),
+              ])
+            ),
+          ],
           effectChanges: (effect_changes, description) => [
             "effect_changes",
             description,

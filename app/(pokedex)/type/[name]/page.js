@@ -73,17 +73,7 @@ export default Page.withContext((context) => {
             ])
           ),
         ],
-        [
-          "game_indices",
-          undefined,
-          table(
-            [undefined, "generation"],
-            type.game_indices.map((generationGameIndex) => [
-              generationGameIndex.game_index,
-              titleCase(generationGameIndex.generation.name),
-            ])
-          ),
-        ]
+        Page.tabs.gameIndices(type.game_indices)
       )}
     </>
   );
