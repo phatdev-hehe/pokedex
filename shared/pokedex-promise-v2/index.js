@@ -215,7 +215,7 @@ export const Pokedex = {
             table(
               [undefined, "language", "version", "version_group"],
               flavor_text_entries.map((flavorText) => [
-                flavorText.flavor_text,
+                flavorText.flavor_text ?? flavorText.text,
                 getLanguageName(flavorText.language.name),
 
                 // ??
