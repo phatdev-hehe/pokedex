@@ -305,7 +305,9 @@ export const Pokedex = {
                   </span>
                 }
               >
-                {await render(context)}
+                {await render(
+                  { data: context.data } // ??
+                )}
                 <div style={{ height: "1rem" }} />
               </Page>
             </>

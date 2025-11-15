@@ -70,7 +70,8 @@ const api = [
       }
 
       return data;
-    } catch {
+    } catch (error) {
+      console.error(error);
       notFound();
     }
   });
