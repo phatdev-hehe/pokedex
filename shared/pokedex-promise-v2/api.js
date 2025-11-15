@@ -9,24 +9,44 @@ import { cache } from "react";
 
 const pokeAPI = new PokeAPI();
 
-export default [
-  "getAbilitiesList",
-  "getAbilityByName",
-  "getItemByName",
-  "getItemsList",
-  "getMoveByName",
-  "getMovesList",
-  "getPokedexByName",
-  "getPokedexList",
-  "getPokemonByName",
-  "getPokemonsList",
-  "getPokemonSpeciesByName",
-  "getPokemonSpeciesList",
+const types = {
+  pokemon: {
+    getList: "getPokemonsList",
+    getByName: "getPokemonByName",
+  },
+  ability: {
+    getList: "getAbilitiesList",
+    getByName: "getAbilityByName",
+  },
+  item: {
+    getList: "getItemsList",
+    getByName: "getItemByName",
+  },
+  move: {
+    getList: "getMovesList",
+    getByName: "getMoveByName",
+  },
+  pokedex: {
+    getList: "getPokedexList",
+    getByName: "getPokedexByName",
+  },
+  "pokemon-species": {
+    getList: "getPokemonSpeciesList",
+    getByName: "getPokemonSpeciesByName",
+  },
+  stat: {
+    getList: "getStatsList",
+    getByName: "getStatByName",
+  },
+  type: {
+    getList: "getTypesList",
+    getByName: "getTypeByName",
+  },
+};
+
+const api = [
   "getResource",
-  "getStatByName",
-  "getStatsList",
-  "getTypeByName",
-  "getTypesList",
+  ...Object.values(types).flatMap(Object.values),
 ].reduce((a, b) => {
   a[b] = cache(async (...args) => {
     if (process.env.NODE_ENV === "production") await delay(1000);
@@ -58,3 +78,8 @@ export default [
 
   return a;
 }, {});
+
+export default Object.assign((...values) => api[types[values[0]][values[1]]], {
+  ...api,
+  types: Object.keys(types),
+});

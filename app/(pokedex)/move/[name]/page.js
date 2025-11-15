@@ -3,11 +3,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const Page = await Pokedex.createDetailPage({
-  getList: "getMovesList",
-  getData: "getMoveByName",
-  path: "move",
-});
+const Page = await Pokedex.createDetailPage("move");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

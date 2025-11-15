@@ -88,12 +88,12 @@ export const Pokedex = {
   Image: ({ style, ...props }) => (
     <img alt=" " style={{ maxWidth: 100, ...style }} {...props} />
   ),
-  createCollectionPage: async ({ path, getList, chunkSize = 100 }) => {
-    const names = (await Pokedex.api[getList]()).results.map(
-      ({ name }) => name
+  createCollectionPage: async (apiType, chunkSize = 100) => {
+    const names = (await Pokedex.api(apiType, "getList")()).results.map(
+      (item) => item.name
     );
 
-    const title = `${titleCase(`list of ${path}`)}(s)`;
+    const title = `${titleCase(`list of ${apiType}`)}(s)`;
     const chunks = chunk(names, chunkSize);
 
     return Object.assign(
@@ -136,7 +136,9 @@ export const Pokedex = {
                         </span>
                       }
                       name={
-                        <Link href={`/${path}/${name}`}>{titleCase(name)}</Link>
+                        <Link href={`/${apiType}/${name}`}>
+                          {titleCase(name)}
+                        </Link>
                       }
                     />
                   ))}
@@ -151,20 +153,15 @@ export const Pokedex = {
       }
     );
   },
-  createDetailPage: async ({
-    getList,
-    getData,
-    path,
-    getAvatar = () => {},
-  }) => {
-    const names = (await Pokedex.api[getList]()).results.map(
-      ({ name }) => name
+  createDetailPage: async (apiType, getAvatar = () => {}) => {
+    const names = (await Pokedex.api(apiType, "getList")()).results.map(
+      (item) => item.name
     );
 
     const createTitle = (input) => {
       const title = titleCase(input);
 
-      return path ? `${title} (${titleCase(path)})` : title;
+      return apiType ? `${title} (${titleCase(apiType)})` : title;
     };
 
     return {
@@ -266,7 +263,7 @@ export const Pokedex = {
 
           const context = {
             index: names.findIndex((name1) => name1 === name),
-            data: await Pokedex.api[getData](name),
+            data: await Pokedex.api(apiType, "getByName")(name),
             names,
             title: createTitle(name),
             cycled,
@@ -284,8 +281,8 @@ export const Pokedex = {
                 src={getAvatar(context)}
               />
               <Page
-                nextHref={`/${path}/${cycled.peek(1)}`}
-                previousHref={`/${path}/${cycled.peek(-1)}`}
+                nextHref={`/${apiType}/${cycled.peek(1)}`}
+                previousHref={`/${apiType}/${cycled.peek(-1)}`}
                 top={5}
                 title={context.title}
                 description={

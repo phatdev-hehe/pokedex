@@ -3,25 +3,20 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const Page = await Pokedex.createDetailPage({
-  getList: "getPokemonsList",
-  getData: "getPokemonByName",
-  path: "pokemon",
-  getAvatar: (context) => {
-    /** @type Pokemon */
-    const pokemon = context.data;
+const Page = await Pokedex.createDetailPage("pokemon", (context) => {
+  /** @type Pokemon */
+  const pokemon = context.data;
 
-    return (
-      pokemon.sprites.versions["generation-v"]["black-white"].animated
-        .front_default ??
-      pokemon.sprites.versions["generation-v"]["black-white"].animated
-        .front_female ??
-      pokemon.sprites.other.showdown.front_default ??
-      pokemon.sprites.other.showdown.front_female ??
-      pokemon.sprites.front_default ??
-      pokemon.sprites.front_female
-    );
-  },
+  return (
+    pokemon.sprites.versions["generation-v"]["black-white"].animated
+      .front_default ??
+    pokemon.sprites.versions["generation-v"]["black-white"].animated
+      .front_female ??
+    pokemon.sprites.other.showdown.front_default ??
+    pokemon.sprites.other.showdown.front_female ??
+    pokemon.sprites.front_default ??
+    pokemon.sprites.front_female
+  );
 });
 
 export const { generateMetadata, generateStaticParams } = Page;

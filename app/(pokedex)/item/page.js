@@ -1,9 +1,6 @@
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 
-const Page = await Pokedex.createCollectionPage({
-  path: "item",
-  getList: "getItemsList",
-});
+const Page = await Pokedex.createCollectionPage("item");
 
 export const { generateMetadata } = Page;
 export default Page;

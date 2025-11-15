@@ -1,4 +1,3 @@
-import { navigation } from "@/shared/navigation";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import { createSearchAPI } from "fumadocs-core/search/server";
@@ -7,13 +6,13 @@ import { createSearchAPI } from "fumadocs-core/search/server";
 export const { GET } = createSearchAPI("simple", {
   indexes: (
     await Promise.all(
-      navigation.sections.flat().map(async ([fnName, path]) => {
-        const data = await Pokedex.api[fnName]();
+      Pokedex.api.types.map(async (apiType) => {
+        const data = await Pokedex.api(apiType, "getList")();
 
         return data.results.map((item) => ({
-          breadcrumbs: [titleCase(path)],
+          breadcrumbs: [titleCase(apiType)],
           title: titleCase(item.name),
-          url: `/${path}/${item.name}`,
+          url: `/${apiType}/${item.name}`,
         }));
       })
     )

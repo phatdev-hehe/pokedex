@@ -4,11 +4,7 @@ import { titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import Link from "next/link";
 
-const Page = await Pokedex.createDetailPage({
-  getList: "getPokemonSpeciesList",
-  getData: "getPokemonSpeciesByName",
-  path: "pokemon-species",
-});
+const Page = await Pokedex.createDetailPage("pokemon-species");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

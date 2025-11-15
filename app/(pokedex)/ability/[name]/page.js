@@ -3,11 +3,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import Link from "next/link";
 
-const Page = await Pokedex.createDetailPage({
-  getList: "getAbilitiesList",
-  getData: "getAbilityByName",
-  path: "ability",
-});
+const Page = await Pokedex.createDetailPage("ability");
 
 export const { generateMetadata, generateStaticParams } = Page;
 
