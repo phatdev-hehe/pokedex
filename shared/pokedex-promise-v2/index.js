@@ -1,6 +1,7 @@
 import { DescriptionList, table, tabs } from "@/shared/components";
 import { chunk, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
+import Cycled from "cycled";
 import { File, Files, Folder } from "fumadocs-ui/components/files";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 import Link from "next/link";
@@ -8,7 +9,14 @@ import { notFound } from "next/navigation";
 import { Fragment } from "react";
 import api from "./api";
 
-const Page = ({ top = 0, title, description, children }) => {
+const Page = ({
+  top = 0,
+  title,
+  description,
+  children,
+  nextHref,
+  previousHref,
+}) => {
   const date = new Date();
 
   return (
@@ -52,9 +60,20 @@ const Page = ({ top = 0, title, description, children }) => {
               <time
                 style={{ color: "var(--color-fd-foreground)" }}
                 dateTime={date.toISOString()}
+                title={date.toISOString()}
               >
                 {date.toLocaleDateString()}
               </time>
+            </span>
+            <span
+              style={{
+                display: "flex",
+                gap: ".5ch",
+                alignSelf: "end",
+              }}
+            >
+              {previousHref && <Link href={previousHref}>Previous</Link>}
+              {nextHref && <Link href={nextHref}>Next</Link>}
             </span>
           </DocsDescription>
         </div>
@@ -233,20 +252,27 @@ export const Pokedex = {
       generateMetadata: async ({ params }) => {
         const { name } = await params;
 
-        return { title: createTitle(name) };
+        return {
+          title: createTitle(name),
+        };
       },
-      withContext:
-        (render) =>
-        async ({ params }) => {
+      withContext: (render) => {
+        const cycled = new Cycled(names);
+
+        return async ({ params }) => {
           const { name } = await params;
 
           if (!names.includes(name)) notFound();
 
           const context = {
+            index: names.findIndex((name1) => name1 === name),
             data: await Pokedex.api[getData](name),
             names,
             title: createTitle(name),
+            cycled,
           };
+
+          cycled.index = context.index;
 
           return (
             <>
@@ -258,11 +284,13 @@ export const Pokedex = {
                 src={getAvatar(context)}
               />
               <Page
+                nextHref={`/${path}/${cycled.peek(1)}`}
+                previousHref={`/${path}/${cycled.peek(-1)}`}
                 top={5}
                 title={context.title}
                 description={
                   <span>
-                    {names.findIndex((value) => value === name) + 1}
+                    {context.index + 1}
                     {" / "}
                     {names.length}
                   </span>
@@ -275,7 +303,8 @@ export const Pokedex = {
               </Page>
             </>
           );
-        },
+        };
+      },
     };
   },
 };
