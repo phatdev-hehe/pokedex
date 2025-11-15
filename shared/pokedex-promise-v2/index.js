@@ -244,7 +244,6 @@ export const Pokedex = {
           ],
         }
       ),
-      Root: Fragment,
       generateStaticParams: () => names.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
         const { name } = await params;

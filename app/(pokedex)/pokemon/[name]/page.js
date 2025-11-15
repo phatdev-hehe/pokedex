@@ -35,7 +35,7 @@ export default Page.withContext(async (context) => {
   );
 
   return (
-    <Page.Root>
+    <>
       {table(undefined, [
         ["Id", pokemon.id],
         [
@@ -232,6 +232,6 @@ export default Page.withContext(async (context) => {
           ),
         ]
       )}
-    </Page.Root>
+    </>
   );
 });

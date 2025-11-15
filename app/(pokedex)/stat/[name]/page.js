@@ -12,7 +12,7 @@ export default Page.withContext((context) => {
   const stat = context.data;
 
   return (
-    <Page.Root>
+    <>
       {table(undefined, [
         ["Id", stat.id],
         ["ID the games use for this stat.", stat.game_index],
@@ -71,6 +71,6 @@ export default Page.withContext((context) => {
           ),
         ]
       )}
-    </Page.Root>
+    </>
   );
 });

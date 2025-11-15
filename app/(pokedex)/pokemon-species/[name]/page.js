@@ -14,7 +14,7 @@ export default Page.withContext((context) => {
   const previousPokemonSpeciesName = pokemonSpecies.evolves_from_species?.name; // ??
 
   return (
-    <Page.Root>
+    <>
       {table(undefined, [
         ["Id", pokemonSpecies.id],
         [
@@ -158,6 +158,6 @@ export default Page.withContext((context) => {
           ),
         ]
       )}
-    </Page.Root>
+    </>
   );
 });

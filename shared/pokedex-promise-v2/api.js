@@ -49,7 +49,7 @@ const api = [
   ...Object.values(types).flatMap(Object.values),
 ].reduce((a, b) => {
   a[b] = cache(async (...args) => {
-    if (process.env.NODE_ENV === "production") await delay(1000);
+    if (process.env.NODE_ENV === "production") await delay(1500);
 
     try {
       const data = await pokeAPI[b](...args);

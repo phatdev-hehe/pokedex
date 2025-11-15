@@ -17,7 +17,7 @@ export default Page.withContext((context) => {
   const type = context.data;
 
   return (
-    <Page.Root>
+    <>
       {table(undefined, [
         ["Id", type.id],
         [
@@ -85,6 +85,6 @@ export default Page.withContext((context) => {
           ),
         ]
       )}
-    </Page.Root>
+    </>
   );
 });

@@ -12,7 +12,7 @@ export default Page.withContext((context) => {
   const ability = context.data;
 
   return (
-    <Page.Root>
+    <>
       {table(undefined, [
         ["Id", ability.id],
         [
@@ -53,6 +53,6 @@ export default Page.withContext((context) => {
           "The flavor text of this ability listed in different languages."
         )
       )}
-    </Page.Root>
+    </>
   );
 });

@@ -15,7 +15,7 @@ export default Page.withContext((context) => {
   move.super_contest_effect;
 
   return (
-    <Page.Root>
+    <>
       {table(undefined, [
         ["Id", move.id],
         [
@@ -147,6 +147,6 @@ export default Page.withContext((context) => {
           ),
         ]
       )}
-    </Page.Root>
+    </>
   );
 });
