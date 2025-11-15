@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/shared/components";
 import { useRouter } from "next/navigation";
 
 export const RouterActions = () => {

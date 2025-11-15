@@ -1,10 +1,9 @@
-import { DescriptionList, table, tabs } from "@/shared/components";
+import { DescriptionList, Link, table, tabs } from "@/shared/components";
 import { chunk, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import Cycled from "cycled";
 import { File, Files, Folder } from "fumadocs-ui/components/files";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 import api from "./api";
@@ -102,18 +101,7 @@ export const Pokedex = {
           <Files>
             <Folder
               defaultOpen
-              name={
-                <span>
-                  {names.length} items
-                  <span
-                    style={{
-                      color: "var(--color-fd-muted-foreground)",
-                    }}
-                  >
-                    , {chunks.length} groups
-                  </span>
-                </span>
-              }
+              name={`${names.length} items, ${chunks.length} groups`}
             >
               {chunks.map((names, index1) => (
                 <Folder

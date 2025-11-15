@@ -6,6 +6,8 @@ import Image1 from "next/image";
 import { Children, useId } from "react";
 import removeAccents from "remove-accents";
 
+export { default as Link } from "fumadocs-core/link";
+
 export const table = Object.assign(
   (thead = [], tbody = thead, tfoot) => {
     if (thead.length || tbody.length)
