@@ -141,7 +141,10 @@ export default {
                 }
               >
                 {staticNames.includes(name) || (
-                  <Callout type="warn" title="Static limit exceeded">
+                  <Callout
+                    type="warn"
+                    title={`Static limit exceeded (${limitStaticParams})`}
+                  >
                     This page wasn’t pre-built because it’s outside the static
                     generation limit. Data changes may cause inconsistent
                     results.
