@@ -7,7 +7,7 @@ const Page = await Pokedex.createDetailPage("pokemon-species");
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page.withContext(({ context }) => {
+export default Page(({ context }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = context.data;
   const previousPokemonSpeciesName = pokemonSpecies.evolves_from_species?.name; // ??

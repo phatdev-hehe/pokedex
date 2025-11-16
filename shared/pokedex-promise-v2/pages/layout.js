@@ -1,4 +1,5 @@
 import { Link } from "@/shared/components";
+import { titleCase } from "@/shared/utils";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 
 const Meta = ({ title, date }) => {
@@ -25,6 +26,8 @@ export default ({
   children,
   nextHref,
   previousHref,
+  nextTitle,
+  previousTitle,
 }) => {
   const date = new Date();
 
@@ -75,8 +78,16 @@ export default ({
                 alignSelf: "end",
               }}
             >
-              {previousHref && <Link href={previousHref}>Previous</Link>}
-              {nextHref && <Link href={nextHref}>Next</Link>}
+              {previousHref && (
+                <Link title={titleCase(previousTitle)} href={previousHref}>
+                  Previous
+                </Link>
+              )}
+              {nextHref && (
+                <Link title={titleCase(nextTitle)} href={nextHref}>
+                  Next
+                </Link>
+              )}
             </span>
           </DocsDescription>
         </div>

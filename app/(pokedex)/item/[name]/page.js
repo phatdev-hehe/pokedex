@@ -14,7 +14,7 @@ const Page = await Pokedex.createDetailPage("item", {
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page.withContext(({ context }) => {
+export default Page(({ context }) => {
   /** @type Item */
   const item = context.data;
 
