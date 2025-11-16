@@ -4,84 +4,10 @@ import { getLanguageName } from "@/shared/utils/get-language-name";
 import Cycled from "cycled";
 import { Callout } from "fumadocs-ui/components/callout";
 import { File, Files, Folder } from "fumadocs-ui/components/files";
-import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 import api from "./api";
-
-const Page = ({
-  top = 0,
-  title,
-  description,
-  children,
-  nextHref,
-  previousHref,
-}) => {
-  const date = new Date();
-
-  return (
-    <>
-      <meta property="og:type" content="article" />
-      <meta property="article:modified_time" content={date.toISOString()} />
-      <meta property="og:title" content={title} />
-      <meta
-        property="og:image"
-        content={`https://nextjs.org/api/docs-og?title=${title}`}
-      />
-      <div
-        style={{
-          "--sticky-offset": "1rem",
-          "--letter-spacing": "-.09ch",
-
-          position: "relative",
-          top: `${top}rem`,
-        }}
-      >
-        <div
-          style={{
-            position: "sticky",
-            top: "var(--sticky-offset)",
-          }}
-        >
-          <DocsTitle style={{ letterSpacing: "var(--letter-spacing)" }}>
-            {title}
-          </DocsTitle>
-          <DocsDescription
-            style={{
-              letterSpacing: "var(--letter-spacing)",
-              display: "flex",
-              flexDirection: "column",
-              fontSize: "medium",
-            }}
-          >
-            {description}
-            <span>
-              Last updated on{" "}
-              <time
-                style={{ color: "var(--color-fd-foreground)" }}
-                dateTime={date.toISOString()}
-                title={date.toISOString()}
-              >
-                {date.toLocaleDateString()}
-              </time>
-            </span>
-            <span
-              style={{
-                display: "flex",
-                gap: ".5ch",
-                alignSelf: "end",
-              }}
-            >
-              {previousHref && <Link href={previousHref}>Previous</Link>}
-              {nextHref && <Link href={nextHref}>Next</Link>}
-            </span>
-          </DocsDescription>
-        </div>
-        <DocsBody>{children}</DocsBody>
-      </div>
-    </>
-  );
-};
+import Page from "./page";
 
 export const Pokedex = {
   api,
@@ -295,7 +221,7 @@ export const Pokedex = {
                   alignSelf: "center",
                   position: "fixed",
                 }}
-                src={getAvatar(context)}
+                src={getAvatar({ context })}
               />
               <Page
                 nextHref={`/${apiType}/${cycled.peek(1)}`}
@@ -316,7 +242,7 @@ export const Pokedex = {
                     might not display correctly.
                   </Callout>
                 )}
-                {await render(context)}
+                {await render({ context })}
                 <div style={{ height: "1rem" }} />
               </Page>
             </>

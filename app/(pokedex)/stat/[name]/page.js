@@ -6,7 +6,7 @@ const Page = await Pokedex.createDetailPage("stat");
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page.withContext((context) => {
+export default Page.withContext(({ context }) => {
   /** @type Stat */
   const stat = context.data;
 

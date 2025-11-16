@@ -3,7 +3,7 @@ import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
 const Page = await Pokedex.createDetailPage("type", {
-  getAvatar: (context) => {
+  getAvatar: ({ context }) => {
     /** @type Type */
     const type = context.data;
 
@@ -13,7 +13,7 @@ const Page = await Pokedex.createDetailPage("type", {
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page.withContext((context) => {
+export default Page.withContext(({ context }) => {
   /** @type Type */
   const type = context.data;
 
