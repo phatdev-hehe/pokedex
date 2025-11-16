@@ -9,7 +9,7 @@ const Page = await Pokedex.createDetailPage("item", {
 
     return item.sprites.default;
   },
-  generateStaticParams: false,
+  limitStaticParams: 1000,
 });
 
 export const { generateMetadata, generateStaticParams } = Page;

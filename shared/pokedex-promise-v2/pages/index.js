@@ -81,11 +81,13 @@ export default {
   },
   createDetailPage: async (
     apiType,
-    { getAvatar = () => {}, generateStaticParams = true } = {}
+    { getAvatar = () => {}, limitStaticParams = Infinity } = {}
   ) => {
     const names = (await Pokedex.api(apiType, "getList")()).results.map(
       (item) => item.name
     );
+
+    const staticNames = names.slice(0, limitStaticParams);
 
     const createTitle = (input) => {
       const title = titleCase(input);
@@ -138,10 +140,11 @@ export default {
                   </span>
                 }
               >
-                {generateStaticParams || (
-                  <Callout type="warn" title="generateStaticParams">
-                    This page isn’t pre-built. If the data changes, the page
-                    might not display correctly.
+                {staticNames.includes(name) || (
+                  <Callout type="warn" title="Static limit exceeded">
+                    This page wasn’t pre-built because it’s outside the static
+                    generation limit. Data changes may cause inconsistent
+                    results.
                   </Callout>
                 )}
                 {await render({ context })}
@@ -245,8 +248,7 @@ export default {
             ],
           }
         ),
-        generateStaticParams:
-          generateStaticParams && (() => names.map((name) => ({ name }))),
+        generateStaticParams: () => staticNames.map((name) => ({ name })),
         generateMetadata: async ({ params }) => {
           const { name } = await params;
 
