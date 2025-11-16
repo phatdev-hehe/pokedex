@@ -32,7 +32,9 @@ export default Page.withContext((context) => {
           table(
             undefined,
             stat.affecting_items.map((affectingItem) => [
-              titleCase(affectingItem.name),
+              <Link href={`/item/${affectingItem.name}`}>
+                {titleCase(affectingItem.name)}
+              </Link>,
             ])
           ),
         ],

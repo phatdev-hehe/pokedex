@@ -2,17 +2,17 @@ import { Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
-const Page = await Pokedex.createDetailPage("item", (context) => {
-  /** @type Item */
-  const item = context.data;
+const Page = await Pokedex.createDetailPage("item", {
+  getAvatar: (context) => {
+    /** @type Item */
+    const item = context.data;
 
-  return item.sprites.default;
+    return item.sprites.default;
+  },
+  generateStaticParams: false,
 });
 
-export const {
-  generateMetadata,
-  // generateStaticParams // ??
-} = Page;
+export const { generateMetadata, generateStaticParams } = Page;
 
 export default Page.withContext((context) => {
   /** @type Item */

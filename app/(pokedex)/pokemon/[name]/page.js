@@ -2,20 +2,22 @@ import { Audio, Checkbox, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
-const Page = await Pokedex.createDetailPage("pokemon", (context) => {
-  /** @type Pokemon */
-  const pokemon = context.data;
+const Page = await Pokedex.createDetailPage("pokemon", {
+  getAvatar: (context) => {
+    /** @type Pokemon */
+    const pokemon = context.data;
 
-  return (
-    pokemon.sprites.versions["generation-v"]["black-white"].animated
-      .front_default ??
-    pokemon.sprites.versions["generation-v"]["black-white"].animated
-      .front_female ??
-    pokemon.sprites.other.showdown.front_default ??
-    pokemon.sprites.other.showdown.front_female ??
-    pokemon.sprites.front_default ??
-    pokemon.sprites.front_female
-  );
+    return (
+      pokemon.sprites.versions["generation-v"]["black-white"].animated
+        .front_default ??
+      pokemon.sprites.versions["generation-v"]["black-white"].animated
+        .front_female ??
+      pokemon.sprites.other.showdown.front_default ??
+      pokemon.sprites.other.showdown.front_female ??
+      pokemon.sprites.front_default ??
+      pokemon.sprites.front_female
+    );
+  },
 });
 
 export const { generateMetadata, generateStaticParams } = Page;
@@ -174,7 +176,9 @@ export default Page.withContext(async (context) => {
           table(
             [undefined, "version_details"],
             pokemon.held_items.map((heldItem) => [
-              titleCase(heldItem.item.name),
+              <Link href={`/item/${heldItem.item.name}`}>
+                {titleCase(heldItem.item.name)}
+              </Link>,
               table(
                 [undefined, "rarity"],
                 heldItem.version_details.map((rarityVersion) => [

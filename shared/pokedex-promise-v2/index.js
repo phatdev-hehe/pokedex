@@ -2,6 +2,7 @@ import { DescriptionList, Link, table, tabs } from "@/shared/components";
 import { chunk, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import Cycled from "cycled";
+import { Callout } from "fumadocs-ui/components/callout";
 import { File, Files, Folder } from "fumadocs-ui/components/files";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
@@ -152,7 +153,10 @@ export const Pokedex = {
       }
     );
   },
-  createDetailPage: async (apiType, getAvatar = () => {}) => {
+  createDetailPage: async (
+    apiType,
+    { getAvatar = () => {}, generateStaticParams = true } = {}
+  ) => {
     const names = (await Pokedex.api(apiType, "getList")()).results.map(
       (item) => item.name
     );
@@ -257,7 +261,8 @@ export const Pokedex = {
           ],
         }
       ),
-      generateStaticParams: () => names.map((name) => ({ name })),
+      generateStaticParams:
+        generateStaticParams && (() => names.map((name) => ({ name }))),
       generateMetadata: async ({ params }) => {
         const { name } = await params;
 
@@ -305,6 +310,12 @@ export const Pokedex = {
                   </span>
                 }
               >
+                {generateStaticParams || (
+                  <Callout type="warn" title="generateStaticParams">
+                    This page isn’t pre-built. If the data changes, the page
+                    might not display correctly.
+                  </Callout>
+                )}
                 {await render(context)}
                 <div style={{ height: "1rem" }} />
               </Page>

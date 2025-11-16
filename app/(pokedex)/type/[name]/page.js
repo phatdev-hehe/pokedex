@@ -2,11 +2,13 @@ import { Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
-const Page = await Pokedex.createDetailPage("type", (context) => {
-  /** @type Type */
-  const type = context.data;
+const Page = await Pokedex.createDetailPage("type", {
+  getAvatar: (context) => {
+    /** @type Type */
+    const type = context.data;
 
-  return type.sprites["generation-ix"]["scarlet-violet"].name_icon;
+    return type.sprites["generation-ix"]["scarlet-violet"].name_icon;
+  },
 });
 
 export const { generateMetadata, generateStaticParams } = Page;
