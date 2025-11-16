@@ -1,6 +1,6 @@
 import { DescriptionList, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
-import { chunk, titleCase } from "@/shared/utils";
+import { chunk, noop, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import Cycled from "cycled";
 import { Callout } from "fumadocs-ui/components/callout";
@@ -81,7 +81,7 @@ export default {
   },
   createDetailPage: async (
     apiType,
-    { getAvatar = () => {}, limitStaticParams = Infinity } = {}
+    { getAvatar = noop, limitStaticParams = Infinity, getFavicon = noop } = {}
   ) => {
     const names = (await Pokedex.api(apiType, "getList")()).results.map(
       (item) => item.name
@@ -118,6 +118,7 @@ export default {
 
           return (
             <>
+              <link rel="icon" href={getFavicon({ context })} />
               <Avatar
                 style={{
                   alignSelf: "center",

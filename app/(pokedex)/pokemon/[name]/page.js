@@ -18,6 +18,15 @@ const Page = await Pokedex.createDetailPage("pokemon", {
       pokemon.sprites.front_female
     );
   },
+  getFavicon: ({ context }) => {
+    /** @type Pokemon */
+    const pokemon = context.data;
+
+    return (
+      pokemon.sprites.versions["generation-vii"].icons.front_default ??
+      pokemon.sprites.versions["generation-viii"].icons.front_default
+    );
+  },
 });
 
 export const { generateMetadata, generateStaticParams } = Page;
