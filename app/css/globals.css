@@ -22,7 +22,7 @@
     }
   }
 
-  #nd-sidebar [data-radix-scroll-area-viewport] a[data-active]:hover {
+  [id^="nd-sidebar"] [data-radix-scroll-area-viewport] a[data-active]:hover {
     text-decoration: initial;
   }
 
