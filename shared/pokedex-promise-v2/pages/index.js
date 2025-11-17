@@ -127,6 +127,22 @@ export default {
                 src={getAvatar({ context })}
               />
               <Layout
+                renderTitle={() => {
+                  const [a, b] = context.title.split(" (");
+
+                  return (
+                    <span>
+                      {a}{" "}
+                      <span
+                        style={{
+                          color: "var(--color-fd-muted-foreground)",
+                        }}
+                      >
+                        ({b}
+                      </span>
+                    </span>
+                  );
+                }}
                 nextHref={`/${apiType}/${nextItem}`}
                 previousHref={`/${apiType}/${previousItem}`}
                 nextTitle={nextItem}

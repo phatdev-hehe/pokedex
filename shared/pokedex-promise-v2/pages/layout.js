@@ -1,5 +1,5 @@
 import { Link } from "@/shared/components";
-import { titleCase } from "@/shared/utils";
+import { noop, titleCase } from "@/shared/utils";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 
 const Meta = ({ title, date }) => {
@@ -28,6 +28,7 @@ export default ({
   previousHref,
   nextTitle,
   previousTitle,
+  renderTitle = noop,
 }) => {
   const date = new Date();
 
@@ -50,7 +51,7 @@ export default ({
           }}
         >
           <DocsTitle style={{ letterSpacing: "var(--letter-spacing)" }}>
-            {title}
+            {renderTitle() ?? title}
           </DocsTitle>
           <DocsDescription
             style={{
