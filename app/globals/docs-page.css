@@ -1,0 +1,7 @@
+#nd-page > article {
+  /* DocsBody */
+  div[class="prose flex-1"] {
+    background-color: var(--color-fd-background);
+    position: relative;
+  }
+}

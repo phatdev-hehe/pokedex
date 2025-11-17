@@ -61,7 +61,12 @@ export const tabs = (items, tabs) => (
       const id = kebabCase(removeAccents(item));
 
       return (
-        <Tab id={id} value={titleCase(item)} key={id}>
+        <Tab
+          style={{ overflow: "auto" }}
+          id={id}
+          value={titleCase(item)}
+          key={id}
+        >
           {tab}
         </Tab>
       );

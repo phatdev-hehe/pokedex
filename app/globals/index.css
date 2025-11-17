@@ -1,0 +1,40 @@
+@import url("./docs-page.css");
+@import url("./files.css");
+@import url("./search-dialog.css");
+@import url("./theme.css");
+
+:root {
+  /* --fd-layout-width: 100%; */
+
+  a {
+    text-decoration: none;
+    text-underline-offset: 3.5px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  [style^="--sidebar-item-offset: calc(var(--spacing) * 6); transition-duration: 0s; animation-name: none;"]
+    a:hover {
+    text-decoration: initial;
+  }
+
+  input {
+    accent-color: var(--tw-prose-links);
+  }
+
+  table th {
+    text-wrap: nowrap;
+  }
+
+  .prose {
+    --tw-prose-links: blue;
+  }
+
+  &.dark {
+    .prose {
+      --tw-prose-links: cornflowerblue;
+    }
+  }
+}
