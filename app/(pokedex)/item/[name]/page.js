@@ -12,7 +12,7 @@ const Page = await Pokedex.createDetailPage("item", {
   get getFavicon() {
     return this.getAvatar;
   },
-  limitStaticParams: 1300,
+  limitStaticParams: 1000,
 });
 
 export const { generateMetadata, generateStaticParams } = Page;
