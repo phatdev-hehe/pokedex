@@ -15,11 +15,6 @@
     }
   }
 
-  [style^="--sidebar-item-offset: calc(var(--spacing) * 6); transition-duration: 0s; animation-name: none;"]
-    a:hover {
-    text-decoration: initial;
-  }
-
   input {
     accent-color: var(--tw-prose-links);
   }

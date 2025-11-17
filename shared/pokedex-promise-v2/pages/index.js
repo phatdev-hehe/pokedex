@@ -28,7 +28,7 @@ export default {
           <Files>
             <Folder
               defaultOpen
-              name={`${names.length} items, ${chunks.length} groups`}
+              name={`${names.length} pages, ${chunks.length} sections`}
             >
               {chunks.map((names, index1) => (
                 <Folder

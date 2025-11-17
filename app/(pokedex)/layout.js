@@ -5,6 +5,12 @@ import { titleCase } from "@/shared/utils";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
+const pageCounts = await Promise.all(
+  Pokedex.api.types.map(
+    async (apiType) => (await Pokedex.api(apiType, "getList")()).results.length
+  )
+);
+
 export default ({ children }) => (
   <DocsLayout
     nav={{
@@ -15,10 +21,10 @@ export default ({ children }) => (
       children: [
         {
           defaultOpen: true,
-          name: "List of",
+          name: `${pageCounts.reduce((a, b) => a + b, 0)} pages`,
           type: "folder",
-          children: Pokedex.api.types.map((apiType) => ({
-            name: titleCase(apiType),
+          children: Pokedex.api.types.map((apiType, index) => ({
+            name: `${titleCase(apiType)} (${pageCounts[index]})`,
             url: `/${apiType}`,
           })),
         },
