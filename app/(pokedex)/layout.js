@@ -28,6 +28,23 @@ export default ({ children }) => (
             url: `/${apiType}`,
           })),
         },
+        {
+          type: "folder",
+          name: "More",
+          defaultOpen: true,
+          children:
+            // https://fumadocs.dev/docs/ui/rss
+            [
+              {
+                name: "sitemap.xml",
+                url: "/sitemap.xml",
+              },
+              {
+                name: "robots.txt",
+                url: "/robots.txt",
+              },
+            ],
+        },
       ],
     }}
   >
