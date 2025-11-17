@@ -11,7 +11,7 @@ export default async () =>
             process.env.NEXT_PUBLIC_BASE_URL
           }/${apiType}/${encodeURIComponent(item.name)}`,
           lastModified: new Date(),
-          changeFrequency: "monthly",
+          changeFrequency: "yearly",
         }))
       )
     )

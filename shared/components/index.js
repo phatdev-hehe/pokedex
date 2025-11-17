@@ -4,9 +4,19 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
 import { Children, useId } from "react";
+import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 
 export { default as Link } from "fumadocs-core/link";
+
+export const highlighter = (textToHighlight, ...searchWords) => (
+  <Highlighter
+    caseSensitive
+    highlightTag="code"
+    textToHighlight={textToHighlight}
+    searchWords={searchWords}
+  />
+);
 
 export const table = Object.assign(
   (thead = [], tbody = thead, tfoot) => {
