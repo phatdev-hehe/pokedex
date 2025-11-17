@@ -132,13 +132,14 @@ export default {
 
                   return (
                     <span>
-                      {a}{" "}
+                      {a}
                       <span
                         style={{
                           color: "var(--color-fd-muted-foreground)",
                         }}
                       >
-                        ({b}
+                        {" ("}
+                        {b}
                       </span>
                     </span>
                   );

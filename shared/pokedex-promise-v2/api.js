@@ -14,6 +14,10 @@ const types = {
     getList: "getPokemonsList",
     getByName: "getPokemonByName",
   },
+  berry: {
+    getList: "getBerriesList",
+    getByName: "getBerryByName",
+  },
   ability: {
     getList: "getAbilitiesList",
     getByName: "getAbilityByName",
