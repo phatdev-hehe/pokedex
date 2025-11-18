@@ -2,7 +2,7 @@
   color: var(--color-fd-muted-foreground);
 
   span[class="text-fd-primary underline"] {
-    text-decoration: none;
+    text-decoration: initial;
     color: var(--color-fd-foreground);
   }
 }

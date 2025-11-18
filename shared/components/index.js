@@ -1,5 +1,5 @@
 import { titleCase } from "@/shared/utils";
-import { kebabCase, split } from "change-case";
+import { kebabCase } from "change-case";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
@@ -11,25 +11,10 @@ export { default as Link } from "fumadocs-core/link";
 
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
+    caseSensitive
     highlightTag="code"
     textToHighlight={textToHighlight}
     searchWords={searchWords}
-    findChunks={({ textToHighlight, searchWords }) => {
-      const chunks = [];
-      const words = split(textToHighlight);
-
-      let index = 0;
-      for (const word of words) {
-        const start = index;
-        const end = start + word.length;
-
-        if (searchWords.includes(word)) chunks.push({ start, end });
-
-        index = end + 1;
-      }
-
-      return chunks;
-    }}
   />
 );
 
