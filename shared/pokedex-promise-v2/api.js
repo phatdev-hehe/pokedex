@@ -46,6 +46,10 @@ const types = {
     getList: "getTypesList",
     getByName: "getTypeByName",
   },
+  "evolution-trigger": {
+    getList: "getEvolutionTriggersList",
+    getByName: "getEvolutionTriggerByName",
+  },
 };
 
 const api = [
