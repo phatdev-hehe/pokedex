@@ -1,4 +1,4 @@
-import { Checkbox, Link, table } from "@/shared/components";
+import { Checkbox, highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -15,11 +15,17 @@ export default Page(({ context }) => {
       {table(undefined, [
         ["Id", ability.id],
         [
-          "The generation this ability originated in.",
+          highlighter(
+            "The generation this ability originated in.",
+            "generation"
+          ),
           titleCase(ability.generation.name),
         ],
         [
-          "Whether or not this ability originated in the main series of the video games.",
+          highlighter(
+            "Whether or not this ability originated in the main series of the video games.",
+            "main series"
+          ),
           <Checkbox checked={ability.is_main_series} />,
         ],
       ])}

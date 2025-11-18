@@ -1,4 +1,4 @@
-import { Link, table } from "@/shared/components";
+import { highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -22,7 +22,10 @@ export default Page(({ context }) => {
           move.accuracy,
         ],
         [
-          "The type of appeal this move gives a Pokémon when used in a contest.",
+          highlighter(
+            "The type of appeal this move gives a Pokémon when used in a contest.",
+            "contest"
+          ),
           titleCase(move.contest_type?.name), // ??
         ],
         [
@@ -30,7 +33,10 @@ export default Page(({ context }) => {
           titleCase(move.damage_class.name),
         ],
         [
-          "The percent value of how likely it is this moves effect will happen.",
+          highlighter(
+            "The percent value of how likely it is this moves effect will happen.",
+            "effect"
+          ),
           move.effect_chance,
         ],
         [
@@ -41,17 +47,26 @@ export default Page(({ context }) => {
           "The base power of this move with a value of 0 if it does not have a base power.",
           move.power,
         ],
-        ["Power points. The number of times this move can be used.", move.pp],
+        [
+          highlighter(
+            "Power points. The number of times this move can be used.",
+            "Power points"
+          ),
+          move.pp,
+        ],
         [
           "A value between -8 and 8. Sets the order in which moves are executed during battle.",
           move.priority,
         ],
         [
-          "The type of target that will receive the effects of the attack.",
+          highlighter(
+            "The type of target that will receive the effects of the attack.",
+            "target"
+          ),
           titleCase(move.target.name),
         ],
         [
-          "The elemental type of this move.",
+          highlighter("The elemental type of this move.", "type"),
           <Link href={`/type/${move.type.name}`}>
             {titleCase(move.type.name)}
           </Link>,

@@ -1,4 +1,4 @@
-import { Link, table } from "@/shared/components";
+import { highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -22,7 +22,10 @@ export default Page(({ context }) => {
       {table(undefined, [
         ["Id", type.id],
         [
-          "The generation this type was introduced in.",
+          highlighter(
+            "The generation this type was introduced in.",
+            "generation"
+          ),
           titleCase(type.generation.name),
         ],
         [

@@ -1,4 +1,4 @@
-import { Audio, Checkbox, Link, table } from "@/shared/components";
+import { Audio, Checkbox, highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -49,25 +49,40 @@ export default Page(async ({ context }) => {
       {table(undefined, [
         ["Id", pokemon.id],
         [
-          "Species",
+          highlighter("The species this Pokémon belongs to.", "species"),
           <Link href={`/pokemon-species/${pokemon.species.name}`}>
             {titleCase(pokemon.species.name)}
           </Link>,
         ],
         [
-          "Set for exactly one Pokémon used as the default for each species.",
+          highlighter(
+            "Set for exactly one Pokémon used as the default for each species.",
+            "default"
+          ),
           <Checkbox checked={pokemon.is_default} />,
         ],
         [
-          "Order for sorting. Almost national order, except families are grouped together.",
+          highlighter(
+            "Order for sorting. Almost national order, except families are grouped together.",
+            "Order"
+          ),
           pokemon.order,
         ],
         [
-          "The base experience gained for defeating this Pokémon.",
+          highlighter(
+            "The base experience gained for defeating this Pokémon.",
+            "experience"
+          ),
           pokemon.base_experience,
         ],
-        ["Height", pokemon.height],
-        ["Weight", pokemon.weight],
+        [
+          highlighter("The height of this Pokémon in decimetres.", "height"),
+          pokemon.height,
+        ],
+        [
+          highlighter("The weight of this Pokémon in hectograms.", "weight"),
+          pokemon.weight,
+        ],
       ])}
       {Page.tabs(
         Page.tabs.sprites(

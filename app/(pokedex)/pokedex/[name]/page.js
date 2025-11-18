@@ -1,4 +1,4 @@
-import { Checkbox, Link, table } from "@/shared/components";
+import { Checkbox, highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
@@ -16,11 +16,17 @@ export default Page(({ context }) => {
       {table(undefined, [
         ["Id", pokedex.id],
         [
-          "Whether or not this Pokédex originated in the main series of the video games.",
+          highlighter(
+            "Whether or not this Pokédex originated in the main series of the video games.",
+            "main series"
+          ),
           <Checkbox checked={pokedex.is_main_series} />,
         ],
         [
-          "The region this Pokédex catalogues Pokémon for.",
+          highlighter(
+            "The region this Pokédex catalogues Pokémon for.",
+            "region"
+          ),
           titleCase(pokedex.region?.name), // ??
         ],
       ])}

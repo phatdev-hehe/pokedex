@@ -1,4 +1,4 @@
-import { Link, table } from "@/shared/components";
+import { highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -21,7 +21,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
         [
-          "The firmness of this berry, used in making Pokéblocks or Poffins.",
+          highlighter(
+            "The firmness of this berry, used in making Pokéblocks or Poffins.",
+            "firmness"
+          ),
           titleCase(berry.firmness.name),
         ],
         [
@@ -42,9 +45,15 @@ export default Page(({ context }) => {
             {titleCase(berry.natural_gift_type.name)}
           </Link>,
         ],
-        ["The size of this Berry, in millimeters.", berry.size],
         [
-          "The smoothness of this Berry, used in making Pokéblocks or Poffins.",
+          highlighter("The size of this Berry, in millimeters.", "size"),
+          berry.size,
+        ],
+        [
+          highlighter(
+            "The smoothness of this Berry, used in making Pokéblocks or Poffins.",
+            "smoothness"
+          ),
           berry.smoothness,
         ],
         [

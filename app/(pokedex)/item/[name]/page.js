@@ -1,4 +1,4 @@
-import { Link, table } from "@/shared/components";
+import { highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -28,10 +28,13 @@ export default Page(({ context }) => {
       {table(undefined, [
         ["Id", item.id],
         [
-          "The category of items this item falls into.",
+          highlighter(
+            "The category of items this item falls into.",
+            "category"
+          ),
           titleCase(item.category.name),
         ],
-        ["The price of this item in stores.", item.cost],
+        [highlighter("The price of this item in stores.", "price"), item.cost],
         [
           "The effect of the move Fling when used with this item.",
           titleCase(item.fling_effect?.name), // ??

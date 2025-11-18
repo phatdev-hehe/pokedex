@@ -27,6 +27,13 @@
     text-decoration: initial;
   }
 
+  code {
+    background-color: var(--color-fd-accent);
+    color: var(--color-fd-accent-foreground);
+    letter-spacing: -0.05ch;
+    font-style: italic;
+  }
+
   input {
     accent-color: var(--tw-prose-links);
   }

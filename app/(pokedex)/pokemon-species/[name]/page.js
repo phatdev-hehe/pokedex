@@ -1,4 +1,4 @@
-import { Checkbox, Link, table } from "@/shared/components";
+import { Checkbox, highlighter, Link, table } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
@@ -17,38 +17,59 @@ export default Page(({ context }) => {
       {table(undefined, [
         ["Id", pokemonSpecies.id],
         [
-          "The Pokémon species that evolves into this Pokemon_species.",
+          highlighter(
+            "The Pokémon species that evolves into this Pokemon_species.",
+            "Pokémon species"
+          ),
           <Link href={`/pokemon-species/${previousPokemonSpeciesName}`}>
             {titleCase(previousPokemonSpeciesName)}
           </Link>,
         ],
         [
-          "The generation this Pokémon species was introduced in.",
+          highlighter(
+            "The generation this Pokémon species was introduced in.",
+            "generation"
+          ),
           titleCase(pokemonSpecies.generation.name),
         ],
-        [undefined, <Checkbox checked={pokemonSpecies.is_baby}>Baby</Checkbox>],
         [
-          undefined,
-          <Checkbox checked={pokemonSpecies.is_legendary}>Legendary</Checkbox>,
+          highlighter("Whether or not this is a baby Pokémon.", "baby"),
+          <Checkbox checked={pokemonSpecies.is_baby} />,
         ],
         [
-          undefined,
-          <Checkbox checked={pokemonSpecies.is_mythical}>Mythical</Checkbox>,
+          highlighter(
+            "Whether or not this is a legendary Pokémon.",
+            "legendary"
+          ),
+          <Checkbox checked={pokemonSpecies.is_legendary} />,
         ],
         [
-          "The order in which species should be sorted. Based on National Dex order, except families are grouped together and sorted by stage.",
+          highlighter("Whether or not this is a mythical Pokémon.", "mythical"),
+          <Checkbox checked={pokemonSpecies.is_mythical} />,
+        ],
+        [
+          highlighter(
+            "The order in which species should be sorted. Based on National Dex order, except families are grouped together and sorted by stage.",
+            "National Dex order"
+          ),
           pokemonSpecies.order,
         ],
         [
-          "The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.",
+          highlighter(
+            "The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.",
+            "happiness"
+          ),
           pokemonSpecies.base_happiness,
         ],
         [
-          "The base capture rate; up to 255. The higher the number, the easier the catch.",
+          highlighter(
+            "The base capture rate; up to 255. The higher the number, the easier the catch.",
+            "capture rate"
+          ),
           pokemonSpecies.capture_rate,
         ],
         [
-          "The color of this Pokémon for Pokédex search.",
+          highlighter("The color of this Pokémon for Pokédex search.", "color"),
           titleCase(pokemonSpecies.color.name),
         ],
         [
@@ -56,7 +77,10 @@ export default Page(({ context }) => {
           titleCase(pokemonSpecies.growth_rate.name),
         ],
         [
-          "Whether or not this Pokémon has multiple forms and can switch between them.",
+          highlighter(
+            "Whether or not this Pokémon has multiple forms and can switch between them.",
+            "multiple forms"
+          ),
           <Checkbox checked={pokemonSpecies.forms_switchable} />,
         ],
         [
@@ -64,7 +88,10 @@ export default Page(({ context }) => {
           pokemonSpecies.gender_rate,
         ],
         [
-          "The habitat this Pokémon species can be encountered in.",
+          highlighter(
+            "The habitat this Pokémon species can be encountered in.",
+            "habitat"
+          ),
           titleCase(pokemonSpecies.habitat?.name), // ??
         ],
         [
@@ -72,11 +99,14 @@ export default Page(({ context }) => {
           <Checkbox checked={pokemonSpecies.has_gender_differences} />,
         ],
         [
-          `Initial hatch counter: one must walk Y × (hatch_counter + 1) steps before this Pokémon's egg hatches, unless utilizing bonuses like Flame Body's. Y varies per generation. In Generations II, III, and VII, Egg cycles are 256 steps long. In Generation IV, Egg cycles are 255 steps long. In Pokémon Brilliant Diamond and Shining Pearl, Egg cycles are also 255 steps long, but are shorter on special dates. In Generations V and VI, Egg cycles are 257 steps long. In Pokémon Sword and Shield, and in Pokémon Scarlet and Violet, Egg cycles are 128 steps long.`,
+          highlighter(
+            `Initial hatch counter: one must walk Y × (hatch_counter + 1) steps before this Pokémon's egg hatches, unless utilizing bonuses like Flame Body's. Y varies per generation. In Generations II, III, and VII, Egg cycles are 256 steps long. In Generation IV, Egg cycles are 255 steps long. In Pokémon Brilliant Diamond and Shining Pearl, Egg cycles are also 255 steps long, but are shorter on special dates. In Generations V and VI, Egg cycles are 257 steps long. In Pokémon Sword and Shield, and in Pokémon Scarlet and Violet, Egg cycles are 128 steps long.`,
+            "Initial hatch counter"
+          ),
           pokemonSpecies.hatch_counter,
         ],
         [
-          "The shape of this Pokémon for Pokédex search.",
+          highlighter("The shape of this Pokémon for Pokédex search.", "shape"),
           titleCase(pokemonSpecies.shape.name),
         ],
       ])}
