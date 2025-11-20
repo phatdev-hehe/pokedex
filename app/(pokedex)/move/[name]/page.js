@@ -1,4 +1,4 @@
-import { highlighter, Link, table } from "@/shared/components";
+import { highlighter, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -119,18 +119,14 @@ export default Page(({ context }) => {
             ).map(([key, value]) => [
               titleCase(key),
               table(
-                undefined,
+                [undefined, "move"],
                 Object.entries(value).map(([key, moves]) => [
                   titleCase(key),
-                  moves &&
-                    table(
-                      ["move"],
-                      moves.map((move) => [
-                        <Link href={`/move/${move.name}`}>
-                          {titleCase(move.name)}
-                        </Link>,
-                      ])
-                    ),
+                  tabs.paginate(moves, (move) => (
+                    <Link href={`/move/${move.name}`}>
+                      {titleCase(move.name)}
+                    </Link>
+                  )),
                 ])
               ),
             ])
@@ -151,14 +147,11 @@ export default Page(({ context }) => {
         [
           "learned_by_pokemon",
           "List of Pokemon that can learn the move",
-          table(
-            undefined,
-            move.learned_by_pokemon.map((pokemon) => [
-              <Link href={`/pokemon/${pokemon.name}`}>
-                {titleCase(pokemon.name)}
-              </Link>,
-            ])
-          ),
+          tabs.paginate(move.learned_by_pokemon, (pokemon) => (
+            <Link href={`/pokemon/${pokemon.name}`}>
+              {titleCase(pokemon.name)}
+            </Link>
+          )),
         ]
       )}
     </>

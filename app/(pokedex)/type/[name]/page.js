@@ -1,4 +1,4 @@
-import { highlighter, Link, table } from "@/shared/components";
+import { highlighter, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -52,28 +52,20 @@ export default Page(({ context }) => {
         [
           "moves",
           "A list of moves that have this type.",
-          table(
-            undefined,
-            type.moves.map((move) => [
-              <Link href={`/move/${move.name}`}>{titleCase(move.name)}</Link>,
-            ])
-          ),
+          tabs.paginate(type.moves, (move) => (
+            <Link href={`/move/${move.name}`}>{titleCase(move.name)}</Link>
+          )),
         ],
         [
           "damage_relations",
           "A detail of how effective this type is toward others and vice versa.",
           table(
-            undefined,
+            [undefined, "Type"],
             Object.entries(type.damage_relations).map(([key, value]) => [
               titleCase(key),
-              table(
-                ["type"],
-                value.map((type) => [
-                  <Link href={`/type/${type.name}`}>
-                    {titleCase(type.name)}
-                  </Link>,
-                ])
-              ),
+              tabs.paginate(value, (type) => (
+                <Link href={`/type/${type.name}`}>{titleCase(type.name)}</Link>
+              )),
             ])
           ),
         ],

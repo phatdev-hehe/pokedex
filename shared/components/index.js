@@ -1,4 +1,4 @@
-import { titleCase } from "@/shared/utils";
+import { chunk, titleCase } from "@/shared/utils";
 import { kebabCase } from "change-case";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
@@ -64,24 +64,56 @@ export const table = Object.assign(
   }
 );
 
-export const tabs = (items, tabs) => (
-  <Tabs updateAnchor items={items.map(titleCase)}>
-    {tabs.map((tab, index) => {
-      const item = items[index];
-      const id = kebabCase(removeAccents(item));
+export const tabs = Object.assign(
+  (items, tabs) => (
+    <Tabs updateAnchor items={items.map(titleCase)}>
+      {tabs.map((tab, index) => {
+        const item = items[index];
+        const id = kebabCase(removeAccents(item));
 
-      return (
-        <Tab
-          style={{ overflow: "auto" }}
-          id={id}
-          value={titleCase(item)}
-          key={id}
-        >
-          {tab}
-        </Tab>
-      );
-    })}
-  </Tabs>
+        return (
+          <Tab
+            style={{ overflow: "auto" }}
+            id={id}
+            value={titleCase(item)}
+            key={id}
+          >
+            {tab}
+          </Tab>
+        );
+      })}
+    </Tabs>
+  ),
+  {
+    paginate: (items, renderItem = JSON.stringify) => {
+      if (items !== null && items.length) {
+        const chunkSize = 100;
+        const chunks = chunk(items, chunkSize);
+
+        return tabs(
+          chunks.map((values, index) => `Page ${index + 1}`),
+          chunks.map((values, index1) =>
+            table(
+              undefined,
+              values.map((value, index2) => [
+                <span>
+                  <span
+                    style={{
+                      color: "var(--color-fd-muted-foreground)",
+                    }}
+                  >
+                    {index1 * chunkSize + index2 + 1}
+                    {". "}
+                  </span>
+                  {renderItem(value)}
+                </span>,
+              ])
+            )
+          )
+        );
+      }
+    },
+  }
 );
 
 export const Audio = (props) => <audio controls {...props} />;

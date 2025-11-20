@@ -1,4 +1,4 @@
-import { Checkbox, Link, table } from "@/shared/components";
+import { Checkbox, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -29,14 +29,11 @@ export default Page(({ context }) => {
         [
           "affecting_items",
           undefined,
-          table(
-            undefined,
-            stat.affecting_items.map((affectingItem) => [
-              <Link href={`/item/${affectingItem.name}`}>
-                {titleCase(affectingItem.name)}
-              </Link>,
-            ])
-          ),
+          tabs.paginate(stat.affecting_items, (affectingItem) => (
+            <Link href={`/item/${affectingItem.name}`}>
+              {titleCase(affectingItem.name)}
+            </Link>
+          )),
         ],
         [
           "affecting_moves",
@@ -64,10 +61,9 @@ export default Page(({ context }) => {
             ["set", undefined],
             Object.entries(stat.affecting_natures).map(([key, value]) => [
               titleCase(key),
-              table(
-                undefined,
-                Object.values(value).map(({ name }) => [titleCase(name)])
-              ),
+              tabs.paginate(Object.values(value), (item) => [
+                titleCase(item.name),
+              ]),
             ])
           ),
         ]

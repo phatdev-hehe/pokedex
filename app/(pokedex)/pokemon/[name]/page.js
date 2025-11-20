@@ -1,4 +1,11 @@
-import { Audio, Checkbox, highlighter, Link, table } from "@/shared/components";
+import {
+  Audio,
+  Checkbox,
+  highlighter,
+  Link,
+  table,
+  tabs,
+} from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -130,7 +137,7 @@ export default Page(async ({ context }) => {
           "cries",
           "A set of cries used to depict this Pokémon in the game. A visual representation of the various cries can be found at PokeAPI/cries",
           table(
-            undefined,
+            ["depiction", undefined],
             Object.entries(pokemon.cries).map(([input, src]) => [
               titleCase(input),
               <Audio src={src} />,
@@ -177,13 +184,10 @@ export default Page(async ({ context }) => {
                           encounter.chance,
                           encounter.min_level,
                           encounter.max_level,
-                          table(
-                            undefined,
-                            encounter.condition_values.map(
-                              (encounterConditionValue) => [
-                                titleCase(encounterConditionValue.name),
-                              ]
-                            )
+                          tabs.paginate(
+                            encounter.condition_values,
+                            (encounterConditionValue) =>
+                              titleCase(encounterConditionValue.name)
                           ),
                         ]
                       )
@@ -220,9 +224,8 @@ export default Page(async ({ context }) => {
         [
           "forms",
           "A list of forms this Pokémon can take on.",
-          table(
-            undefined,
-            pokemon.forms.map((pokemonFrom) => [titleCase(pokemonFrom.name)])
+          tabs.paginate(pokemon.forms, (pokemonFrom) =>
+            titleCase(pokemonFrom.name)
           ),
         ],
         [

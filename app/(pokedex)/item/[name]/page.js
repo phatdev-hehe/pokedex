@@ -1,4 +1,4 @@
-import { highlighter, Link, table } from "@/shared/components";
+import { highlighter, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 
@@ -49,11 +49,8 @@ export default Page(({ context }) => {
         [
           "attributes",
           "A list of attributes this item has.",
-          table(
-            undefined,
-            item.attributes.map((itemAttribute) => [
-              titleCase(itemAttribute.name),
-            ])
+          tabs.paginate(item.attributes, (itemAttribute) =>
+            titleCase(itemAttribute.name)
           ),
         ],
         Page.tabs.effectEntries(item.effect_entries),

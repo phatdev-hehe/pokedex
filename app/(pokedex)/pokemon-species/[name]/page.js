@@ -1,4 +1,4 @@
-import { Checkbox, highlighter, Link, table } from "@/shared/components";
+import { Checkbox, highlighter, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
@@ -128,11 +128,8 @@ export default Page(({ context }) => {
         [
           "egg_groups",
           "A list of egg groups this Pokémon species is a member of.",
-          table(
-            undefined,
-            pokemonSpecies.egg_groups.map((eggGroups) => [
-              titleCase(eggGroups.name),
-            ])
+          tabs.paginate(pokemonSpecies.egg_groups, (eggGroups) =>
+            titleCase(eggGroups.name)
           ),
         ],
         Page.tabs.flavorTextEntries(

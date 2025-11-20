@@ -1,6 +1,6 @@
 import { DescriptionList, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
-import { chunk, noop, titleCase } from "@/shared/utils";
+import { noop, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import Cycled from "cycled";
 import { Callout } from "fumadocs-ui/components/callout";
@@ -13,40 +13,19 @@ const Avatar = ({ style, ...props }) => (
 );
 
 export default {
-  createCollectionPage: async (apiType, chunkSize = 100) => {
+  createCollectionPage: async (apiType) => {
     const title = `${titleCase(`list of ${apiType}`)}(s)`;
 
-    const chunks = chunk(
-      (await Pokedex.api(apiType, "getList")()).results.map(
-        (item) => item.name
-      ),
-      chunkSize
+    const names = (await Pokedex.api(apiType, "getList")()).results.map(
+      (item) => item.name
     );
 
     return Object.assign(
       () => (
         <Layout title={title}>
-          {tabs(
-            chunks.map((names, index) => `Page ${index + 1}`),
-            chunks.map((names, index1) =>
-              table(
-                undefined,
-                names.map((name, index2) => [
-                  <span>
-                    <span
-                      style={{
-                        color: "var(--color-fd-muted-foreground)",
-                      }}
-                    >
-                      {index1 * chunkSize + index2 + 1}
-                      {". "}
-                    </span>
-                    <Link href={`/${apiType}/${name}`}>{titleCase(name)}</Link>
-                  </span>,
-                ])
-              )
-            )
-          )}
+          {tabs.paginate(names, (name) => (
+            <Link href={`/${apiType}/${name}`}>{titleCase(name)}</Link>
+          ))}
         </Layout>
       ),
       {

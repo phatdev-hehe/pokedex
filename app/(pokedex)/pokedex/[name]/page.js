@@ -1,4 +1,4 @@
-import { Checkbox, highlighter, Link, table } from "@/shared/components";
+import { Checkbox, highlighter, Link, table, tabs } from "@/shared/components";
 import { Pokedex } from "@/shared/pokedex-promise-v2";
 import { titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
@@ -61,11 +61,8 @@ export default Page(({ context }) => {
         [
           "version_groups",
           "A list of version groups this Pokédex is relevant to.",
-          table(
-            undefined,
-            pokedex.version_groups.map((versionGroup) => [
-              titleCase(versionGroup.name),
-            ])
+          tabs.paginate(pokedex.version_groups, (versionGroup) =>
+            titleCase(versionGroup.name)
           ),
         ]
       )}
