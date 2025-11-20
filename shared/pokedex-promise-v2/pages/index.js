@@ -4,7 +4,6 @@ import { chunk, noop, titleCase } from "@/shared/utils";
 import { getLanguageName } from "@/shared/utils/get-language-name";
 import Cycled from "cycled";
 import { Callout } from "fumadocs-ui/components/callout";
-import { File, Files, Folder } from "fumadocs-ui/components/files";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 import Layout from "./layout";
@@ -15,63 +14,39 @@ const Avatar = ({ style, ...props }) => (
 
 export default {
   createCollectionPage: async (apiType, chunkSize = 100) => {
-    const names = (await Pokedex.api(apiType, "getList")()).results.map(
-      (item) => item.name
-    );
-
     const title = `${titleCase(`list of ${apiType}`)}(s)`;
-    const chunks = chunk(names, chunkSize);
+
+    const chunks = chunk(
+      (await Pokedex.api(apiType, "getList")()).results.map(
+        (item) => item.name
+      ),
+      chunkSize
+    );
 
     return Object.assign(
       () => (
         <Layout title={title}>
-          <Files>
-            <Folder
-              defaultOpen
-              name={`${names.length} pages, ${chunks.length} sections`}
-            >
-              {chunks.map((names, index1) => (
-                <Folder
-                  key={index1}
-                  defaultOpen={!index1}
-                  name={
-                    <span>
-                      {index1 * chunkSize + 1}
-                      <span
-                        style={{
-                          color: "var(--color-fd-muted-foreground)",
-                        }}
-                      >
-                        {" - "}
-                        {index1 * chunkSize + names.length}
-                      </span>
+          {tabs(
+            chunks.map((names, index) => `Page ${index + 1}`),
+            chunks.map((names, index1) =>
+              table(
+                undefined,
+                names.map((name, index2) => [
+                  <span>
+                    <span
+                      style={{
+                        color: "var(--color-fd-muted-foreground)",
+                      }}
+                    >
+                      {index1 * chunkSize + index2 + 1}
+                      {". "}
                     </span>
-                  }
-                >
-                  {names.map((name, index2) => (
-                    <File
-                      key={index2}
-                      icon={
-                        <span
-                          key={index2} // ??
-                          style={{
-                            color: "var(--color-fd-muted-foreground)",
-                          }}
-                        >
-                          {index1 * chunkSize + index2 + 1}
-                        </span>
-                      }
-                      name={
-                        <Link href={`/${apiType}/${name}`}>
-                          {titleCase(name)}
-                        </Link>
-                      }
-                    />
-                  ))}
-                </Folder>
-              ))}
-            </Folder>
-          </Files>
+                    <Link href={`/${apiType}/${name}`}>{titleCase(name)}</Link>
+                  </span>,
+                ])
+              )
+            )
+          )}
         </Layout>
       ),
       {
