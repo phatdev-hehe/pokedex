@@ -14,16 +14,22 @@
     }
   }
 
-  #nd-page > article {
-    /* DocsBody */
-    div[class="prose flex-1"] {
-      background-color: var(--color-fd-background);
-      position: relative;
+  #nd-docs-layout {
+    #nd-page > article {
+      /* DocsBody */
+      div[class="prose flex-1"] {
+        background-color: var(--color-fd-background);
+        position: relative;
+      }
     }
-  }
 
-  [id^="nd-sidebar"] [data-radix-scroll-area-viewport] a[data-active]:hover {
-    text-decoration: initial;
+    [id^="nd-sidebar"] {
+      background-color: var(--color-fd-background);
+
+      [data-radix-scroll-area-viewport] a[data-active]:hover {
+        text-decoration: initial;
+      }
+    }
   }
 
   code {
