@@ -1,4 +1,4 @@
-import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 
 export default async () =>
   (

@@ -1,6 +1,6 @@
-import { Link, table, tabs } from "@/shared/components";
-import { Pokedex } from "@/shared/pokedex-promise-v2";
-import { titleCase } from "@/shared/utils";
+import { Link, table, tabs } from "@/(shared)/components";
+import { Pokedex } from "@/(shared)/pokedex-promise-v2";
+import { titleCase } from "@/(shared)/utils";
 
 const Page = await Pokedex.createDetailPage("evolution-trigger");
 

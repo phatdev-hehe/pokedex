@@ -1,5 +1,5 @@
-import { RandomRedirect } from "@/shared/components/random-redirect";
-import { Pokedex } from "@/shared/pokedex-promise-v2";
+import { RandomRedirect } from "@/(shared)/components/random-redirect";
+import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { DocsBody } from "fumadocs-ui/page";
 
 const pokemonNames = (await Pokedex.api.getPokemonsList()).results.map(

@@ -1,6 +1,6 @@
-import { Checkbox, highlighter, Link, table } from "@/shared/components";
-import { Pokedex } from "@/shared/pokedex-promise-v2";
-import { titleCase } from "@/shared/utils";
+import { Checkbox, highlighter, Link, table } from "@/(shared)/components";
+import { Pokedex } from "@/(shared)/pokedex-promise-v2";
+import { titleCase } from "@/(shared)/utils";
 
 const Page = await Pokedex.createDetailPage("pokemon-form", {
   limitStaticParams: 100,

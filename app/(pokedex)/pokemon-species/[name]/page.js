@@ -1,7 +1,13 @@
-import { Checkbox, highlighter, Link, table, tabs } from "@/shared/components";
-import { Pokedex } from "@/shared/pokedex-promise-v2";
-import { titleCase } from "@/shared/utils";
-import { getLanguageName } from "@/shared/utils/get-language-name";
+import {
+  Checkbox,
+  highlighter,
+  Link,
+  table,
+  tabs,
+} from "@/(shared)/components";
+import { Pokedex } from "@/(shared)/pokedex-promise-v2";
+import { titleCase } from "@/(shared)/utils";
+import { getLanguageName } from "@/(shared)/utils/get-language-name";
 
 const Page = await Pokedex.createDetailPage("pokemon-species");
 

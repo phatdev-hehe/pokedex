@@ -1,6 +1,6 @@
 import "server-only";
 
-import { uniqBy } from "@/shared/utils";
+import { uniqBy } from "@/(shared)/utils";
 import delay from "delay";
 import isPlainObject from "is-plain-obj";
 import { notFound } from "next/navigation";
