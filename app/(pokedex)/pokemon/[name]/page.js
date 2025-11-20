@@ -144,19 +144,10 @@ export default Page(async ({ context }) => {
             ])
           ),
         ],
-        [
-          "types",
-          "A list of details showing types this Pokémon has.",
-          table(
-            [undefined, "slot"],
-            pokemon.types.map((pokemonType) => [
-              <Link href={`/type/${pokemonType.type.name}`}>
-                {titleCase(pokemonType.type.name)}
-              </Link>,
-              pokemonType.slot,
-            ])
-          ),
-        ],
+        Page.tabs.types(
+          pokemon.types,
+          "A list of details showing types this Pokémon has."
+        ),
         [
           "location_area_encounters",
           "Encounter details pertaining to specific versions.",
@@ -224,9 +215,11 @@ export default Page(async ({ context }) => {
         [
           "forms",
           "A list of forms this Pokémon can take on.",
-          tabs.paginate(pokemon.forms, (pokemonFrom) =>
-            titleCase(pokemonFrom.name)
-          ),
+          tabs.paginate(pokemon.forms, (pokemonFrom) => (
+            <Link href={`/pokemon-form/${pokemonFrom.name}`}>
+              {titleCase(pokemonFrom.name)}
+            </Link>
+          )),
         ],
         [
           "moves",

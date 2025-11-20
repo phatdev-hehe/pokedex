@@ -50,6 +50,10 @@ const types = {
     getList: "getEvolutionTriggersList",
     getByName: "getEvolutionTriggerByName",
   },
+  "pokemon-form": {
+    getList: "getPokemonFormsList",
+    getByName: "getPokemonFormByName",
+  },
 };
 
 const api = [

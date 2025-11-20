@@ -91,7 +91,7 @@ export const tabs = Object.assign(
         const chunks = chunk(items, chunkSize);
 
         return tabs(
-          chunks.map((values, index) => `Page ${index + 1}`),
+          chunks.map((values, index) => `${index * chunkSize + values.length}`),
           chunks.map((values, index1) =>
             table(
               undefined,

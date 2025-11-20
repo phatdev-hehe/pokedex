@@ -221,6 +221,19 @@ export default {
                 ])
               ),
             ],
+            types: (types, description) => [
+              "types",
+              description,
+              table(
+                [undefined, "slot"],
+                types.map((type) => [
+                  <Link href={`/type/${type.type.name}`}>
+                    {titleCase(type.type.name)}
+                  </Link>,
+                  type.slot,
+                ])
+              ),
+            ],
           }
         ),
         generateStaticParams: () => staticNames.map((name) => ({ name })),
