@@ -40,6 +40,10 @@ export default ({ children }) => (
                 name: "robots.txt",
                 url: "/robots.txt",
               },
+              {
+                name: "create-search-indexes.js",
+                url: "/api/create-search-indexes",
+              },
             ],
         },
       ],
