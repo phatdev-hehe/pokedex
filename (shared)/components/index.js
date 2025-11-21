@@ -1,4 +1,4 @@
-import { chunk, titleCase } from "@/(shared)/utils";
+import { chunk, noop, titleCase } from "@/(shared)/utils";
 import { kebabCase } from "change-case";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
@@ -85,7 +85,7 @@ export const tabs = Object.assign(
     </Tabs>
   ),
   {
-    paginate: (items, renderItem = JSON.stringify) => {
+    paginate: (items, renderItem = noop) => {
       if (items !== null && items.length) {
         const chunkSize = 100;
         const chunks = chunk(items, chunkSize);
