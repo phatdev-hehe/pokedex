@@ -1,5 +1,4 @@
-import { Image } from "@/(shared)/components";
-import logoSrc from "@/(shared)/logo.gif";
+import { Logo } from "@/(shared)/components/logo";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
@@ -13,9 +12,7 @@ const pageCounts = await Promise.all(
 
 export default ({ children }) => (
   <DocsLayout
-    nav={{
-      title: <Image width={40} src={logoSrc} />,
-    }}
+    nav={{ title: <Logo /> }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
