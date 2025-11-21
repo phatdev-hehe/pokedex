@@ -11,4 +11,5 @@
  * @typedef {import('pokedex-promise-v2').PokemonSpecies} PokemonSpecies
  * @typedef {import('pokedex-promise-v2').Stat} Stat
  * @typedef {import('pokedex-promise-v2').Type} Type
+ * @typedef {import('pokedex-promise-v2').Gender} Gender
  */

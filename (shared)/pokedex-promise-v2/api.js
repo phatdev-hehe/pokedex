@@ -54,6 +54,10 @@ const types = {
     getList: "getPokemonFormsList",
     getByName: "getPokemonFormByName",
   },
+  gender: {
+    getList: "getGendersList",
+    getByName: "getGenderByName",
+  },
 };
 
 const api = [
