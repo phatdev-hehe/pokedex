@@ -21,8 +21,6 @@ export default Page(({ context }) => {
   /** @type PokemonForm */
   const pokemonForm = context.data;
 
-  pokemonForm.names;
-
   return (
     <>
       {table(undefined, [
@@ -75,18 +73,22 @@ export default Page(({ context }) => {
         ],
       ])}
       {Page.tabs(
-        Page.tabs.sprites(
-          pokemonForm.sprites,
-          "A set of sprites used to depict this Pokémon form in the game."
-        ),
-        Page.tabs.types(
-          pokemonForm.types,
-          "A list of details showing types this Pokémon form has."
-        ),
-        Page.tabs.names(
-          pokemonForm.form_names,
-          "The form specific form name of this Pokémon form, or empty if the form does not have a specific name."
-        )
+        Page.tabs.sprites(pokemonForm.sprites, {
+          description:
+            "A set of sprites used to depict this Pokémon form in the game.",
+        }),
+        Page.tabs.names(pokemonForm.names, {
+          description:
+            "The form specific full name of this Pokémon form, or empty if the form does not have a specific name.",
+        }),
+        Page.tabs.types(pokemonForm.types, {
+          description: "A list of details showing types this Pokémon form has.",
+        }),
+        Page.tabs.names(pokemonForm.form_names, {
+          title: "form_names",
+          description:
+            "The form specific form name of this Pokémon form, or empty if the form does not have a specific name.",
+        })
       )}
     </>
   );

@@ -137,18 +137,17 @@ export default Page(({ context }) => {
             }
           ),
         ],
-        Page.tabs.effectChanges(
-          move.effect_changes,
-          "The list of previous effects this move has had across version groups of the games."
-        ),
-        Page.tabs.effectEntries(
-          move.effect_entries,
-          "The effect of this move listed in different languages."
-        ),
-        Page.tabs.flavorTextEntries(
-          move.flavor_text_entries,
-          "The flavor text of this move listed in different languages."
-        ),
+        Page.tabs.effectChanges(move.effect_changes, {
+          description:
+            "The list of previous effects this move has had across version groups of the games.",
+        }),
+        Page.tabs.effectEntries(move.effect_entries, {
+          description: "The effect of this move listed in different languages.",
+        }),
+        Page.tabs.flavorTextEntries(move.flavor_text_entries, {
+          description:
+            "The flavor text of this move listed in different languages.",
+        }),
         [
           "learned_by_pokemon",
           "List of Pokemon that can learn the move",

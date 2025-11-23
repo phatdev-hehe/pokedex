@@ -91,10 +91,10 @@ export default Page(async ({ context }) => {
         ],
       ])}
       {Page.tabs(
-        Page.tabs.sprites(
-          pokemon.sprites,
-          "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites"
-        ),
+        Page.tabs.sprites(pokemon.sprites, {
+          description:
+            "A set of sprites used to depict this Pokémon in the game. A visual representation of the various sprites can be found at PokeAPI/sprites",
+        }),
         [
           "stats",
           "A list of base stat values for this Pokémon.",
@@ -144,10 +144,9 @@ export default Page(async ({ context }) => {
             renderItems: ({ context }) => [<Audio src={context[1]} />],
           }),
         ],
-        Page.tabs.types(
-          pokemon.types,
-          "A list of details showing types this Pokémon has."
-        ),
+        Page.tabs.types(pokemon.types, {
+          description: "A list of details showing types this Pokémon has.",
+        }),
         [
           "location_area_encounters",
           "Encounter details pertaining to specific versions.",
@@ -207,10 +206,10 @@ export default Page(async ({ context }) => {
             ],
           }),
         ],
-        Page.tabs.gameIndices(
-          pokemon.game_indices,
-          "A list of game indices relevent to Pokémon item by generation."
-        ),
+        Page.tabs.gameIndices(pokemon.game_indices, {
+          description:
+            "A list of game indices relevent to Pokémon item by generation.",
+        }),
         [
           "forms",
           "A list of forms this Pokémon can take on.",

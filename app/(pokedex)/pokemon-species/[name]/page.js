@@ -134,14 +134,15 @@ export default Page(({ context }) => {
             renderFirstItem: ({ context }) => titleCase(context.name),
           }),
         ],
-        Page.tabs.flavorTextEntries(
-          pokemonSpecies.flavor_text_entries,
-          "A list of flavor text entries for this Pokémon species."
-        ),
-        Page.tabs.descriptions(
-          pokemonSpecies.form_descriptions,
-          "Descriptions of different forms Pokémon take on within the Pokémon species."
-        ),
+        Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries, {
+          description:
+            "A list of flavor text entries for this Pokémon species.",
+        }),
+        Page.tabs.descriptions(pokemonSpecies.form_descriptions, {
+          title: "form_descriptions",
+          description:
+            "Descriptions of different forms Pokémon take on within the Pokémon species.",
+        }),
         [
           "genera",
           "The genus of this Pokémon species listed in multiple languages.",

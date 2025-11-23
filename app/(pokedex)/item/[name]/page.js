@@ -55,10 +55,10 @@ export default Page(({ context }) => {
         ],
         Page.tabs.effectEntries(item.effect_entries),
         Page.tabs.flavorTextEntries(item.flavor_text_entries),
-        Page.tabs.gameIndices(
-          item.game_indices,
-          "A list of game indices relevent to this item by generation."
-        ),
+        Page.tabs.gameIndices(item.game_indices, {
+          description:
+            "A list of game indices relevent to this item by generation.",
+        }),
         [
           "held_by_pokemon",
           "A list of Pokémon that might be found in the wild holding this item.",

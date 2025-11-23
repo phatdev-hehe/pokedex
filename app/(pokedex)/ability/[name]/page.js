@@ -47,18 +47,18 @@ export default Page(({ context }) => {
             ],
           }),
         ],
-        Page.tabs.effectChanges(
-          ability.effect_changes,
-          "The list of previous effects this ability has had across version groups."
-        ),
-        Page.tabs.effectEntries(
-          ability.effect_entries,
-          "The effect of this ability listed in different languages."
-        ),
-        Page.tabs.flavorTextEntries(
-          ability.flavor_text_entries,
-          "The flavor text of this ability listed in different languages."
-        )
+        Page.tabs.effectChanges(ability.effect_changes, {
+          description:
+            "The list of previous effects this ability has had across version groups.",
+        }),
+        Page.tabs.effectEntries(ability.effect_entries, {
+          description:
+            "The effect of this ability listed in different languages.",
+        }),
+        Page.tabs.flavorTextEntries(ability.flavor_text_entries, {
+          description:
+            "The flavor text of this ability listed in different languages.",
+        })
       )}
     </>
   );
