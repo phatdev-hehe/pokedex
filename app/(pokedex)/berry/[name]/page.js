@@ -64,13 +64,11 @@ export default Page(({ context }) => {
       {Page.tabs([
         "flavors",
         "A list of references to each flavor a berry can have and the potency of each of those flavors in regard to this berry.",
-        table(
-          [undefined, "potency"],
-          berry.flavors.map((flavor) => [
-            titleCase(flavor.flavor.name),
-            flavor.potency,
-          ])
-        ),
+        table.pagination(berry.flavors, {
+          thead: [undefined, "potency"],
+          renderFirstItem: ({ context }) => titleCase(context.flavor.name),
+          renderItems: ({ context }) => [context.potency],
+        }),
       ])}
     </>
   );

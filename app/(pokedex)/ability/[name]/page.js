@@ -34,16 +34,18 @@ export default Page(({ context }) => {
         [
           "pokemon",
           "A list of Pokémon that could potentially have this ability.",
-          table(
-            [undefined, "slot", "hidden"],
-            ability.pokemon.map((abilityPokemon) => [
-              <Link href={`/pokemon/${abilityPokemon.pokemon.name}`}>
-                {titleCase(abilityPokemon.pokemon.name)}
-              </Link>,
-              abilityPokemon.slot,
-              <Checkbox checked={abilityPokemon.is_hidden} />,
-            ])
-          ),
+          table.pagination(ability.pokemon, {
+            thead: [undefined, "slot", "hidden"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokemon/${context.pokemon.name}`}>
+                {titleCase(context.pokemon.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [
+              context.slot,
+              <Checkbox checked={context.is_hidden} />,
+            ],
+          }),
         ],
         Page.tabs.effectChanges(
           ability.effect_changes,

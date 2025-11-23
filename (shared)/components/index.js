@@ -6,6 +6,7 @@ import Image1 from "next/image";
 import { Children, useId } from "react";
 import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
+import romanize from "romanize";
 
 export { default as Link } from "fumadocs-core/link";
 
@@ -61,59 +62,65 @@ export const table = Object.assign(
 
       return formatValue(tbody);
     },
-  }
-);
-
-export const tabs = Object.assign(
-  (items, tabs) => (
-    <Tabs updateAnchor items={items.map(titleCase)}>
-      {tabs.map((tab, index) => {
-        const item = items[index];
-        const id = kebabCase(removeAccents(item));
-
-        return (
-          <Tab
-            style={{ overflow: "auto" }}
-            id={id}
-            value={titleCase(item)}
-            key={id}
-          >
-            {tab}
-          </Tab>
-        );
-      })}
-    </Tabs>
-  ),
-  {
-    paginate: (items, renderItem = noop) => {
-      if (items !== null && items.length) {
+    pagination: (
+      items,
+      { thead, renderFirstItem = noop, renderItems = noop, showIndex = true }
+    ) => {
+      if (items && items.length) {
         const chunkSize = 100;
         const chunks = chunk(items, chunkSize);
 
         return tabs(
-          chunks.map((values, index) => `${index * chunkSize + values.length}`),
-          chunks.map((values, index1) =>
+          chunks.map((items, index) => `page ${romanize(++index)}`),
+          chunks.map((items, index1) =>
             table(
-              undefined,
-              values.map((value, index2) => [
-                <span>
-                  <span
-                    style={{
-                      color: "var(--color-fd-muted-foreground)",
-                    }}
-                  >
-                    {index1 * chunkSize + index2 + 1}
-                    {". "}
-                  </span>
-                  {renderItem(value)}
-                </span>,
-              ])
+              thead,
+              items.map((item, index2) => {
+                const context = { context: item };
+
+                return [
+                  <span>
+                    {showIndex && (
+                      <span
+                        style={{
+                          color: "var(--color-fd-muted-foreground)",
+                        }}
+                      >
+                        {index1 * chunkSize + index2 + 1}
+                        {". "}
+                      </span>
+                    )}
+                    {renderFirstItem(context)}
+                  </span>,
+                  ...(renderItems(context) ?? []),
+                ];
+              })
             )
           )
         );
       }
     },
   }
+);
+
+export const tabs = (items, tabs) => (
+  <Tabs updateAnchor items={items.map(titleCase)}>
+    {tabs.map((tab, index) => {
+      const item = items[index];
+      const id = kebabCase(removeAccents(item));
+
+      return (
+        <Tab
+          style={{ overflow: "auto" }}
+          id={id}
+          value={titleCase(item)}
+          key={id}
+        >
+          {tab}
+        </Tab>
+      );
+    })}
+  </Tabs>
 );
 
 export const Audio = (props) => <audio controls {...props} />;

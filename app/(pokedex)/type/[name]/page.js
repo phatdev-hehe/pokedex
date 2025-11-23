@@ -1,4 +1,4 @@
-import { highlighter, Link, table, tabs } from "@/(shared)/components";
+import { highlighter, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 
@@ -39,35 +39,43 @@ export default Page(({ context }) => {
         [
           "pokemon",
           "A list of details of Pokémon that have this type.",
-          table(
-            [undefined, "slot"],
-            type.pokemon.map((typePokemon) => [
-              <Link href={`/pokemon/${typePokemon.pokemon.name}`}>
-                {titleCase(typePokemon.pokemon.name)}
-              </Link>,
-              typePokemon.slot,
-            ])
-          ),
+          table.pagination(type.pokemon, {
+            thead: [undefined, "slot"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokemon/${context.pokemon.name}`}>
+                {titleCase(context.pokemon.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [context.slot],
+          }),
         ],
         [
           "moves",
           "A list of moves that have this type.",
-          tabs.paginate(type.moves, (move) => (
-            <Link href={`/move/${move.name}`}>{titleCase(move.name)}</Link>
-          )),
+          table.pagination(type.moves, {
+            renderFirstItem: ({ context }) => (
+              <Link href={`/move/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>
+            ),
+          }),
         ],
         [
           "damage_relations",
           "A detail of how effective this type is toward others and vice versa.",
-          table(
-            [undefined, "Type"],
-            Object.entries(type.damage_relations).map(([key, value]) => [
-              titleCase(key),
-              tabs.paginate(value, (type) => (
-                <Link href={`/type/${type.name}`}>{titleCase(type.name)}</Link>
-              )),
-            ])
-          ),
+          table.pagination(Object.entries(type.damage_relations), {
+            thead: [undefined, "Type"],
+            renderFirstItem: ({ context }) => titleCase(context[0]),
+            renderItems: ({ context }) => [
+              table.pagination(context[1], {
+                renderFirstItem: ({ context }) => (
+                  <Link href={`/type/${context.name}`}>
+                    {titleCase(context.name)}
+                  </Link>
+                ),
+              }),
+            ],
+          }),
         ],
         Page.tabs.gameIndices(type.game_indices)
       )}

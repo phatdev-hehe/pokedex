@@ -1,4 +1,4 @@
-import { highlighter, Link, table, tabs } from "@/(shared)/components";
+import { highlighter, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 
@@ -99,37 +99,42 @@ export default Page(({ context }) => {
         [
           "stat_changes",
           "A list of stats this moves effects and how much it effects them.",
-          table(
-            [undefined, "change"],
-            move.stat_changes.map((statChange) => [
-              <Link href={`/stat/${statChange.stat.name}`}>
-                {titleCase(statChange.stat.name)}
-              </Link>,
-              statChange.change,
-            ])
-          ),
+          table.pagination(move.stat_changes, {
+            thead: [undefined, "change"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/stat/${context.stat.name}`}>
+                {titleCase(context.stat.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [context.change],
+          }),
         ],
         [
           "contest_combos",
           "A detail of normal and super contest combos that require this move.",
-          table(
-            ["set", "detail"],
+          table.pagination(
             Object.entries(
               move?.contest_combos ?? [] // ??
-            ).map(([key, value]) => [
-              titleCase(key),
-              table(
-                [undefined, "move"],
-                Object.entries(value).map(([key, moves]) => [
-                  titleCase(key),
-                  tabs.paginate(moves, (move) => (
-                    <Link href={`/move/${move.name}`}>
-                      {titleCase(move.name)}
-                    </Link>
-                  )),
-                ])
-              ),
-            ])
+            ),
+            {
+              thead: ["set", "detail"],
+              renderFirstItem: ({ context }) => titleCase(context[0]),
+              renderItems: ({ context }) => [
+                table.pagination(Object.entries(context[1]), {
+                  thead: [undefined, "move"],
+                  renderFirstItem: ({ context }) => titleCase(context[0]),
+                  renderItems: ({ context }) => [
+                    table.pagination(context[1], {
+                      renderFirstItem: ({ context }) => (
+                        <Link href={`/move/${context.name}`}>
+                          {titleCase(context.name)}
+                        </Link>
+                      ),
+                    }),
+                  ],
+                }),
+              ],
+            }
           ),
         ],
         Page.tabs.effectChanges(
@@ -147,11 +152,13 @@ export default Page(({ context }) => {
         [
           "learned_by_pokemon",
           "List of Pokemon that can learn the move",
-          tabs.paginate(move.learned_by_pokemon, (pokemon) => (
-            <Link href={`/pokemon/${pokemon.name}`}>
-              {titleCase(pokemon.name)}
-            </Link>
-          )),
+          table.pagination(move.learned_by_pokemon, {
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokemon/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>
+            ),
+          }),
         ]
       )}
     </>

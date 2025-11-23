@@ -1,4 +1,4 @@
-import { Link, table, tabs } from "@/(shared)/components";
+import { Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 
@@ -16,11 +16,13 @@ export default Page(({ context }) => {
       {Page.tabs(Page.tabs.names(evolutionTrigger.names), [
         "pokemon_species",
         "A list of pokemon species that result from this evolution trigger.",
-        tabs.paginate(evolutionTrigger.pokemon_species, (pokemonSpecies) => (
-          <Link href={`/pokemon-species/${pokemonSpecies.name}`}>
-            {titleCase(pokemonSpecies.name)}
-          </Link>
-        )),
+        table.pagination(evolutionTrigger.pokemon_species, {
+          renderFirstItem: ({ context }) => (
+            <Link href={`/pokemon-species/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>
+          ),
+        }),
       ])}
     </>
   );

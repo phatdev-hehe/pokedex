@@ -1,4 +1,4 @@
-import { highlighter, Link, table, tabs } from "@/(shared)/components";
+import { highlighter, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 
@@ -49,9 +49,9 @@ export default Page(({ context }) => {
         [
           "attributes",
           "A list of attributes this item has.",
-          tabs.paginate(item.attributes, (itemAttribute) =>
-            titleCase(itemAttribute.name)
-          ),
+          table.pagination(item.attributes, {
+            renderFirstItem: ({ context }) => titleCase(context.name),
+          }),
         ],
         Page.tabs.effectEntries(item.effect_entries),
         Page.tabs.flavorTextEntries(item.flavor_text_entries),
@@ -62,21 +62,22 @@ export default Page(({ context }) => {
         [
           "held_by_pokemon",
           "A list of Pokémon that might be found in the wild holding this item.",
-          table(
-            [undefined, "version_details"],
-            item.held_by_pokemon.map((heldByPokemon) => [
-              <Link href={`/pokemon/${heldByPokemon.pokemon.name}`}>
-                {titleCase(heldByPokemon.pokemon.name)}
-              </Link>,
-              table(
-                [undefined, "rarity"],
-                heldByPokemon.version_details.map((rarityVersion) => [
-                  titleCase(rarityVersion.version.name),
-                  rarityVersion.rarity,
-                ])
-              ),
-            ])
-          ),
+          table.pagination(item.held_by_pokemon, {
+            thead: [undefined, "version_details"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokemon/${context.pokemon.name}`}>
+                {titleCase(context.pokemon.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [
+              table.pagination(context.version_details, {
+                thead: [undefined, "rarity"],
+                renderFirstItem: ({ context }) =>
+                  titleCase(context.version.name),
+                renderItems: ({ context }) => [context.rarity],
+              }),
+            ],
+          }),
         ]
       )}
     </>

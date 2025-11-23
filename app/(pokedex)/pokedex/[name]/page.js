@@ -1,13 +1,6 @@
-import {
-  Checkbox,
-  highlighter,
-  Link,
-  table,
-  tabs,
-} from "@/(shared)/components";
+import { Checkbox, highlighter, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
-import { getLanguageName } from "@/(shared)/utils/get-language-name";
 
 const Page = await Pokedex.createDetailPage("pokedex");
 
@@ -38,38 +31,26 @@ export default Page(({ context }) => {
       ])}
       {Page.tabs(
         Page.tabs.names(pokedex.names),
-        [
-          "descriptions",
-          "The description of this resource listed in different languages.",
-          table(
-            [undefined, "language"],
-            pokedex.descriptions.map((description) => [
-              description.description,
-              getLanguageName(description.language.name),
-            ])
-          ),
-        ],
+        Page.tabs.descriptions(pokedex.descriptions),
         [
           "pokemon_entries",
           "A list of Pokémon catalogued in this Pokédex and their indexes.",
-          table(
-            [undefined, "entry_number"],
-            pokedex.pokemon_entries.map((pokemonEntry) => [
-              <Link
-                href={`/pokemon-species/${pokemonEntry.pokemon_species.name}`}
-              >
-                {titleCase(pokemonEntry.pokemon_species.name)}
-              </Link>,
-              pokemonEntry.entry_number,
-            ])
-          ),
+          table.pagination(pokedex.pokemon_entries, {
+            thead: [undefined, "entry_number"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
+                {titleCase(context.pokemon_species.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [context.entry_number],
+          }),
         ],
         [
           "version_groups",
           "A list of version groups this Pokédex is relevant to.",
-          tabs.paginate(pokedex.version_groups, (versionGroup) =>
-            titleCase(versionGroup.name)
-          ),
+          table.pagination(pokedex.version_groups, {
+            renderFirstItem: ({ context }) => titleCase(context.name),
+          }),
         ]
       )}
     </>

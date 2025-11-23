@@ -1,4 +1,4 @@
-import { Link, table, tabs } from "@/(shared)/components";
+import { Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 
@@ -14,26 +14,26 @@ export default Page(({ context }) => {
     [
       "pokemon_species_details",
       "A list of Pokémon species that can be this gender and how likely it is that they will be.",
-      table(
-        [undefined, "rate"],
-        gender.pokemon_species_details.map((pokemonSpeciesDetail) => [
-          <Link
-            href={`/pokemon-species/${pokemonSpeciesDetail.pokemon_species.name}`}
-          >
-            {titleCase(pokemonSpeciesDetail.pokemon_species.name)}
-          </Link>,
-          pokemonSpeciesDetail.rate,
-        ])
-      ),
+      table.pagination(gender.pokemon_species_details, {
+        thead: [undefined, "rate"],
+        renderFirstItem: ({ context }) => (
+          <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
+            {titleCase(context.pokemon_species.name)}
+          </Link>
+        ),
+        renderItems: ({ context }) => [context.rate],
+      }),
     ],
     [
       "required_for_evolution",
       "A list of Pokémon species that required this gender in order for a Pokémon to evolve into them.",
-      tabs.paginate(gender.required_for_evolution, (pokemonSpecies) => (
-        <Link href={`/pokemon-species/${pokemonSpecies.name}`}>
-          {titleCase(pokemonSpecies.name)}
-        </Link>
-      )),
+      table.pagination(gender.required_for_evolution, {
+        renderFirstItem: ({ context }) => (
+          <Link href={`/pokemon-species/${context.name}`}>
+            {titleCase(context.name)}
+          </Link>
+        ),
+      }),
     ]
   );
 });

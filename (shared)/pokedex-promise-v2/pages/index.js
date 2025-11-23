@@ -1,4 +1,4 @@
-import { Link, tabs } from "@/(shared)/components";
+import { Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 import createDetailPage from "./create-detail-page";
@@ -15,9 +15,11 @@ export default {
     return Object.assign(
       () => (
         <Layout title={title}>
-          {tabs.paginate(names, (name) => (
-            <Link href={`/${apiType}/${name}`}>{titleCase(name)}</Link>
-          ))}
+          {table.pagination(names, {
+            renderFirstItem: ({ context }) => (
+              <Link href={`/${apiType}/${context}`}>{titleCase(context)}</Link>
+            ),
+          })}
         </Layout>
       ),
       {

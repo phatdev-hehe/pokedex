@@ -1,10 +1,4 @@
-import {
-  Checkbox,
-  highlighter,
-  Link,
-  table,
-  tabs,
-} from "@/(shared)/components";
+import { Checkbox, highlighter, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 import { getLanguageName } from "@/(shared)/utils/get-language-name";
@@ -120,74 +114,66 @@ export default Page(({ context }) => {
         [
           "varieties",
           "A list of the Pokémon that exist within this Pokémon species.",
-          table(
-            [undefined, "default"],
-            pokemonSpecies.varieties.map((variety) => [
-              <Link href={`/pokemon/${variety.pokemon.name}`}>
-                {titleCase(variety.pokemon.name)}
-              </Link>,
-              <Checkbox checked={variety.is_default} />,
-            ])
-          ),
+          table.pagination(pokemonSpecies.varieties, {
+            thead: [undefined, "default"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokemon/${context.pokemon.name}`}>
+                {titleCase(context.pokemon.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [
+              <Checkbox checked={context.is_default} />,
+            ],
+          }),
         ],
         Page.tabs.names(pokemonSpecies.names),
         [
           "egg_groups",
           "A list of egg groups this Pokémon species is a member of.",
-          tabs.paginate(pokemonSpecies.egg_groups, (eggGroups) =>
-            titleCase(eggGroups.name)
-          ),
+          table.pagination(pokemonSpecies.egg_groups, {
+            renderFirstItem: ({ context }) => titleCase(context.name),
+          }),
         ],
         Page.tabs.flavorTextEntries(
           pokemonSpecies.flavor_text_entries,
           "A list of flavor text entries for this Pokémon species."
         ),
-        [
-          "form_descriptions",
-          "Descriptions of different forms Pokémon take on within the Pokémon species.",
-          table(
-            [undefined, "language"],
-            pokemonSpecies.form_descriptions.map((description) => [
-              description.description,
-              getLanguageName(description.language.name),
-            ])
-          ),
-        ],
+        Page.tabs.descriptions(
+          pokemonSpecies.form_descriptions,
+          "Descriptions of different forms Pokémon take on within the Pokémon species."
+        ),
         [
           "genera",
           "The genus of this Pokémon species listed in multiple languages.",
-          table(
-            [undefined, "language"],
-            pokemonSpecies.genera.map((genus) => [
-              genus.genus,
-              getLanguageName(genus.language.name),
-            ])
-          ),
+          table.pagination(pokemonSpecies.genera, {
+            thead: [undefined, "language"],
+            renderFirstItem: ({ context }) => context.genus,
+            renderItems: ({ context }) => [
+              getLanguageName(context.language.name),
+            ],
+          }),
         ],
         [
           "pal_park_encounters",
           "A list of encounters that can be had with this Pokémon species in pal park.",
-          table(
-            ["area", "base_score", "rate"],
-            pokemonSpecies.pal_park_encounters.map((palParkEncounter) => [
-              titleCase(palParkEncounter.area.name),
-              palParkEncounter.base_score,
-              palParkEncounter.rate,
-            ])
-          ),
+          table.pagination(pokemonSpecies.pal_park_encounters, {
+            thead: ["area", "base_score", "rate"],
+            renderFirstItem: ({ context }) => titleCase(context.area.name),
+            renderItems: ({ context }) => [context.base_score, context.rate],
+          }),
         ],
         [
           "pokedex_numbers",
           "A list of Pokedexes and the indexes reserved within them for this Pokémon species.",
-          table(
-            ["pokedex", "entry_number"],
-            pokemonSpecies.pokedex_numbers.map((pokedexNumber) => [
-              <Link href={`/pokedex/${pokedexNumber.pokedex.name}`}>
-                {titleCase(pokedexNumber.pokedex.name)}
-              </Link>,
-              pokedexNumber.entry_number,
-            ])
-          ),
+          table.pagination(pokemonSpecies.pokedex_numbers, {
+            thead: [undefined, "entry_number"],
+            renderFirstItem: ({ context }) => (
+              <Link href={`/pokedex/${context.pokedex.name}`}>
+                {titleCase(context.pokedex.name)}
+              </Link>
+            ),
+            renderItems: ({ context }) => [context.entry_number],
+          }),
         ]
       )}
     </>

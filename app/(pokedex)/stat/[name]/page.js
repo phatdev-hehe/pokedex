@@ -1,4 +1,4 @@
-import { Checkbox, Link, table, tabs } from "@/(shared)/components";
+import { Checkbox, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils";
 
@@ -29,43 +29,45 @@ export default Page(({ context }) => {
         [
           "affecting_items",
           undefined,
-          tabs.paginate(stat.affecting_items, (affectingItem) => (
-            <Link href={`/item/${affectingItem.name}`}>
-              {titleCase(affectingItem.name)}
-            </Link>
-          )),
+          table.pagination(stat.affecting_items, {
+            renderFirstItem: ({ context }) => (
+              <Link href={`/item/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>
+            ),
+          }),
         ],
         [
           "affecting_moves",
           "A detail of moves which affect this stat positively or negatively.",
-          table(
-            ["set", undefined],
-            Object.entries(stat.affecting_moves).map(([key, value]) => [
-              titleCase(key),
-              table(
-                [undefined, "change"],
-                Object.values(value).map(({ change, move }) => [
-                  <Link href={`/move/${move.name}`}>
-                    {titleCase(move.name)}
-                  </Link>,
-                  change,
-                ])
-              ),
-            ])
-          ),
+          table.pagination(Object.entries(stat.affecting_moves), {
+            thead: ["set", undefined],
+            renderFirstItem: ({ context }) => titleCase(context[0]),
+            renderItems: ({ context }) => [
+              table.pagination(Object.values(context[1]), {
+                thead: [undefined, "change"],
+                renderFirstItem: ({ context }) => (
+                  <Link href={`/move/${context.move.name}`}>
+                    {titleCase(context.move.name)}
+                  </Link>
+                ),
+                renderItems: ({ context }) => [context.change],
+              }),
+            ],
+          }),
         ],
         [
           "affecting_natures",
           "A detail of natures which affect this stat positively or negatively.",
-          table(
-            ["set", undefined],
-            Object.entries(stat.affecting_natures).map(([key, value]) => [
-              titleCase(key),
-              tabs.paginate(Object.values(value), (item) => [
-                titleCase(item.name),
-              ]),
-            ])
-          ),
+          table.pagination(Object.entries(stat.affecting_natures), {
+            thead: ["set", undefined],
+            renderFirstItem: ({ context }) => titleCase(context[0]),
+            renderItems: ({ context }) => [
+              table.pagination(Object.values(context[1]), {
+                renderFirstItem: ({ context }) => [titleCase(context.name)],
+              }),
+            ],
+          }),
         ]
       )}
     </>

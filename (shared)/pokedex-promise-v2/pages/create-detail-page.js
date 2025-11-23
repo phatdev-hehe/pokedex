@@ -125,61 +125,63 @@ export default async (
           gameIndices: (game_indices, description) => [
             "game_indices",
             description,
-            table(
-              [undefined, "generation", "version"],
-              game_indices.map(({ game_index, version, generation }) => [
-                game_index,
-
+            table.pagination(game_indices, {
+              thead: [undefined, "generation", "version"],
+              renderFirstItem: ({ context }) => context.game_index,
+              renderItems: ({ context }) => [
                 // ??
-                titleCase(generation?.name),
-                titleCase(version?.name),
-              ])
-            ),
+                titleCase(context.generation?.name),
+                titleCase(context.version?.name),
+              ],
+              showIndex: false,
+            }),
           ],
           effectChanges: (effect_changes, description) => [
             "effect_changes",
             description,
-            table(
-              ["version_group", "effect_entries"],
-              effect_changes.map((effectChange) => [
-                titleCase(effectChange.version_group.name),
-                table(
-                  [undefined, "language"],
-                  effectChange.effect_entries.map((effect) => [
-                    effect.effect,
-                    getLanguageName(effect.language.name),
-                  ])
-                ),
-              ])
-            ),
+            table.pagination(effect_changes, {
+              thead: ["version_group", "effect_entries"],
+              renderFirstItem: ({ context }) =>
+                titleCase(context.version_group.name),
+              renderItems: ({ context }) => [
+                table.pagination(context.effect_entries, {
+                  thead: [undefined, "language"],
+                  renderFirstItem: ({ context }) => context.effect,
+                  renderItems: ({ context }) => [
+                    getLanguageName(context.language.name),
+                  ],
+                }),
+              ],
+            }),
           ],
           effectEntries: (effect_entries, description) => [
             "effect_entries",
             description,
-            table(
-              [undefined, "language"],
-              effect_entries.map((verboseEffect) => [
-                <div title={verboseEffect.effect}>
-                  {verboseEffect.short_effect}
-                </div>,
-                getLanguageName(verboseEffect.language.name),
-              ])
-            ),
+            table.pagination(effect_entries, {
+              thead: [undefined, "language"],
+              renderFirstItem: ({ context }) => (
+                <span title={context.effect}>{context.short_effect}</span>
+              ),
+              renderItems: ({ context }) => [
+                getLanguageName(context.language.name),
+              ],
+            }),
           ],
           flavorTextEntries: (flavor_text_entries, description) => [
             "flavor_text_entries",
             description,
-            table(
-              [undefined, "language", "version", "version_group"],
-              flavor_text_entries.map((flavorText) => [
-                flavorText.flavor_text ?? flavorText.text,
-                getLanguageName(flavorText.language.name),
+            table.pagination(flavor_text_entries, {
+              thead: [undefined, "language", "version", "version_group"],
+              renderFirstItem: ({ context }) =>
+                context.flavor_text ?? context.text,
+              renderItems: ({ context }) => [
+                getLanguageName(context.language.name),
 
                 // ??
-                titleCase(flavorText.version?.name),
-                titleCase(flavorText.version_group?.name),
-              ])
-            ),
+                titleCase(context.version?.name),
+                titleCase(context.version_group?.name),
+              ],
+            }),
           ],
           sprites: (sprites, description) => [
             "sprites",
@@ -191,26 +193,37 @@ export default async (
           names: (names, description) => [
             "names",
             description,
-            table(
-              [undefined, "language"],
-              names.map((name) => [
-                name.name,
-                getLanguageName(name.language.name),
-              ])
-            ),
+            table.pagination(names, {
+              thead: [undefined, "language"],
+              renderFirstItem: ({ context }) => context.name,
+              renderItems: ({ context }) => [
+                getLanguageName(context.language.name),
+              ],
+            }),
           ],
           types: (types, description) => [
             "types",
             description,
-            table(
-              [undefined, "slot"],
-              types.map((type) => [
-                <Link href={`/type/${type.type.name}`}>
-                  {titleCase(type.type.name)}
-                </Link>,
-                type.slot,
-              ])
-            ),
+            table.pagination(types, {
+              thead: [undefined, "slot"],
+              renderFirstItem: ({ context }) => (
+                <Link href={`/type/${context.type.name}`}>
+                  {titleCase(context.type.name)}
+                </Link>
+              ),
+              renderItems: ({ context }) => [context.slot],
+            }),
+          ],
+          descriptions: (descriptions, description) => [
+            "descriptions",
+            description,
+            table.pagination(descriptions, {
+              thead: [undefined, "language"],
+              renderFirstItem: ({ context }) => context.description,
+              renderItems: ({ context }) => [
+                getLanguageName(context.language.name),
+              ],
+            }),
           ],
         }
       ),
