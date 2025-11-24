@@ -45,13 +45,9 @@ export default Page(({ context }) => {
             renderItems: ({ context }) => [context.entry_number],
           }),
         ],
-        [
-          "version_groups",
-          "A list of version groups this Pokédex is relevant to.",
-          table.pagination(pokedex.version_groups, {
-            renderFirstItem: ({ context }) => titleCase(context.name),
-          }),
-        ]
+        Page.tabs.versionGroups(pokedex.version_groups, {
+          description: "A list of version groups this Pokédex is relevant to.",
+        })
       )}
     </>
   );

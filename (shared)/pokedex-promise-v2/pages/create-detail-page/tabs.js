@@ -100,5 +100,26 @@ export default Object.assign(
         renderItems: ({ context }) => [getLanguageName(context.language.name)],
       })
     ),
+    moves: defineTab("moves", ({ context }) =>
+      table.pagination(context, {
+        renderFirstItem: ({ context }) => (
+          <Link href={`/move/${context.name}`}>{titleCase(context.name)}</Link>
+        ),
+      })
+    ),
+    pokemonSpecies: defineTab("pokemon_species", ({ context }) =>
+      table.pagination(context, {
+        renderFirstItem: ({ context }) => (
+          <Link href={`/pokemon-species/${context.name}`}>
+            {titleCase(context.name)}
+          </Link>
+        ),
+      })
+    ),
+    versionGroups: defineTab("version_groups", ({ context }) =>
+      table.pagination(context, {
+        renderFirstItem: ({ context }) => titleCase(context.name),
+      })
+    ),
   }
 );

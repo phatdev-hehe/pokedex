@@ -58,6 +58,10 @@ const types = {
     getList: "getGendersList",
     getByName: "getGenderByName",
   },
+  generation: {
+    getList: "getGenerationsList",
+    getByName: "getGenerationByName",
+  },
 };
 
 const api = [

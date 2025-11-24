@@ -49,17 +49,9 @@ export default Page(({ context }) => {
             renderItems: ({ context }) => [context.slot],
           }),
         ],
-        [
-          "moves",
-          "A list of moves that have this type.",
-          table.pagination(type.moves, {
-            renderFirstItem: ({ context }) => (
-              <Link href={`/move/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>
-            ),
-          }),
-        ],
+        Page.tabs.moves(type.moves, {
+          description: "A list of moves that have this type.",
+        }),
         [
           "damage_relations",
           "A detail of how effective this type is toward others and vice versa.",
