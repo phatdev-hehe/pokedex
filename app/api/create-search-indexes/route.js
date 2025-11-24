@@ -1,5 +1,5 @@
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
-import { titleCase } from "@/(shared)/utils";
+import { titleCase } from "@/(shared)/utils/title-case";
 import { NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";

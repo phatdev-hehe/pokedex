@@ -1,4 +1,5 @@
-import { chunk, noop, titleCase } from "@/(shared)/utils";
+import { chunk, noop } from "@/(shared)/utils";
+import { titleCase } from "@/(shared)/utils/title-case";
 import { kebabCase } from "change-case";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";

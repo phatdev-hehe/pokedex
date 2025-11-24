@@ -1,6 +1,6 @@
 import { DescriptionList, Link, table, tabs } from "@/(shared)/components";
-import { titleCase } from "@/(shared)/utils";
 import { getLanguageName } from "@/(shared)/utils/get-language-name";
+import { titleCase } from "@/(shared)/utils/title-case";
 import { Fragment } from "react";
 import Avatar from "./avatar";
 

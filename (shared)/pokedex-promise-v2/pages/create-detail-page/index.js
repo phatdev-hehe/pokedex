@@ -1,5 +1,6 @@
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
-import { noop, titleCase } from "@/(shared)/utils";
+import { noop } from "@/(shared)/utils";
+import { titleCase } from "@/(shared)/utils/title-case";
 import Cycled from "cycled";
 import { Callout } from "fumadocs-ui/components/callout";
 import { notFound } from "next/navigation";

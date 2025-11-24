@@ -1,5 +1,6 @@
 import { Link } from "@/(shared)/components";
-import { noop, titleCase } from "@/(shared)/utils";
+import { noop } from "@/(shared)/utils";
+import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 
 const Meta = ({ title, date }) => {
