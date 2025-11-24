@@ -9,7 +9,7 @@ import { cache } from "react";
 
 const pokeAPI = new PokeAPI();
 
-const types = {
+const endpoints = {
   pokemon: {
     getList: "getPokemonsList",
     getByName: "getPokemonByName",
@@ -66,7 +66,7 @@ const types = {
 
 const api = [
   "getResource",
-  ...Object.values(types).flatMap(Object.values),
+  ...Object.values(endpoints).flatMap(Object.values),
 ].reduce((a, b) => {
   a[b] = cache(async (...args) => {
     if (process.env.NODE_ENV === "production") await delay(1000);
@@ -99,7 +99,10 @@ const api = [
   return a;
 }, {});
 
-export default Object.assign((...values) => api[types[values[0]][values[1]]], {
-  ...api,
-  types: Object.keys(types),
-});
+export default Object.assign(
+  (...values) => api[endpoints[values[0]][values[1]]],
+  {
+    ...api,
+    endpoints: Object.keys(endpoints),
+  }
+);
