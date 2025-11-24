@@ -9,13 +9,13 @@ export const GET = async () => {
   const data = JSON.stringify(
     (
       await Promise.all(
-        Pokedex.api.endpoints.map(async (apiEndpoint) => {
-          const data = await Pokedex.api(apiEndpoint, "getList")();
+        Pokedex.api.endpoints.map(async (endpoint) => {
+          const data = await Pokedex.api(endpoint, "getList")();
 
           return data.results.map((item) => ({
-            breadcrumbs: [titleCase(apiEndpoint)],
+            breadcrumbs: [titleCase(endpoint)],
             title: titleCase(item.name),
-            url: `/${apiEndpoint}/${item.name}`,
+            url: `/${endpoint}/${item.name}`,
           }));
         })
       )

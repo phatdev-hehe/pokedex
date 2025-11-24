@@ -4,17 +4,17 @@ import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
-const createNavigationSection = async (name, { options, apiTypes }) => ({
+const createNavigationSection = async (name, { options, apiEndpoints }) => ({
   type: "folder",
   name: titleCase(name),
   children: await Promise.all(
-    apiTypes.map(async (apiType) => ({
-      name: `${titleCase(apiType)} (${
+    apiEndpoints.map(async (apiEndpoint) => ({
+      name: `${titleCase(apiEndpoint)} (${
         (
-          await Pokedex.api(apiType, "getList")()
+          await Pokedex.api(apiEndpoint, "getList")()
         ).results.length
       })`,
-      url: `/${apiType}`,
+      url: `/${apiEndpoint}`,
     }))
   ),
   ...options,
@@ -31,9 +31,9 @@ export default async ({ children }) => (
           name: `${(
             await Promise.all(
               Pokedex.api.endpoints.map(
-                async (apiEndpoint) =>
+                async (endpoint) =>
                   (
-                    await Pokedex.api(apiEndpoint, "getList")()
+                    await Pokedex.api(endpoint, "getList")()
                   ).results.length
               )
             )
@@ -42,7 +42,7 @@ export default async ({ children }) => (
           children: await Promise.all([
             createNavigationSection("pokemon", {
               options: { defaultOpen: true },
-              apiTypes: [
+              apiEndpoints: [
                 "pokemon",
                 "ability",
                 "gender",
@@ -52,15 +52,15 @@ export default async ({ children }) => (
                 "type",
               ],
             }),
-            createNavigationSection("berries", { apiTypes: ["berry"] }),
+            createNavigationSection("berries", { apiEndpoints: ["berry"] }),
             createNavigationSection("evolution", {
-              apiTypes: ["evolution-trigger"],
+              apiEndpoints: ["evolution-trigger"],
             }),
             createNavigationSection("games", {
-              apiTypes: ["generation", "pokedex"],
+              apiEndpoints: ["generation", "pokedex"],
             }),
-            createNavigationSection("items", { apiTypes: ["item"] }),
-            createNavigationSection("moves", { apiTypes: ["move"] }),
+            createNavigationSection("items", { apiEndpoints: ["item"] }),
+            createNavigationSection("moves", { apiEndpoints: ["move"] }),
           ]),
         },
         {
