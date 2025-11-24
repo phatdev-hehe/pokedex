@@ -5,7 +5,7 @@ import createDetailPage from "./create-detail-page";
 import Layout from "./layout";
 
 export default {
-  createCollectionPage: async (apiType) => {
+  createListPage: async (apiType) => {
     const title = `${titleCase(`list of ${apiType}`)}(s)`;
 
     const names = (await Pokedex.api(apiType, "getList")()).results.map(
