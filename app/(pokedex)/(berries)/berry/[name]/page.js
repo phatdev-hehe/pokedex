@@ -2,7 +2,7 @@ import { highlighter, Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("berry");
+const Page = await Pokedex.createListPage("berry");
 
 export const { generateMetadata, generateStaticParams } = Page;
 
