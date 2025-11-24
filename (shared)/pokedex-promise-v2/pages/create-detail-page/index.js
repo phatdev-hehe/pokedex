@@ -16,7 +16,7 @@ export default async (
     (item) => item.name
   );
 
-  const staticNames = names.slice(0, limitStaticParams);
+  const staticParams = names.slice(0, limitStaticParams);
 
   const createTitle = (input) => {
     const title = titleCase(input);
@@ -87,7 +87,7 @@ export default async (
                 </span>
               }
             >
-              {staticNames.includes(name) || (
+              {staticParams.includes(name) || (
                 <Callout
                   type="warn"
                   title={`Static limit exceeded (${limitStaticParams})`}
@@ -105,7 +105,7 @@ export default async (
     },
     {
       tabs,
-      generateStaticParams: () => staticNames.map((name) => ({ name })),
+      generateStaticParams: () => staticParams.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
         const { name } = await params;
 
