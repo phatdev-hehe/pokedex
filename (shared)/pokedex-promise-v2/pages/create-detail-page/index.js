@@ -16,9 +16,9 @@ export default async (
     (item) => item.name
   );
 
-  const staticParams = names.slice(0, limitStaticParams);
+  const staticNames = names.slice(0, limitStaticParams);
 
-  const formatTitle = (input) => {
+  const createTitle = (input) => {
     const title = titleCase(input);
 
     return apiType ? `${title} (${titleCase(apiType)})` : title;
@@ -37,7 +37,7 @@ export default async (
           index: names.findIndex((name1) => name1 === name),
           data: await Pokedex.api(apiType, "getByName")(name),
           names,
-          title: formatTitle(name),
+          title: createTitle(name),
           cycled,
         };
 
@@ -87,7 +87,7 @@ export default async (
                 </span>
               }
             >
-              {staticParams.includes(name) || (
+              {staticNames.includes(name) || (
                 <Callout
                   type="warn"
                   title={`Static limit exceeded (${limitStaticParams})`}
@@ -105,12 +105,12 @@ export default async (
     },
     {
       tabs,
-      generateStaticParams: () => staticParams.map((name) => ({ name })),
+      generateStaticParams: () => staticNames.map((name) => ({ name })),
       generateMetadata: async ({ params }) => {
         const { name } = await params;
 
         return {
-          title: formatTitle(name),
+          title: createTitle(name),
         };
       },
     }
