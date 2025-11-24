@@ -30,7 +30,9 @@ export default Page(({ context }) => {
             "The generation this Pokémon species was introduced in.",
             "generation"
           ),
-          titleCase(pokemonSpecies.generation.name),
+          <Link href={`/generation/${pokemonSpecies.generation.name}`}>
+            {titleCase(pokemonSpecies.generation.name)}
+          </Link>,
         ],
         [
           highlighter("Whether or not this is a baby Pokémon.", "baby"),

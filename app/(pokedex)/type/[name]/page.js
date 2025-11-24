@@ -26,7 +26,9 @@ export default Page(({ context }) => {
             "The generation this type was introduced in.",
             "generation"
           ),
-          titleCase(type.generation.name),
+          <Link href={`/generation/${type.generation.name}`}>
+            {titleCase(type.generation.name)}
+          </Link>,
         ],
         [
           "The class of damage inflicted by this type.",

@@ -25,11 +25,16 @@ export default Object.assign(
       table.pagination(context, {
         thead: [undefined, "generation", "version"],
         renderFirstItem: ({ context }) => context.game_index,
-        renderItems: ({ context }) => [
-          // ??
-          titleCase(context.generation?.name),
-          titleCase(context.version?.name),
-        ],
+        renderItems: ({ context }) => {
+          const generation = context.generation?.name;
+
+          return [
+            <Link href={`/generation/${generation}`}>
+              {titleCase(generation)}
+            </Link>,
+            titleCase(context.version?.name),
+          ];
+        },
         showIndex: false,
       })
     ),

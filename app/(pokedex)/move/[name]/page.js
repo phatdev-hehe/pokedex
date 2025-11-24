@@ -41,7 +41,9 @@ export default Page(({ context }) => {
         ],
         [
           "The generation in which this move was introduced.",
-          titleCase(move.generation.name),
+          <Link href={`/generation/${move.generation.name}`}>
+            {titleCase(move.generation.name)}
+          </Link>,
         ],
         [
           "The base power of this move with a value of 0 if it does not have a base power.",

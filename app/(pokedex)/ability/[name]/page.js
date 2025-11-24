@@ -19,7 +19,9 @@ export default Page(({ context }) => {
             "The generation this ability originated in.",
             "generation"
           ),
-          titleCase(ability.generation.name),
+          <Link href={`/generation/${ability.generation.name}`}>
+            {titleCase(ability.generation.name)}
+          </Link>,
         ],
         [
           highlighter(
