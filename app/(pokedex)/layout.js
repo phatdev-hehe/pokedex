@@ -4,7 +4,7 @@ import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
-const createNavigationSection = async (name, { options, apiEndpoints }) => ({
+const createNavigationSection = async (name, ...apiEndpoints) => ({
   type: "folder",
   name: titleCase(name),
   children: await Promise.all(
@@ -17,17 +17,17 @@ const createNavigationSection = async (name, { options, apiEndpoints }) => ({
       url: `/${apiEndpoint}`,
     }))
   ),
-  ...options,
 });
 
 export default async ({ children }) => (
   <DocsLayout
+    themeSwitch={{ mode: "light-dark-system" }}
+    sidebar={{ defaultOpenLevel: 1 }}
     nav={{ title: <Logo /> }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
         {
-          defaultOpen: true,
           name: `${(
             await Promise.all(
               Pokedex.api.endpoints.map(
@@ -40,27 +40,21 @@ export default async ({ children }) => (
           ).reduce((a, b) => a + b, 0)} pages`,
           type: "folder",
           children: await Promise.all([
-            createNavigationSection("pokemon", {
-              options: { defaultOpen: true },
-              apiEndpoints: [
-                "pokemon",
-                "ability",
-                "gender",
-                "pokemon-form",
-                "pokemon-species",
-                "stat",
-                "type",
-              ],
-            }),
-            createNavigationSection("berries", { apiEndpoints: ["berry"] }),
-            createNavigationSection("evolution", {
-              apiEndpoints: ["evolution-trigger"],
-            }),
-            createNavigationSection("games", {
-              apiEndpoints: ["generation", "pokedex"],
-            }),
-            createNavigationSection("items", { apiEndpoints: ["item"] }),
-            createNavigationSection("moves", { apiEndpoints: ["move"] }),
+            createNavigationSection(
+              "pokemon",
+              "pokemon",
+              "ability",
+              "gender",
+              "pokemon-form",
+              "pokemon-species",
+              "stat",
+              "type"
+            ),
+            createNavigationSection("berries", "berry"),
+            createNavigationSection("evolution", "evolution-trigger"),
+            createNavigationSection("games", "generation", "pokedex"),
+            createNavigationSection("items", "item"),
+            createNavigationSection("moves", "move"),
           ]),
         },
         {
