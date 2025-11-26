@@ -1,6 +1,7 @@
 import { chunk, noop } from "@/(shared)/utils";
 import { titleCase } from "@/(shared)/utils/title-case";
 import { kebabCase } from "change-case";
+import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
@@ -118,7 +119,7 @@ export const tabs = (items, tabs) => (
           value={titleCase(item)}
           key={id}
         >
-          {tab}
+          {tab ?? <Callout title="No Content" />}
         </Tab>
       );
     })}

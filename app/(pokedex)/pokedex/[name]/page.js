@@ -34,7 +34,6 @@ export default Page(({ context }) => {
         Page.tabs.descriptions(pokedex.descriptions),
         [
           "pokemon_entries",
-          "A list of Pokémon catalogued in this Pokédex and their indexes.",
           table.pagination(pokedex.pokemon_entries, {
             thead: [undefined, "entry_number"],
             renderFirstItem: ({ context }) => (
@@ -45,9 +44,7 @@ export default Page(({ context }) => {
             renderItems: ({ context }) => [context.entry_number],
           }),
         ],
-        Page.tabs.versionGroups(pokedex.version_groups, {
-          description: "A list of version groups this Pokédex is relevant to.",
-        })
+        Page.tabs.versionGroups(pokedex.version_groups)
       )}
     </>
   );

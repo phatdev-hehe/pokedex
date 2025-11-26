@@ -26,7 +26,6 @@ export default Page(({ context }) => {
         Page.tabs.names(generation.names),
         [
           "abilities",
-          "A list of abilities that were introduced in this generation.",
           table.pagination(generation.abilities, {
             renderFirstItem: ({ context }) => (
               <Link href={`/ability/${context.name}`}>
@@ -35,17 +34,10 @@ export default Page(({ context }) => {
             ),
           }),
         ],
-        Page.tabs.moves(generation.moves, {
-          description:
-            "A list of moves that were introduced in this generation.",
-        }),
-        Page.tabs.pokemonSpecies(generation.pokemon_species, {
-          description:
-            "A list of Pokémon species that were introduced in this generation.",
-        }),
+        Page.tabs.moves(generation.moves),
+        Page.tabs.pokemonSpecies(generation.pokemon_species),
         [
           "types",
-          "A list of types that were introduced in this generation.",
           table.pagination(generation.types, {
             renderFirstItem: ({ context }) => (
               <Link href={`/type/${context.name}`}>
@@ -54,10 +46,7 @@ export default Page(({ context }) => {
             ),
           }),
         ],
-        Page.tabs.versionGroups(generation.version_groups, {
-          description:
-            "A list of version groups that were introduced in this generation.",
-        })
+        Page.tabs.versionGroups(generation.version_groups)
       )}
     </>
   );

@@ -77,7 +77,6 @@ export default Page(({ context }) => {
       {Page.tabs(
         [
           "meta",
-          "Metadata about this move",
           table(
             undefined,
             // ??
@@ -100,7 +99,6 @@ export default Page(({ context }) => {
         Page.tabs.names(move.names),
         [
           "stat_changes",
-          "A list of stats this moves effects and how much it effects them.",
           table.pagination(move.stat_changes, {
             thead: [undefined, "change"],
             renderFirstItem: ({ context }) => (
@@ -113,7 +111,6 @@ export default Page(({ context }) => {
         ],
         [
           "contest_combos",
-          "A detail of normal and super contest combos that require this move.",
           table.pagination(
             Object.entries(
               move?.contest_combos ?? [] // ??
@@ -139,20 +136,11 @@ export default Page(({ context }) => {
             }
           ),
         ],
-        Page.tabs.effectChanges(move.effect_changes, {
-          description:
-            "The list of previous effects this move has had across version groups of the games.",
-        }),
-        Page.tabs.effectEntries(move.effect_entries, {
-          description: "The effect of this move listed in different languages.",
-        }),
-        Page.tabs.flavorTextEntries(move.flavor_text_entries, {
-          description:
-            "The flavor text of this move listed in different languages.",
-        }),
+        Page.tabs.effectChanges(move.effect_changes),
+        Page.tabs.effectEntries(move.effect_entries),
+        Page.tabs.flavorTextEntries(move.flavor_text_entries),
         [
           "learned_by_pokemon",
-          "List of Pokemon that can learn the move",
           table.pagination(move.learned_by_pokemon, {
             renderFirstItem: ({ context }) => (
               <Link href={`/pokemon/${context.name}`}>

@@ -14,10 +14,7 @@ export default Page(({ context }) => {
       {table(undefined, [["Id", evolutionTrigger.id]])}
       {Page.tabs(
         Page.tabs.names(evolutionTrigger.names),
-        Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species, {
-          description:
-            "A list of pokemon species that result from this evolution trigger.",
-        })
+        Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species)
       )}
     </>
   );

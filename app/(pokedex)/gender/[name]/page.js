@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return Page.tabs(
     [
       "pokemon_species_details",
-      "A list of Pokémon species that can be this gender and how likely it is that they will be.",
       table.pagination(gender.pokemon_species_details, {
         thead: [undefined, "rate"],
         renderFirstItem: ({ context }) => (
@@ -26,7 +25,6 @@ export default Page(({ context }) => {
     ],
     [
       "required_for_evolution",
-      "A list of Pokémon species that required this gender in order for a Pokémon to evolve into them.",
       table.pagination(gender.required_for_evolution, {
         renderFirstItem: ({ context }) => (
           <Link href={`/pokemon-species/${context.name}`}>

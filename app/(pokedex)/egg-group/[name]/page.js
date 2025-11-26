@@ -14,10 +14,7 @@ export default Page(({ context }) => {
       {table(undefined, [["Id", eggGroup.id]])}
       {Page.tabs(
         Page.tabs.names(eggGroup.names),
-        Page.tabs.pokemonSpecies(eggGroup.pokemon_species, {
-          description:
-            "A list of all Pokémon species that are members of this egg group.",
-        })
+        Page.tabs.pokemonSpecies(eggGroup.pokemon_species)
       )}
     </>
   );

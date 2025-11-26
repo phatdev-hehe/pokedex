@@ -115,7 +115,6 @@ export default Page(({ context }) => {
       {Page.tabs(
         [
           "varieties",
-          "A list of the Pokémon that exist within this Pokémon species.",
           table.pagination(pokemonSpecies.varieties, {
             thead: [undefined, "default"],
             renderFirstItem: ({ context }) => (
@@ -131,7 +130,6 @@ export default Page(({ context }) => {
         Page.tabs.names(pokemonSpecies.names),
         [
           "egg_groups",
-          "A list of egg groups this Pokémon species is a member of.",
           table.pagination(pokemonSpecies.egg_groups, {
             renderFirstItem: ({ context }) => (
               <Link href={`/egg-group/${context.name}`}>
@@ -140,18 +138,13 @@ export default Page(({ context }) => {
             ),
           }),
         ],
-        Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries, {
-          description:
-            "A list of flavor text entries for this Pokémon species.",
-        }),
-        Page.tabs.descriptions(pokemonSpecies.form_descriptions, {
-          title: "form_descriptions",
-          description:
-            "Descriptions of different forms Pokémon take on within the Pokémon species.",
-        }),
+        Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries),
+        Page.tabs.descriptions(
+          pokemonSpecies.form_descriptions,
+          "form_descriptions"
+        ),
         [
           "genera",
-          "The genus of this Pokémon species listed in multiple languages.",
           table.pagination(pokemonSpecies.genera, {
             thead: [undefined, "language"],
             renderFirstItem: ({ context }) => context.genus,
@@ -162,7 +155,6 @@ export default Page(({ context }) => {
         ],
         [
           "pal_park_encounters",
-          "A list of encounters that can be had with this Pokémon species in pal park.",
           table.pagination(pokemonSpecies.pal_park_encounters, {
             thead: ["area", "base_score", "rate"],
             renderFirstItem: ({ context }) => titleCase(context.area.name),
@@ -171,7 +163,6 @@ export default Page(({ context }) => {
         ],
         [
           "pokedex_numbers",
-          "A list of Pokedexes and the indexes reserved within them for this Pokémon species.",
           table.pagination(pokemonSpecies.pokedex_numbers, {
             thead: [undefined, "entry_number"],
             renderFirstItem: ({ context }) => (

@@ -1,24 +1,18 @@
-import { DescriptionList, Link, table, tabs } from "@/(shared)/components";
+import { Link, table, tabs } from "@/(shared)/components";
 import { getLanguageName } from "@/(shared)/utils/get-language-name";
 import { titleCase } from "@/(shared)/utils/title-case";
-import { Fragment } from "react";
 import Avatar from "./avatar";
 
 const defineTab =
-  (defaultTitle, fn) =>
-  (context, { title = defaultTitle, description } = {}) =>
-    [title, description, fn({ context })];
+  (title, fn) =>
+  (context, as = title) =>
+    [as, fn({ context })];
 
 export default Object.assign(
   (...values) =>
     tabs(
-      values.map(([item]) => item),
-      values.map(([, description, content], key) => (
-        <Fragment key={key}>
-          {description && <DescriptionList>{description}</DescriptionList>}
-          {content}
-        </Fragment>
-      ))
+      values.map(([value]) => value),
+      values.map(([, value]) => value)
     ),
   {
     gameIndices: defineTab("game_indices", ({ context }) =>

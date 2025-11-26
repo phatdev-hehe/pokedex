@@ -40,7 +40,6 @@ export default Page(({ context }) => {
         Page.tabs.names(type.names),
         [
           "pokemon",
-          "A list of details of Pokémon that have this type.",
           table.pagination(type.pokemon, {
             thead: [undefined, "slot"],
             renderFirstItem: ({ context }) => (
@@ -51,12 +50,9 @@ export default Page(({ context }) => {
             renderItems: ({ context }) => [context.slot],
           }),
         ],
-        Page.tabs.moves(type.moves, {
-          description: "A list of moves that have this type.",
-        }),
+        Page.tabs.moves(type.moves),
         [
           "damage_relations",
-          "A detail of how effective this type is toward others and vice versa.",
           table.pagination(Object.entries(type.damage_relations), {
             thead: [undefined, "Type"],
             renderFirstItem: ({ context }) => titleCase(context[0]),

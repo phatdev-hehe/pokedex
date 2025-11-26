@@ -28,7 +28,6 @@ export default Page(({ context }) => {
         Page.tabs.names(stat.names),
         [
           "affecting_items",
-          undefined,
           table.pagination(stat.affecting_items, {
             renderFirstItem: ({ context }) => (
               <Link href={`/item/${context.name}`}>
@@ -39,7 +38,6 @@ export default Page(({ context }) => {
         ],
         [
           "affecting_moves",
-          "A detail of moves which affect this stat positively or negatively.",
           table.pagination(Object.entries(stat.affecting_moves), {
             thead: ["set", undefined],
             renderFirstItem: ({ context }) => titleCase(context[0]),
@@ -58,7 +56,6 @@ export default Page(({ context }) => {
         ],
         [
           "affecting_natures",
-          "A detail of natures which affect this stat positively or negatively.",
           table.pagination(Object.entries(stat.affecting_natures), {
             thead: ["set", undefined],
             renderFirstItem: ({ context }) => titleCase(context[0]),

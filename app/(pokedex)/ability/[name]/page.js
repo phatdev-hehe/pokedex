@@ -35,7 +35,6 @@ export default Page(({ context }) => {
         Page.tabs.names(ability.names),
         [
           "pokemon",
-          "A list of Pokémon that could potentially have this ability.",
           table.pagination(ability.pokemon, {
             thead: [undefined, "slot", "hidden"],
             renderFirstItem: ({ context }) => (
@@ -49,18 +48,9 @@ export default Page(({ context }) => {
             ],
           }),
         ],
-        Page.tabs.effectChanges(ability.effect_changes, {
-          description:
-            "The list of previous effects this ability has had across version groups.",
-        }),
-        Page.tabs.effectEntries(ability.effect_entries, {
-          description:
-            "The effect of this ability listed in different languages.",
-        }),
-        Page.tabs.flavorTextEntries(ability.flavor_text_entries, {
-          description:
-            "The flavor text of this ability listed in different languages.",
-        })
+        Page.tabs.effectChanges(ability.effect_changes),
+        Page.tabs.effectEntries(ability.effect_entries),
+        Page.tabs.flavorTextEntries(ability.flavor_text_entries)
       )}
     </>
   );

@@ -48,20 +48,15 @@ export default Page(({ context }) => {
         Page.tabs.names(item.names),
         [
           "attributes",
-          "A list of attributes this item has.",
           table.pagination(item.attributes, {
             renderFirstItem: ({ context }) => titleCase(context.name),
           }),
         ],
         Page.tabs.effectEntries(item.effect_entries),
         Page.tabs.flavorTextEntries(item.flavor_text_entries),
-        Page.tabs.gameIndices(item.game_indices, {
-          description:
-            "A list of game indices relevent to this item by generation.",
-        }),
+        Page.tabs.gameIndices(item.game_indices),
         [
           "held_by_pokemon",
-          "A list of Pokémon that might be found in the wild holding this item.",
           table.pagination(item.held_by_pokemon, {
             thead: [undefined, "version_details"],
             renderFirstItem: ({ context }) => (
