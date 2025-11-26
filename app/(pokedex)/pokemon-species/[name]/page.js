@@ -133,7 +133,11 @@ export default Page(({ context }) => {
           "egg_groups",
           "A list of egg groups this Pokémon species is a member of.",
           table.pagination(pokemonSpecies.egg_groups, {
-            renderFirstItem: ({ context }) => titleCase(context.name),
+            renderFirstItem: ({ context }) => (
+              <Link href={`/egg-group/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>
+            ),
           }),
         ],
         Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries, {

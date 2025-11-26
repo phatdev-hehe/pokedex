@@ -76,7 +76,7 @@ export default Object.assign(
       })
     ),
     sprites: defineTab("sprites", ({ context }) =>
-      table.fromObject(context, {
+      table.pagination.fromObject(context, {
         renderKey: titleCase,
         renderValue: (src) => <Avatar src={src} />,
       })

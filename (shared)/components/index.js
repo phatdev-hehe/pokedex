@@ -46,55 +46,62 @@ export const table = Object.assign(
       );
   },
   {
-    fromObject: (object, { renderKey, renderValue }) => {
-      if (isPlainObject(object))
-        return table.pagination(Object.entries(object), {
-          renderFirstItem: ({ context }) => renderKey(context[0]),
-          renderItems: ({ context }) => [
-            table.fromObject(context[1], { renderKey, renderValue }),
-          ],
-        });
+    pagination: Object.assign(
+      (
+        items,
+        { thead, renderFirstItem = noop, renderItems = noop, showIndex = true }
+      ) => {
+        if (items && items.length) {
+          const chunkSize = 100;
+          const chunks = chunk(items, chunkSize);
 
-      return renderValue(object);
-    },
-    pagination: (
-      items,
-      { thead, renderFirstItem = noop, renderItems = noop, showIndex = true }
-    ) => {
-      if (items && items.length) {
-        const chunkSize = 100;
-        const chunks = chunk(items, chunkSize);
+          return tabs(
+            chunks.map((items, index) => `page ${romanize(++index)}`),
+            chunks.map((items, index1) =>
+              table(
+                thead,
+                items.map((item, index2) => {
+                  const context = { context: item };
 
-        return tabs(
-          chunks.map((items, index) => `page ${romanize(++index)}`),
-          chunks.map((items, index1) =>
-            table(
-              thead,
-              items.map((item, index2) => {
-                const context = { context: item };
-
-                return [
-                  <span>
-                    {showIndex && (
-                      <span
-                        style={{
-                          color: "var(--color-fd-muted-foreground)",
-                        }}
-                      >
-                        {index1 * chunkSize + index2 + 1}
-                        {". "}
-                      </span>
-                    )}
-                    {renderFirstItem(context)}
-                  </span>,
-                  ...(renderItems(context) ?? []),
-                ];
-              })
+                  return [
+                    <span>
+                      {showIndex && (
+                        <span
+                          style={{
+                            color: "var(--color-fd-muted-foreground)",
+                          }}
+                        >
+                          {index1 * chunkSize + index2 + 1}
+                          {". "}
+                        </span>
+                      )}
+                      {renderFirstItem(context)}
+                    </span>,
+                    ...(renderItems(context) ?? []),
+                  ];
+                })
+              )
             )
-          )
-        );
+          );
+        }
+      },
+      {
+        fromObject: (object, { renderKey, renderValue }) => {
+          if (isPlainObject(object))
+            return table.pagination(Object.entries(object), {
+              renderFirstItem: ({ context }) => renderKey(context[0]),
+              renderItems: ({ context }) => [
+                table.pagination.fromObject(context[1], {
+                  renderKey,
+                  renderValue,
+                }),
+              ],
+            });
+
+          return renderValue(object);
+        },
       }
-    },
+    ),
   }
 );
 

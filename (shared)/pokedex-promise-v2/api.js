@@ -62,6 +62,10 @@ const endpoints = {
     getList: "getGenerationsList",
     getByName: "getGenerationByName",
   },
+  "egg-group": {
+    getList: "getEggGroupsList",
+    getByName: "getEggGroupByName",
+  },
 };
 
 const api = [
