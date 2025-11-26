@@ -3,7 +3,7 @@ import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { getLanguageName } from "@/(shared)/utils/get-language-name";
 import { titleCase } from "@/(shared)/utils/title-case";
 
-const Page = await Pokedex.createListPage("pokemon-species");
+const Page = await Pokedex.createDetailPage("pokemon-species");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

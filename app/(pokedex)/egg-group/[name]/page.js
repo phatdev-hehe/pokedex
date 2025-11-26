@@ -1,7 +1,7 @@
 import { table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 
-const Page = await Pokedex.createListPage("egg-group");
+const Page = await Pokedex.createDetailPage("egg-group");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

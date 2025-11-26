@@ -1,11 +1,11 @@
 import { Link, table } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
-import createListPage from "./create-detail-page";
+import createDetailPage from "./create-detail-page";
 import Layout from "./layout";
 
 export default {
-  createCollectionPage: async (apiGroup) => {
+  createListPage: async (apiGroup) => {
     const title = `${titleCase(`list of ${apiGroup}`)}(s)`;
 
     const names = (await Pokedex.api(apiGroup, "getList")()).results.map(
@@ -27,5 +27,5 @@ export default {
       }
     );
   },
-  createListPage,
+  createDetailPage,
 };

@@ -8,7 +8,7 @@ import {
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
 
-const Page = await Pokedex.createListPage("pokemon", {
+const Page = await Pokedex.createDetailPage("pokemon", {
   getAvatar: ({ context }) => {
     /** @type Pokemon */
     const pokemon = context.data;
