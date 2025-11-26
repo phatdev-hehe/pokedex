@@ -5,10 +5,10 @@ import createListPage from "./create-detail-page";
 import Layout from "./layout";
 
 export default {
-  createCollectionPage: async (apiEndpoint) => {
-    const title = `${titleCase(`list of ${apiEndpoint}`)}(s)`;
+  createCollectionPage: async (apiGroup) => {
+    const title = `${titleCase(`list of ${apiGroup}`)}(s)`;
 
-    const names = (await Pokedex.api(apiEndpoint, "getList")()).results.map(
+    const names = (await Pokedex.api(apiGroup, "getList")()).results.map(
       (item) => item.name
     );
 
@@ -17,9 +17,7 @@ export default {
         <Layout title={title}>
           {table.pagination(names, {
             renderFirstItem: ({ context }) => (
-              <Link href={`/${apiEndpoint}/${context}`}>
-                {titleCase(context)}
-              </Link>
+              <Link href={`/${apiGroup}/${context}`}>{titleCase(context)}</Link>
             ),
           })}
         </Layout>

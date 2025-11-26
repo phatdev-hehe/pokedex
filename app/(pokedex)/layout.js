@@ -4,17 +4,17 @@ import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
-const createNavigationSection = async (name, ...apiEndpoints) => ({
+const createNavigationSection = async (name, ...apiGroups) => ({
   type: "folder",
   name: titleCase(name),
   children: await Promise.all(
-    apiEndpoints.map(async (apiEndpoint) => ({
-      name: `${titleCase(apiEndpoint)} (${
+    apiGroups.map(async (apiGroup) => ({
+      name: `${titleCase(apiGroup)} (${
         (
-          await Pokedex.api(apiEndpoint, "getList")()
+          await Pokedex.api(apiGroup, "getList")()
         ).results.length
       })`,
-      url: `/${apiEndpoint}`,
+      url: `/${apiGroup}`,
     }))
   ),
 });
@@ -30,10 +30,10 @@ export default async ({ children }) => (
         {
           name: `${(
             await Promise.all(
-              Pokedex.api.endpoints.map(
-                async (endpoint) =>
+              Pokedex.api.groupNames.map(
+                async (groupName) =>
                   (
-                    await Pokedex.api(endpoint, "getList")()
+                    await Pokedex.api(groupName, "getList")()
                   ).results.length
               )
             )

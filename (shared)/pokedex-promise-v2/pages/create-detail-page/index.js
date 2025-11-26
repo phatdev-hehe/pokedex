@@ -9,10 +9,10 @@ import Avatar from "./avatar";
 import tabs from "./tabs";
 
 export default async (
-  apiEndpoint,
+  apiGroup,
   { getAvatar = noop, limitStaticParams = Infinity, getFavicon = noop } = {}
 ) => {
-  const names = (await Pokedex.api(apiEndpoint, "getList")()).results.map(
+  const names = (await Pokedex.api(apiGroup, "getList")()).results.map(
     (item) => item.name
   );
 
@@ -21,7 +21,7 @@ export default async (
   const createTitle = (input) => {
     const title = titleCase(input);
 
-    return apiEndpoint ? `${title} (${titleCase(apiEndpoint)})` : title;
+    return apiGroup ? `${title} (${titleCase(apiGroup)})` : title;
   };
 
   return Object.assign(
@@ -35,7 +35,7 @@ export default async (
 
         const context = {
           index: names.findIndex((name1) => name1 === name),
-          data: await Pokedex.api(apiEndpoint, "getByName")(name),
+          data: await Pokedex.api(apiGroup, "getByName")(name),
           names,
           title: createTitle(name),
           cycled,
@@ -73,8 +73,8 @@ export default async (
                   </span>
                 );
               }}
-              nextHref={`/${apiEndpoint}/${nextName}`}
-              previousHref={`/${apiEndpoint}/${previousName}`}
+              nextHref={`/${apiGroup}/${nextName}`}
+              previousHref={`/${apiGroup}/${previousName}`}
               nextTitle={nextName}
               previousTitle={previousName}
               top={5}
