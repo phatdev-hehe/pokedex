@@ -45,11 +45,6 @@ export default Page(async ({ context }) => {
     (statElement) => statElement.base_stat
   );
 
-  /** @type PokemonEncounter[] */
-  const pokemonLocationAreaEncounters = await Pokedex.api.getResource(
-    pokemon.location_area_encounters
-  );
-
   return (
     <>
       {table(undefined, [
@@ -150,41 +145,44 @@ export default Page(async ({ context }) => {
         [
           "location_area_encounters",
           "Encounter details pertaining to specific versions.",
-          table.pagination(pokemonLocationAreaEncounters, {
-            thead: [undefined, "version_details"],
-            renderFirstItem: ({ context }) =>
-              titleCase(context.location_area.name),
-            renderItems: ({ context }) => [
-              table.pagination(context.version_details, {
-                thead: [undefined, "max_chance", "encounter_details"],
-                renderFirstItem: ({ context }) =>
-                  titleCase(context.version.name),
-                renderItems: ({ context }) => [
-                  context.max_chance,
-                  table.pagination(context.encounter_details, {
-                    thead: [
-                      undefined,
-                      "chance",
-                      "min_level",
-                      "max_level",
-                      "condition_values",
-                    ],
-                    renderFirstItem: ({ context }) =>
-                      titleCase(context.method.name),
-                    renderItems: ({ context }) => [
-                      context.chance,
-                      context.min_level,
-                      context.max_level,
-                      table.pagination(context.condition_values, {
-                        renderFirstItem: ({ context }) =>
-                          titleCase(context.name),
-                      }),
-                    ],
-                  }),
-                ],
-              }),
-            ],
-          }),
+          table.pagination(
+            await Pokedex.api.getResource(pokemon.location_area_encounters),
+            {
+              thead: [undefined, "version_details"],
+              renderFirstItem: ({ context }) =>
+                titleCase(context.location_area.name),
+              renderItems: ({ context }) => [
+                table.pagination(context.version_details, {
+                  thead: [undefined, "max_chance", "encounter_details"],
+                  renderFirstItem: ({ context }) =>
+                    titleCase(context.version.name),
+                  renderItems: ({ context }) => [
+                    context.max_chance,
+                    table.pagination(context.encounter_details, {
+                      thead: [
+                        undefined,
+                        "chance",
+                        "min_level",
+                        "max_level",
+                        "condition_values",
+                      ],
+                      renderFirstItem: ({ context }) =>
+                        titleCase(context.method.name),
+                      renderItems: ({ context }) => [
+                        context.chance,
+                        context.min_level,
+                        context.max_level,
+                        table.pagination(context.condition_values, {
+                          renderFirstItem: ({ context }) =>
+                            titleCase(context.name),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
+            }
+          ),
         ],
         [
           "held_items",
