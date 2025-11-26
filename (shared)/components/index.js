@@ -46,22 +46,16 @@ export const table = Object.assign(
       );
   },
   {
-    fromObject: (
-      thead, // ??
-      tbody,
-      formatKey = JSON.stringify,
-      formatValue = JSON.stringify
-    ) => {
-      if (isPlainObject(tbody))
-        return table(
-          thead,
-          Object.entries(tbody).map(([key, value], index) => [
-            formatKey(key),
-            table.fromObject(thead, value, formatKey, formatValue),
-          ])
-        );
+    fromObject: (object, { renderKey, renderValue }) => {
+      if (isPlainObject(object))
+        return table.pagination(Object.entries(object), {
+          renderFirstItem: ({ context }) => renderKey(context[0]),
+          renderItems: ({ context }) => [
+            table.fromObject(context[1], { renderKey, renderValue }),
+          ],
+        });
 
-      return formatValue(tbody);
+      return renderValue(object);
     },
     pagination: (
       items,
