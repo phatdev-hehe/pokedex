@@ -4,22 +4,53 @@ import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
-const createNavigationSection = async (name, ...apiGroups) => ({
-  type: "folder",
-  name: titleCase(name),
-  children: await Promise.all(
-    apiGroups.map(async (apiGroup) => ({
-      name: `${titleCase(apiGroup)} (${
-        (
-          await Pokedex.api(apiGroup, "getList")()
-        ).results.length
-      })`,
-      url: `/${apiGroup}`,
+const createSidebar = async (object) => {
+  let pageCount = 0;
+
+  const folders = await Promise.all(
+    Object.entries(object).map(async ([value, values]) => ({
+      defaultOpen: value === "pokemon",
+      type: "folder",
+      name: titleCase(value),
+      children: await Promise.all(
+        values.map(async (value) => {
+          const { length } = (await Pokedex.api(value, "getList")()).results;
+
+          pageCount += length;
+
+          return {
+            name: `${titleCase(value)} (${length})`,
+            url: `/${value}`,
+          };
+        })
+      ),
     }))
-  ),
+  );
+
+  return { pageCount, folders };
+};
+
+const sidebar = await createSidebar({
+  pokemon: [
+    "pokemon",
+    "ability",
+    "gender",
+    "pokemon-form",
+    "pokemon-species",
+    "stat",
+    "type",
+    "egg-group",
+    "growth-rate",
+    "pokemon-shape",
+  ],
+  berries: ["berry"],
+  evolution: ["evolution-trigger"],
+  games: ["generation", "pokedex"],
+  items: ["item"],
+  moves: ["move"],
 });
 
-export default async ({ children }) => (
+export default ({ children }) => (
   <DocsLayout
     themeSwitch={{ mode: "light-dark-system" }}
     sidebar={{ defaultOpenLevel: 1 }}
@@ -28,37 +59,9 @@ export default async ({ children }) => (
     tree={{
       children: [
         {
-          name: `${(
-            await Promise.all(
-              Pokedex.api.groupNames.map(
-                async (groupName) =>
-                  (
-                    await Pokedex.api(groupName, "getList")()
-                  ).results.length
-              )
-            )
-          ).reduce((a, b) => a + b, 0)} pages`,
+          name: `${sidebar.pageCount} pages`,
           type: "folder",
-          children: await Promise.all([
-            createNavigationSection(
-              "pokemon",
-              "pokemon",
-              "ability",
-              "gender",
-              "pokemon-form",
-              "pokemon-species",
-              "stat",
-              "type",
-              "egg-group",
-              "growth-rate",
-              "pokemon-shape"
-            ),
-            createNavigationSection("berries", "berry"),
-            createNavigationSection("evolution", "evolution-trigger"),
-            createNavigationSection("games", "generation", "pokedex"),
-            createNavigationSection("items", "item"),
-            createNavigationSection("moves", "move"),
-          ]),
+          children: sidebar.folders,
         },
         {
           type: "folder",
