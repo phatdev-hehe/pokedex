@@ -14,12 +14,12 @@ const createSidebar = async (object) => {
       name: titleCase(value),
       children: await Promise.all(
         values.map(async (value) => {
-          const { length } = (await Pokedex.api(value, "getList")()).results;
+          const { count } = await Pokedex.api(value, "getList")();
 
-          pageCount += length;
+          pageCount += count;
 
           return {
-            name: `${titleCase(value)} (${length})`,
+            name: `${titleCase(value)} (${count})`,
             url: `/${value}`,
           };
         })
