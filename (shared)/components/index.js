@@ -10,8 +10,6 @@ import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
 
-export { default as Link } from "fumadocs-core/link";
-
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
     caseSensitive
