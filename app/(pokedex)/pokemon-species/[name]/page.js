@@ -1,4 +1,5 @@
-import { Checkbox, highlighter, Link, table } from "@/(shared)/components";
+import { Checkbox, highlighter, table } from "@/(shared)/components";
+import { Link } from "@/(shared)/components/link";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { getLanguageName } from "@/(shared)/utils/get-language-name";
 import { titleCase } from "@/(shared)/utils/title-case";

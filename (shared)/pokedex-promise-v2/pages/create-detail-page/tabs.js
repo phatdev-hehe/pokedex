@@ -1,4 +1,5 @@
-import { Link, table, tabs } from "@/(shared)/components";
+import { table, tabs } from "@/(shared)/components";
+import { Link } from "@/(shared)/components/link";
 import { getLanguageName } from "@/(shared)/utils/get-language-name";
 import { titleCase } from "@/(shared)/utils/title-case";
 import Avatar from "./avatar";
