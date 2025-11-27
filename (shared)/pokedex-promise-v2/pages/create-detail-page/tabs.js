@@ -1,6 +1,5 @@
 import { table, tabs } from "@/(shared)/components";
 import { Link } from "@/(shared)/components/link";
-import { getLanguageName } from "@/(shared)/utils/get-language-name";
 import { titleCase } from "@/(shared)/utils/title-case";
 import Avatar from "./avatar";
 
@@ -42,7 +41,7 @@ export default Object.assign(
             thead: [undefined, "language"],
             renderFirstItem: ({ context }) => context.effect,
             renderItems: ({ context }) => [
-              getLanguageName(context.language.name),
+              <Link.Language code={context.language.name} />,
             ],
           }),
         ],
@@ -54,7 +53,9 @@ export default Object.assign(
         renderFirstItem: ({ context }) => (
           <span title={context.effect}>{context.short_effect}</span>
         ),
-        renderItems: ({ context }) => [getLanguageName(context.language.name)],
+        renderItems: ({ context }) => [
+          <Link.Language code={context.language.name} />,
+        ],
       })
     ),
     flavorTextEntries: defineTab("flavor_text_entries", ({ context }) =>
@@ -62,7 +63,7 @@ export default Object.assign(
         thead: [undefined, "language", "version", "version_group"],
         renderFirstItem: ({ context }) => context.flavor_text ?? context.text,
         renderItems: ({ context }) => [
-          getLanguageName(context.language.name),
+          <Link.Language code={context.language.name} />,
 
           // ??
           titleCase(context.version?.name),
@@ -80,7 +81,9 @@ export default Object.assign(
       table.pagination(context, {
         thead: [undefined, "language"],
         renderFirstItem: ({ context }) => context.name,
-        renderItems: ({ context }) => [getLanguageName(context.language.name)],
+        renderItems: ({ context }) => [
+          <Link.Language code={context.language.name} />,
+        ],
       })
     ),
     types: defineTab("types", ({ context }) =>
@@ -98,7 +101,9 @@ export default Object.assign(
       table.pagination(context, {
         thead: [undefined, "language"],
         renderFirstItem: ({ context }) => context.description,
-        renderItems: ({ context }) => [getLanguageName(context.language.name)],
+        renderItems: ({ context }) => [
+          <Link.Language code={context.language.name} />,
+        ],
       })
     ),
     moves: defineTab("moves", ({ context }) =>

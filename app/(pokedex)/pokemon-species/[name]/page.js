@@ -1,7 +1,6 @@
 import { Checkbox, highlighter, table } from "@/(shared)/components";
 import { Link } from "@/(shared)/components/link";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
-import { getLanguageName } from "@/(shared)/utils/get-language-name";
 import { titleCase } from "@/(shared)/utils/title-case";
 
 const Page = await Pokedex.createDetailPage("pokemon-species");
@@ -154,7 +153,7 @@ export default Page(({ context }) => {
             thead: [undefined, "language"],
             renderFirstItem: ({ context }) => context.genus,
             renderItems: ({ context }) => [
-              getLanguageName(context.language.name),
+              <Link.Language code={context.language.name} />,
             ],
           }),
         ],
