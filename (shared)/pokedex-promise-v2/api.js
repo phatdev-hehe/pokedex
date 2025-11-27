@@ -70,6 +70,10 @@ const groups = {
     getList: "getGrowthRatesList",
     getByName: "getGrowthRateByName",
   },
+  "pokemon-shape": {
+    getList: "getPokemonShapesList",
+    getByName: "getPokemonShapeByName",
+  },
 };
 
 const api = [

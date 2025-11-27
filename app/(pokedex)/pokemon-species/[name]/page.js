@@ -111,7 +111,9 @@ export default Page(({ context }) => {
         ],
         [
           highlighter("The shape of this Pokémon for Pokédex search.", "shape"),
-          titleCase(pokemonSpecies.shape.name),
+          <Link href={`/pokemon-shape/${pokemonSpecies.shape.name}`}>
+            {titleCase(pokemonSpecies.shape.name)}
+          </Link>,
         ],
       ])}
       {Page.tabs(

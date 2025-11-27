@@ -50,7 +50,8 @@ export default async ({ children }) => (
               "stat",
               "type",
               "egg-group",
-              "growth-rate"
+              "growth-rate",
+              "pokemon-shape"
             ),
             createNavigationSection("berries", "berry"),
             createNavigationSection("evolution", "evolution-trigger"),
