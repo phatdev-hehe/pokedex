@@ -76,7 +76,9 @@ export default Page(({ context }) => {
         ],
         [
           "The rate at which this Pokémon species gains levels.",
-          titleCase(pokemonSpecies.growth_rate.name),
+          <Link href={`/growth-rate/${pokemonSpecies.growth_rate.name}`}>
+            {titleCase(pokemonSpecies.growth_rate.name)}
+          </Link>,
         ],
         [
           highlighter(

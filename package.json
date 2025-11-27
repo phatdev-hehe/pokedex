@@ -19,6 +19,7 @@
     "next": "^16.0.4",
     "pokedex-promise-v2": "^4.2.1",
     "react-highlight-words": "^0.21.0",
+    "react-katex": "^3.1.0",
     "remove-accents": "^0.5.0",
     "romanize": "^1.1.1",
     "server-only": "^0.0.1",

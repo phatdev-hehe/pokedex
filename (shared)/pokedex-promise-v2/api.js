@@ -66,6 +66,10 @@ const groups = {
     getList: "getEggGroupsList",
     getByName: "getEggGroupByName",
   },
+  "growth-rate": {
+    getList: "getGrowthRatesList",
+    getByName: "getGrowthRateByName",
+  },
 };
 
 const api = [
