@@ -57,11 +57,6 @@ export default ({ children }) => (
     themeSwitch={{ mode: "light-dark-system" }}
     sidebar={{
       defaultOpenLevel: 1,
-      banner: (
-        <Link href="https://pokeapi.statuspage.io/">
-          <img src="https://img.shields.io/badge/dynamic/json?label=status&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json" />
-        </Link>
-      ),
     }}
     nav={{ title: <Logo /> }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
@@ -91,6 +86,17 @@ export default ({ children }) => (
                 url: "/api/create-search-indexes",
               },
             ],
+        },
+        {
+          type: "separator",
+          name: (
+            <Link
+              style={{ position: "absolute", bottom: "1rem" }}
+              href="https://pokeapi.statuspage.io/"
+            >
+              <img src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json" />
+            </Link>
+          ),
         },
       ],
     }}
