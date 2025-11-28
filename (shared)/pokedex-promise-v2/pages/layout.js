@@ -1,4 +1,4 @@
-import { Link } from "@/(shared)/components/link";
+import { Link } from "@/(shared)/components";
 import { noop } from "@/(shared)/utils";
 import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";

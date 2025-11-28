@@ -1,4 +1,4 @@
-import { Link } from "@/(shared)/components/link";
+import { Link } from "@/(shared)/components";
 
 const names = new Intl.DisplayNames(["en"], { type: "language" });
 

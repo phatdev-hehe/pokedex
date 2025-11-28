@@ -1,4 +1,4 @@
-import { Link } from "@/(shared)/components/link";
+import { Link } from "@/(shared)/components";
 import { Logo } from "@/(shared)/components/logo";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
