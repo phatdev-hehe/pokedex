@@ -61,6 +61,9 @@ const groups = {
   language: {
     getList: "getLanguagesList",
   },
+  version: {
+    getList: "getVersionsList",
+  },
 };
 
 const api = [

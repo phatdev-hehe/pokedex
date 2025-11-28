@@ -16,4 +16,5 @@
  * @typedef {import('pokedex-promise-v2').Type} Type
  * @typedef {import('pokedex-promise-v2').PokemonShape} PokemonShape
  * @typedef {import('pokedex-promise-v2').Language} Language
+ * @typedef {import('pokedex-promise-v2').Version} Version
  */
