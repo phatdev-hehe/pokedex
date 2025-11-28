@@ -1,4 +1,4 @@
-import Link from "fumadocs-core/link";
+import { Link } from "@/(shared)/components/link";
 
 const names = new Intl.DisplayNames(["en"], { type: "language" });
 
