@@ -12,10 +12,8 @@ export default async (
   apiGroup,
   { getAvatar = noop, limitStaticParams = Infinity, getFavicon = noop } = {}
 ) => {
-  const names = (await Pokedex.api(apiGroup, "getList")()).results.map(
-    (item) => item.name
-  );
-
+  const { results: items } = await Pokedex.api(apiGroup, "getList")();
+  const names = items.map((item) => item.name);
   const staticParams = names.slice(0, limitStaticParams);
 
   const createTitle = (input) => {
@@ -33,9 +31,11 @@ export default async (
 
         if (!names.includes(name)) notFound();
 
+        const getCurrentItem = (item) => item.name === name;
+
         const context = {
-          index: names.findIndex((name1) => name1 === name),
-          data: await Pokedex.api(apiGroup, "getByName")(name),
+          index: items.findIndex(getCurrentItem),
+          data: await Pokedex.api.getResource(items.find(getCurrentItem).url),
           names,
           title: createTitle(name),
           cycled,
@@ -83,7 +83,7 @@ export default async (
                 <span>
                   {context.index + 1}
                   {" / "}
-                  {names.length}
+                  {items.length}
                 </span>
               }
             >

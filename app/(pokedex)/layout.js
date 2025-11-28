@@ -59,10 +59,7 @@ export default ({ children }) => (
       defaultOpenLevel: 1,
       banner: (
         <Link href="https://pokeapi.statuspage.io/">
-          <img
-            alt="Status"
-            src="https://img.shields.io/badge/dynamic/json?label=status&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
-          />
+          <img src="https://img.shields.io/badge/dynamic/json?label=status&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json" />
         </Link>
       ),
     }}

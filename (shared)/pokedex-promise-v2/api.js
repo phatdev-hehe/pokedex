@@ -12,71 +12,54 @@ const pokeAPI = new PokeAPI();
 const groups = {
   pokemon: {
     getList: "getPokemonsList",
-    getByName: "getPokemonByName",
   },
   berry: {
     getList: "getBerriesList",
-    getByName: "getBerryByName",
   },
   ability: {
     getList: "getAbilitiesList",
-    getByName: "getAbilityByName",
   },
   item: {
     getList: "getItemsList",
-    getByName: "getItemByName",
   },
   move: {
     getList: "getMovesList",
-    getByName: "getMoveByName",
   },
   pokedex: {
     getList: "getPokedexList",
-    getByName: "getPokedexByName",
   },
   "pokemon-species": {
     getList: "getPokemonSpeciesList",
-    getByName: "getPokemonSpeciesByName",
   },
   stat: {
     getList: "getStatsList",
-    getByName: "getStatByName",
   },
   type: {
     getList: "getTypesList",
-    getByName: "getTypeByName",
   },
   "evolution-trigger": {
     getList: "getEvolutionTriggersList",
-    getByName: "getEvolutionTriggerByName",
   },
   "pokemon-form": {
     getList: "getPokemonFormsList",
-    getByName: "getPokemonFormByName",
   },
   gender: {
     getList: "getGendersList",
-    getByName: "getGenderByName",
   },
   generation: {
     getList: "getGenerationsList",
-    getByName: "getGenerationByName",
   },
   "egg-group": {
     getList: "getEggGroupsList",
-    getByName: "getEggGroupByName",
   },
   "growth-rate": {
     getList: "getGrowthRatesList",
-    getByName: "getGrowthRateByName",
   },
   "pokemon-shape": {
     getList: "getPokemonShapesList",
-    getByName: "getPokemonShapeByName",
   },
   language: {
     getList: "getLanguagesList",
-    getByName: "getLanguageByName",
   },
 };
 
