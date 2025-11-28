@@ -153,7 +153,7 @@ export default Page(({ context }) => {
             thead: [undefined, "language"],
             renderFirstItem: ({ context }) => context.genus,
             renderItems: ({ context }) => [
-              <Link.Language code={context.language.name} />,
+              <Pokedex.LanguageLink code={context.language.name} />,
             ],
           }),
         ],

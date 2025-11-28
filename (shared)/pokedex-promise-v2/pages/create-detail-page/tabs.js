@@ -1,5 +1,6 @@
 import { table, tabs } from "@/(shared)/components";
 import { Link } from "@/(shared)/components/link";
+import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
 import Avatar from "./avatar";
 
@@ -41,7 +42,7 @@ export default Object.assign(
             thead: [undefined, "language"],
             renderFirstItem: ({ context }) => context.effect,
             renderItems: ({ context }) => [
-              <Link.Language code={context.language.name} />,
+              <Pokedex.LanguageLink code={context.language.name} />,
             ],
           }),
         ],
@@ -54,7 +55,7 @@ export default Object.assign(
           <span title={context.effect}>{context.short_effect}</span>
         ),
         renderItems: ({ context }) => [
-          <Link.Language code={context.language.name} />,
+          <Pokedex.LanguageLink code={context.language.name} />,
         ],
       })
     ),
@@ -63,7 +64,7 @@ export default Object.assign(
         thead: [undefined, "language", "version", "version_group"],
         renderFirstItem: ({ context }) => context.flavor_text ?? context.text,
         renderItems: ({ context }) => [
-          <Link.Language code={context.language.name} />,
+          <Pokedex.LanguageLink code={context.language.name} />,
 
           // ??
           titleCase(context.version?.name),
@@ -82,7 +83,7 @@ export default Object.assign(
         thead: [undefined, "language"],
         renderFirstItem: ({ context }) => context.name,
         renderItems: ({ context }) => [
-          <Link.Language code={context.language.name} />,
+          <Pokedex.LanguageLink code={context.language.name} />,
         ],
       })
     ),
@@ -102,7 +103,7 @@ export default Object.assign(
         thead: [undefined, "language"],
         renderFirstItem: ({ context }) => context.description,
         renderItems: ({ context }) => [
-          <Link.Language code={context.language.name} />,
+          <Pokedex.LanguageLink code={context.language.name} />,
         ],
       })
     ),

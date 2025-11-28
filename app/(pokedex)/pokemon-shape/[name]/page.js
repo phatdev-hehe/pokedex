@@ -1,5 +1,4 @@
 import { table } from "@/(shared)/components";
-import { Link } from "@/(shared)/components/link";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("pokemon-shape");
@@ -21,7 +20,7 @@ export default Page(({ context }) => {
             thead: [undefined, "language"],
             renderFirstItem: ({ context }) => context.awesome_name,
             renderItems: ({ context }) => [
-              <Link.Language code={context.language.name} />,
+              <Pokedex.LanguageLink code={context.language.name} />,
             ],
           }),
         ],
