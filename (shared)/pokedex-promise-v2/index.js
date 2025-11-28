@@ -1,4 +1,5 @@
 import api from "./api";
-import pages from "./pages";
+import LanguageLink from "./language-link";
+import pageBuilders from "./page-builders";
 
-export const Pokedex = { api, LanguageLink, ...pages };
+export const Pokedex = { api, LanguageLink, ...pageBuilders };
