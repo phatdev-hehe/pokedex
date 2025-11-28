@@ -1,3 +1,4 @@
+import { Link } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { noop } from "@/(shared)/utils";
 import { titleCase } from "@/(shared)/utils/title-case";
@@ -19,7 +20,7 @@ export default async (
   const createTitle = (input) => {
     const title = titleCase(input);
 
-    return apiGroup ? `${title} (${titleCase(apiGroup)})` : title;
+    return `${title} (${titleCase(apiGroup)})`;
   };
 
   return Object.assign(
@@ -56,34 +57,49 @@ export default async (
               src={getAvatar({ context })}
             />
             <Layout
-              renderTitle={() => {
-                const [a, b] = context.title.split(" (");
-
-                return (
-                  <span>
-                    {a}
-                    <span
-                      style={{
-                        color: "var(--color-fd-muted-foreground)",
-                      }}
-                    >
-                      {" ("}
-                      {b}
-                    </span>
+              renderTitle={() => (
+                <span>
+                  {titleCase(name)}
+                  <span
+                    style={{
+                      color: "var(--color-fd-muted-foreground)",
+                    }}
+                  >
+                    {" ("}
+                    {titleCase(apiGroup)}
+                    {")"}
                   </span>
-                );
-              }}
-              nextHref={`/${apiGroup}/${nextName}`}
-              previousHref={`/${apiGroup}/${previousName}`}
-              nextTitle={nextName}
-              previousTitle={previousName}
+                </span>
+              )}
               top={5}
               title={context.title}
-              description={
+              description1={
                 <span>
                   {context.index + 1}
                   {" / "}
                   {items.length}
+                </span>
+              }
+              description2={
+                <span
+                  style={{
+                    display: "flex",
+                    gap: ".5ch",
+                    alignSelf: "end",
+                  }}
+                >
+                  <Link
+                    title={titleCase(previousName)}
+                    href={`/${apiGroup}/${previousName}`}
+                  >
+                    Previous
+                  </Link>
+                  <Link
+                    title={titleCase(nextName)}
+                    href={`/${apiGroup}/${nextName}`}
+                  >
+                    Next
+                  </Link>
                 </span>
               }
             >

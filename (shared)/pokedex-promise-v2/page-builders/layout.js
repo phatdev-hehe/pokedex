@@ -1,6 +1,4 @@
-import { Link } from "@/(shared)/components";
 import { noop } from "@/(shared)/utils";
-import { titleCase } from "@/(shared)/utils/title-case";
 import { DocsBody, DocsDescription, DocsTitle } from "fumadocs-ui/page";
 
 const Meta = ({ title, date }) => {
@@ -23,13 +21,10 @@ const Meta = ({ title, date }) => {
 export default ({
   top = 0,
   title,
-  description,
+  description1,
   children,
-  nextHref,
-  previousHref,
-  nextTitle,
-  previousTitle,
   renderTitle = noop,
+  description2,
 }) => {
   const date = new Date();
 
@@ -62,7 +57,7 @@ export default ({
               fontSize: "medium",
             }}
           >
-            {description}
+            {description1}
             <span>
               Last updated on{" "}
               <time
@@ -73,24 +68,7 @@ export default ({
                 {date.toLocaleDateString()}
               </time>
             </span>
-            <span
-              style={{
-                display: "flex",
-                gap: ".5ch",
-                alignSelf: "end",
-              }}
-            >
-              {previousHref && (
-                <Link title={titleCase(previousTitle)} href={previousHref}>
-                  Previous
-                </Link>
-              )}
-              {nextHref && (
-                <Link title={titleCase(nextTitle)} href={nextHref}>
-                  Next
-                </Link>
-              )}
-            </span>
+            {description2}
           </DocsDescription>
         </div>
         <DocsBody>{children}</DocsBody>
