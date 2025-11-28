@@ -151,7 +151,7 @@ export const Checkbox = ({ checked, children }) => {
 export const Image = (props) => {
   const id = useId();
 
-  return <Image1 loading="eager" alt={id} {...props} />;
+  return <Image1 alt={id} {...props} />;
 };
 
 export const DescriptionList = ({ term, children }) => (

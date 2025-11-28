@@ -1,3 +1,4 @@
+import { Link } from "@/(shared)/components/link";
 import { Logo } from "@/(shared)/components/logo";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
@@ -48,12 +49,23 @@ const sidebar = await createSidebar({
   games: ["generation", "pokedex"],
   items: ["item"],
   moves: ["move"],
+  utility: ["language"],
 });
 
 export default ({ children }) => (
   <DocsLayout
     themeSwitch={{ mode: "light-dark-system" }}
-    sidebar={{ defaultOpenLevel: 1 }}
+    sidebar={{
+      defaultOpenLevel: 1,
+      banner: (
+        <Link href="https://pokeapi.statuspage.io/">
+          <img
+            alt="Status"
+            src="https://img.shields.io/badge/dynamic/json?label=status&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
+          />
+        </Link>
+      ),
+    }}
     nav={{ title: <Logo /> }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{

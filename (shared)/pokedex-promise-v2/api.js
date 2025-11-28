@@ -74,6 +74,10 @@ const groups = {
     getList: "getPokemonShapesList",
     getByName: "getPokemonShapeByName",
   },
+  language: {
+    getList: "getLanguagesList",
+    getByName: "getLanguageByName",
+  },
 };
 
 const api = [

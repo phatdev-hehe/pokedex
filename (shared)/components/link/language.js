@@ -9,7 +9,5 @@ export default ({ code }) => {
         {names.of(code)}
       </Link>
     );
-  } catch {
-    return code;
-  }
+  } catch {}
 };
