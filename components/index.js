@@ -1,6 +1,7 @@
 import { chunk, noop } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
@@ -12,8 +13,15 @@ import romanize from "romanize";
 
 export { default as Link } from "fumadocs-core/link";
 
+const formatId = (value) => kebabCase(removeAccents(value));
+
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
+    highlightStyle={{
+      backgroundColor: "var(--color-fd-accent)",
+      color: "var(--color-fd-accent-foreground)",
+      letterSpacing: "-0.05ch",
+    }}
     caseSensitive
     highlightTag="code"
     textToHighlight={textToHighlight}
@@ -108,7 +116,7 @@ export const table = Object.assign(
 export const tabs = (...tabs) => (
   <Tabs updateAnchor items={tabs.map((tab) => titleCase(tab[0]))}>
     {tabs.map((tab) => {
-      const id = kebabCase(removeAccents(tab[0]));
+      const id = formatId(tab[0]);
 
       return (
         <Tab
@@ -122,6 +130,20 @@ export const tabs = (...tabs) => (
       );
     })}
   </Tabs>
+);
+
+export const accordions = (...accordions) => (
+  <Accordions>
+    {accordions.map((accordion) => {
+      const id = formatId(accordion[0]);
+
+      return (
+        <Accordion key={id} id={id} title={titleCase(accordion[0])}>
+          {accordion[1]}
+        </Accordion>
+      );
+    })}
+  </Accordions>
 );
 
 export const ul = (...values) => (

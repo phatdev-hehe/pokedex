@@ -32,12 +32,6 @@
     }
   }
 
-  code {
-    background-color: var(--color-fd-accent);
-    color: var(--color-fd-accent-foreground);
-    letter-spacing: -0.05ch;
-  }
-
   input {
     accent-color: var(--tw-prose-links);
   }
