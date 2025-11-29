@@ -3,15 +3,15 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-const CurrentPath1 = () => {
+const CurrentPathname1 = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   return searchParams.toString() ? `${pathname}?${searchParams}` : pathname;
 };
 
-export const CurrentPath = () => (
+export const CurrentPathname = () => (
   <Suspense>
-    <CurrentPath1 />
+    <CurrentPathname1 />
   </Suspense>
 );
