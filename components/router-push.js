@@ -11,4 +11,6 @@ export const RouterPush = ({ href }) => {
   });
 
   useEffect(effectEvent, [href]);
+
+  return href;
 };

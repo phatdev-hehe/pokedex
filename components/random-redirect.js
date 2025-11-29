@@ -6,20 +6,17 @@ import { randomItem } from "@/utils";
 import { Callout } from "fumadocs-ui/components/callout";
 import { useEffect, useState } from "react";
 
-export const RandomRedirect = ({ items }) => {
+export const RandomRedirect = ({ links }) => {
   const [state, setState] = useState();
 
   useEffect(() => {
-    setState(randomItem(items));
+    setState(randomItem(links));
   }, []);
 
   return (
-    <>
+    <Callout type="warn" title="Redirecting to">
       <RouterPush href={state} />
-      <Callout type="warn" title="Redirecting to">
-        {state}
-        <RouterActions />
-      </Callout>
-    </>
+      <RouterActions />
+    </Callout>
   );
 };
