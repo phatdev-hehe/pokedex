@@ -5,7 +5,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import Image1 from "next/image";
-import { Children, useId } from "react";
+import { useId } from "react";
 import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
@@ -132,7 +132,7 @@ export const ul = (...values) => (
   </ul>
 );
 
-export const Audio = (props) => <audio controls {...props} />;
+export const audio = (src) => <audio controls src={src} />;
 
 export const Checkbox = ({ checked, children }) => {
   const id = useId();
@@ -162,13 +162,16 @@ export const Image = (props) => {
   return <Image1 alt={id} {...props} />;
 };
 
-export const DescriptionList = ({ term, children }) => (
+export const descriptionList = (term, ...descriptions) => (
   <dl>
     <dt>{titleCase(term)}</dt>
     <dd>
-      {Children.map(children, (children) => (
-        <blockquote style={{ fontWeight: "initial", fontStyle: "initial" }}>
-          {children}
+      {descriptions.map((description, index) => (
+        <blockquote
+          key={index}
+          style={{ fontWeight: "initial", fontStyle: "initial" }}
+        >
+          {description}
         </blockquote>
       ))}
     </dd>

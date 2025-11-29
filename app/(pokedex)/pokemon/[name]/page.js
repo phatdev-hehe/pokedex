@@ -1,4 +1,4 @@
-import { Audio, Checkbox, highlighter, Link, table, tabs } from "@/components";
+import { audio, Checkbox, highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -124,7 +124,7 @@ export default Page(async ({ context }) => {
           "cries",
           table.pagination(Object.entries(pokemon.cries), {
             renderFirstItem: ({ context }) => titleCase(context[0]),
-            renderItems: ({ context }) => [<Audio src={context[1]} />],
+            renderItems: ({ context }) => [audio(context[1])],
           }),
         ],
         Page.tabs.types(pokemon.types),
