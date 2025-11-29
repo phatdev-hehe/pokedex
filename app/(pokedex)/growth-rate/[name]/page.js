@@ -1,6 +1,6 @@
-import { highlighter, table, tabs } from "@/(shared)/components";
-import { math } from "@/(shared)/components/katex";
-import { Pokedex } from "@/(shared)/pokedex-promise-v2";
+import { highlighter, table, tabs } from "@/components";
+import { math } from "@/components/katex";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("growth-rate");
 

@@ -1,6 +1,6 @@
-import { highlighter, Link, table, tabs } from "@/(shared)/components";
-import { Pokedex } from "@/(shared)/pokedex-promise-v2";
-import { titleCase } from "@/(shared)/utils/title-case";
+import { highlighter, Link, table, tabs } from "@/components";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.createDetailPage("type", {
   getAvatar: ({ context }) => {

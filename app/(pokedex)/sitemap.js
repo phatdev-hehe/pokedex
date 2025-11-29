@@ -1,4 +1,4 @@
-import { Pokedex } from "@/(shared)/pokedex-promise-v2";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const withDefaultProps = (values) => ({
   lastModified: new Date(),

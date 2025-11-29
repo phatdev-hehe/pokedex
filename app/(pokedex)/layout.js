@@ -1,7 +1,7 @@
-import { Link } from "@/(shared)/components";
-import { Logo } from "@/(shared)/components/logo";
-import { Pokedex } from "@/(shared)/pokedex-promise-v2";
-import { titleCase } from "@/(shared)/utils/title-case";
+import { Link } from "@/components";
+import { Logo } from "@/components/logo";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 

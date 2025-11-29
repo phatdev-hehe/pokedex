@@ -1,5 +1,5 @@
-import { chunk, noop } from "@/(shared)/utils";
-import { titleCase } from "@/(shared)/utils/title-case";
+import { chunk, noop } from "@/utils";
+import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";

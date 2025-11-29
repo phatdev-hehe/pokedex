@@ -1,5 +1,5 @@
-import { Checkbox, highlighter, table, tabs } from "@/(shared)/components";
-import { Pokedex } from "@/(shared)/pokedex-promise-v2";
+import { Checkbox, highlighter, table, tabs } from "@/components";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("language");
 
