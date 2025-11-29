@@ -4,6 +4,7 @@ import {
   highlighter,
   Link,
   table,
+  tabs,
 } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
@@ -85,7 +86,7 @@ export default Page(async ({ context }) => {
           pokemon.weight,
         ],
       ])}
-      {Page.tabs(
+      {tabs(
         Page.tabs.sprites(pokemon.sprites),
         [
           "stats",

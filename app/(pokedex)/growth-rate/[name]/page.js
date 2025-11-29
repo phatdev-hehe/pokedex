@@ -1,4 +1,4 @@
-import { highlighter, table } from "@/(shared)/components";
+import { highlighter, table, tabs } from "@/(shared)/components";
 import { math } from "@/(shared)/components/katex";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 
@@ -22,7 +22,7 @@ export default Page(({ context }) => {
           math(String.raw`${growthRate.formula}`),
         ],
       ])}
-      {Page.tabs(
+      {tabs(
         Page.tabs.descriptions(growthRate.descriptions),
         [
           "levels",

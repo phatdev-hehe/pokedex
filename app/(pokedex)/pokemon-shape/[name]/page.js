@@ -1,4 +1,4 @@
-import { table } from "@/(shared)/components";
+import { table, tabs } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("pokemon-shape");
@@ -12,7 +12,7 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [["Id", pokemonShape.id]])}
-      {Page.tabs(
+      {tabs(
         Page.tabs.names(pokemonShape.names),
         [
           "awesome_names",

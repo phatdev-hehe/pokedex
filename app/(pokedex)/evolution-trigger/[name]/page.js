@@ -1,4 +1,4 @@
-import { table } from "@/(shared)/components";
+import { table, tabs } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("evolution-trigger");
@@ -12,7 +12,7 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [["Id", evolutionTrigger.id]])}
-      {Page.tabs(
+      {tabs(
         Page.tabs.names(evolutionTrigger.names),
         Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species)
       )}

@@ -54,11 +54,10 @@ export const table = Object.assign(
       ) => {
         if (items && items.length) {
           const chunkSize = 100;
-          const chunks = chunk(items, chunkSize);
 
           return tabs(
-            chunks.map((items, index) => `page ${romanize(++index)}`),
-            chunks.map((items, index1) =>
+            ...chunk(items, chunkSize).map((items, index1) => [
+              `page ${romanize(index1 + 1)}`,
               table(
                 thead,
                 items.map((item, index2) => {
@@ -81,8 +80,8 @@ export const table = Object.assign(
                     ...(renderItems(context) ?? []),
                   ];
                 })
-              )
-            )
+              ),
+            ])
           );
         }
       },
@@ -106,20 +105,19 @@ export const table = Object.assign(
   }
 );
 
-export const tabs = (items, tabs) => (
-  <Tabs updateAnchor items={items.map(titleCase)}>
-    {tabs.map((tab, index) => {
-      const item = items[index];
-      const id = kebabCase(removeAccents(item));
+export const tabs = (...tabs) => (
+  <Tabs updateAnchor items={tabs.map((tab) => titleCase(tab[0]))}>
+    {tabs.map((tab) => {
+      const id = kebabCase(removeAccents(tab[0]));
 
       return (
         <Tab
           style={{ overflow: "auto" }}
           id={id}
-          value={titleCase(item)}
+          value={titleCase(tab[0])}
           key={id}
         >
-          {tab ?? <Callout title="No Content" />}
+          {tab[1] ?? <Callout title="No Content" />}
         </Tab>
       );
     })}

@@ -1,4 +1,4 @@
-import { highlighter, table } from "@/(shared)/components";
+import { highlighter, table, tabs } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
 
@@ -22,7 +22,7 @@ export default Page(({ context }) => {
           titleCase(version.version_group.name),
         ],
       ])}
-      {Page.tabs(Page.tabs.names(version.names))}
+      {tabs(Page.tabs.names(version.names))}
     </>
   );
 });

@@ -1,4 +1,4 @@
-import { highlighter, Link, table } from "@/(shared)/components";
+import { highlighter, Link, table, tabs } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
 
@@ -44,7 +44,7 @@ export default Page(({ context }) => {
           item.fling_power,
         ],
       ])}
-      {Page.tabs(
+      {tabs(
         Page.tabs.names(item.names),
         [
           "attributes",

@@ -1,4 +1,4 @@
-import { Link, table } from "@/(shared)/components";
+import { Link, table, tabs } from "@/(shared)/components";
 import { Pokedex } from "@/(shared)/pokedex-promise-v2";
 import { titleCase } from "@/(shared)/utils/title-case";
 
@@ -10,7 +10,7 @@ export default Page(({ context }) => {
   /** @type Gender */
   const gender = context.data;
 
-  return Page.tabs(
+  return tabs(
     [
       "pokemon_species_details",
       table.pagination(gender.pokemon_species_details, {
