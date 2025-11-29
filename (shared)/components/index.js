@@ -124,6 +124,14 @@ export const tabs = (...tabs) => (
   </Tabs>
 );
 
+export const ul = (...values) => (
+  <ul>
+    {values.map((value, index) => (
+      <li key={index}>{value}</li>
+    ))}
+  </ul>
+);
+
 export const Audio = (props) => <audio controls {...props} />;
 
 export const Checkbox = ({ checked, children }) => {

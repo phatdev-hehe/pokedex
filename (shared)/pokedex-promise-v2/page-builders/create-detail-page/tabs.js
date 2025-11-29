@@ -4,9 +4,9 @@ import { titleCase } from "@/(shared)/utils/title-case";
 import Avatar from "./avatar";
 
 const defineTab =
-  (title, fn) =>
-  (context, as = title) =>
-    [as, fn({ context })];
+  (trigger, render) =>
+  (context, as = trigger) =>
+    [as, render({ context })];
 
 export default {
   gameIndices: defineTab("game_indices", ({ context }) =>
