@@ -1,4 +1,4 @@
-import { highlighter, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -19,7 +19,9 @@ export default Page(({ context }) => {
             "The version group this version belongs to.",
             "version group"
           ),
-          titleCase(version.version_group.name),
+          <Link href={`/version-group/${version.version_group.name}`}>
+            {titleCase(version.version_group.name)}
+          </Link>,
         ],
       ])}
       {tabs(Page.tabs.names(version.names))}
