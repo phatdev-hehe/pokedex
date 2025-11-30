@@ -139,8 +139,11 @@ export default Page(async ({ context }) => {
               renderItems: ({ context }) => [
                 table.pagination(context.version_details, {
                   thead: [undefined, "max_chance", "encounter_details"],
-                  renderFirstItem: ({ context }) =>
-                    titleCase(context.version.name),
+                  renderFirstItem: ({ context }) => (
+                    <Link href={`/version/${context.version.name}`}>
+                      {titleCase(context.version.name)}
+                    </Link>
+                  ),
                   renderItems: ({ context }) => [
                     context.max_chance,
                     table.pagination(context.encounter_details, {
@@ -181,8 +184,11 @@ export default Page(async ({ context }) => {
             renderItems: ({ context }) => [
               table.pagination(context.version_details, {
                 thead: [undefined, "rarity"],
-                renderFirstItem: ({ context }) =>
-                  titleCase(context.version.name),
+                renderFirstItem: ({ context }) => (
+                  <Link href={`/version/${context.version.name}`}>
+                    {titleCase(context.version.name)}
+                  </Link>
+                ),
                 renderItems: ({ context }) => [context.rarity],
               }),
             ],
@@ -220,7 +226,9 @@ export default Page(async ({ context }) => {
                 renderItems: ({ context }) => [
                   context.level_learned_at,
                   titleCase(context.move_learn_method.name),
-                  titleCase(context.version_group.name),
+                  <Link href={`/version-group/${context.version_group.name}`}>
+                    {titleCase(context.version_group.name)}
+                  </Link>,
                 ],
                 showIndex: false,
               }),

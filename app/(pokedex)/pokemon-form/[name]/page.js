@@ -36,7 +36,9 @@ export default Page(({ context }) => {
             "The version group this Pokémon form was introduced in.",
             "version group"
           ),
-          titleCase(pokemonForm.version_group.name),
+          <Link href={`/version-group/${pokemonForm.version_group.name}`}>
+            {titleCase(pokemonForm.version_group.name)}
+          </Link>,
         ],
         [
           "The order in which forms should be sorted within all forms. Multiple forms may have equal order, in which case they should fall back on sorting by name.",

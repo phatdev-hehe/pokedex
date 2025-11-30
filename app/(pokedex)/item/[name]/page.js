@@ -67,8 +67,11 @@ export default Page(({ context }) => {
             renderItems: ({ context }) => [
               table.pagination(context.version_details, {
                 thead: [undefined, "rarity"],
-                renderFirstItem: ({ context }) =>
-                  titleCase(context.version.name),
+                renderFirstItem: ({ context }) => (
+                  <Link href={`/version/${context.version.name}`}>
+                    {titleCase(context.version.name)}
+                  </Link>
+                ),
                 renderItems: ({ context }) => [context.rarity],
               }),
             ],
