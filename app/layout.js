@@ -16,7 +16,7 @@ export default ({ children }) => (
       style={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
+        minHeight: "100dvh",
       }}
     >
       <RootProvider>{children}</RootProvider>

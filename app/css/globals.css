@@ -4,9 +4,8 @@
 :root {
   /* --fd-layout-width: 100%; */
 
-  text-underline-offset: 3.5px !important;
-
   a {
+    text-underline-offset: var(--spacing);
     text-decoration: none;
 
     &:hover {

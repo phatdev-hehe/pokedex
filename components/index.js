@@ -163,7 +163,7 @@ export const Checkbox = ({ checked, children }) => {
     <div
       style={{
         display: "inline-flex",
-        gap: "1ch",
+        gap: "var(--spacing)",
       }}
     >
       <input
@@ -191,7 +191,10 @@ export const descriptionList = (term, ...descriptions) => (
       {descriptions.map((description, index) => (
         <blockquote
           key={index}
-          style={{ fontWeight: "initial", fontStyle: "initial" }}
+          style={{
+            fontWeight: "initial",
+            fontStyle: "initial",
+          }}
         >
           {description}
         </blockquote>
