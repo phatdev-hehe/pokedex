@@ -93,13 +93,13 @@ export default Page(async ({ context }) => {
               statElement.effort,
             ]),
             <tr>
-              <th>Min / Max / Total</th>
+              <th>Min/Max/Total</th>
               <td>
                 {[
                   Math.min(...pokemonBaseStats),
                   Math.max(...pokemonBaseStats),
                   pokemonBaseStats.reduce((a, b) => a + b, 0),
-                ].join(" / ")}
+                ].join("/")}
               </td>
               <td />
             </tr>
