@@ -18,7 +18,9 @@ export default Page(({ context }) => {
             "The contest type that correlates with this berry flavor.",
             "contest type"
           ),
-          titleCase(berryFlavor.contest_type.name),
+          <Link href={`/contest-type/${berryFlavor.contest_type.name}`}>
+            {titleCase(berryFlavor.contest_type.name)}
+          </Link>,
         ],
       ])}
       {tabs(Page.tabs.names(berryFlavor.names), [

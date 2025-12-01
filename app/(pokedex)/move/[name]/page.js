@@ -10,6 +10,8 @@ export default Page(({ context }) => {
   /** @type Move */
   const move = context.data;
 
+  const contestType = move.contest_type?.name;
+
   move.machines;
   move.super_contest_effect;
 
@@ -25,7 +27,9 @@ export default Page(({ context }) => {
             "The type of appeal this move gives a Pokémon when used in a contest.",
             "contest"
           ),
-          titleCase(move.contest_type?.name), // ??
+          <Link href={`/contest-type/${contestType}`}>
+            {titleCase(contestType)}
+          </Link>, // ??
         ],
         [
           "The type of damage the move inflicts on the target.",

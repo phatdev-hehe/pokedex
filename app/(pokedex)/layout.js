@@ -49,6 +49,7 @@ const sidebar = await createSidebar({
   games: ["generation", "pokedex", "version", "version-group"],
   items: ["item"],
   moves: ["move"],
+  contests: ["contest-type"],
   utility: ["language"],
 });
 
