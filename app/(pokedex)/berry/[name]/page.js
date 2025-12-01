@@ -24,7 +24,9 @@ export default Page(({ context }) => {
             "The firmness of this berry, used in making Pokéblocks or Poffins.",
             "firmness"
           ),
-          titleCase(berry.firmness.name),
+          <Link href={`/berry-firmness/${berry.firmness.name}`}>
+            {titleCase(berry.firmness.name)}
+          </Link>,
         ],
         [
           "Time it takes the tree to grow one stage, in hours. Berry trees go through four of these growth stages before they can be picked.",
@@ -64,7 +66,11 @@ export default Page(({ context }) => {
         "flavors",
         table.pagination(berry.flavors, {
           thead: [undefined, "potency"],
-          renderFirstItem: ({ context }) => titleCase(context.flavor.name),
+          renderFirstItem: ({ context }) => (
+            <Link href={`/berry-flavor/${context.flavor.name}`}>
+              {titleCase(context.flavor.name)}
+            </Link>
+          ),
           renderItems: ({ context }) => [context.potency],
         }),
       ])}
