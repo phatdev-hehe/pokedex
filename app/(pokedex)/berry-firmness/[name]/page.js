@@ -1,0 +1,28 @@
+import { Link, table, tabs } from "@/components";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
+
+const Page = await Pokedex.createDetailPage("berry-firmness");
+
+export const { generateMetadata, generateStaticParams } = Page;
+
+export default Page(({ context }) => {
+  /** @type BerryFirmness */
+  const berryFirmness = context.data;
+
+  return (
+    <>
+      {table(undefined, [["Id", berryFirmness.id]])}
+      {tabs(Page.tabs.names(berryFirmness.names), [
+        "berries",
+        table.pagination(berryFirmness.berries, {
+          renderFirstItem: ({ context }) => (
+            <Link href={`/berry/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>
+          ),
+        }),
+      ])}
+    </>
+  );
+});

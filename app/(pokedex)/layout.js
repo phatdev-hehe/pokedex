@@ -44,7 +44,7 @@ const sidebar = await createSidebar({
     "growth-rate",
     "pokemon-shape",
   ],
-  berries: ["berry"],
+  berries: ["berry", "berry-firmness"],
   evolution: ["evolution-trigger"],
   games: ["generation", "pokedex", "version", "version-group"],
   items: ["item"],
