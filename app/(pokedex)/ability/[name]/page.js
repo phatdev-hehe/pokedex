@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", ability.id],
         [
           highlighter(
             "The generation this ability originated in.",

@@ -24,7 +24,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", pokemonForm.id],
         [
           highlighter("The Pokémon that can take on this form.", "Pokémon"),
           <Link href={`/pokemon/${pokemonForm.pokemon.name}`}>

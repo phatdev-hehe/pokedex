@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", pokedex.id],
         [
           highlighter(
             "Whether or not this Pokédex originated in the main series of the video games.",

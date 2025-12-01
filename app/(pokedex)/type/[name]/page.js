@@ -20,7 +20,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", type.id],
         [
           highlighter(
             "The generation this type was introduced in.",

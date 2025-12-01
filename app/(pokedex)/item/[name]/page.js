@@ -26,7 +26,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", item.id],
         [
           highlighter(
             "The category of items this item falls into.",

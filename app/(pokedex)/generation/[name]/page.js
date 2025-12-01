@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", generation.id],
         [
           highlighter(
             "The main region travelled in this generation.",

@@ -42,7 +42,6 @@ export default Page(async ({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", pokemon.id],
         [
           highlighter("The species this Pokémon belongs to.", "species"),
           <Link href={`/pokemon-species/${pokemon.species.name}`}>

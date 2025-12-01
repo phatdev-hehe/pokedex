@@ -16,7 +16,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", move.id],
         [
           "The percent value of how likely this move is to be successful.",
           move.accuracy,

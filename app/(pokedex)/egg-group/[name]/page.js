@@ -1,4 +1,4 @@
-import { table, tabs } from "@/components";
+import { tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("egg-group");
@@ -9,13 +9,8 @@ export default Page(({ context }) => {
   /** @type EggGroup */
   const eggGroup = context.data;
 
-  return (
-    <>
-      {table(undefined, [["Id", eggGroup.id]])}
-      {tabs(
-        Page.tabs.names(eggGroup.names),
-        Page.tabs.pokemonSpecies(eggGroup.pokemon_species)
-      )}
-    </>
+  return tabs(
+    Page.tabs.names(eggGroup.names),
+    Page.tabs.pokemonSpecies(eggGroup.pokemon_species)
   );
 });

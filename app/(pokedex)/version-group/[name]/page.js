@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", versionGroup.id],
         [
           highlighter(
             "Order for sorting. Almost by date of release, except similar versions are grouped together.",

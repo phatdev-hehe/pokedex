@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", version.id],
         [
           highlighter(
             "The version group this version belongs to.",

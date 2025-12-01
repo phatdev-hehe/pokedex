@@ -1,4 +1,4 @@
-import { table, tabs } from "@/components";
+import { tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("evolution-trigger");
@@ -9,13 +9,8 @@ export default Page(({ context }) => {
   /** @type EvolutionTrigger */
   const evolutionTrigger = context.data;
 
-  return (
-    <>
-      {table(undefined, [["Id", evolutionTrigger.id]])}
-      {tabs(
-        Page.tabs.names(evolutionTrigger.names),
-        Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species)
-      )}
-    </>
+  return tabs(
+    Page.tabs.names(evolutionTrigger.names),
+    Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species)
   );
 });

@@ -12,7 +12,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", language.id],
         [
           "Whether or not the games are published in this language.",
           <Checkbox checked={language.official} />,

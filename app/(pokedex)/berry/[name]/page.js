@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", berry.id],
         [
           "Berries are actually items. This is a reference to the item specific data for this berry.",
           <Link href={`/item/${berry.item.name}`}>

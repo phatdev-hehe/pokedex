@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", stat.id],
         ["ID the games use for this stat.", stat.game_index],
         [
           "Whether this stat only exists within a battle.",

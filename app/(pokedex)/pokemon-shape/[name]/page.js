@@ -9,23 +9,18 @@ export default Page(({ context }) => {
   /** @type PokemonShape */
   const pokemonShape = context.data;
 
-  return (
-    <>
-      {table(undefined, [["Id", pokemonShape.id]])}
-      {tabs(
-        Page.tabs.names(pokemonShape.names),
-        [
-          "awesome_names",
-          table.pagination(pokemonShape.awesome_names, {
-            thead: [undefined, "language"],
-            renderFirstItem: ({ context }) => context.awesome_name,
-            renderItems: ({ context }) => [
-              <Pokedex.LanguageLink code={context.language.name} />,
-            ],
-          }),
+  return tabs(
+    Page.tabs.names(pokemonShape.names),
+    [
+      "awesome_names",
+      table.pagination(pokemonShape.awesome_names, {
+        thead: [undefined, "language"],
+        renderFirstItem: ({ context }) => context.awesome_name,
+        renderItems: ({ context }) => [
+          <Pokedex.LanguageLink code={context.language.name} />,
         ],
-        Page.tabs.pokemonSpecies(pokemonShape.pokemon_species)
-      )}
-    </>
+      }),
+    ],
+    Page.tabs.pokemonSpecies(pokemonShape.pokemon_species)
   );
 });

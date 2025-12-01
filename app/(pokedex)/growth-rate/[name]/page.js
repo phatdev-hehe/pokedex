@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", growthRate.id],
         [
           highlighter(
             "The formula used to calculate the rate at which the Pokémon species gains level.",

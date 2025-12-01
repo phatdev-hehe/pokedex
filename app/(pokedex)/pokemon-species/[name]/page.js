@@ -14,7 +14,6 @@ export default Page(({ context }) => {
   return (
     <>
       {table(undefined, [
-        ["Id", pokemonSpecies.id],
         [
           highlighter(
             "The Pokémon species that evolves into this Pokemon_species.",
