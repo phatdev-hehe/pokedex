@@ -9,15 +9,15 @@ export const GET = async () => {
   const data = JSON.stringify(
     (
       await Promise.all(
-        Pokedex.api.groupNames.map(async (groupName) => {
-          const data = await Pokedex.api(groupName, "getList")();
-
-          return data.results.map((item) => ({
+        Pokedex.api.groupNames.map(async (groupName) =>
+          (
+            await Pokedex.api(groupName, "getList")()
+          ).results.map((item) => ({
             breadcrumbs: [titleCase(groupName)],
             title: titleCase(item.name),
             url: `/${groupName}/${item.name}`,
-          }));
-        })
+          }))
+        )
       )
     ).flat()
   );
@@ -27,5 +27,7 @@ export const GET = async () => {
     data
   );
 
-  return new NextResponse(data);
+  return new NextResponse(data, {
+    headers: new Headers({ "content-type": "application/json" }),
+  });
 };

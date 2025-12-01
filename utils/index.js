@@ -27,3 +27,6 @@ export const chunk =
     );
 
 export const noop = () => {};
+
+export const getOpengraphUrl = (title) =>
+  new URL(`https://nextjs.org/api/docs-og?title=${title}`);

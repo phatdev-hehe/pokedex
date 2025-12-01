@@ -70,22 +70,38 @@ export default ({ children }) => (
         {
           type: "folder",
           name: "More",
-          children:
-            // https://fumadocs.dev/docs/ui/rss
-            [
-              {
-                name: "sitemap.xml",
-                url: "/sitemap.xml",
-              },
-              {
-                name: "robots.txt",
-                url: "/robots.txt",
-              },
-              {
-                name: "create-search-indexes.js",
-                url: "/api/create-search-indexes",
-              },
-            ],
+          children: [
+            {
+              name: "sitemap.xml",
+              url: "/sitemap.xml",
+            },
+            {
+              name: "robots.txt",
+              url: "/robots.txt",
+            },
+            {
+              name: "create-search-indexes.js",
+              url: "/api/create-search-indexes",
+            },
+            {
+              type: "folder",
+              name: "Feed",
+              children: [
+                {
+                  name: "rss2.xml",
+                  url: "/api/feed/rss2",
+                },
+                {
+                  name: "atom1.xml",
+                  url: "/api/feed/atom1",
+                },
+                {
+                  name: "json1.json",
+                  url: "/api/feed/json1",
+                },
+              ],
+            },
+          ],
         },
         {
           type: "separator",
