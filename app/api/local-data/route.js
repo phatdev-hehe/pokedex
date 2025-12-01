@@ -1,0 +1,27 @@
+import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { NextResponse } from "next/server";
+import fs from "node:fs";
+import path from "node:path";
+
+export const GET = async () => {
+  const data = JSON.stringify(
+    await Pokedex.api.groupNames.reduce(async (a, b) => {
+      a = await a;
+
+      a[b] = (await Pokedex.api(b, "getList")()).results.map(
+        (item) => item.name
+      );
+
+      return a;
+    }, {})
+  );
+
+  fs.writeFileSync(
+    path.join(process.cwd(), "app", "api", "local-data", "data.json"),
+    data
+  );
+
+  return new NextResponse(data, {
+    headers: new Headers({ "content-type": "application/json" }),
+  });
+};

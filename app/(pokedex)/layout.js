@@ -80,8 +80,8 @@ export default ({ children }) => (
               url: "/robots.txt",
             },
             {
-              name: "create-search-indexes.js",
-              url: "/api/create-search-indexes",
+              name: "local-data.js",
+              url: "/api/local-data",
             },
             {
               type: "folder",
