@@ -8,7 +8,7 @@ export const GET = async () => {
     await Pokedex.api.routeNames.reduce(async (a, b) => {
       a = await a;
 
-      a[b] = (await Pokedex.api(b, "getList")()).results.map(
+      a[b] = (await Pokedex.api(b, "rootEndpoint")()).results.map(
         (item) => item.name
       );
 

@@ -4,15 +4,15 @@ import { notFound } from "next/navigation";
 import RandomRedirect from "./random-redirect";
 
 export default async ({ params }) => {
-  const { name } = await params;
+  const { "route-name": routeName } = await params;
 
-  if (!Pokedex.api.routeNames.includes(name)) notFound();
+  if (!Pokedex.api.routeNames.includes(routeName)) notFound();
 
   return (
     <DocsBody>
       <RandomRedirect
-        links={(await Pokedex.api(name, "getList")()).results.map(
-          (item) => `/${name}/${item.name}`
+        links={(await Pokedex.api(routeName, "rootEndpoint")()).results.map(
+          (item) => `/${routeName}/${item.name}`
         )}
       />
     </DocsBody>

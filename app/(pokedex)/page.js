@@ -8,7 +8,7 @@ let [routeCount, pageCount] = [0, 0];
 const content = tabs(
   ...(await Promise.all(
     Pokedex.api.routeNames.map(async (routeName) => {
-      const data = await Pokedex.api(routeName, "getList")();
+      const data = await Pokedex.api(routeName, "rootEndpoint")();
 
       ++routeCount;
       pageCount += data.count;
