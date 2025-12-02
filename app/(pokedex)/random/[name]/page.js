@@ -6,7 +6,7 @@ import RandomRedirect from "./random-redirect";
 export default async ({ params }) => {
   const { name } = await params;
 
-  if (!Pokedex.api.groupNames.includes(name)) notFound();
+  if (!Pokedex.api.routeNames.includes(name)) notFound();
 
   return (
     <DocsBody>

@@ -7,17 +7,17 @@ let [routeCount, pageCount] = [0, 0];
 
 const content = tabs(
   ...(await Promise.all(
-    Pokedex.api.groupNames.map(async (groupName) => {
-      const data = await Pokedex.api(groupName, "getList")();
+    Pokedex.api.routeNames.map(async (routeName) => {
+      const data = await Pokedex.api(routeName, "getList")();
 
       ++routeCount;
       pageCount += data.count;
 
       return [
-        groupName,
+        routeName,
         table.pagination(data.results, {
           renderFirstItem: ({ context }) => (
-            <Link href={`/${groupName}/${context.name}`}>
+            <Link href={`/${routeName}/${context.name}`}>
               {titleCase(context.name)}
             </Link>
           ),

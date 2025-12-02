@@ -5,7 +5,7 @@ import path from "node:path";
 
 export const GET = async () => {
   const data = JSON.stringify(
-    await Pokedex.api.groupNames.reduce(async (a, b) => {
+    await Pokedex.api.routeNames.reduce(async (a, b) => {
       a = await a;
 
       a[b] = (await Pokedex.api(b, "getList")()).results.map(

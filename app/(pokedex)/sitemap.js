@@ -7,21 +7,21 @@ const withDefaultProps = (values) => ({
 });
 
 export default async () => [
-  ...Pokedex.api.groupNames.map((groupName) =>
+  ...Pokedex.api.routeNames.map((routeName) =>
     withDefaultProps({
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${groupName}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${routeName}`,
     })
   ),
   ...(
     await Promise.all(
-      Pokedex.api.groupNames.map(async (groupName) =>
+      Pokedex.api.routeNames.map(async (routeName) =>
         (
-          await Pokedex.api(groupName, "getList")()
+          await Pokedex.api(routeName, "getList")()
         ).results.map((item) =>
           withDefaultProps({
             url: `${
               process.env.NEXT_PUBLIC_BASE_URL
-            }/${groupName}/${encodeURIComponent(item.name)}`,
+            }/${routeName}/${encodeURIComponent(item.name)}`,
           })
         )
       )
