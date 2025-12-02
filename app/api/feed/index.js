@@ -20,7 +20,7 @@ for (const [key, value] of Object.entries(data)) {
       id: link,
       link,
       category: [{ name: categoryName }],
-      image: getOpengraphUrl(`${title} (${categoryName})`).toString(),
+      image: getOpengraphUrl({ title: `${title} (${categoryName})` }),
       date: new Date(),
     });
   }
