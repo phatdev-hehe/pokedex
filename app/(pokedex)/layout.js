@@ -1,57 +1,8 @@
 import { Link } from "@/components";
 import { Logo } from "@/components/logo";
-import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
-
-const createSidebar = async (object) => {
-  let pageCount = 0;
-
-  const folders = await Promise.all(
-    Object.entries(object).map(async ([value, values]) => ({
-      defaultOpen: value === "pokemon",
-      type: "folder",
-      name: titleCase(value),
-      children: await Promise.all(
-        values.map(async (value) => {
-          const { count } = await Pokedex.api(value, "getList")();
-
-          pageCount += count;
-
-          return {
-            name: `${titleCase(value)} (${count})`,
-            url: `/${value}`,
-          };
-        })
-      ),
-    }))
-  );
-
-  return { pageCount, folders };
-};
-
-const sidebar = await createSidebar({
-  pokemon: [
-    "pokemon",
-    "ability",
-    "gender",
-    "pokemon-form",
-    "pokemon-species",
-    "stat",
-    "type",
-    "egg-group",
-    "growth-rate",
-    "pokemon-shape",
-  ],
-  berries: ["berry", "berry-firmness", "berry-flavor"],
-  evolution: ["evolution-trigger"],
-  games: ["generation", "pokedex", "version", "version-group"],
-  items: ["item"],
-  moves: ["move"],
-  contests: ["contest-type"],
-  utility: ["language"],
-});
 
 export default ({ children }) => (
   <DocsLayout
@@ -63,11 +14,35 @@ export default ({ children }) => (
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
-        {
-          name: `${sidebar.pageCount} pages`,
+        ...Object.entries({
+          pokemon: [
+            "pokemon",
+            "ability",
+            "gender",
+            "pokemon-form",
+            "pokemon-species",
+            "stat",
+            "type",
+            "egg-group",
+            "growth-rate",
+            "pokemon-shape",
+          ],
+          berries: ["berry", "berry-firmness", "berry-flavor"],
+          evolution: ["evolution-trigger"],
+          games: ["generation", "pokedex", "version", "version-group"],
+          items: ["item"],
+          moves: ["move"],
+          contests: ["contest-type"],
+          utility: ["language"],
+        }).map(([key, value]) => ({
+          defaultOpen: key === "pokemon",
           type: "folder",
-          children: sidebar.folders,
-        },
+          name: titleCase(key),
+          children: value.map((value) => ({
+            name: titleCase(value),
+            url: `/${value}`,
+          })),
+        })),
         {
           type: "folder",
           name: "More",
