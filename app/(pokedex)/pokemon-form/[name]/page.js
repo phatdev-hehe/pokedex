@@ -40,10 +40,6 @@ export default Page(({ context }) => {
           </Link>,
         ],
         [
-          "The order in which forms should be sorted within all forms. Multiple forms may have equal order, in which case they should fall back on sorting by name.",
-          pokemonForm.order,
-        ],
-        [
           highlighter("The name of this form.", "name"),
           titleCase(pokemonForm.form_name),
         ],

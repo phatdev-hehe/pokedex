@@ -57,13 +57,6 @@ export default Page(async ({ context }) => {
         ],
         [
           highlighter(
-            "Order for sorting. Almost national order, except families are grouped together.",
-            "Order"
-          ),
-          pokemon.order,
-        ],
-        [
-          highlighter(
             "The base experience gained for defeating this Pokémon.",
             "experience"
           ),

@@ -15,13 +15,6 @@ export default Page(({ context }) => {
       {table(undefined, [
         [
           highlighter(
-            "Order for sorting. Almost by date of release, except similar versions are grouped together.",
-            "Order"
-          ),
-          versionGroup.order,
-        ],
-        [
-          highlighter(
             "The generation this version was introduced in.",
             "generation"
           ),

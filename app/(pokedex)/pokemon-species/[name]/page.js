@@ -49,13 +49,6 @@ export default Page(({ context }) => {
         ],
         [
           highlighter(
-            "The order in which species should be sorted. Based on National Dex order, except families are grouped together and sorted by stage.",
-            "National Dex order"
-          ),
-          pokemonSpecies.order,
-        ],
-        [
-          highlighter(
             "The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.",
             "happiness"
           ),
