@@ -35,6 +35,15 @@ export default () => (
     descriptions={[
       ["routes", routeCount],
       ["pages", pageCount],
+      [
+        "status",
+        <Link href="https://pokeapi.statuspage.io/">
+          <img
+            style={{ margin: "initial" }}
+            src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
+          />
+        </Link>,
+      ],
     ]}
   >
     {content}

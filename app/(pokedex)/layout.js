@@ -1,4 +1,3 @@
-import { Link } from "@/components";
 import { Logo } from "@/components/logo";
 import { titleCase } from "@/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
@@ -85,20 +84,6 @@ export default ({ children }) => (
               ],
             },
           ],
-        },
-        {
-          type: "separator",
-          name: (
-            <Link
-              style={{
-                position: "absolute",
-                bottom: "calc(var(--spacing) * 4)",
-              }}
-              href="https://pokeapi.statuspage.io/"
-            >
-              <img src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json" />
-            </Link>
-          ),
         },
       ],
     }}

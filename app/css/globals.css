@@ -8,7 +8,7 @@
 
   a {
     text-underline-offset: var(--spacing);
-    text-decoration: none;
+    text-decoration: initial;
 
     &:hover {
       text-decoration: underline;
