@@ -10,7 +10,10 @@ export default ({ children }) => (
     sidebar={{
       defaultOpenLevel: 1,
     }}
-    nav={{ title: <Logo /> }}
+    nav={{
+      title: <Logo />,
+      url: "/random/pokemon",
+    }}
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
@@ -47,6 +50,10 @@ export default ({ children }) => (
           type: "folder",
           name: "More",
           children: [
+            {
+              name: "Home",
+              url: "/",
+            },
             {
               name: "sitemap.xml",
               url: "/sitemap.xml",

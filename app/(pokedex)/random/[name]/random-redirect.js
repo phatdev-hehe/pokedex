@@ -6,7 +6,7 @@ import { randomItem } from "@/utils";
 import { Callout } from "fumadocs-ui/components/callout";
 import { useEffect, useState } from "react";
 
-export const RandomRedirect = ({ links }) => {
+export default ({ links }) => {
   const [state, setState] = useState();
 
   useEffect(() => {
