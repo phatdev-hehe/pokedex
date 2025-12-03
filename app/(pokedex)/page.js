@@ -3,25 +3,36 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 const title = "Home";
-let [routeCount, pageCount] = [0, 0];
+let [groupCount, routeCount, pageCount] = [0, 0, 0];
 
 const content = tabs(
   ...(await Promise.all(
-    Pokedex.api.routeNames.map(async (routeName) => {
-      const data = await Pokedex.api(routeName, "rootEndpoint")();
-
-      ++routeCount;
-      pageCount += data.count;
+    Object.entries(Pokedex.api.routeMap).map(async ([key, value]) => {
+      ++groupCount;
 
       return [
-        routeName,
-        table.pagination(data.results, {
-          renderFirstItem: ({ context }) => (
-            <Link href={`/${routeName}/${context.name}`}>
-              {titleCase(context.name)}
-            </Link>
-          ),
-        }),
+        key,
+        tabs(
+          ...(await Promise.all(
+            Object.keys(value).map(async (routeName) => {
+              const data = await Pokedex.api(routeName, "rootEndpoint")();
+
+              ++routeCount;
+              pageCount += data.count;
+
+              return [
+                routeName,
+                table.pagination(data.results, {
+                  renderFirstItem: ({ context }) => (
+                    <Link href={`/${routeName}/${context.name}`}>
+                      {titleCase(context.name)}
+                    </Link>
+                  ),
+                }),
+              ];
+            })
+          ))
+        ),
       ];
     })
   ))
@@ -33,6 +44,7 @@ export default () => (
   <Pokedex
     title={title}
     descriptions={[
+      ["groups", groupCount],
       ["routes", routeCount],
       ["pages", pageCount],
       [

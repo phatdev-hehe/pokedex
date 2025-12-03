@@ -1,4 +1,5 @@
 import { Logo } from "@/components/logo";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
@@ -16,36 +17,11 @@ export default ({ children }) => (
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
-        ...Object.entries({
-          pokemon: [
-            "pokemon",
-            "ability",
-            "gender",
-            "pokemon-form",
-            "pokemon-species",
-            "stat",
-            "type",
-            "egg-group",
-            "growth-rate",
-            "pokemon-shape",
-          ],
-          berries: ["berry", "berry-firmness", "berry-flavor"],
-          evolution: ["evolution-trigger"],
-          games: ["generation", "pokedex", "version", "version-group"],
-          items: ["item"],
-          moves: ["move"],
-          contests: ["contest-type"],
-          encounters: [
-            "encounter-method",
-            "encounter-condition",
-            "encounter-condition-value",
-          ],
-          utility: ["language"],
-        }).map(([key, value]) => ({
+        ...Object.entries(Pokedex.api.routeMap).map(([key, value]) => ({
           defaultOpen: key === "pokemon",
           type: "folder",
           name: titleCase(key),
-          children: value.map((value) => ({
+          children: Object.keys(value).map((value) => ({
             name: titleCase(value),
             url: `/${value}`,
           })),
