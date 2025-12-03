@@ -35,7 +35,11 @@ export default ({ children }) => (
           items: ["item"],
           moves: ["move"],
           contests: ["contest-type"],
-          encounters: ["encounter-method", "encounter-condition"],
+          encounters: [
+            "encounter-method",
+            "encounter-condition",
+            "encounter-condition-value",
+          ],
           utility: ["language"],
         }).map(([key, value]) => ({
           defaultOpen: key === "pokemon",

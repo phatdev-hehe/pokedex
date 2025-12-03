@@ -153,8 +153,13 @@ export default Page(async ({ context }) => {
                         context.min_level,
                         context.max_level,
                         table.pagination(context.condition_values, {
-                          renderFirstItem: ({ context }) =>
-                            titleCase(context.name),
+                          renderFirstItem: ({ context }) => (
+                            <Link
+                              href={`/encounter-condition-value/${context.name}`}
+                            >
+                              {titleCase(context.name)}
+                            </Link>
+                          ),
                         }),
                       ],
                     }),
