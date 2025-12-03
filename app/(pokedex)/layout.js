@@ -9,6 +9,7 @@ export default ({ children }) => (
     themeSwitch={{ mode: "light-dark-system" }}
     sidebar={{
       defaultOpenLevel: 1,
+      prefetch: false,
     }}
     nav={{
       title: <Logo />,
@@ -18,7 +19,7 @@ export default ({ children }) => (
     tree={{
       children: [
         ...Object.entries(Pokedex.api.routeMap).map(([key, value]) => ({
-          defaultOpen: key === "pokemon",
+          defaultOpen: false,
           type: "folder",
           name: titleCase(key),
           children: Object.keys(value).map((value) => ({

@@ -63,7 +63,9 @@ export default Page(({ context }) => {
         ],
         [
           highlighter("The color of this Pokémon for Pokédex search.", "color"),
-          titleCase(pokemonSpecies.color.name),
+          <Link href={`/pokemon-color/${pokemonSpecies.color.name}`}>
+            {titleCase(pokemonSpecies.color.name)}
+          </Link>,
         ],
         [
           "The rate at which this Pokémon species gains levels.",
