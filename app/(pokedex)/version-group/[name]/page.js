@@ -27,13 +27,13 @@ export default Page(({ context }) => {
         [
           "move_learn_methods",
           table.pagination(versionGroup.move_learn_methods, {
-            renderFirstItem: ({ context }) => titleCase(context.name),
+            renderFirstRow: ({ context }) => titleCase(context.name),
           }),
         ],
         [
           "pokedexes",
           table.pagination(versionGroup.pokedexes, {
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/pokedex/${context.name}`}>
                 {titleCase(context.name)}
               </Link>
@@ -43,13 +43,13 @@ export default Page(({ context }) => {
         [
           "regions",
           table.pagination(versionGroup.regions, {
-            renderFirstItem: ({ context }) => titleCase(context.name),
+            renderFirstRow: ({ context }) => titleCase(context.name),
           }),
         ],
         [
           "versions",
           table.pagination(versionGroup.versions, {
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/version/${context.name}`}>
                 {titleCase(context.name)}
               </Link>

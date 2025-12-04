@@ -26,7 +26,7 @@ export default Page(({ context }) => {
         [
           "abilities",
           table.pagination(generation.abilities, {
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/ability/${context.name}`}>
                 {titleCase(context.name)}
               </Link>
@@ -38,7 +38,7 @@ export default Page(({ context }) => {
         [
           "types",
           table.pagination(generation.types, {
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/type/${context.name}`}>
                 {titleCase(context.name)}
               </Link>

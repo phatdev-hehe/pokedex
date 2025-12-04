@@ -35,12 +35,12 @@ export default Page(({ context }) => {
           "pokemon_entries",
           table.pagination(pokedex.pokemon_entries, {
             thead: [undefined, "entry_number"],
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
                 {titleCase(context.pokemon_species.name)}
               </Link>
             ),
-            renderItems: ({ context }) => [context.entry_number],
+            renderRows: ({ context }) => [context.entry_number],
           }),
         ],
         Page.tabs.versionGroups(pokedex.version_groups)

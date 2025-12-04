@@ -58,7 +58,7 @@ export const table = Object.assign(
     pagination: Object.assign(
       (
         items,
-        { thead, renderFirstItem = noop, renderItems = noop, showIndex = true }
+        { thead, renderFirstRow = noop, renderRows = noop, showIndex = true }
       ) => {
         if (items && items.length) {
           const chunkSize = 100;
@@ -83,9 +83,9 @@ export const table = Object.assign(
                           {". "}
                         </span>
                       )}
-                      {renderFirstItem(context)}
+                      {renderFirstRow(context)}
                     </span>,
-                    ...(renderItems(context) ?? []),
+                    ...(renderRows(context) ?? []),
                   ];
                 })
               ),
@@ -97,8 +97,8 @@ export const table = Object.assign(
         fromObject: (object, { renderKey, renderValue }) => {
           if (isPlainObject(object))
             return table.pagination(Object.entries(object), {
-              renderFirstItem: ({ context }) => renderKey(context[0]),
-              renderItems: ({ context }) => [
+              renderFirstRow: ({ context }) => renderKey(context[0]),
+              renderRows: ({ context }) => [
                 table.pagination.fromObject(context[1], {
                   renderKey,
                   renderValue,

@@ -27,8 +27,8 @@ export default Page(({ context }) => {
         "names",
         table.pagination(contestType.names, {
           thead: [undefined, "language", "color"],
-          renderFirstItem: ({ context }) => context.name,
-          renderItems: ({ context }) => [
+          renderFirstRow: ({ context }) => context.name,
+          renderRows: ({ context }) => [
             <Pokedex.LanguageLink code={context.language.name} />,
             context.color,
           ],

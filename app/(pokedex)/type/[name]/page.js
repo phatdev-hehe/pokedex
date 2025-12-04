@@ -41,12 +41,12 @@ export default Page(({ context }) => {
           "pokemon",
           table.pagination(type.pokemon, {
             thead: [undefined, "slot"],
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
               </Link>
             ),
-            renderItems: ({ context }) => [context.slot],
+            renderRows: ({ context }) => [context.slot],
           }),
         ],
         Page.tabs.moves(type.moves),
@@ -54,10 +54,10 @@ export default Page(({ context }) => {
           "damage_relations",
           table.pagination(Object.entries(type.damage_relations), {
             thead: [undefined, "Type"],
-            renderFirstItem: ({ context }) => titleCase(context[0]),
-            renderItems: ({ context }) => [
+            renderFirstRow: ({ context }) => titleCase(context[0]),
+            renderRows: ({ context }) => [
               table.pagination(context[1], {
-                renderFirstItem: ({ context }) => (
+                renderFirstRow: ({ context }) => (
                   <Link href={`/type/${context.name}`}>
                     {titleCase(context.name)}
                   </Link>

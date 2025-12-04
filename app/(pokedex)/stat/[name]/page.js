@@ -28,7 +28,7 @@ export default Page(({ context }) => {
         [
           "affecting_items",
           table.pagination(stat.affecting_items, {
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/item/${context.name}`}>
                 {titleCase(context.name)}
               </Link>
@@ -39,16 +39,16 @@ export default Page(({ context }) => {
           "affecting_moves",
           table.pagination(Object.entries(stat.affecting_moves), {
             thead: ["set", undefined],
-            renderFirstItem: ({ context }) => titleCase(context[0]),
-            renderItems: ({ context }) => [
+            renderFirstRow: ({ context }) => titleCase(context[0]),
+            renderRows: ({ context }) => [
               table.pagination(Object.values(context[1]), {
                 thead: [undefined, "change"],
-                renderFirstItem: ({ context }) => (
+                renderFirstRow: ({ context }) => (
                   <Link href={`/move/${context.move.name}`}>
                     {titleCase(context.move.name)}
                   </Link>
                 ),
-                renderItems: ({ context }) => [context.change],
+                renderRows: ({ context }) => [context.change],
               }),
             ],
           }),
@@ -57,10 +57,10 @@ export default Page(({ context }) => {
           "affecting_natures",
           table.pagination(Object.entries(stat.affecting_natures), {
             thead: ["set", undefined],
-            renderFirstItem: ({ context }) => titleCase(context[0]),
-            renderItems: ({ context }) => [
+            renderFirstRow: ({ context }) => titleCase(context[0]),
+            renderRows: ({ context }) => [
               table.pagination(Object.values(context[1]), {
-                renderFirstItem: ({ context }) => [
+                renderFirstRow: ({ context }) => [
                   <Link key={context.name} href={`/nature/${context.name}`}>
                     {titleCase(context.name)}
                   </Link>,

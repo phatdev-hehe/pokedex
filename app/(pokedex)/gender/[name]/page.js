@@ -15,18 +15,18 @@ export default Page(({ context }) => {
       "pokemon_species_details",
       table.pagination(gender.pokemon_species_details, {
         thead: [undefined, "rate"],
-        renderFirstItem: ({ context }) => (
+        renderFirstRow: ({ context }) => (
           <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
             {titleCase(context.pokemon_species.name)}
           </Link>
         ),
-        renderItems: ({ context }) => [context.rate],
+        renderRows: ({ context }) => [context.rate],
       }),
     ],
     [
       "required_for_evolution",
       table.pagination(gender.required_for_evolution, {
-        renderFirstItem: ({ context }) => (
+        renderFirstRow: ({ context }) => (
           <Link href={`/pokemon-species/${context.name}`}>
             {titleCase(context.name)}
           </Link>

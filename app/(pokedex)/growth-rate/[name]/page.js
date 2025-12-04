@@ -28,8 +28,8 @@ export default Page(({ context }) => {
           table.pagination(growthRate.levels, {
             showIndex: false,
             thead: [undefined, "experience"],
-            renderFirstItem: ({ context }) => context.level,
-            renderItems: ({ context }) => [context.experience],
+            renderFirstRow: ({ context }) => context.level,
+            renderRows: ({ context }) => [context.experience],
           }),
         ],
         Page.tabs.pokemonSpecies(growthRate.pokemon_species)

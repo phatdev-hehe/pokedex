@@ -104,12 +104,12 @@ export default Page(({ context }) => {
           "stat_changes",
           table.pagination(move.stat_changes, {
             thead: [undefined, "change"],
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/stat/${context.stat.name}`}>
                 {titleCase(context.stat.name)}
               </Link>
             ),
-            renderItems: ({ context }) => [context.change],
+            renderRows: ({ context }) => [context.change],
           }),
         ],
         [
@@ -120,14 +120,14 @@ export default Page(({ context }) => {
             ),
             {
               thead: ["set", "detail"],
-              renderFirstItem: ({ context }) => titleCase(context[0]),
-              renderItems: ({ context }) => [
+              renderFirstRow: ({ context }) => titleCase(context[0]),
+              renderRows: ({ context }) => [
                 table.pagination(Object.entries(context[1]), {
                   thead: [undefined, "move"],
-                  renderFirstItem: ({ context }) => titleCase(context[0]),
-                  renderItems: ({ context }) => [
+                  renderFirstRow: ({ context }) => titleCase(context[0]),
+                  renderRows: ({ context }) => [
                     table.pagination(context[1], {
-                      renderFirstItem: ({ context }) => (
+                      renderFirstRow: ({ context }) => (
                         <Link href={`/move/${context.name}`}>
                           {titleCase(context.name)}
                         </Link>
@@ -145,7 +145,7 @@ export default Page(({ context }) => {
         [
           "learned_by_pokemon",
           table.pagination(move.learned_by_pokemon, {
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/pokemon/${context.name}`}>
                 {titleCase(context.name)}
               </Link>

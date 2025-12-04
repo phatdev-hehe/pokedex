@@ -36,12 +36,12 @@ export default Page(({ context }) => {
           "pokemon",
           table.pagination(ability.pokemon, {
             thead: [undefined, "slot", "hidden"],
-            renderFirstItem: ({ context }) => (
+            renderFirstRow: ({ context }) => (
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
               </Link>
             ),
-            renderItems: ({ context }) => [
+            renderRows: ({ context }) => [
               context.slot,
               <Checkbox checked={context.is_hidden} />,
             ],
