@@ -21,6 +21,8 @@ export default Page(({ context }) => {
   /** @type Item */
   const item = context.data;
 
+  const flingEffect = item.fling_effect?.name;
+
   item.machines;
 
   return (
@@ -38,7 +40,9 @@ export default Page(({ context }) => {
         [highlighter("The price of this item in stores.", "price"), item.cost],
         [
           "The effect of the move Fling when used with this item.",
-          titleCase(item.fling_effect?.name), // ??
+          <Link href={`/item-fling-effect/${flingEffect}`}>
+            {titleCase(flingEffect)}
+          </Link>,
         ],
         [
           "The power of the move Fling when used with this item.",
