@@ -25,16 +25,7 @@ export default Page(({ context }) => {
       ])}
       {tabs(
         Page.tabs.names(stat.names),
-        [
-          "affecting_items",
-          table.pagination(stat.affecting_items, {
-            renderRows: ({ context }) => [
-              <Link href={`/item/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ],
+        Page.tabs.items(stat.affecting_items, "affecting_items"),
         [
           "affecting_moves",
           table.pagination(Object.entries(stat.affecting_moves), {

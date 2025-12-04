@@ -48,7 +48,11 @@ export default Page(({ context }) => {
         [
           "attributes",
           table.pagination(item.attributes, {
-            renderRows: ({ context }) => [titleCase(context.name)],
+            renderRows: ({ context }) => [
+              <Link href={`/item-attribute/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>,
+            ],
           }),
         ],
         Page.tabs.effectEntries(item.effect_entries),
