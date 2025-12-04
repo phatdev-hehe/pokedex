@@ -15,7 +15,7 @@ export default Page(({ context }) => {
       table.pagination(itemFlingEffect.effect_entries, {
         renderRows: ({ context }) => [
           context.effect,
-          <Pokedex.LanguageLink code={context.language.name} />,
+          <Pokedex.LanguageLink language={context.language} />,
         ],
       }),
     ],

@@ -29,7 +29,7 @@ export default Page(({ context }) => {
           thead: [undefined, "language", "color"],
           renderRows: ({ context }) => [
             context.name,
-            <Pokedex.LanguageLink code={context.language.name} />,
+            <Pokedex.LanguageLink language={context.language} />,
             context.color,
           ],
         }),
