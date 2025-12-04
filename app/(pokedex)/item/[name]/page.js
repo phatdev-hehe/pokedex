@@ -31,7 +31,9 @@ export default Page(({ context }) => {
             "The category of items this item falls into.",
             "category"
           ),
-          titleCase(item.category.name),
+          <Link href={`/item-category/${item.category.name}`}>
+            {titleCase(item.category.name)}
+          </Link>,
         ],
         [highlighter("The price of this item in stores.", "price"), item.cost],
         [
