@@ -1,4 +1,4 @@
-import { highlighter, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -18,7 +18,9 @@ export default Page(({ context }) => {
             "The pocket items in this category would be put in.",
             "pocket"
           ),
-          titleCase(itemCategory.pocket.name),
+          <Link href={`/item-pocket/${itemCategory.pocket.name}`}>
+            {titleCase(itemCategory.pocket.name)}
+          </Link>,
         ],
       ])}
       {tabs(
