@@ -60,7 +60,11 @@ export default Page(({ context }) => {
             renderFirstItem: ({ context }) => titleCase(context[0]),
             renderItems: ({ context }) => [
               table.pagination(Object.values(context[1]), {
-                renderFirstItem: ({ context }) => [titleCase(context.name)],
+                renderFirstItem: ({ context }) => [
+                  <Link key={context.name} href={`/nature/${context.name}`}>
+                    {titleCase(context.name)}
+                  </Link>,
+                ],
               }),
             ],
           }),

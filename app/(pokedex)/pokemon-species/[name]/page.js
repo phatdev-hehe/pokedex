@@ -9,7 +9,9 @@ export const { generateMetadata, generateStaticParams } = Page;
 export default Page(({ context }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = context.data;
-  const previousPokemonSpeciesName = pokemonSpecies.evolves_from_species?.name; // ??
+
+  const previousPokemonSpeciesName = pokemonSpecies.evolves_from_species?.name;
+  const habitat = pokemonSpecies.habitat?.name;
 
   return (
     <>
@@ -89,7 +91,9 @@ export default Page(({ context }) => {
             "The habitat this Pokémon species can be encountered in.",
             "habitat"
           ),
-          titleCase(pokemonSpecies.habitat?.name), // ??
+          <Link href={`/pokemon-habitat/${habitat}`}>
+            {titleCase(habitat)}
+          </Link>,
         ],
         [
           "Whether or not this Pokémon has visual gender differences.",
