@@ -13,11 +13,11 @@ export default Page(({ context }) => {
   return tabs(Page.tabs.names(encounterCondition.names), [
     "values",
     table.pagination(encounterCondition.values, {
-      renderFirstRow: ({ context }) => (
+      renderRows: ({ context }) => [
         <Link href={`/encounter-condition-value/${context.name}`}>
           {titleCase(context.name)}
-        </Link>
-      ),
+        </Link>,
+      ],
     }),
   ]);
 });

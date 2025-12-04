@@ -26,11 +26,11 @@ export default Page(({ context }) => {
         [
           "abilities",
           table.pagination(generation.abilities, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/ability/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ],
         Page.tabs.moves(generation.moves),
@@ -38,11 +38,11 @@ export default Page(({ context }) => {
         [
           "types",
           table.pagination(generation.types, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/type/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ],
         Page.tabs.versionGroups(generation.version_groups)

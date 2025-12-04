@@ -27,33 +27,33 @@ export default Page(({ context }) => {
         [
           "move_learn_methods",
           table.pagination(versionGroup.move_learn_methods, {
-            renderFirstRow: ({ context }) => titleCase(context.name),
+            renderRows: ({ context }) => [titleCase(context.name)],
           }),
         ],
         [
           "pokedexes",
           table.pagination(versionGroup.pokedexes, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/pokedex/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ],
         [
           "regions",
           table.pagination(versionGroup.regions, {
-            renderFirstRow: ({ context }) => titleCase(context.name),
+            renderRows: ({ context }) => [titleCase(context.name)],
           }),
         ],
         [
           "versions",
           table.pagination(versionGroup.versions, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/version/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ]
       )}

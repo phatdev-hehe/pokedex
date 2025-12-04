@@ -48,7 +48,7 @@ export default Page(({ context }) => {
         [
           "attributes",
           table.pagination(item.attributes, {
-            renderFirstRow: ({ context }) => titleCase(context.name),
+            renderRows: ({ context }) => [titleCase(context.name)],
           }),
         ],
         Page.tabs.effectEntries(item.effect_entries),
@@ -58,20 +58,18 @@ export default Page(({ context }) => {
           "held_by_pokemon",
           table.pagination(item.held_by_pokemon, {
             thead: [undefined, "version_details"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [
+              </Link>,
               table.pagination(context.version_details, {
                 thead: [undefined, "rarity"],
-                renderFirstRow: ({ context }) => (
+                renderRows: ({ context }) => [
                   <Link href={`/version/${context.version.name}`}>
                     {titleCase(context.version.name)}
-                  </Link>
-                ),
-                renderRows: ({ context }) => [context.rarity],
+                  </Link>,
+                  context.rarity,
+                ],
               }),
             ],
           }),

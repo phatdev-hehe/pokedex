@@ -61,9 +61,8 @@ export default Page(({ context }) => {
           "move_battle_style_preferences",
           table.pagination(nature.move_battle_style_preferences, {
             thead: [undefined, "high_hp_preference", "low_hp_preference"],
-            renderFirstRow: ({ context }) =>
-              titleCase(context.move_battle_style.name),
             renderRows: ({ context }) => [
+              titleCase(context.move_battle_style.name),
               context.high_hp_preference,
               context.low_hp_preference,
             ],
@@ -73,9 +72,10 @@ export default Page(({ context }) => {
           "pokeathlon_stat_changes",
           table.pagination(nature.pokeathlon_stat_changes, {
             thead: [undefined, "max_change"],
-            renderFirstRow: ({ context }) =>
+            renderRows: ({ context }) => [
               titleCase(context.pokeathlon_stat.name),
-            renderRows: ({ context }) => [context.max_change],
+              context.max_change,
+            ],
           }),
         ]
       )}

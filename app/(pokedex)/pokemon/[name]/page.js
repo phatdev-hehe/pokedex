@@ -101,12 +101,10 @@ export default Page(async ({ context }) => {
           "abilities",
           table.pagination(pokemon.abilities, {
             thead: [undefined, "slot", "hidden"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/ability/${context.ability.name}`}>
                 {titleCase(context.ability.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [
+              </Link>,
               context.slot,
               <Checkbox checked={context.is_hidden} />,
             ],
@@ -115,8 +113,10 @@ export default Page(async ({ context }) => {
         [
           "cries",
           table.pagination(Object.entries(pokemon.cries), {
-            renderFirstRow: ({ context }) => titleCase(context[0]),
-            renderRows: ({ context }) => [audio(context[1])],
+            renderRows: ({ context }) => [
+              titleCase(context[0]),
+              audio(context[1]),
+            ],
           }),
         ],
         Page.tabs.types(pokemon.types),
@@ -126,17 +126,14 @@ export default Page(async ({ context }) => {
             await Pokedex.api.getResource(pokemon.location_area_encounters),
             {
               thead: [undefined, "version_details"],
-              renderFirstRow: ({ context }) =>
-                titleCase(context.location_area.name),
               renderRows: ({ context }) => [
+                titleCase(context.location_area.name),
                 table.pagination(context.version_details, {
                   thead: [undefined, "max_chance", "encounter_details"],
-                  renderFirstRow: ({ context }) => (
+                  renderRows: ({ context }) => [
                     <Link href={`/version/${context.version.name}`}>
                       {titleCase(context.version.name)}
-                    </Link>
-                  ),
-                  renderRows: ({ context }) => [
+                    </Link>,
                     context.max_chance,
                     table.pagination(context.encounter_details, {
                       thead: [
@@ -146,20 +143,19 @@ export default Page(async ({ context }) => {
                         "max_level",
                         "condition_values",
                       ],
-                      renderFirstRow: ({ context }) =>
-                        titleCase(context.method.name),
                       renderRows: ({ context }) => [
+                        titleCase(context.method.name),
                         context.chance,
                         context.min_level,
                         context.max_level,
                         table.pagination(context.condition_values, {
-                          renderFirstRow: ({ context }) => (
+                          renderRows: ({ context }) => [
                             <Link
                               href={`/encounter-condition-value/${context.name}`}
                             >
                               {titleCase(context.name)}
-                            </Link>
-                          ),
+                            </Link>,
+                          ],
                         }),
                       ],
                     }),
@@ -173,20 +169,18 @@ export default Page(async ({ context }) => {
           "held_items",
           table.pagination(pokemon.held_items, {
             thead: [undefined, "version_details"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/item/${context.item.name}`}>
                 {titleCase(context.item.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [
+              </Link>,
               table.pagination(context.version_details, {
                 thead: [undefined, "rarity"],
-                renderFirstRow: ({ context }) => (
+                renderRows: ({ context }) => [
                   <Link href={`/version/${context.version.name}`}>
                     {titleCase(context.version.name)}
-                  </Link>
-                ),
-                renderRows: ({ context }) => [context.rarity],
+                  </Link>,
+                  context.rarity,
+                ],
               }),
             ],
           }),
@@ -195,23 +189,21 @@ export default Page(async ({ context }) => {
         [
           "forms",
           table.pagination(pokemon.forms, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/pokemon-form/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ],
         [
           "moves",
           table.pagination(pokemon.moves, {
             thead: [undefined, "version_group_details"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/move/${context.move.name}`}>
                 {titleCase(context.move.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [
+              </Link>,
               table.pagination(context.version_group_details, {
                 thead: [
                   "order",
@@ -219,8 +211,8 @@ export default Page(async ({ context }) => {
                   "move_learn_method",
                   "version_group",
                 ],
-                renderFirstRow: ({ context }) => context.order, // ??
                 renderRows: ({ context }) => [
+                  context.order,
                   context.level_learned_at,
                   titleCase(context.move_learn_method.name),
                   <Link href={`/version-group/${context.version_group.name}`}>

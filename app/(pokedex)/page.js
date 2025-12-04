@@ -23,11 +23,11 @@ const content = tabs(
               return [
                 routeName,
                 table.pagination(data.results, {
-                  renderFirstRow: ({ context }) => (
+                  renderRows: ({ context }) => [
                     <Link href={`/${routeName}/${context.name}`}>
                       {titleCase(context.name)}
-                    </Link>
-                  ),
+                    </Link>,
+                  ],
                 }),
               ];
             })

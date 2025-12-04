@@ -66,12 +66,12 @@ export default Page(({ context }) => {
         "flavors",
         table.pagination(berry.flavors, {
           thead: [undefined, "potency"],
-          renderFirstRow: ({ context }) => (
+          renderRows: ({ context }) => [
             <Link href={`/berry-flavor/${context.flavor.name}`}>
               {titleCase(context.flavor.name)}
-            </Link>
-          ),
-          renderRows: ({ context }) => [context.potency],
+            </Link>,
+            context.potency,
+          ],
         }),
       ])}
     </>

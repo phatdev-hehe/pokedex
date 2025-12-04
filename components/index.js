@@ -56,10 +56,7 @@ export const table = Object.assign(
   },
   {
     pagination: Object.assign(
-      (
-        items,
-        { thead, renderFirstRow = noop, renderRows = noop, showIndex = true }
-      ) => {
+      (items, { thead, renderRows = noop, showIndex = true }) => {
         if (items && items.length) {
           const chunkSize = 100;
 
@@ -68,8 +65,8 @@ export const table = Object.assign(
               `page ${romanize(index1 + 1)}`,
               table(
                 thead,
-                items.map((item, index2) => {
-                  const context = { context: item };
+                items.map((context, index2) => {
+                  const [firstRow, ...rows] = renderRows({ context });
 
                   return [
                     <span>
@@ -83,9 +80,9 @@ export const table = Object.assign(
                           {". "}
                         </span>
                       )}
-                      {renderFirstRow(context)}
+                      {firstRow}
                     </span>,
-                    ...(renderRows(context) ?? []),
+                    ...rows,
                   ];
                 })
               ),
@@ -97,8 +94,8 @@ export const table = Object.assign(
         fromObject: (object, { renderKey, renderValue }) => {
           if (isPlainObject(object))
             return table.pagination(Object.entries(object), {
-              renderFirstRow: ({ context }) => renderKey(context[0]),
               renderRows: ({ context }) => [
+                renderKey(context[0]),
                 table.pagination.fromObject(context[1], {
                   renderKey,
                   renderValue,

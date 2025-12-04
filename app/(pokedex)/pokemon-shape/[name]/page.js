@@ -15,8 +15,8 @@ export default Page(({ context }) => {
       "awesome_names",
       table.pagination(pokemonShape.awesome_names, {
         thead: [undefined, "language"],
-        renderFirstRow: ({ context }) => context.awesome_name,
         renderRows: ({ context }) => [
+          context.awesome_name,
           <Pokedex.LanguageLink code={context.language.name} />,
         ],
       }),

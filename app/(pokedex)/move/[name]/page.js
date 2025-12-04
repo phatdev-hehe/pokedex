@@ -104,12 +104,12 @@ export default Page(({ context }) => {
           "stat_changes",
           table.pagination(move.stat_changes, {
             thead: [undefined, "change"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/stat/${context.stat.name}`}>
                 {titleCase(context.stat.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [context.change],
+              </Link>,
+              context.change,
+            ],
           }),
         ],
         [
@@ -120,18 +120,18 @@ export default Page(({ context }) => {
             ),
             {
               thead: ["set", "detail"],
-              renderFirstRow: ({ context }) => titleCase(context[0]),
               renderRows: ({ context }) => [
+                titleCase(context[0]),
                 table.pagination(Object.entries(context[1]), {
                   thead: [undefined, "move"],
-                  renderFirstRow: ({ context }) => titleCase(context[0]),
                   renderRows: ({ context }) => [
+                    titleCase(context[0]),
                     table.pagination(context[1], {
-                      renderFirstRow: ({ context }) => (
+                      renderRows: ({ context }) => [
                         <Link href={`/move/${context.name}`}>
                           {titleCase(context.name)}
-                        </Link>
-                      ),
+                        </Link>,
+                      ],
                     }),
                   ],
                 }),
@@ -145,11 +145,11 @@ export default Page(({ context }) => {
         [
           "learned_by_pokemon",
           table.pagination(move.learned_by_pokemon, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ]
       )}

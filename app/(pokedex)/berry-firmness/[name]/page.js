@@ -13,9 +13,9 @@ export default Page(({ context }) => {
   return tabs(Page.tabs.names(berryFirmness.names), [
     "berries",
     table.pagination(berryFirmness.berries, {
-      renderFirstRow: ({ context }) => (
-        <Link href={`/berry/${context.name}`}>{titleCase(context.name)}</Link>
-      ),
+      renderRows: ({ context }) => [
+        <Link href={`/berry/${context.name}`}>{titleCase(context.name)}</Link>,
+      ],
     }),
   ]);
 });

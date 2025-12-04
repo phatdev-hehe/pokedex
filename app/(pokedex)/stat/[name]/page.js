@@ -28,27 +28,27 @@ export default Page(({ context }) => {
         [
           "affecting_items",
           table.pagination(stat.affecting_items, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/item/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ],
         [
           "affecting_moves",
           table.pagination(Object.entries(stat.affecting_moves), {
             thead: ["set", undefined],
-            renderFirstRow: ({ context }) => titleCase(context[0]),
             renderRows: ({ context }) => [
+              titleCase(context[0]),
               table.pagination(Object.values(context[1]), {
                 thead: [undefined, "change"],
-                renderFirstRow: ({ context }) => (
+                renderRows: ({ context }) => [
                   <Link href={`/move/${context.move.name}`}>
                     {titleCase(context.move.name)}
-                  </Link>
-                ),
-                renderRows: ({ context }) => [context.change],
+                  </Link>,
+                  context.change,
+                ],
               }),
             ],
           }),
@@ -57,11 +57,11 @@ export default Page(({ context }) => {
           "affecting_natures",
           table.pagination(Object.entries(stat.affecting_natures), {
             thead: ["set", undefined],
-            renderFirstRow: ({ context }) => titleCase(context[0]),
             renderRows: ({ context }) => [
+              titleCase(context[0]),
               table.pagination(Object.values(context[1]), {
-                renderFirstRow: ({ context }) => [
-                  <Link key={context.name} href={`/nature/${context.name}`}>
+                renderRows: ({ context }) => [
+                  <Link href={`/nature/${context.name}`}>
                     {titleCase(context.name)}
                   </Link>,
                 ],

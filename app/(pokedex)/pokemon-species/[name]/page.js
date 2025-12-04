@@ -118,12 +118,10 @@ export default Page(({ context }) => {
           "varieties",
           table.pagination(pokemonSpecies.varieties, {
             thead: [undefined, "default"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [
+              </Link>,
               <Checkbox checked={context.is_default} />,
             ],
           }),
@@ -132,11 +130,11 @@ export default Page(({ context }) => {
         [
           "egg_groups",
           table.pagination(pokemonSpecies.egg_groups, {
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/egg-group/${context.name}`}>
                 {titleCase(context.name)}
-              </Link>
-            ),
+              </Link>,
+            ],
           }),
         ],
         Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries),
@@ -148,8 +146,8 @@ export default Page(({ context }) => {
           "genera",
           table.pagination(pokemonSpecies.genera, {
             thead: [undefined, "language"],
-            renderFirstRow: ({ context }) => context.genus,
             renderRows: ({ context }) => [
+              context.genus,
               <Pokedex.LanguageLink code={context.language.name} />,
             ],
           }),
@@ -158,20 +156,23 @@ export default Page(({ context }) => {
           "pal_park_encounters",
           table.pagination(pokemonSpecies.pal_park_encounters, {
             thead: ["area", "base_score", "rate"],
-            renderFirstRow: ({ context }) => titleCase(context.area.name),
-            renderRows: ({ context }) => [context.base_score, context.rate],
+            renderRows: ({ context }) => [
+              titleCase(context.area.name),
+              context.base_score,
+              context.rate,
+            ],
           }),
         ],
         [
           "pokedex_numbers",
           table.pagination(pokemonSpecies.pokedex_numbers, {
             thead: [undefined, "entry_number"],
-            renderFirstRow: ({ context }) => (
+            renderRows: ({ context }) => [
               <Link href={`/pokedex/${context.pokedex.name}`}>
                 {titleCase(context.pokedex.name)}
-              </Link>
-            ),
-            renderRows: ({ context }) => [context.entry_number],
+              </Link>,
+              context.entry_number,
+            ],
           }),
         ]
       )}
