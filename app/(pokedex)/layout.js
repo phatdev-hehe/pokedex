@@ -9,7 +9,6 @@ export default ({ children }) => (
     themeSwitch={{ mode: "light-dark-system" }}
     sidebar={{
       defaultOpenLevel: 1,
-      prefetch: false,
     }}
     nav={{
       title: <Logo />,
