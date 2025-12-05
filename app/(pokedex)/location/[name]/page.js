@@ -1,4 +1,4 @@
-import { highlighter, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -26,7 +26,11 @@ export default Page(({ context }) => {
         [
           "areas",
           table.pagination(location.areas, {
-            renderRows: ({ context }) => [titleCase(context.name)],
+            renderRows: ({ context }) => [
+              <Link href={`/location-area/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>,
+            ],
           }),
         ]
       )}

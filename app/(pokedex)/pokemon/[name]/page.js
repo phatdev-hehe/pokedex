@@ -127,7 +127,9 @@ export default Page(async ({ context }) => {
             {
               thead: [undefined, "version_details"],
               renderRows: ({ context }) => [
-                titleCase(context.location_area.name),
+                <Link href={`/location-area/${context.location_area.name}`}>
+                  {titleCase(context.location_area.name)}
+                </Link>,
                 Page.tabs.versionDetails(context.version_details)[1],
               ],
             }
