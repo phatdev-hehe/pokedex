@@ -128,39 +128,7 @@ export default Page(async ({ context }) => {
               thead: [undefined, "version_details"],
               renderRows: ({ context }) => [
                 titleCase(context.location_area.name),
-                table.pagination(context.version_details, {
-                  thead: [undefined, "max_chance", "encounter_details"],
-                  renderRows: ({ context }) => [
-                    <Link href={`/version/${context.version.name}`}>
-                      {titleCase(context.version.name)}
-                    </Link>,
-                    context.max_chance,
-                    table.pagination(context.encounter_details, {
-                      thead: [
-                        undefined,
-                        "chance",
-                        "min_level",
-                        "max_level",
-                        "condition_values",
-                      ],
-                      renderRows: ({ context }) => [
-                        titleCase(context.method.name),
-                        context.chance,
-                        context.min_level,
-                        context.max_level,
-                        table.pagination(context.condition_values, {
-                          renderRows: ({ context }) => [
-                            <Link
-                              href={`/encounter-condition-value/${context.name}`}
-                            >
-                              {titleCase(context.name)}
-                            </Link>,
-                          ],
-                        }),
-                      ],
-                    }),
-                  ],
-                }),
+                Page.tabs.versionDetails(context.version_details)[1],
               ],
             }
           ),
