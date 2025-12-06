@@ -1,6 +1,7 @@
-import { RootProvider } from "fumadocs-ui/provider/next";
+import { RootProvider as FumadocsUIProvider } from "fumadocs-ui/provider/next";
 import "fumadocs-ui/style.css";
 import { Geist } from "next/font/google";
+import { Provider as ReactWrapBalancerProvider } from "react-wrap-balancer";
 import "./css/globals.css";
 
 const font = Geist();
@@ -19,7 +20,9 @@ export default ({ children }) => (
         minHeight: "100dvh",
       }}
     >
-      <RootProvider>{children}</RootProvider>
+      <FumadocsUIProvider>
+        <ReactWrapBalancerProvider>{children}</ReactWrapBalancerProvider>
+      </FumadocsUIProvider>
     </body>
   </html>
 );

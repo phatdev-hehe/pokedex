@@ -7,6 +7,7 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import isPlainObject from "is-plain-obj";
 import { useId } from "react";
 import Highlighter from "react-highlight-words";
+import Balancer from "react-wrap-balancer";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
 
@@ -186,7 +187,7 @@ export const descriptionList = (term, ...descriptions) => (
             fontStyle: "initial",
           }}
         >
-          {description}
+          <Balancer>{description}</Balancer>
         </blockquote>
       ))}
     </dd>
