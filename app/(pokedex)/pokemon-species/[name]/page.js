@@ -157,7 +157,9 @@ export default Page(({ context }) => {
           table.pagination(pokemonSpecies.pal_park_encounters, {
             thead: ["area", "base_score", "rate"],
             renderRows: ({ context }) => [
-              titleCase(context.area.name),
+              <Link href={`/pal-park-area/${context.area.name}`}>
+                {titleCase(context.area.name)}
+              </Link>,
               context.base_score,
               context.rate,
             ],
