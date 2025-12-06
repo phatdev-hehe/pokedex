@@ -1,4 +1,12 @@
-import { audio, Checkbox, highlighter, Link, table, tabs } from "@/components";
+import {
+  audio,
+  Checkbox,
+  highlighter,
+  Link,
+  table,
+  tabs,
+  unit,
+} from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -42,6 +50,8 @@ export default Page(async ({ context }) => {
   return (
     <>
       {table(undefined, [
+        ["Height", unit(pokemon.height, "dm")],
+        ["Weight", unit(pokemon.weight, "hg")],
         [
           highlighter("The species this Pokémon belongs to.", "species"),
           <Link href={`/pokemon-species/${pokemon.species.name}`}>
@@ -61,14 +71,6 @@ export default Page(async ({ context }) => {
             "experience"
           ),
           pokemon.base_experience,
-        ],
-        [
-          highlighter("The height of this Pokémon in decimetres.", "height"),
-          pokemon.height,
-        ],
-        [
-          highlighter("The weight of this Pokémon in hectograms.", "weight"),
-          pokemon.weight,
         ],
       ])}
       {tabs(

@@ -1,6 +1,7 @@
 import { chunk, noop } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
+import convert from "convert";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
@@ -192,4 +193,10 @@ export const descriptionList = (term, ...descriptions) => (
       ))}
     </dd>
   </dl>
+);
+
+export const unit = (quantity, from, to = "best") => (
+  <span title={`${quantity} ${from}`}>
+    {convert(quantity, from).to(to).toString(1)}
+  </span>
 );
