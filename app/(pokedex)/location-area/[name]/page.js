@@ -16,10 +16,6 @@ export default Page(({ context }) => {
     <>
       {table(undefined, [
         [
-          "The internal id of an API resource within game data.",
-          locationArea.game_index,
-        ],
-        [
           "The region this location area can be found in.",
           <Link href={`/location/${locationArea.location.name}`}>
             {titleCase(locationArea.location.name)}
