@@ -1,8 +1,11 @@
 import { Link, table, tabs } from "@/components";
+import { Chart } from "@/components/chart";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 const title = "Home";
+const pageSeriesData = [];
+
 let [groupCount, routeCount, pageCount] = [0, 0, 0];
 
 const content = tabs(
@@ -19,6 +22,11 @@ const content = tabs(
 
               ++routeCount;
               pageCount += data.count;
+
+              pageSeriesData.push({
+                name: routeName,
+                y: data.count,
+              });
 
               return [
                 routeName,
@@ -58,6 +66,20 @@ export default () => (
       ],
     ]}
   >
-    {content}
+    {tabs(
+      ["content", content],
+      [
+        "chart",
+        <Chart
+          series={[
+            {
+              type: "line",
+              data: pageSeriesData,
+              options: { name: "Page" },
+            },
+          ]}
+        />,
+      ]
+    )}
   </Pokedex>
 );

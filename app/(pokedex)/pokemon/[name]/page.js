@@ -7,6 +7,7 @@ import {
   tabs,
   unit,
 } from "@/components";
+import { Chart } from "@/components/chart";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -77,26 +78,46 @@ export default Page(async ({ context }) => {
         Page.tabs.sprites(pokemon.sprites),
         [
           "stats",
-          table(
-            [undefined, "base_stat", "effort"],
-            pokemon.stats.map((statElement) => [
-              <Link href={`/stat/${statElement.stat.name}`}>
-                {titleCase(statElement.stat.name)}
-              </Link>,
-              statElement.base_stat,
-              statElement.effort,
-            ]),
-            <tr>
-              <th>Min/Max/Total</th>
-              <td>
-                {[
-                  Math.min(...pokemonBaseStats),
-                  Math.max(...pokemonBaseStats),
-                  pokemonBaseStats.reduce((a, b) => a + b, 0),
-                ].join("/")}
-              </td>
-              <td />
-            </tr>
+          tabs(
+            [
+              "content",
+              table(
+                [undefined, "base_stat", "effort"],
+                pokemon.stats.map((statElement) => [
+                  <Link href={`/stat/${statElement.stat.name}`}>
+                    {titleCase(statElement.stat.name)}
+                  </Link>,
+                  statElement.base_stat,
+                  statElement.effort,
+                ]),
+                <tr>
+                  <th>Min/Max/Total</th>
+                  <td>
+                    {[
+                      Math.min(...pokemonBaseStats),
+                      Math.max(...pokemonBaseStats),
+                      pokemonBaseStats.reduce((a, b) => a + b, 0),
+                    ].join("/")}
+                  </td>
+                  <td />
+                </tr>
+              ),
+            ],
+            [
+              "chart",
+              <Chart
+                series={[
+                  {
+                    type: "pie",
+                    data: pokemon.stats.map((statElement) => ({
+                      name: statElement.stat.name,
+                      y: statElement.base_stat,
+                    })),
+                    options: { name: "Base Stat" },
+                  },
+                ]}
+              />,
+            ]
           ),
         ],
         [

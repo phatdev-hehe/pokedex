@@ -9,6 +9,7 @@
     "react-dom": "^19.2.1"
   },
   "devDependencies": {
+    "@highcharts/react": "^4.1.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "change-case": "^5.4.4",
     "convert": "^5.13.1",
