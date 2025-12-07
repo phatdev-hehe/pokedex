@@ -25,7 +25,7 @@ export default Page(({ context }) => {
             "The region this Pokédex catalogues Pokémon for.",
             "region"
           ),
-          titleCase(pokedex.region?.name), // ??
+          titleCase(pokedex.region?.name),
         ],
       ])}
       {tabs(

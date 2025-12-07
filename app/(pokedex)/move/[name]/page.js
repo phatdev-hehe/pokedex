@@ -29,7 +29,7 @@ export default Page(({ context }) => {
           ),
           <Link href={`/contest-type/${contestType}`}>
             {titleCase(contestType)}
-          </Link>, // ??
+          </Link>,
         ],
         [
           "The type of damage the move inflicts on the target.",
@@ -80,24 +80,20 @@ export default Page(({ context }) => {
       {tabs(
         [
           "meta",
-          table(
-            undefined,
-            // ??
-            [
-              ["Ailment Chance", move.meta?.ailment_chance],
-              ["Ailment", titleCase(move.meta?.ailment.name)],
-              ["Category", titleCase(move.meta?.category.name)],
-              ["Crit Rate", move.meta?.crit_rate],
-              ["Drain", move.meta?.drain],
-              ["Flinch Chance", move.meta?.flinch_chance],
-              ["Healing", move.meta?.healing],
-              ["Max Hits", move.meta?.max_hits],
-              ["Max Turns", move.meta?.max_turns],
-              ["Min Hits", move.meta?.min_hits],
-              ["Min Turns", move.meta?.min_turns],
-              ["Stat Chance", move.meta?.stat_chance],
-            ]
-          ),
+          table(undefined, [
+            ["Ailment Chance", move.meta?.ailment_chance],
+            ["Ailment", titleCase(move.meta?.ailment.name)],
+            ["Category", titleCase(move.meta?.category.name)],
+            ["Crit Rate", move.meta?.crit_rate],
+            ["Drain", move.meta?.drain],
+            ["Flinch Chance", move.meta?.flinch_chance],
+            ["Healing", move.meta?.healing],
+            ["Max Hits", move.meta?.max_hits],
+            ["Max Turns", move.meta?.max_turns],
+            ["Min Hits", move.meta?.min_hits],
+            ["Min Turns", move.meta?.min_turns],
+            ["Stat Chance", move.meta?.stat_chance],
+          ]),
         ],
         Page.tabs.names(move.names),
         [
@@ -114,30 +110,25 @@ export default Page(({ context }) => {
         ],
         [
           "contest_combos",
-          table.pagination(
-            Object.entries(
-              move?.contest_combos ?? [] // ??
-            ),
-            {
-              thead: ["set", "detail"],
-              renderRows: ({ context }) => [
-                titleCase(context[0]),
-                table.pagination(Object.entries(context[1]), {
-                  thead: [undefined, "move"],
-                  renderRows: ({ context }) => [
-                    titleCase(context[0]),
-                    table.pagination(context[1], {
-                      renderRows: ({ context }) => [
-                        <Link href={`/move/${context.name}`}>
-                          {titleCase(context.name)}
-                        </Link>,
-                      ],
-                    }),
-                  ],
-                }),
-              ],
-            }
-          ),
+          table.pagination(Object.entries(move?.contest_combos ?? {}), {
+            thead: ["set", "detail"],
+            renderRows: ({ context }) => [
+              titleCase(context[0]),
+              table.pagination(Object.entries(context[1]), {
+                thead: [undefined, "move"],
+                renderRows: ({ context }) => [
+                  titleCase(context[0]),
+                  table.pagination(context[1], {
+                    renderRows: ({ context }) => [
+                      <Link href={`/move/${context.name}`}>
+                        {titleCase(context.name)}
+                      </Link>,
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
         ],
         Page.tabs.effectChanges(move.effect_changes),
         Page.tabs.effectEntries(move.effect_entries),

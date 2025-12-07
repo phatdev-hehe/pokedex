@@ -31,7 +31,7 @@ export default Page(({ context }) => {
         ],
         [
           "The class of damage inflicted by this type.",
-          titleCase(type.move_damage_class?.name), // ??
+          titleCase(type.move_damage_class?.name),
         ],
       ])}
       {tabs(

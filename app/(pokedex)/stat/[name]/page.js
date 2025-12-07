@@ -19,7 +19,7 @@ export default Page(({ context }) => {
         ],
         [
           "The class of damage this stat is directly related to.",
-          titleCase(stat.move_damage_class?.name), // ??
+          titleCase(stat.move_damage_class?.name),
         ],
       ])}
       {tabs(
