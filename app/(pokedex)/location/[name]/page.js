@@ -9,7 +9,7 @@ const Page = await Pokedex.createDetailPage("location", {
 export const { generateMetadata, generateStaticParams } = Page;
 
 export default Page(({ context }) => {
-  /** @type Location1 */
+  /** @type PokedexLocation */
   const location = context.data;
 
   return (
