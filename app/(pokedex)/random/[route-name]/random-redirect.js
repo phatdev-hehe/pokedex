@@ -2,7 +2,7 @@
 
 import { RouterActions } from "@/components/router-actions";
 import { RouterPush } from "@/components/router-push";
-import { randomItem } from "@/utils";
+import { sample } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ export default ({ links }) => {
   const [state, setState] = useState();
 
   useEffect(() => {
-    setState(randomItem(links));
+    setState(sample(links));
   }, []);
 
   return (

@@ -1,11 +1,10 @@
-import { chunk, noop } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
 import convert from "convert";
+import { chunk, isPlainObject, noop } from "es-toolkit";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import isPlainObject from "is-plain-obj";
 import { useId } from "react";
 import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
