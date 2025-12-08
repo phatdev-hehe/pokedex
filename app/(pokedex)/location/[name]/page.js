@@ -3,7 +3,7 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.createDetailPage("location", {
-  staticLimit: 100,
+  staticLimit: process.env.DEFAULT_STATIC_LIMIT,
 });
 
 export const { generateMetadata, generateStaticParams } = Page;
