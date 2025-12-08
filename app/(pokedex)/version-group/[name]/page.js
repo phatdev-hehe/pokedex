@@ -43,7 +43,11 @@ export default Page(({ context }) => {
         [
           "regions",
           table.pagination(versionGroup.regions, {
-            renderRows: ({ context }) => [titleCase(context.name)],
+            renderRows: ({ context }) => [
+              <Link href={`/region/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>,
+            ],
           }),
         ],
         [

@@ -17,7 +17,9 @@ export default Page(({ context }) => {
       {table(undefined, [
         [
           highlighter("The region this location can be found in.", "region"),
-          titleCase(location.region.name),
+          <Link href={`/region/${location.region.name}`}>
+            {titleCase(location.region.name)}
+          </Link>,
         ],
       ])}
       {tabs(

@@ -10,6 +10,8 @@ export default Page(({ context }) => {
   /** @type Pokedex */
   const pokedex = context.data;
 
+  const region = pokedex.region?.name;
+
   return (
     <>
       {table(undefined, [
@@ -25,7 +27,7 @@ export default Page(({ context }) => {
             "The region this Pokédex catalogues Pokémon for.",
             "region"
           ),
-          titleCase(pokedex.region?.name),
+          <Link href={`/region/${region}`}>{titleCase(region)}</Link>,
         ],
       ])}
       {tabs(

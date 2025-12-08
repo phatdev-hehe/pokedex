@@ -18,7 +18,9 @@ export default Page(({ context }) => {
             "The main region travelled in this generation.",
             "main region"
           ),
-          titleCase(generation.main_region.name),
+          <Link href={`/region/${generation.main_region.name}`}>
+            {titleCase(generation.main_region.name)}
+          </Link>,
         ],
       ])}
       {tabs(
