@@ -1,0 +1,41 @@
+import { highlighter, Link, table } from "@/components";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
+
+const Page = await Pokedex.createDetailPage("machine", {
+  staticLimit: process.env.DEFAULT_STATIC_LIMIT,
+});
+
+export const { generateMetadata, generateStaticParams } = Page;
+
+export default Page(({ context }) => {
+  /** @type Machine */
+  const machine = context.data;
+
+  return table(undefined, [
+    [
+      highlighter(
+        "The TM or HM item that corresponds to this machine.",
+        "item"
+      ),
+      <Link href={`/item/${machine.item.name}`}>
+        {titleCase(machine.item.name)}
+      </Link>,
+    ],
+    [
+      highlighter("The move that is taught by this machine.", "move"),
+      <Link href={`/move/${machine.move.name}`}>
+        {titleCase(machine.move.name)}
+      </Link>,
+    ],
+    [
+      highlighter(
+        "The version group that this machine applies to.",
+        "version group"
+      ),
+      <Link href={`/version-group/${machine.version_group.name}`}>
+        {titleCase(machine.version_group.name)}
+      </Link>,
+    ],
+  ]);
+});
