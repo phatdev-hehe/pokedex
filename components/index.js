@@ -121,7 +121,7 @@ export const tabs = (...tabs) => (
           value={titleCase(tab[0])}
           key={id}
         >
-          {tab[1] ?? <Callout title="No Content" />}
+          {tab[1] ?? noContent()}
         </Tab>
       );
     })}
@@ -198,3 +198,5 @@ export const unit = (quantity, from, to = "best") => (
     {convert(quantity, from).to(to).toString(1)}
   </span>
 );
+
+export const noContent = () => <Callout title="No Content" />;
