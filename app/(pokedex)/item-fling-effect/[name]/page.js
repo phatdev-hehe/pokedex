@@ -1,4 +1,4 @@
-import { table, tabs } from "@/components";
+import { tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("item-fling-effect");
@@ -10,15 +10,7 @@ export default Page(({ context }) => {
   const itemFlingEffect = context.data;
 
   return tabs(
-    [
-      "effect_entries",
-      table.pagination(itemFlingEffect.effect_entries, {
-        renderRows: ({ context }) => [
-          context.effect,
-          <Pokedex.LanguageLink language={context.language} />,
-        ],
-      }),
-    ],
-    Page.tabs.items(itemFlingEffect.items)
+    Page.tabs.items(itemFlingEffect.items),
+    Page.tabs.effectEntries(itemFlingEffect.effect_entries)
   );
 });
