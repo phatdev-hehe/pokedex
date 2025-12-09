@@ -4,11 +4,27 @@ import { titleCase } from "@/utils/title-case";
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
+const sidebar = [];
+
+for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
+  sidebar.push({
+    type: "separator",
+    name: titleCase(key),
+  });
+
+  for (const key of Object.keys(value))
+    sidebar.push({
+      name: titleCase(key),
+      url: `/${key}`,
+    });
+}
+
 export default ({ children }) => (
   <DocsLayout
     themeSwitch={{ mode: "light-dark-system" }}
     sidebar={{
-      defaultOpenLevel: 1,
+      // defaultOpenLevel: 1,
+      prefetch: false,
     }}
     nav={{
       title: <Logo />,
@@ -17,55 +33,41 @@ export default ({ children }) => (
     githubUrl="https://github.com/phatdev-hehe/pokedex"
     tree={{
       children: [
-        ...Object.entries(Pokedex.api.routeMap).map(([key, value]) => ({
-          defaultOpen: false,
-          type: "folder",
-          name: titleCase(key),
-          children: Object.keys(value).map((value) => ({
-            name: titleCase(value),
-            url: `/${value}`,
-          })),
-        })),
+        {
+          name: "Home",
+          url: "/",
+        },
+        {
+          name: "sitemap.xml",
+          url: "/sitemap.xml",
+        },
+        {
+          name: "robots.txt",
+          url: "/robots.txt",
+        },
+        {
+          name: "local-data.js",
+          url: "/api/local-data",
+        },
         {
           type: "folder",
-          name: "More",
+          name: "Feed",
           children: [
             {
-              name: "Home",
-              url: "/",
+              name: "rss2.xml",
+              url: "/api/feed/rss2",
             },
             {
-              name: "sitemap.xml",
-              url: "/sitemap.xml",
+              name: "atom1.xml",
+              url: "/api/feed/atom1",
             },
             {
-              name: "robots.txt",
-              url: "/robots.txt",
-            },
-            {
-              name: "local-data.js",
-              url: "/api/local-data",
-            },
-            {
-              type: "folder",
-              name: "Feed",
-              children: [
-                {
-                  name: "rss2.xml",
-                  url: "/api/feed/rss2",
-                },
-                {
-                  name: "atom1.xml",
-                  url: "/api/feed/atom1",
-                },
-                {
-                  name: "json1.json",
-                  url: "/api/feed/json1",
-                },
-              ],
+              name: "json1.json",
+              url: "/api/feed/json1",
             },
           ],
         },
+        ...sidebar,
       ],
     }}
   >
