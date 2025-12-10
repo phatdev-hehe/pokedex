@@ -207,7 +207,11 @@ export default Page(async ({ context }) => {
                 renderRows: ({ context }) => [
                   context.order,
                   context.level_learned_at,
-                  titleCase(context.move_learn_method.name),
+                  <Link
+                    href={`/move-learn-method/${context.move_learn_method.name}`}
+                  >
+                    {titleCase(context.move_learn_method.name)}
+                  </Link>,
                   <Link href={`/version-group/${context.version_group.name}`}>
                     {titleCase(context.version_group.name)}
                   </Link>,

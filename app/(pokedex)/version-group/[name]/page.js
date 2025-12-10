@@ -27,7 +27,11 @@ export default Page(({ context }) => {
         [
           "move_learn_methods",
           table.pagination(versionGroup.move_learn_methods, {
-            renderRows: ({ context }) => [titleCase(context.name)],
+            renderRows: ({ context }) => [
+              <Link href={`/move-learn-method/${context.name}`}>
+                {titleCase(context.name)}
+              </Link>,
+            ],
           }),
         ],
         [
