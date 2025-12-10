@@ -12,6 +12,7 @@ export default Page(({ context }) => {
 
   const contestType = move.contest_type?.name;
   const ailment = move.meta?.ailment.name;
+  const category = move.meta?.category.name;
 
   move.machines;
   move.super_contest_effect;
@@ -89,7 +90,12 @@ export default Page(({ context }) => {
                 {titleCase(ailment)}
               </Link>,
             ],
-            ["Category", titleCase(move.meta?.category.name)],
+            [
+              "Category",
+              <Link href={`/move-category/${category}`}>
+                {titleCase(category)}
+              </Link>,
+            ],
             ["Crit Rate", move.meta?.crit_rate],
             ["Drain", move.meta?.drain],
             ["Flinch Chance", move.meta?.flinch_chance],
