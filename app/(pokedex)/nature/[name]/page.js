@@ -62,7 +62,11 @@ export default Page(({ context }) => {
           table.pagination(nature.move_battle_style_preferences, {
             thead: [undefined, "high_hp_preference", "low_hp_preference"],
             renderRows: ({ context }) => [
-              titleCase(context.move_battle_style.name),
+              <Link
+                href={`/move-battle-style/${context.move_battle_style.name}`}
+              >
+                {titleCase(context.move_battle_style.name)}
+              </Link>,
               context.high_hp_preference,
               context.low_hp_preference,
             ],
