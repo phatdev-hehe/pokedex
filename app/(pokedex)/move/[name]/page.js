@@ -11,6 +11,7 @@ export default Page(({ context }) => {
   const move = context.data;
 
   const contestType = move.contest_type?.name;
+  const ailment = move.meta?.ailment.name;
 
   move.machines;
   move.super_contest_effect;
@@ -82,7 +83,12 @@ export default Page(({ context }) => {
           "meta",
           table(undefined, [
             ["Ailment Chance", move.meta?.ailment_chance],
-            ["Ailment", titleCase(move.meta?.ailment.name)],
+            [
+              "Ailment",
+              <Link href={`/move-ailment/${ailment}`}>
+                {titleCase(ailment)}
+              </Link>,
+            ],
             ["Category", titleCase(move.meta?.category.name)],
             ["Crit Rate", move.meta?.crit_rate],
             ["Drain", move.meta?.drain],
