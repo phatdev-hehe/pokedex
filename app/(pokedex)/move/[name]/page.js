@@ -2,7 +2,9 @@ import { highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("move");
+const Page = await Pokedex.createDetailPage("move", {
+  staticLimit: process.env.DEFAULT_STATIC_LIMIT,
+});
 
 export const { generateMetadata, generateStaticParams } = Page;
 
