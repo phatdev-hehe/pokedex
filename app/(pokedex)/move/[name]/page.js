@@ -72,7 +72,9 @@ export default Page(({ context }) => {
             "The type of target that will receive the effects of the attack.",
             "target"
           ),
-          titleCase(move.target.name),
+          <Link href={`/move-target/${move.target.name}`}>
+            {titleCase(move.target.name)}
+          </Link>,
         ],
         [
           highlighter("The elemental type of this move.", "type"),
