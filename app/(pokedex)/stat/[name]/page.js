@@ -10,6 +10,8 @@ export default Page(({ context }) => {
   /** @type Stat */
   const stat = context.data;
 
+  const moveDamageClass = stat.move_damage_class?.name;
+
   return (
     <>
       {table(undefined, [
@@ -19,7 +21,9 @@ export default Page(({ context }) => {
         ],
         [
           "The class of damage this stat is directly related to.",
-          titleCase(stat.move_damage_class?.name),
+          <Link href={`/move-damage-class/${moveDamageClass}`}>
+            {titleCase(moveDamageClass)}
+          </Link>,
         ],
       ])}
       {tabs(

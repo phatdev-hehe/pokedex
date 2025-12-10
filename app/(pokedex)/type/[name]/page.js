@@ -17,6 +17,8 @@ export default Page(({ context }) => {
   /** @type Type */
   const type = context.data;
 
+  const moveDamageClass = type.move_damage_class?.name;
+
   return (
     <>
       {table(undefined, [
@@ -31,7 +33,9 @@ export default Page(({ context }) => {
         ],
         [
           "The class of damage inflicted by this type.",
-          titleCase(type.move_damage_class?.name),
+          <Link href={`/move-damage-class/${moveDamageClass}`}>
+            {titleCase(moveDamageClass)}
+          </Link>,
         ],
       ])}
       {tabs(
