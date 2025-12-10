@@ -35,7 +35,9 @@ export default Page(({ context }) => {
         ],
         [
           "The type of damage the move inflicts on the target.",
-          titleCase(move.damage_class.name),
+          <Link href={`/move-damage-class/${move.damage_class.name}`}>
+            {titleCase(move.damage_class.name)}
+          </Link>,
         ],
         [
           highlighter(
