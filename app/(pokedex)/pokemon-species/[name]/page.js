@@ -1,3 +1,4 @@
+import { evolutionChainTable } from "@/app/(pokedex)/evolution-chain/[name]/page";
 import { Checkbox, highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
@@ -6,7 +7,7 @@ const Page = await Pokedex.createDetailPage("pokemon-species");
 
 export const { generateMetadata, generateStaticParams } = Page;
 
-export default Page(({ context }) => {
+export default Page(async ({ context }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = context.data;
 
@@ -114,6 +115,7 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs(
+        Page.tabs.names(pokemonSpecies.names),
         [
           "varieties",
           table.pagination(pokemonSpecies.varieties, {
@@ -126,7 +128,12 @@ export default Page(({ context }) => {
             ],
           }),
         ],
-        Page.tabs.names(pokemonSpecies.names),
+        [
+          "evolution_chain",
+          evolutionChainTable(
+            await Pokedex.api.getResource(pokemonSpecies.evolution_chain.url)
+          ),
+        ],
         [
           "egg_groups",
           table.pagination(pokemonSpecies.egg_groups, {

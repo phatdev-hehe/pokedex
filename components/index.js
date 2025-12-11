@@ -1,11 +1,11 @@
 import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
 import convert from "convert";
-import { chunk, flow, isPlainObject, noop } from "es-toolkit";
+import { chunk, flow, identity, isPlainObject, noop } from "es-toolkit";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { useId } from "react";
+import { isValidElement, useId } from "react";
 import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
@@ -36,7 +36,9 @@ export const table = Object.assign(
           <thead>
             <tr>
               {thead.map((value, key) => (
-                <th key={key}>{titleCase(value)}</th>
+                <th key={key}>
+                  {(isValidElement(value) ? identity : titleCase)(value)}
+                </th>
               ))}
             </tr>
           </thead>
