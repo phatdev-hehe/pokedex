@@ -73,7 +73,7 @@ export default () => (
         <Chart
           series={[
             {
-              type: "line",
+              type: "pie",
               data: pageSeriesData,
               options: { name: "Page" },
             },

@@ -1,7 +1,6 @@
 "use client";
 
-import { RouterActions } from "@/components/router-actions";
-import { RouterPush } from "@/components/router-push";
+import { RouterActions, RouterPush } from "@/components/router";
 import { sample } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { useEffect, useState } from "react";

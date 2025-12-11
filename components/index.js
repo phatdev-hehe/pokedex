@@ -1,7 +1,7 @@
 import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
 import convert from "convert";
-import { chunk, isPlainObject, noop } from "es-toolkit";
+import { chunk, flow, isPlainObject, noop } from "es-toolkit";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
@@ -12,7 +12,7 @@ import romanize from "romanize";
 
 export { default as Link } from "fumadocs-core/link";
 
-const formatId = (value) => kebabCase(removeAccents(value));
+const formatId = flow(removeAccents, kebabCase);
 
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
@@ -173,25 +173,6 @@ export const Checkbox = ({ checked, children }) => {
     </div>
   );
 };
-
-export const descriptionList = (term, ...descriptions) => (
-  <dl>
-    <dt>{titleCase(term)}</dt>
-    <dd>
-      {descriptions.map((description, index) => (
-        <blockquote
-          key={index}
-          style={{
-            fontWeight: "initial",
-            fontStyle: "initial",
-          }}
-        >
-          {description}
-        </blockquote>
-      ))}
-    </dd>
-  </dl>
-);
 
 export const unit = (quantity, from, to = "best") => (
   <span title={`${quantity} ${from}`}>
