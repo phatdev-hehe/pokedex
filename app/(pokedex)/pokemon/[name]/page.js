@@ -123,13 +123,13 @@ export default Page(async ({ context }) => {
         [
           "abilities",
           table.pagination(pokemon.abilities, {
-            thead: [undefined, "slot", "hidden"],
+            thead: [undefined, "hidden", "slot"],
             renderRows: ({ context }) => [
               <Link href={`/ability/${context.ability.name}`}>
                 {titleCase(context.ability.name)}
               </Link>,
-              context.slot,
               <Checkbox checked={context.is_hidden} />,
+              context.slot,
             ],
           }),
         ],
