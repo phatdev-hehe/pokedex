@@ -1,7 +1,6 @@
 import { kebabCase } from "change-case";
 import convert from "convert";
 import { chunk, flow, identity, isPlainObject, noop } from "es-toolkit";
-import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { isValidElement, useId } from "react";
@@ -133,20 +132,6 @@ export const tabs = (...tabs) => {
       </Tabs>
     );
 };
-
-export const accordions = (...accordions) => (
-  <Accordions>
-    {accordions.map((accordion) => {
-      const id = formatId(accordion[0]);
-
-      return (
-        <Accordion id={id} key={id} title={titleCase(accordion[0])}>
-          {accordion[1]}
-        </Accordion>
-      );
-    })}
-  </Accordions>
-);
 
 export const ul = (...values) => (
   <ul>
