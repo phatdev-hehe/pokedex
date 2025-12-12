@@ -22,10 +22,6 @@ for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
 export default ({ children }) => (
   <DocsLayout
     themeSwitch={{ mode: "light-dark-system" }}
-    sidebar={{
-      // defaultOpenLevel: 1,
-      prefetch: false,
-    }}
     nav={{
       title: <Logo />,
       url: "/random/pokemon",

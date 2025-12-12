@@ -9,7 +9,7 @@ const withDefaultProps = (values) => ({
 export default async () => [
   ...Pokedex.api.routeNames.map((routeName) =>
     withDefaultProps({
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/${routeName}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${routeName}`,
     })
   ),
   ...(
@@ -20,7 +20,7 @@ export default async () => [
         ).results.map((item) =>
           withDefaultProps({
             url: `${
-              process.env.NEXT_PUBLIC_BASE_URL
+              process.env.NEXT_PUBLIC_SITE_URL
             }/${routeName}/${encodeURIComponent(item.name)}`,
           })
         )
