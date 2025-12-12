@@ -93,6 +93,7 @@ export const evolutionChainPage = (evolution_chain) => {
                         {titleCase(partyType)}
                       </Link>,
                     ],
+                    ["region_id", evolutionDetail.region_id],
                     [
                       "relative_physical_stats",
                       evolutionDetail.relative_physical_stats,

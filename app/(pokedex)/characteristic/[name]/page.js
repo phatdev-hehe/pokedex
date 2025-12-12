@@ -23,15 +23,11 @@ export default Page(({ context }) => {
             {titleCase(characteristic.highest_stat.name)}
           </Link>,
         ],
-        [
-          highlighter(
-            "The possible values of the highest stat that would result in a Pokémon recieving this characteristic when divided by 5.",
-            "possible values"
-          ),
-          ul(...characteristic.possible_values),
-        ],
       ])}
-      {tabs(Page.tabs.descriptions(characteristic.descriptions))}
+      {tabs(Page.tabs.descriptions(characteristic.descriptions), [
+        "possible_values",
+        ul(...characteristic.possible_values),
+      ])}
     </>
   );
 });

@@ -77,7 +77,9 @@ export default Page(({ context }) => {
           table.pagination(nature.pokeathlon_stat_changes, {
             thead: [undefined, "max_change"],
             renderRows: ({ context }) => [
-              titleCase(context.pokeathlon_stat.name),
+              <Link href={`/pokeathlon-stat/${context.pokeathlon_stat.name}`}>
+                {titleCase(context.pokeathlon_stat.name)}
+              </Link>,
               context.max_change,
             ],
           }),

@@ -1,4 +1,4 @@
-import { highlighter, Link, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs, ul } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -57,16 +57,16 @@ export default Page(({ context }) => {
         [
           "damage_relations",
           table.pagination(Object.entries(type.damage_relations), {
-            thead: [undefined, "Type"],
+            thead: [undefined, "type"],
             renderRows: ({ context }) => [
               titleCase(context[0]),
-              table.pagination(context[1], {
-                renderRows: ({ context }) => [
-                  <Link href={`/type/${context.name}`}>
-                    {titleCase(context.name)}
-                  </Link>,
-                ],
-              }),
+              ul(
+                ...context[1].map((type) => (
+                  <Link href={`/type/${type.name}`}>
+                    {titleCase(type.name)}
+                  </Link>
+                ))
+              ),
             ],
           }),
         ],
