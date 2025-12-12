@@ -6,4 +6,11 @@ export default defineConfig([
   ...nextVitals,
   perfectionist.configs["recommended-natural"],
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  {
+    rules: {
+      "import/no-anonymous-default-export": "off",
+      "react/display-name": "off",
+      "react/jsx-key": "off",
+    },
+  },
 ]);
