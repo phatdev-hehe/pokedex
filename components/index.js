@@ -1,9 +1,9 @@
 import { kebabCase } from "change-case";
 import convert from "convert";
-import { chunk, flow, identity, isPlainObject, noop } from "es-toolkit";
+import { chunk, flow, isPlainObject, noop } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { isValidElement, useId } from "react";
+import { useId } from "react";
 import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
@@ -36,9 +36,7 @@ export const table = Object.assign(
           <thead>
             <tr>
               {thead.map((value, key) => (
-                <th key={key}>
-                  {(isValidElement(value) ? identity : titleCase)(value)}
-                </th>
+                <th key={key}>{titleCase(value)}</th>
               ))}
             </tr>
           </thead>
