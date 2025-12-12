@@ -1,4 +1,4 @@
-import { evolutionChainTable } from "@/app/(pokedex)/evolution-chain/[name]/page";
+import { evolutionChainPage } from "@/app/(pokedex)/evolution-chain/[name]/page";
 import { Checkbox, highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
@@ -130,7 +130,7 @@ export default Page(async ({ context }) => {
         ],
         [
           "evolution_chain",
-          evolutionChainTable(
+          evolutionChainPage(
             await Pokedex.api.getResource(pokemonSpecies.evolution_chain.url)
           ),
         ],

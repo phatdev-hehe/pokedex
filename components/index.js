@@ -111,24 +111,27 @@ export const table = Object.assign(
   }
 );
 
-export const tabs = (...tabs) => (
-  <Tabs updateAnchor items={tabs.map((tab) => titleCase(tab[0]))}>
-    {tabs.map((tab) => {
-      const id = formatId(tab[0]);
+export const tabs = (...tabs) => {
+  if (tabs.length)
+    return (
+      <Tabs updateAnchor items={tabs.map((tab) => titleCase(tab[0]))}>
+        {tabs.map((tab) => {
+          const id = formatId(tab[0]);
 
-      return (
-        <Tab
-          style={{ overflow: "auto" }}
-          id={id}
-          value={titleCase(tab[0])}
-          key={id}
-        >
-          {tab[1] ?? noContent()}
-        </Tab>
-      );
-    })}
-  </Tabs>
-);
+          return (
+            <Tab
+              style={{ overflow: "auto" }}
+              id={id}
+              value={titleCase(tab[0])}
+              key={id}
+            >
+              {tab[1] ?? noContent()}
+            </Tab>
+          );
+        })}
+      </Tabs>
+    );
+};
 
 export const accordions = (...accordions) => (
   <Accordions>
