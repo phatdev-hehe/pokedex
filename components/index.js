@@ -1,4 +1,3 @@
-import { titleCase } from "@/utils/title-case";
 import { kebabCase } from "change-case";
 import convert from "convert";
 import { chunk, flow, identity, isPlainObject, noop } from "es-toolkit";
@@ -10,21 +9,23 @@ import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
 
+import { titleCase } from "@/utils/title-case";
+
 export { default as Link } from "fumadocs-core/link";
 
 const formatId = flow(removeAccents, kebabCase);
 
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
+    caseSensitive
     highlightStyle={{
       backgroundColor: "var(--color-fd-accent)",
       color: "var(--color-fd-accent-foreground)",
       letterSpacing: "-0.05ch",
     }}
-    caseSensitive
     highlightTag="code"
-    textToHighlight={textToHighlight}
     searchWords={searchWords}
+    textToHighlight={textToHighlight}
   />
 );
 
@@ -57,7 +58,7 @@ export const table = Object.assign(
   },
   {
     pagination: Object.assign(
-      (items, { thead, renderRows = noop, showIndex = true }) => {
+      (items, { renderRows = noop, showIndex = true, thead }) => {
         if (items && items.length) {
           const chunkSize = 100;
 
@@ -114,16 +115,16 @@ export const table = Object.assign(
 export const tabs = (...tabs) => {
   if (tabs.length)
     return (
-      <Tabs updateAnchor items={tabs.map((tab) => titleCase(tab[0]))}>
+      <Tabs items={tabs.map((tab) => titleCase(tab[0]))} updateAnchor>
         {tabs.map((tab) => {
           const id = formatId(tab[0]);
 
           return (
             <Tab
-              style={{ overflow: "auto" }}
               id={id}
-              value={titleCase(tab[0])}
               key={id}
+              style={{ overflow: "auto" }}
+              value={titleCase(tab[0])}
             >
               {tab[1] ?? noContent()}
             </Tab>
@@ -139,7 +140,7 @@ export const accordions = (...accordions) => (
       const id = formatId(accordion[0]);
 
       return (
-        <Accordion key={id} id={id} title={titleCase(accordion[0])}>
+        <Accordion id={id} key={id} title={titleCase(accordion[0])}>
           {accordion[1]}
         </Accordion>
       );
@@ -168,11 +169,11 @@ export const Checkbox = ({ checked, children }) => {
       }}
     >
       <input
-        id={id}
+        checked={checked}
         disabled={!checked}
+        id={id}
         readOnly
         type="checkbox"
-        checked={checked}
       />
       <label htmlFor={id}>{children}</label>
     </div>

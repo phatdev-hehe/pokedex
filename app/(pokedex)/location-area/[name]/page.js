@@ -27,33 +27,33 @@ export default Page(({ context }) => {
         [
           "encounter_method_rates",
           table.pagination(locationArea.encounter_method_rates, {
-            thead: [undefined, "version_details"],
             renderRows: ({ context }) => [
               <Link href={`/encounter-method/${context.encounter_method.name}`}>
                 {titleCase(context.encounter_method.name)}
               </Link>,
               table.pagination(context.version_details, {
-                thead: [undefined, "rate"],
                 renderRows: ({ context }) => [
                   <Link href={`/version/${context.version.name}`}>
                     {titleCase(context.version.name)}
                   </Link>,
                   context.rate,
                 ],
+                thead: [undefined, "rate"],
               }),
             ],
+            thead: [undefined, "version_details"],
           }),
         ],
         [
           "pokemon_encounters",
           table.pagination(locationArea.pokemon_encounters, {
-            thead: [undefined, "version_details"],
             renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
               </Link>,
               Page.tabs.versionDetails(context.version_details)[1],
             ],
+            thead: [undefined, "version_details"],
           }),
         ]
       )}

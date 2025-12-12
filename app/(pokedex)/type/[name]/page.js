@@ -44,20 +44,19 @@ export default Page(({ context }) => {
         [
           "pokemon",
           table.pagination(type.pokemon, {
-            thead: [undefined, "slot"],
             renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
               </Link>,
               context.slot,
             ],
+            thead: [undefined, "slot"],
           }),
         ],
         Page.tabs.moves(type.moves),
         [
           "damage_relations",
           table.pagination(Object.entries(type.damage_relations), {
-            thead: [undefined, "type"],
             renderRows: ({ context }) => [
               titleCase(context[0]),
               ul(
@@ -68,6 +67,7 @@ export default Page(({ context }) => {
                 ))
               ),
             ],
+            thead: [undefined, "type"],
           }),
         ],
         Page.tabs.gameIndices(type.game_indices)

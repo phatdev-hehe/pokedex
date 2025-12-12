@@ -65,13 +65,13 @@ export default Page(({ context }) => {
       {tabs([
         "flavors",
         table.pagination(berry.flavors, {
-          thead: [undefined, "potency"],
           renderRows: ({ context }) => [
             <Link href={`/berry-flavor/${context.flavor.name}`}>
               {titleCase(context.flavor.name)}
             </Link>,
             context.potency,
           ],
+          thead: [undefined, "potency"],
         }),
       ])}
     </>

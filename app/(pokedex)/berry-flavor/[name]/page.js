@@ -26,13 +26,13 @@ export default Page(({ context }) => {
       {tabs(Page.tabs.names(berryFlavor.names), [
         "berries",
         table.pagination(berryFlavor.berries, {
-          thead: [undefined, "potency"],
           renderRows: ({ context }) => [
             <Link href={`/berry/${context.berry.name}`}>
               {titleCase(context.berry.name)}
             </Link>,
             context.potency,
           ],
+          thead: [undefined, "potency"],
         }),
       ])}
     </>

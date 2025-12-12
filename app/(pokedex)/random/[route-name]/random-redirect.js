@@ -1,9 +1,10 @@
 "use client";
 
-import { RouterActions, RouterPush } from "@/components/router";
 import { sample } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { useEffect, useState } from "react";
+
+import { RouterActions, RouterPush } from "@/components/router";
 
 export default ({ links }) => {
   const [state, setState] = useState();
@@ -13,7 +14,7 @@ export default ({ links }) => {
   }, []);
 
   return (
-    <Callout type="warn" title="Redirecting to">
+    <Callout title="Redirecting to" type="warn">
       <RouterPush href={state} />
       <RouterActions />
     </Callout>

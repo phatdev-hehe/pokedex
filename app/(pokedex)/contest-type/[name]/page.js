@@ -26,12 +26,12 @@ export default Page(({ context }) => {
       {tabs([
         "names",
         table.pagination(contestType.names, {
-          thead: [undefined, "language", "color"],
           renderRows: ({ context }) => [
             context.name,
             <Pokedex.LanguageLink language={context.language} />,
             context.color,
           ],
+          thead: [undefined, "language", "color"],
         }),
       ])}
     </>

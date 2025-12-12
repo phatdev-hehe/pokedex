@@ -1,7 +1,8 @@
+import { Feed } from "feed";
+
 import data from "@/app/api/local-data/data.json";
 import { getOpengraphUrl } from "@/utils";
 import { titleCase } from "@/utils/title-case";
-import { Feed } from "feed";
 
 export const feed = new Feed({
   id: process.env.NEXT_PUBLIC_SITE_URL,
@@ -17,12 +18,12 @@ for (const [key, value] of Object.entries(data)) {
     const title = titleCase(value1);
 
     feed.addItem({
-      title,
-      id: link,
-      link,
       category: [{ name: categoryName }],
-      image: getOpengraphUrl({ title: `${title} (${categoryName})` }),
       date: new Date(),
+      id: link,
+      image: getOpengraphUrl({ title: `${title} (${categoryName})` }),
+      link,
+      title,
     });
   }
 }

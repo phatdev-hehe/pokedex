@@ -1,8 +1,8 @@
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const withDefaultProps = (values) => ({
-  lastModified: new Date(),
   changeFrequency: "yearly",
+  lastModified: new Date(),
   ...values,
 });
 

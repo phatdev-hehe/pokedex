@@ -2,15 +2,16 @@ import { RootProvider as FumadocsUIProvider } from "fumadocs-ui/provider/next";
 import "fumadocs-ui/style.css";
 import { Geist } from "next/font/google";
 import { Provider as ReactWrapBalancerProvider } from "react-wrap-balancer";
+
 import "./css/globals.css";
 
 const font = Geist();
 
 export default ({ children }) => (
-  <html lang="en" className={font.className} suppressHydrationWarning>
+  <html className={font.className} lang="en" suppressHydrationWarning>
     <meta
-      name="google-site-verification"
       content="0g4xOknHTsS3aWczVHDj-smtRc9MUBhqsnVTeQVAkKE"
+      name="google-site-verification"
     />
     <body
       // https://fumadocs.dev/docs/ui/manual-installation/next#root-layout

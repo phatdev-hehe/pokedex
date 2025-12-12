@@ -32,25 +32,24 @@ export default Page(({ context }) => {
         [
           "affecting_moves",
           table.pagination(Object.entries(stat.affecting_moves), {
-            thead: ["set", undefined],
             renderRows: ({ context }) => [
               titleCase(context[0]),
               table.pagination(Object.values(context[1]), {
-                thead: [undefined, "change"],
                 renderRows: ({ context }) => [
                   <Link href={`/move/${context.move.name}`}>
                     {titleCase(context.move.name)}
                   </Link>,
                   context.change,
                 ],
+                thead: [undefined, "change"],
               }),
             ],
+            thead: ["set", undefined],
           }),
         ],
         [
           "affecting_natures",
           table.pagination(Object.entries(stat.affecting_natures), {
-            thead: ["set", undefined],
             renderRows: ({ context }) => [
               titleCase(context[0]),
               table.pagination(Object.values(context[1]), {
@@ -61,6 +60,7 @@ export default Page(({ context }) => {
                 ],
               }),
             ],
+            thead: ["set", undefined],
           }),
         ]
       )}

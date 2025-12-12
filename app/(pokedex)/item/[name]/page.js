@@ -67,21 +67,21 @@ export default Page(({ context }) => {
         [
           "held_by_pokemon",
           table.pagination(item.held_by_pokemon, {
-            thead: [undefined, "version_details"],
             renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
               </Link>,
               table.pagination(context.version_details, {
-                thead: [undefined, "rarity"],
                 renderRows: ({ context }) => [
                   <Link href={`/version/${context.version.name}`}>
                     {titleCase(context.version.name)}
                   </Link>,
                   context.rarity,
                 ],
+                thead: [undefined, "rarity"],
               }),
             ],
+            thead: [undefined, "version_details"],
           }),
         ]
       )}

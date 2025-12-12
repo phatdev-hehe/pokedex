@@ -1,7 +1,8 @@
-import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";
+
+import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export const GET = async () => {
   const data = JSON.stringify(

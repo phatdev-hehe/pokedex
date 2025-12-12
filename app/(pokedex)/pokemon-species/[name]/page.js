@@ -119,13 +119,13 @@ export default Page(async ({ context }) => {
         [
           "varieties",
           table.pagination(pokemonSpecies.varieties, {
-            thead: [undefined, "default"],
             renderRows: ({ context }) => [
               <Link href={`/pokemon/${context.pokemon.name}`}>
                 {titleCase(context.pokemon.name)}
               </Link>,
               <Checkbox checked={context.is_default} />,
             ],
+            thead: [undefined, "default"],
           }),
         ],
         [
@@ -152,17 +152,16 @@ export default Page(async ({ context }) => {
         [
           "genera",
           table.pagination(pokemonSpecies.genera, {
-            thead: [undefined, "language"],
             renderRows: ({ context }) => [
               context.genus,
               <Pokedex.LanguageLink language={context.language} />,
             ],
+            thead: [undefined, "language"],
           }),
         ],
         [
           "pal_park_encounters",
           table.pagination(pokemonSpecies.pal_park_encounters, {
-            thead: ["area", "base_score", "rate"],
             renderRows: ({ context }) => [
               <Link href={`/pal-park-area/${context.area.name}`}>
                 {titleCase(context.area.name)}
@@ -170,18 +169,19 @@ export default Page(async ({ context }) => {
               context.base_score,
               context.rate,
             ],
+            thead: ["area", "base_score", "rate"],
           }),
         ],
         [
           "pokedex_numbers",
           table.pagination(pokemonSpecies.pokedex_numbers, {
-            thead: [undefined, "entry_number"],
             renderRows: ({ context }) => [
               <Link href={`/pokedex/${context.pokedex.name}`}>
                 {titleCase(context.pokedex.name)}
               </Link>,
               context.entry_number,
             ],
+            thead: [undefined, "entry_number"],
           }),
         ]
       )}

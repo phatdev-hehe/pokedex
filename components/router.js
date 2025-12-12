@@ -1,8 +1,9 @@
 "use client";
 
-import { Link, ul } from "@/components";
 import { useRouter } from "next/navigation";
 import { useEffect, useEffectEvent } from "react";
+
+import { Link, ul } from "@/components";
 
 export const RouterPush = ({ href }) => {
   const router = useRouter();

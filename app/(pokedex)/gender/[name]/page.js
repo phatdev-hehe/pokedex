@@ -14,13 +14,13 @@ export default Page(({ context }) => {
     [
       "pokemon_species_details",
       table.pagination(gender.pokemon_species_details, {
-        thead: [undefined, "rate"],
         renderRows: ({ context }) => [
           <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
             {titleCase(context.pokemon_species.name)}
           </Link>,
           context.rate,
         ],
+        thead: [undefined, "rate"],
       }),
     ],
     [

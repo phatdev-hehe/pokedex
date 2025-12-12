@@ -13,7 +13,6 @@ export default Page(({ context }) => {
   return tabs(Page.tabs.names(palParkArea.names), [
     "pokemon_encounters",
     table.pagination(palParkArea.pokemon_encounters, {
-      thead: ["pokemon_species", "base_score", "rate"],
       renderRows: ({ context }) => [
         <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
           {titleCase(context.pokemon_species.name)}
@@ -21,6 +20,7 @@ export default Page(({ context }) => {
         context.base_score,
         context.rate,
       ],
+      thead: ["pokemon_species", "base_score", "rate"],
     }),
   ]);
 });

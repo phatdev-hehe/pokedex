@@ -3,7 +3,6 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.createDetailPage("pokemon-form", {
-  staticLimit: process.env.DEFAULT_STATIC_LIMIT,
   getAvatar: ({ context }) => {
     /** @type PokemonForm */
     const pokemonForm = context.data;
@@ -13,6 +12,7 @@ const Page = await Pokedex.createDetailPage("pokemon-form", {
   get getFavicon() {
     return this.getAvatar;
   },
+  staticLimit: process.env.DEFAULT_STATIC_LIMIT,
 });
 
 export const { generateMetadata, generateStaticParams } = Page;

@@ -50,7 +50,6 @@ export const generateMetadata = () => ({ title });
 
 export default () => (
   <Pokedex
-    title={title}
     descriptions={[
       ["groups", groupCount],
       ["routes", routeCount],
@@ -59,12 +58,13 @@ export default () => (
         "status",
         <Link href="https://pokeapi.statuspage.io/">
           <img
-            style={{ margin: "initial" }}
             src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
+            style={{ margin: "initial" }}
           />
         </Link>,
       ],
     ]}
+    title={title}
   >
     {tabs(
       ["content", content],
@@ -73,9 +73,9 @@ export default () => (
         <Chart
           series={[
             {
-              type: "pie",
               data: pageSeriesData,
               options: { name: "Page" },
+              type: "pie",
             },
           ]}
         />,

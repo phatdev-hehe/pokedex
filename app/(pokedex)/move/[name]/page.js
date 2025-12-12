@@ -117,23 +117,21 @@ export default Page(({ context }) => {
         [
           "stat_changes",
           table.pagination(move.stat_changes, {
-            thead: [undefined, "change"],
             renderRows: ({ context }) => [
               <Link href={`/stat/${context.stat.name}`}>
                 {titleCase(context.stat.name)}
               </Link>,
               context.change,
             ],
+            thead: [undefined, "change"],
           }),
         ],
         [
           "contest_combos",
           table.pagination(Object.entries(move?.contest_combos ?? {}), {
-            thead: ["set", "detail"],
             renderRows: ({ context }) => [
               titleCase(context[0]),
               table.pagination(Object.entries(context[1]), {
-                thead: [undefined, "move"],
                 renderRows: ({ context }) => [
                   titleCase(context[0]),
                   table.pagination(context[1], {
@@ -144,8 +142,10 @@ export default Page(({ context }) => {
                     ],
                   }),
                 ],
+                thead: [undefined, "move"],
               }),
             ],
+            thead: ["set", "detail"],
           }),
         ],
         Page.tabs.effectChanges(move.effect_changes),

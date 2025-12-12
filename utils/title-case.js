@@ -13,8 +13,8 @@ export const titleCase = (input) => {
       .map((word) =>
         Number.isNaN(deromanize(word))
           ? {
-              pokemon: "Pokémon",
               pokedex: "Pokédex",
+              pokemon: "Pokémon",
             }[noCase(removeAccents(word))] ?? word
           : word.toUpperCase()
       )

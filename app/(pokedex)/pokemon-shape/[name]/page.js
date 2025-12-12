@@ -14,11 +14,11 @@ export default Page(({ context }) => {
     [
       "awesome_names",
       table.pagination(pokemonShape.awesome_names, {
-        thead: [undefined, "language"],
         renderRows: ({ context }) => [
           context.awesome_name,
           <Pokedex.LanguageLink language={context.language} />,
         ],
+        thead: [undefined, "language"],
       }),
     ],
     Page.tabs.pokemonSpecies(pokemonShape.pokemon_species)

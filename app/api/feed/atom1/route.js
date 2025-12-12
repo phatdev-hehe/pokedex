@@ -1,5 +1,6 @@
-import { feed } from "@/app/api/feed";
 import { NextResponse } from "next/server";
+
+import { feed } from "@/app/api/feed";
 
 export const GET = () =>
   new NextResponse(feed.atom1(), {

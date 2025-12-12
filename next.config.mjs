@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 export default {
-  reactStrictMode: false,
-  reactCompiler: true,
   images: {
     unoptimized: true,
   },
+  reactCompiler: true,
+  reactStrictMode: false,
 };

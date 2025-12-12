@@ -1,15 +1,16 @@
+import { DocsLayout } from "fumadocs-ui/layouts/docs";
+import { DocsPage } from "fumadocs-ui/page";
+
 import { Logo } from "@/components/logo";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
-import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import { DocsPage } from "fumadocs-ui/page";
 
 const sidebar = [];
 
 for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
   sidebar.push({
-    type: "separator",
     name: titleCase(key),
+    type: "separator",
   });
 
   for (const key of Object.keys(value))
@@ -21,12 +22,12 @@ for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
 
 export default ({ children }) => (
   <DocsLayout
-    themeSwitch={{ mode: "light-dark-system" }}
+    githubUrl="https://github.com/phatdev-hehe/pokedex"
     nav={{
       title: <Logo />,
       url: "/random/pokemon",
     }}
-    githubUrl="https://github.com/phatdev-hehe/pokedex"
+    themeSwitch={{ mode: "light-dark-system" }}
     tree={{
       children: [
         {
@@ -46,8 +47,6 @@ export default ({ children }) => (
           url: "/api/local-data",
         },
         {
-          type: "folder",
-          name: "Feed",
           children: [
             {
               name: "rss2.xml",
@@ -62,6 +61,8 @@ export default ({ children }) => (
               url: "/api/feed/json1",
             },
           ],
+          name: "Feed",
+          type: "folder",
         },
         ...sidebar,
       ],

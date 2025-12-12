@@ -13,19 +13,19 @@ export default Page(({ context }) => {
   return tabs(Page.tabs.names(pokeathlonStat.names), [
     "affecting_natures",
     table.pagination(Object.entries(pokeathlonStat.affecting_natures), {
-      thead: ["set", undefined],
       renderRows: ({ context }) => [
         titleCase(context[0]),
         table.pagination(context[1], {
-          thead: [undefined, "max_change"],
           renderRows: ({ context }) => [
             <Link href={`/nature/${context.nature.name}`}>
               {titleCase(context.nature.name)}
             </Link>,
             context.max_change,
           ],
+          thead: [undefined, "max_change"],
         }),
       ],
+      thead: ["set", undefined],
     }),
   ]);
 });

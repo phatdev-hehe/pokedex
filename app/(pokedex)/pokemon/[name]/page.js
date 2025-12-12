@@ -108,12 +108,12 @@ export default Page(async ({ context }) => {
               <Chart
                 series={[
                   {
-                    type: "pie",
                     data: pokemon.stats.map((statElement) => ({
                       name: statElement.stat.name,
                       y: statElement.base_stat,
                     })),
                     options: { name: "Base Stat" },
+                    type: "pie",
                   },
                 ]}
               />,
@@ -123,7 +123,6 @@ export default Page(async ({ context }) => {
         [
           "abilities",
           table.pagination(pokemon.abilities, {
-            thead: [undefined, "hidden", "slot"],
             renderRows: ({ context }) => [
               <Link href={`/ability/${context.ability.name}`}>
                 {titleCase(context.ability.name)}
@@ -131,6 +130,7 @@ export default Page(async ({ context }) => {
               <Checkbox checked={context.is_hidden} />,
               context.slot,
             ],
+            thead: [undefined, "hidden", "slot"],
           }),
         ],
         [
@@ -148,34 +148,34 @@ export default Page(async ({ context }) => {
           table.pagination(
             await Pokedex.api.getResource(pokemon.location_area_encounters),
             {
-              thead: [undefined, "version_details"],
               renderRows: ({ context }) => [
                 <Link href={`/location-area/${context.location_area.name}`}>
                   {titleCase(context.location_area.name)}
                 </Link>,
                 Page.tabs.versionDetails(context.version_details)[1],
               ],
+              thead: [undefined, "version_details"],
             }
           ),
         ],
         [
           "held_items",
           table.pagination(pokemon.held_items, {
-            thead: [undefined, "version_details"],
             renderRows: ({ context }) => [
               <Link href={`/item/${context.item.name}`}>
                 {titleCase(context.item.name)}
               </Link>,
               table.pagination(context.version_details, {
-                thead: [undefined, "rarity"],
                 renderRows: ({ context }) => [
                   <Link href={`/version/${context.version.name}`}>
                     {titleCase(context.version.name)}
                   </Link>,
                   context.rarity,
                 ],
+                thead: [undefined, "rarity"],
               }),
             ],
+            thead: [undefined, "version_details"],
           }),
         ],
         Page.tabs.gameIndices(pokemon.game_indices),
@@ -192,18 +192,11 @@ export default Page(async ({ context }) => {
         [
           "moves",
           table.pagination(pokemon.moves, {
-            thead: [undefined, "version_group_details"],
             renderRows: ({ context }) => [
               <Link href={`/move/${context.move.name}`}>
                 {titleCase(context.move.name)}
               </Link>,
               table.pagination(context.version_group_details, {
-                thead: [
-                  "order",
-                  "level_learned_at",
-                  "move_learn_method",
-                  "version_group",
-                ],
                 renderRows: ({ context }) => [
                   context.order,
                   context.level_learned_at,
@@ -217,8 +210,15 @@ export default Page(async ({ context }) => {
                   </Link>,
                 ],
                 showIndex: false,
+                thead: [
+                  "order",
+                  "level_learned_at",
+                  "move_learn_method",
+                  "version_group",
+                ],
               }),
             ],
+            thead: [undefined, "version_group_details"],
           }),
         ]
       )}
