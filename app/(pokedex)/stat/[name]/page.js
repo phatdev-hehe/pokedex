@@ -26,12 +26,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(stat.names),
-        Page.tabs.items(stat.affecting_items, "affecting_items"),
-        [
-          "affecting_moves",
-          table.pagination(Object.entries(stat.affecting_moves), {
+      {tabs({
+        affecting_moves: table.pagination(
+          Object.entries(stat.affecting_moves),
+          {
             renderRows: ({ context }) => [
               titleCase(context[0]),
               table.pagination(Object.values(context[1]), {
@@ -45,11 +43,11 @@ export default Page(({ context }) => {
               }),
             ],
             thead: ["set", undefined],
-          }),
-        ],
-        [
-          "affecting_natures",
-          table.pagination(Object.entries(stat.affecting_natures), {
+          }
+        ),
+        affecting_natures: table.pagination(
+          Object.entries(stat.affecting_natures),
+          {
             renderRows: ({ context }) => [
               titleCase(context[0]),
               table.pagination(Object.values(context[1]), {
@@ -61,9 +59,11 @@ export default Page(({ context }) => {
               }),
             ],
             thead: ["set", undefined],
-          }),
-        ]
-      )}
+          }
+        ),
+        ...Page.tabs.items(stat.affecting_items, "affecting_items"),
+        ...Page.tabs.names(stat.names),
+      })}
     </>
   );
 });

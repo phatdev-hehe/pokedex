@@ -9,41 +9,45 @@ const pageSeriesData = [];
 let [groupCount, routeCount, pageCount] = [0, 0, 0];
 
 const content = tabs(
-  ...(await Promise.all(
-    Object.entries(Pokedex.api.routeMap).map(async ([key, value]) => {
-      ++groupCount;
+  Object.fromEntries(
+    await Promise.all(
+      Object.entries(Pokedex.api.routeMap).map(async ([key, value]) => {
+        ++groupCount;
 
-      return [
-        key,
-        tabs(
-          ...(await Promise.all(
-            Object.keys(value).map(async (routeName) => {
-              const data = await Pokedex.api(routeName, "rootEndpoint")();
+        return [
+          key,
+          tabs(
+            Object.fromEntries(
+              await Promise.all(
+                Object.keys(value).map(async (routeName) => {
+                  const data = await Pokedex.api(routeName, "rootEndpoint")();
 
-              ++routeCount;
-              pageCount += data.count;
+                  ++routeCount;
+                  pageCount += data.count;
 
-              pageSeriesData.push({
-                name: routeName,
-                y: data.count,
-              });
+                  pageSeriesData.push({
+                    name: routeName,
+                    y: data.count,
+                  });
 
-              return [
-                routeName,
-                table.pagination(data.results, {
-                  renderRows: ({ context }) => [
-                    <Link href={`/${routeName}/${context.name}`}>
-                      {titleCase(context.name)}
-                    </Link>,
-                  ],
-                }),
-              ];
-            })
-          ))
-        ),
-      ];
-    })
-  ))
+                  return [
+                    routeName,
+                    table.pagination(data.results, {
+                      renderRows: ({ context }) => [
+                        <Link href={`/${routeName}/${context.name}`}>
+                          {titleCase(context.name)}
+                        </Link>,
+                      ],
+                    }),
+                  ];
+                })
+              )
+            )
+          ),
+        ];
+      })
+    )
+  )
 );
 
 export const generateMetadata = () => ({ title });
@@ -66,10 +70,10 @@ export default () => (
     ]}
     title={title}
   >
-    {tabs(
-      ["content", content],
-      [
-        "chart",
+    {tabs({
+      content,
+      // eslint-disable-next-line perfectionist/sort-objects
+      chart: (
         <Chart
           series={[
             {
@@ -78,8 +82,8 @@ export default () => (
               type: "pie",
             },
           ]}
-        />,
-      ]
-    )}
+        />
+      ),
+    })}
   </Pokedex>
 );

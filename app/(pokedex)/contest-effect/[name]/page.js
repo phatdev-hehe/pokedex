@@ -21,10 +21,10 @@ export default Page(({ context }) => {
           contestEffect.jam,
         ],
       ])}
-      {tabs(
-        Page.tabs.effectEntries(contestEffect.effect_entries),
-        Page.tabs.flavorTextEntries(contestEffect.flavor_text_entries)
-      )}
+      {tabs({
+        ...Page.tabs.effectEntries(contestEffect.effect_entries),
+        ...Page.tabs.flavorTextEntries(contestEffect.flavor_text_entries),
+      })}
     </>
   );
 });

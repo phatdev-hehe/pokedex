@@ -10,12 +10,12 @@ export default Page(({ context }) => {
   /** @type BerryFirmness */
   const berryFirmness = context.data;
 
-  return tabs(Page.tabs.names(berryFirmness.names), [
-    "berries",
-    table.pagination(berryFirmness.berries, {
+  return tabs({
+    berries: table.pagination(berryFirmness.berries, {
       renderRows: ({ context }) => [
         <Link href={`/berry/${context.name}`}>{titleCase(context.name)}</Link>,
       ],
     }),
-  ]);
+    ...Page.tabs.names(berryFirmness.names),
+  });
 });

@@ -22,20 +22,17 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(location.names),
-        Page.tabs.gameIndices(location.game_indices),
-        [
-          "areas",
-          table.pagination(location.areas, {
-            renderRows: ({ context }) => [
-              <Link href={`/location-area/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ]
-      )}
+      {tabs({
+        areas: table.pagination(location.areas, {
+          renderRows: ({ context }) => [
+            <Link href={`/location-area/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        ...Page.tabs.gameIndices(location.game_indices),
+        ...Page.tabs.names(location.names),
+      })}
     </>
   );
 });

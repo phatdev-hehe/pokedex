@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type EvolutionTrigger */
   const evolutionTrigger = context.data;
 
-  return tabs(
-    Page.tabs.names(evolutionTrigger.names),
-    Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species)
-  );
+  return tabs({
+    ...Page.tabs.names(evolutionTrigger.names),
+    ...Page.tabs.pokemonSpecies(evolutionTrigger.pokemon_species),
+  });
 });

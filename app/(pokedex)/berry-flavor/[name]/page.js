@@ -23,9 +23,8 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(Page.tabs.names(berryFlavor.names), [
-        "berries",
-        table.pagination(berryFlavor.berries, {
+      {tabs({
+        berries: table.pagination(berryFlavor.berries, {
           renderRows: ({ context }) => [
             <Link href={`/berry/${context.berry.name}`}>
               {titleCase(context.berry.name)}
@@ -34,7 +33,8 @@ export default Page(({ context }) => {
           ],
           thead: [undefined, "potency"],
         }),
-      ])}
+        ...Page.tabs.names(berryFlavor.names),
+      })}
     </>
   );
 });

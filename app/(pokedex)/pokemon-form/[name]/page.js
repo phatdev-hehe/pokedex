@@ -69,12 +69,12 @@ export default Page(({ context }) => {
           <Checkbox checked={pokemonForm.is_mega} />,
         ],
       ])}
-      {tabs(
-        Page.tabs.sprites(pokemonForm.sprites),
-        Page.tabs.names(pokemonForm.names),
-        Page.tabs.types(pokemonForm.types),
-        Page.tabs.names(pokemonForm.form_names, "form_names")
-      )}
+      {tabs({
+        ...Page.tabs.names(pokemonForm.form_names, "form_names"),
+        ...Page.tabs.names(pokemonForm.names),
+        ...Page.tabs.sprites(pokemonForm.sprites),
+        ...Page.tabs.types(pokemonForm.types),
+      })}
     </>
   );
 });

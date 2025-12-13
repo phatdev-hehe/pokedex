@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type MoveCategory */
   const moveCategory = context.data;
 
-  return tabs(
-    Page.tabs.descriptions(moveCategory.descriptions),
-    Page.tabs.moves(moveCategory.moves)
-  );
+  return tabs({
+    ...Page.tabs.descriptions(moveCategory.descriptions),
+    ...Page.tabs.moves(moveCategory.moves),
+  });
 });

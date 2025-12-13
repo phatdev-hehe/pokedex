@@ -23,32 +23,26 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(generation.names),
-        [
-          "abilities",
-          table.pagination(generation.abilities, {
-            renderRows: ({ context }) => [
-              <Link href={`/ability/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ],
-        Page.tabs.moves(generation.moves),
-        Page.tabs.pokemonSpecies(generation.pokemon_species),
-        [
-          "types",
-          table.pagination(generation.types, {
-            renderRows: ({ context }) => [
-              <Link href={`/type/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ],
-        Page.tabs.versionGroups(generation.version_groups)
-      )}
+      {tabs({
+        abilities: table.pagination(generation.abilities, {
+          renderRows: ({ context }) => [
+            <Link href={`/ability/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        types: table.pagination(generation.types, {
+          renderRows: ({ context }) => [
+            <Link href={`/type/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        ...Page.tabs.moves(generation.moves),
+        ...Page.tabs.names(generation.names),
+        ...Page.tabs.pokemonSpecies(generation.pokemon_species),
+        ...Page.tabs.versionGroups(generation.version_groups),
+      })}
     </>
   );
 });

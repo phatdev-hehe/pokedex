@@ -10,14 +10,14 @@ export default Page(({ context }) => {
   /** @type ItemPocket */
   const itemPocket = context.data;
 
-  return tabs(Page.tabs.names(itemPocket.names), [
-    "categories",
-    table.pagination(itemPocket.categories, {
+  return tabs({
+    categories: table.pagination(itemPocket.categories, {
       renderRows: ({ context }) => [
         <Link href={`/item-category/${context.name}`}>
           {titleCase(context.name)}
         </Link>,
       ],
     }),
-  ]);
+    ...Page.tabs.names(itemPocket.names),
+  });
 });

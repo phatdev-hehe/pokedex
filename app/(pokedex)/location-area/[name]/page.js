@@ -22,11 +22,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(locationArea.names),
-        [
-          "encounter_method_rates",
-          table.pagination(locationArea.encounter_method_rates, {
+      {tabs({
+        encounter_method_rates: table.pagination(
+          locationArea.encounter_method_rates,
+          {
             renderRows: ({ context }) => [
               <Link href={`/encounter-method/${context.encounter_method.name}`}>
                 {titleCase(context.encounter_method.name)}
@@ -42,21 +41,19 @@ export default Page(({ context }) => {
               }),
             ],
             thead: [undefined, "version_details"],
-          }),
-        ],
-        [
-          "pokemon_encounters",
-          table.pagination(locationArea.pokemon_encounters, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon/${context.pokemon.name}`}>
-                {titleCase(context.pokemon.name)}
-              </Link>,
-              Page.tabs.versionDetails(context.version_details)[1],
-            ],
-            thead: [undefined, "version_details"],
-          }),
-        ]
-      )}
+          }
+        ),
+        pokemon_encounters: table.pagination(locationArea.pokemon_encounters, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon/${context.pokemon.name}`}>
+              {titleCase(context.pokemon.name)}
+            </Link>,
+            Page.tabs.versionDetails(context.version_details)[1],
+          ],
+          thead: [undefined, "version_details"],
+        }),
+        ...Page.tabs.names(locationArea.names),
+      })}
     </>
   );
 });

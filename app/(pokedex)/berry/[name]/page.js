@@ -62,9 +62,8 @@ export default Page(({ context }) => {
           berry.soil_dryness,
         ],
       ])}
-      {tabs([
-        "flavors",
-        table.pagination(berry.flavors, {
+      {tabs({
+        flavors: table.pagination(berry.flavors, {
           renderRows: ({ context }) => [
             <Link href={`/berry-flavor/${context.flavor.name}`}>
               {titleCase(context.flavor.name)}
@@ -73,7 +72,7 @@ export default Page(({ context }) => {
           ],
           thead: [undefined, "potency"],
         }),
-      ])}
+      })}
     </>
   );
 });

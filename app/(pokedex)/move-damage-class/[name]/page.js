@@ -9,9 +9,9 @@ export default Page(({ context }) => {
   /** @type MoveDamageClass */
   const moveDamageClass = context.data;
 
-  return tabs(
-    Page.tabs.names(moveDamageClass.names),
-    Page.tabs.descriptions(moveDamageClass.descriptions),
-    Page.tabs.moves(moveDamageClass.moves)
-  );
+  return tabs({
+    ...Page.tabs.descriptions(moveDamageClass.descriptions),
+    ...Page.tabs.moves(moveDamageClass.moves),
+    ...Page.tabs.names(moveDamageClass.names),
+  });
 });

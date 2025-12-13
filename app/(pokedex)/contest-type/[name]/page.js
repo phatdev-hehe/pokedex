@@ -23,9 +23,8 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs([
-        "names",
-        table.pagination(contestType.names, {
+      {tabs({
+        names: table.pagination(contestType.names, {
           renderRows: ({ context }) => [
             context.name,
             <Pokedex.LanguageLink language={context.language} />,
@@ -33,7 +32,7 @@ export default Page(({ context }) => {
           ],
           thead: [undefined, "language", "color"],
         }),
-      ])}
+      })}
     </>
   );
 });

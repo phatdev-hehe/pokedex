@@ -49,42 +49,36 @@ export default Page(({ context }) => {
           item.fling_power,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(item.names),
-        [
-          "attributes",
-          table.pagination(item.attributes, {
-            renderRows: ({ context }) => [
-              <Link href={`/item-attribute/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ],
-        Page.tabs.effectEntries(item.effect_entries),
-        Page.tabs.flavorTextEntries(item.flavor_text_entries),
-        Page.tabs.gameIndices(item.game_indices),
-        [
-          "held_by_pokemon",
-          table.pagination(item.held_by_pokemon, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon/${context.pokemon.name}`}>
-                {titleCase(context.pokemon.name)}
-              </Link>,
-              table.pagination(context.version_details, {
-                renderRows: ({ context }) => [
-                  <Link href={`/version/${context.version.name}`}>
-                    {titleCase(context.version.name)}
-                  </Link>,
-                  context.rarity,
-                ],
-                thead: [undefined, "rarity"],
-              }),
-            ],
-            thead: [undefined, "version_details"],
-          }),
-        ]
-      )}
+      {tabs({
+        attributes: table.pagination(item.attributes, {
+          renderRows: ({ context }) => [
+            <Link href={`/item-attribute/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        held_by_pokemon: table.pagination(item.held_by_pokemon, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon/${context.pokemon.name}`}>
+              {titleCase(context.pokemon.name)}
+            </Link>,
+            table.pagination(context.version_details, {
+              renderRows: ({ context }) => [
+                <Link href={`/version/${context.version.name}`}>
+                  {titleCase(context.version.name)}
+                </Link>,
+                context.rarity,
+              ],
+              thead: [undefined, "rarity"],
+            }),
+          ],
+          thead: [undefined, "version_details"],
+        }),
+        ...Page.tabs.effectEntries(item.effect_entries),
+        ...Page.tabs.flavorTextEntries(item.flavor_text_entries),
+        ...Page.tabs.gameIndices(item.game_indices),
+        ...Page.tabs.names(item.names),
+      })}
     </>
   );
 });

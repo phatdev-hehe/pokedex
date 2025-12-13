@@ -23,10 +23,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(itemCategory.names),
-        Page.tabs.items(itemCategory.items)
-      )}
+      {tabs({
+        ...Page.tabs.items(itemCategory.items),
+        ...Page.tabs.names(itemCategory.names),
+      })}
     </>
   );
 });

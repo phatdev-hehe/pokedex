@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type ItemFlingEffect */
   const itemFlingEffect = context.data;
 
-  return tabs(
-    Page.tabs.items(itemFlingEffect.items),
-    Page.tabs.effectEntries(itemFlingEffect.effect_entries)
-  );
+  return tabs({
+    ...Page.tabs.effectEntries(itemFlingEffect.effect_entries),
+    ...Page.tabs.items(itemFlingEffect.items),
+  });
 });

@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type PokemonHabitat */
   const pokemonHabitat = context.data;
 
-  return tabs(
-    Page.tabs.names(pokemonHabitat.names),
-    Page.tabs.pokemonSpecies(pokemonHabitat.pokemon_species)
-  );
+  return tabs({
+    ...Page.tabs.names(pokemonHabitat.names),
+    ...Page.tabs.pokemonSpecies(pokemonHabitat.pokemon_species),
+  });
 });

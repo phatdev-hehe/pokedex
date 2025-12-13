@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type EggGroup */
   const eggGroup = context.data;
 
-  return tabs(
-    Page.tabs.names(eggGroup.names),
-    Page.tabs.pokemonSpecies(eggGroup.pokemon_species)
-  );
+  return tabs({
+    ...Page.tabs.names(eggGroup.names),
+    ...Page.tabs.pokemonSpecies(eggGroup.pokemon_species),
+  });
 });

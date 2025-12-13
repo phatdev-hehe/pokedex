@@ -114,54 +114,27 @@ export default Page(async ({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(pokemonSpecies.names),
-        [
-          "varieties",
-          table.pagination(pokemonSpecies.varieties, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon/${context.pokemon.name}`}>
-                {titleCase(context.pokemon.name)}
-              </Link>,
-              <Checkbox checked={context.is_default} />,
-            ],
-            thead: [undefined, "default"],
-          }),
-        ],
-        [
-          "evolution_chain",
-          evolutionChainPage(
-            await Pokedex.api.getResource(pokemonSpecies.evolution_chain.url)
-          ),
-        ],
-        [
-          "egg_groups",
-          table.pagination(pokemonSpecies.egg_groups, {
-            renderRows: ({ context }) => [
-              <Link href={`/egg-group/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ],
-        Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries),
-        Page.tabs.descriptions(
-          pokemonSpecies.form_descriptions,
-          "form_descriptions"
+      {tabs({
+        egg_groups: table.pagination(pokemonSpecies.egg_groups, {
+          renderRows: ({ context }) => [
+            <Link href={`/egg-group/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        evolution_chain: evolutionChainPage(
+          await Pokedex.api.getResource(pokemonSpecies.evolution_chain.url)
         ),
-        [
-          "genera",
-          table.pagination(pokemonSpecies.genera, {
-            renderRows: ({ context }) => [
-              context.genus,
-              <Pokedex.LanguageLink language={context.language} />,
-            ],
-            thead: [undefined, "language"],
-          }),
-        ],
-        [
-          "pal_park_encounters",
-          table.pagination(pokemonSpecies.pal_park_encounters, {
+        genera: table.pagination(pokemonSpecies.genera, {
+          renderRows: ({ context }) => [
+            context.genus,
+            <Pokedex.LanguageLink language={context.language} />,
+          ],
+          thead: [undefined, "language"],
+        }),
+        pal_park_encounters: table.pagination(
+          pokemonSpecies.pal_park_encounters,
+          {
             renderRows: ({ context }) => [
               <Link href={`/pal-park-area/${context.area.name}`}>
                 {titleCase(context.area.name)}
@@ -170,21 +143,33 @@ export default Page(async ({ context }) => {
               context.rate,
             ],
             thead: ["area", "base_score", "rate"],
-          }),
-        ],
-        [
-          "pokedex_numbers",
-          table.pagination(pokemonSpecies.pokedex_numbers, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokedex/${context.pokedex.name}`}>
-                {titleCase(context.pokedex.name)}
-              </Link>,
-              context.entry_number,
-            ],
-            thead: [undefined, "entry_number"],
-          }),
-        ]
-      )}
+          }
+        ),
+        pokedex_numbers: table.pagination(pokemonSpecies.pokedex_numbers, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokedex/${context.pokedex.name}`}>
+              {titleCase(context.pokedex.name)}
+            </Link>,
+            context.entry_number,
+          ],
+          thead: [undefined, "entry_number"],
+        }),
+        varieties: table.pagination(pokemonSpecies.varieties, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon/${context.pokemon.name}`}>
+              {titleCase(context.pokemon.name)}
+            </Link>,
+            <Checkbox checked={context.is_default} />,
+          ],
+          thead: [undefined, "default"],
+        }),
+        ...Page.tabs.descriptions(
+          pokemonSpecies.form_descriptions,
+          "form_descriptions"
+        ),
+        ...Page.tabs.flavorTextEntries(pokemonSpecies.flavor_text_entries),
+        ...Page.tabs.names(pokemonSpecies.names),
+      })}
     </>
   );
 });

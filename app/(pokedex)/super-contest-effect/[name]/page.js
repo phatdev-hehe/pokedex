@@ -20,10 +20,10 @@ export default Page(({ context }) => {
           superContestEffect.appeal,
         ],
       ])}
-      {tabs(
-        Page.tabs.flavorTextEntries(superContestEffect.flavor_text_entries),
-        Page.tabs.moves(superContestEffect.moves)
-      )}
+      {tabs({
+        ...Page.tabs.flavorTextEntries(superContestEffect.flavor_text_entries),
+        ...Page.tabs.moves(superContestEffect.moves),
+      })}
     </>
   );
 });

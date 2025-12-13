@@ -60,32 +60,34 @@ export const table = Object.assign(
           const chunkSize = 100;
 
           return tabs(
-            ...chunk(items, chunkSize).map((items, index1) => [
-              `page ${romanize(index1 + 1)}`,
-              table(
-                thead,
-                items.map((context, index2) => {
-                  const [firstRow, ...rows] = renderRows({ context });
+            Object.fromEntries(
+              chunk(items, chunkSize).map((items, index1) => [
+                `page ${romanize(index1 + 1)}`,
+                table(
+                  thead,
+                  items.map((context, index2) => {
+                    const [firstRow, ...rows] = renderRows({ context });
 
-                  return [
-                    <span>
-                      {showIndex && (
-                        <span
-                          style={{
-                            color: "var(--color-fd-muted-foreground)",
-                          }}
-                        >
-                          {index1 * chunkSize + index2 + 1}
-                          {". "}
-                        </span>
-                      )}
-                      {firstRow}
-                    </span>,
-                    ...rows,
-                  ];
-                })
-              ),
-            ])
+                    return [
+                      <span>
+                        {showIndex && (
+                          <span
+                            style={{
+                              color: "var(--color-fd-muted-foreground)",
+                            }}
+                          >
+                            {index1 * chunkSize + index2 + 1}
+                            {". "}
+                          </span>
+                        )}
+                        {firstRow}
+                      </span>,
+                      ...rows,
+                    ];
+                  })
+                ),
+              ])
+            )
           );
         }
       },
@@ -109,11 +111,11 @@ export const table = Object.assign(
   }
 );
 
-export const tabs = (...tabs) => {
-  if (tabs.length)
+export const tabs = (tabs = {}) => {
+  if (Object.keys(tabs).length)
     return (
-      <Tabs items={tabs.map((tab) => titleCase(tab[0]))} updateAnchor>
-        {tabs.map((tab) => {
+      <Tabs items={Object.keys(tabs).map(titleCase)} updateAnchor>
+        {Object.entries(tabs).map((tab) => {
           const id = formatId(tab[0]);
 
           return (

@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type MoveAilment */
   const moveAilment = context.data;
 
-  return tabs(
-    Page.tabs.names(moveAilment.names),
-    Page.tabs.moves(moveAilment.moves)
-  );
+  return tabs({
+    ...Page.tabs.moves(moveAilment.moves),
+    ...Page.tabs.names(moveAilment.names),
+  });
 });

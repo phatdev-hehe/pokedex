@@ -21,18 +21,15 @@ export default Page(({ context }) => {
           math(String.raw`${growthRate.formula}`),
         ],
       ])}
-      {tabs(
-        Page.tabs.descriptions(growthRate.descriptions),
-        [
-          "levels",
-          table.pagination(growthRate.levels, {
-            renderRows: ({ context }) => [context.level, context.experience],
-            showIndex: false,
-            thead: [undefined, "experience"],
-          }),
-        ],
-        Page.tabs.pokemonSpecies(growthRate.pokemon_species)
-      )}
+      {tabs({
+        levels: table.pagination(growthRate.levels, {
+          renderRows: ({ context }) => [context.level, context.experience],
+          showIndex: false,
+          thead: [undefined, "experience"],
+        }),
+        ...Page.tabs.descriptions(growthRate.descriptions),
+        ...Page.tabs.pokemonSpecies(growthRate.pokemon_species),
+      })}
     </>
   );
 });

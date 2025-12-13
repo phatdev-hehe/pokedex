@@ -25,21 +25,18 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(region.names),
-        Page.tabs.pokedexes(region.pokedexes),
-        [
-          "locations",
-          table.pagination(region.locations, {
-            renderRows: ({ context }) => [
-              <Link href={`/location/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ],
-        Page.tabs.versionGroups(region.version_groups)
-      )}
+      {tabs({
+        locations: table.pagination(region.locations, {
+          renderRows: ({ context }) => [
+            <Link href={`/location/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        ...Page.tabs.names(region.names),
+        ...Page.tabs.pokedexes(region.pokedexes),
+        ...Page.tabs.versionGroups(region.version_groups),
+      })}
     </>
   );
 });

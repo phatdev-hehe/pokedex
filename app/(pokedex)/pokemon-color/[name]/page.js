@@ -9,8 +9,8 @@ export default Page(({ context }) => {
   /** @type PokemonColor */
   const pokemonColor = context.data;
 
-  return tabs(
-    Page.tabs.names(pokemonColor.names),
-    Page.tabs.pokemonSpecies(pokemonColor.pokemon_species)
-  );
+  return tabs({
+    ...Page.tabs.names(pokemonColor.names),
+    ...Page.tabs.pokemonSpecies(pokemonColor.pokemon_species),
+  });
 });

@@ -10,28 +10,22 @@ export default Page(({ context }) => {
   /** @type Gender */
   const gender = context.data;
 
-  return tabs(
-    [
-      "pokemon_species_details",
-      table.pagination(gender.pokemon_species_details, {
-        renderRows: ({ context }) => [
-          <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
-            {titleCase(context.pokemon_species.name)}
-          </Link>,
-          context.rate,
-        ],
-        thead: [undefined, "rate"],
-      }),
-    ],
-    [
-      "required_for_evolution",
-      table.pagination(gender.required_for_evolution, {
-        renderRows: ({ context }) => [
-          <Link href={`/pokemon-species/${context.name}`}>
-            {titleCase(context.name)}
-          </Link>,
-        ],
-      }),
-    ]
-  );
+  return tabs({
+    pokemon_species_details: table.pagination(gender.pokemon_species_details, {
+      renderRows: ({ context }) => [
+        <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
+          {titleCase(context.pokemon_species.name)}
+        </Link>,
+        context.rate,
+      ],
+      thead: [undefined, "rate"],
+    }),
+    required_for_evolution: table.pagination(gender.required_for_evolution, {
+      renderRows: ({ context }) => [
+        <Link href={`/pokemon-species/${context.name}`}>
+          {titleCase(context.name)}
+        </Link>,
+      ],
+    }),
+  });
 });

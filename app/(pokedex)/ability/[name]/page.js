@@ -30,25 +30,22 @@ export default Page(({ context }) => {
           <Checkbox checked={ability.is_main_series} />,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(ability.names),
-        [
-          "pokemon",
-          table.pagination(ability.pokemon, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon/${context.pokemon.name}`}>
-                {titleCase(context.pokemon.name)}
-              </Link>,
-              <Checkbox checked={context.is_hidden} />,
-              context.slot,
-            ],
-            thead: [undefined, "hidden", "slot"],
-          }),
-        ],
-        Page.tabs.effectChanges(ability.effect_changes),
-        Page.tabs.effectEntries(ability.effect_entries),
-        Page.tabs.flavorTextEntries(ability.flavor_text_entries)
-      )}
+      {tabs({
+        pokemon: table.pagination(ability.pokemon, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon/${context.pokemon.name}`}>
+              {titleCase(context.pokemon.name)}
+            </Link>,
+            <Checkbox checked={context.is_hidden} />,
+            context.slot,
+          ],
+          thead: [undefined, "hidden", "slot"],
+        }),
+        ...Page.tabs.effectChanges(ability.effect_changes),
+        ...Page.tabs.effectEntries(ability.effect_entries),
+        ...Page.tabs.flavorTextEntries(ability.flavor_text_entries),
+        ...Page.tabs.names(ability.names),
+      })}
     </>
   );
 });

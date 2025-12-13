@@ -24,10 +24,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(Page.tabs.descriptions(characteristic.descriptions), [
-        "possible_values",
-        ul(...characteristic.possible_values),
-      ])}
+      {tabs({
+        possible_values: ul(...characteristic.possible_values),
+        ...Page.tabs.descriptions(characteristic.descriptions),
+      })}
     </>
   );
 });

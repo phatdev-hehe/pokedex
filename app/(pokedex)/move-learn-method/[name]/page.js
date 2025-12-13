@@ -9,9 +9,9 @@ export default Page(({ context }) => {
   /** @type MoveLearnMethod */
   const moveLearnMethod = context.data;
 
-  return tabs(
-    Page.tabs.names(moveLearnMethod.names),
-    Page.tabs.descriptions(moveLearnMethod.descriptions),
-    Page.tabs.versionGroups(moveLearnMethod.version_groups)
-  );
+  return tabs({
+    ...Page.tabs.descriptions(moveLearnMethod.descriptions),
+    ...Page.tabs.names(moveLearnMethod.names),
+    ...Page.tabs.versionGroups(moveLearnMethod.version_groups),
+  });
 });

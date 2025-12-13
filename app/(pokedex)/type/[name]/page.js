@@ -38,25 +38,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.sprites(type.sprites),
-        Page.tabs.names(type.names),
-        [
-          "pokemon",
-          table.pagination(type.pokemon, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon/${context.pokemon.name}`}>
-                {titleCase(context.pokemon.name)}
-              </Link>,
-              context.slot,
-            ],
-            thead: [undefined, "slot"],
-          }),
-        ],
-        Page.tabs.moves(type.moves),
-        [
-          "damage_relations",
-          table.pagination(Object.entries(type.damage_relations), {
+      {tabs({
+        damage_relations: table.pagination(
+          Object.entries(type.damage_relations),
+          {
             renderRows: ({ context }) => [
               titleCase(context[0]),
               ul(
@@ -68,10 +53,22 @@ export default Page(({ context }) => {
               ),
             ],
             thead: [undefined, "type"],
-          }),
-        ],
-        Page.tabs.gameIndices(type.game_indices)
-      )}
+          }
+        ),
+        pokemon: table.pagination(type.pokemon, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon/${context.pokemon.name}`}>
+              {titleCase(context.pokemon.name)}
+            </Link>,
+            context.slot,
+          ],
+          thead: [undefined, "slot"],
+        }),
+        ...Page.tabs.gameIndices(type.game_indices),
+        ...Page.tabs.moves(type.moves),
+        ...Page.tabs.names(type.names),
+        ...Page.tabs.sprites(type.sprites),
+      })}
     </>
   );
 });

@@ -30,23 +30,20 @@ export default Page(({ context }) => {
           <Link href={`/region/${region}`}>{titleCase(region)}</Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(pokedex.names),
-        Page.tabs.descriptions(pokedex.descriptions),
-        [
-          "pokemon_entries",
-          table.pagination(pokedex.pokemon_entries, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
-                {titleCase(context.pokemon_species.name)}
-              </Link>,
-              context.entry_number,
-            ],
-            thead: [undefined, "entry_number"],
-          }),
-        ],
-        Page.tabs.versionGroups(pokedex.version_groups)
-      )}
+      {tabs({
+        pokemon_entries: table.pagination(pokedex.pokemon_entries, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon-species/${context.pokemon_species.name}`}>
+              {titleCase(context.pokemon_species.name)}
+            </Link>,
+            context.entry_number,
+          ],
+          thead: [undefined, "entry_number"],
+        }),
+        ...Page.tabs.names(pokedex.names),
+        ...Page.tabs.descriptions(pokedex.descriptions),
+        ...Page.tabs.versionGroups(pokedex.version_groups),
+      })}
     </>
   );
 });

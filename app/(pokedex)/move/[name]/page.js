@@ -85,50 +85,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        [
-          "meta",
-          table(undefined, [
-            ["Ailment Chance", move.meta?.ailment_chance],
-            [
-              "Ailment",
-              <Link href={`/move-ailment/${ailment}`}>
-                {titleCase(ailment)}
-              </Link>,
-            ],
-            [
-              "Category",
-              <Link href={`/move-category/${category}`}>
-                {titleCase(category)}
-              </Link>,
-            ],
-            ["Crit Rate", move.meta?.crit_rate],
-            ["Drain", move.meta?.drain],
-            ["Flinch Chance", move.meta?.flinch_chance],
-            ["Healing", move.meta?.healing],
-            ["Max Hits", move.meta?.max_hits],
-            ["Max Turns", move.meta?.max_turns],
-            ["Min Hits", move.meta?.min_hits],
-            ["Min Turns", move.meta?.min_turns],
-            ["Stat Chance", move.meta?.stat_chance],
-          ]),
-        ],
-        Page.tabs.names(move.names),
-        [
-          "stat_changes",
-          table.pagination(move.stat_changes, {
-            renderRows: ({ context }) => [
-              <Link href={`/stat/${context.stat.name}`}>
-                {titleCase(context.stat.name)}
-              </Link>,
-              context.change,
-            ],
-            thead: [undefined, "change"],
-          }),
-        ],
-        [
-          "contest_combos",
-          table.pagination(Object.entries(move?.contest_combos ?? {}), {
+      {tabs({
+        contest_combos: table.pagination(
+          Object.entries(move?.contest_combos ?? {}),
+          {
             renderRows: ({ context }) => [
               titleCase(context[0]),
               table.pagination(Object.entries(context[1]), {
@@ -146,22 +106,51 @@ export default Page(({ context }) => {
               }),
             ],
             thead: ["set", "detail"],
-          }),
-        ],
-        Page.tabs.effectChanges(move.effect_changes),
-        Page.tabs.effectEntries(move.effect_entries),
-        Page.tabs.flavorTextEntries(move.flavor_text_entries),
-        [
-          "learned_by_pokemon",
-          table.pagination(move.learned_by_pokemon, {
-            renderRows: ({ context }) => [
-              <Link href={`/pokemon/${context.name}`}>
-                {titleCase(context.name)}
-              </Link>,
-            ],
-          }),
-        ]
-      )}
+          }
+        ),
+        learned_by_pokemon: table.pagination(move.learned_by_pokemon, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
+        meta: table(undefined, [
+          ["Ailment Chance", move.meta?.ailment_chance],
+          [
+            "Ailment",
+            <Link href={`/move-ailment/${ailment}`}>{titleCase(ailment)}</Link>,
+          ],
+          [
+            "Category",
+            <Link href={`/move-category/${category}`}>
+              {titleCase(category)}
+            </Link>,
+          ],
+          ["Crit Rate", move.meta?.crit_rate],
+          ["Drain", move.meta?.drain],
+          ["Flinch Chance", move.meta?.flinch_chance],
+          ["Healing", move.meta?.healing],
+          ["Max Hits", move.meta?.max_hits],
+          ["Max Turns", move.meta?.max_turns],
+          ["Min Hits", move.meta?.min_hits],
+          ["Min Turns", move.meta?.min_turns],
+          ["Stat Chance", move.meta?.stat_chance],
+        ]),
+        stat_changes: table.pagination(move.stat_changes, {
+          renderRows: ({ context }) => [
+            <Link href={`/stat/${context.stat.name}`}>
+              {titleCase(context.stat.name)}
+            </Link>,
+            context.change,
+          ],
+          thead: [undefined, "change"],
+        }),
+        ...Page.tabs.names(move.names),
+        ...Page.tabs.effectChanges(move.effect_changes),
+        ...Page.tabs.effectEntries(move.effect_entries),
+        ...Page.tabs.flavorTextEntries(move.flavor_text_entries),
+      })}
     </>
   );
 });

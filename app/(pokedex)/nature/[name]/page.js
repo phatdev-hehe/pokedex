@@ -55,11 +55,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
       ])}
-      {tabs(
-        Page.tabs.names(nature.names),
-        [
-          "move_battle_style_preferences",
-          table.pagination(nature.move_battle_style_preferences, {
+      {tabs({
+        move_battle_style_preferences: table.pagination(
+          nature.move_battle_style_preferences,
+          {
             renderRows: ({ context }) => [
               <Link
                 href={`/move-battle-style/${context.move_battle_style.name}`}
@@ -70,11 +69,11 @@ export default Page(({ context }) => {
               context.low_hp_preference,
             ],
             thead: [undefined, "high_hp_preference", "low_hp_preference"],
-          }),
-        ],
-        [
-          "pokeathlon_stat_changes",
-          table.pagination(nature.pokeathlon_stat_changes, {
+          }
+        ),
+        pokeathlon_stat_changes: table.pagination(
+          nature.pokeathlon_stat_changes,
+          {
             renderRows: ({ context }) => [
               <Link href={`/pokeathlon-stat/${context.pokeathlon_stat.name}`}>
                 {titleCase(context.pokeathlon_stat.name)}
@@ -82,9 +81,10 @@ export default Page(({ context }) => {
               context.max_change,
             ],
             thead: [undefined, "max_change"],
-          }),
-        ]
-      )}
+          }
+        ),
+        ...Page.tabs.names(nature.names),
+      })}
     </>
   );
 });
