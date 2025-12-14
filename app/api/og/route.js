@@ -112,7 +112,6 @@ export async function GET(req) {
                 fontSize: 28,
                 letterSpacing: "-0.56px",
                 lineHeight: 1.2,
-                textTransform: "capitalize",
               }}
             >
               {topic && topic}
@@ -123,7 +122,7 @@ export async function GET(req) {
                   fontFamily: "UntitledSansMedium",
                   fontSize: 72,
                   fontWeight: 500,
-                  letterSpacing: "-0.05em",
+                  letterSpacing: "-0.08em",
                   lineHeight: 1,
                   marginTop: 20,
                 }}
