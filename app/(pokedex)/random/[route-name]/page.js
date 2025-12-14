@@ -6,16 +6,16 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import RandomRedirect from "./random-redirect";
 
 export default async ({ params }) => {
-  const { "route-name": routeName } = await params;
+  params = await params;
 
-  if (!Pokedex.api.routeNames.includes(routeName)) notFound();
+  if (!Pokedex.api.routeNames.includes(params["route-name"])) notFound();
 
   return (
     <DocsBody>
       <RandomRedirect
-        links={(await Pokedex.api(routeName, "rootEndpoint")()).results.map(
-          (item) => `/${routeName}/${item.name}`
-        )}
+        links={(
+          await Pokedex.api(params["route-name"], "rootEndpoint")()
+        ).results.map((item) => `/${params["route-name"]}/${item.name}`)}
       />
     </DocsBody>
   );
