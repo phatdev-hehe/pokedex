@@ -1,5 +1,6 @@
 import { evolutionChainPage } from "@/app/(pokedex)/evolution-chain/[name]/page";
 import { Checkbox, highlighter, Link, table, tabs } from "@/components";
+import { languageLink } from "@/components/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -128,7 +129,7 @@ export default Page(async ({ context }) => {
         genera: table.pagination(pokemonSpecies.genera, {
           renderRows: ({ context }) => [
             context.genus,
-            <Pokedex.LanguageLink language={context.language} />,
+            languageLink(context.language),
           ],
           thead: [undefined, "language"],
         }),

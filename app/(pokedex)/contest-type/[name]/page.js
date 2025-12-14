@@ -1,4 +1,5 @@
 import { highlighter, Link, table, tabs } from "@/components";
+import { languageLink } from "@/components/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -27,7 +28,7 @@ export default Page(({ context }) => {
         names: table.pagination(contestType.names, {
           renderRows: ({ context }) => [
             context.name,
-            <Pokedex.LanguageLink language={context.language} />,
+            languageLink(context.language),
             context.color,
           ],
           thead: [undefined, "language", "color"],

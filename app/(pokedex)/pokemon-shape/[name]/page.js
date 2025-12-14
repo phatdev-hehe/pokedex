@@ -1,4 +1,5 @@
 import { table, tabs } from "@/components";
+import { languageLink } from "@/components/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.createDetailPage("pokemon-shape");
@@ -13,7 +14,7 @@ export default Page(({ context }) => {
     awesome_names: table.pagination(pokemonShape.awesome_names, {
       renderRows: ({ context }) => [
         context.awesome_name,
-        <Pokedex.LanguageLink language={context.language} />,
+        languageLink(context.language),
       ],
       thead: [undefined, "language"],
     }),
