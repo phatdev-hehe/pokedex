@@ -21,7 +21,10 @@ for (const [key, value] of Object.entries(data)) {
       category: [{ name: categoryName }],
       date: new Date(),
       id: link,
-      image: getOpengraphUrl({ title: `${title} (${categoryName})` }),
+      image: {
+        type: "image/png",
+        url: getOpengraphUrl({ title, topic: categoryName }),
+      },
       link,
       title,
     });

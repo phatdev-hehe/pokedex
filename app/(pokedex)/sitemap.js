@@ -1,3 +1,5 @@
+import { encode } from "entities";
+
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const withDefaultProps = (values) => ({
@@ -19,9 +21,9 @@ export default async () => [
           await Pokedex.api(routeName, "rootEndpoint")()
         ).results.map((item) =>
           withDefaultProps({
-            url: `${
-              process.env.NEXT_PUBLIC_SITE_URL
-            }/${routeName}/${encodeURIComponent(item.name)}`,
+            url: encode(
+              `${process.env.NEXT_PUBLIC_SITE_URL}/${routeName}/${item.name}`
+            ),
           })
         )
       )
