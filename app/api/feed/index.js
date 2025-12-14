@@ -1,7 +1,7 @@
 import { Feed } from "feed";
 
 import data from "@/app/api/local-data/data.json";
-import { getEncodedOgUrl } from "@/utils";
+import { getOgUrl } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 
 export const feed = new Feed({
@@ -24,7 +24,7 @@ for (const [key, value] of Object.entries(data)) {
       image: {
         title: `${title} (${categoryName})`,
         type: "image/png",
-        url: getEncodedOgUrl({ title, topic: categoryName }),
+        url: getOgUrl({ title, topic: categoryName }),
       },
       link,
       title,
