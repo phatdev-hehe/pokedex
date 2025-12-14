@@ -122,7 +122,7 @@ export async function GET(req) {
                   fontFamily: "UntitledSansMedium",
                   fontSize: 72,
                   fontWeight: 500,
-                  letterSpacing: "-0.08em",
+                  letterSpacing: "-0.07em",
                   lineHeight: 1,
                   marginTop: 20,
                 }}
