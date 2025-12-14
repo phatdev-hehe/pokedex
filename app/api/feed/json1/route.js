@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { feed } from "@/app/api/feed";
+import { feed } from "@/lib/feed";
 
 export const GET = () =>
   new NextResponse(feed.json1(), {

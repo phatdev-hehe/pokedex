@@ -1,3 +1,6 @@
+// https://www.highcharts.com/samples/highcharts/css/palette-helper
+// https://github.com/highcharts/highcharts/blob/ad4f5d9c525f6b0de1ce8f2a05ff3339bbe05f89/ts/Extensions/Themes/Adaptive.ts
+
 export default {
   accessibility: {
     keyboardNavigation: {

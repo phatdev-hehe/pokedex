@@ -1,5 +1,6 @@
-@import url("./search-dialog.css");
 @import url("./theme.css");
+@import url("./docs-layout.css");
+@import url("./search-dialog.css");
 
 :root {
   --fd-page-width: 1100px;
@@ -11,26 +12,6 @@
 
     &:hover {
       text-decoration: underline;
-    }
-  }
-
-  #nd-docs-layout {
-    #nd-page {
-      margin-inline: initial;
-
-      /* DocsBody */
-      > article div[class="prose flex-1"] {
-        background-color: var(--color-fd-background);
-        position: relative;
-      }
-    }
-
-    [id^="nd-sidebar"] {
-      background-color: var(--color-fd-background);
-
-      [data-radix-scroll-area-viewport] a[data-active]:hover {
-        text-decoration: initial;
-      }
     }
   }
 
@@ -46,9 +27,7 @@
     --tw-prose-links: blue;
   }
 
-  &.dark {
-    .prose {
-      --tw-prose-links: cornflowerblue;
-    }
+  &.dark .prose {
+    --tw-prose-links: cornflowerblue;
   }
 }
