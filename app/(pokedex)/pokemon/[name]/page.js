@@ -120,7 +120,10 @@ export default Page(async ({ context }) => {
               <Link href={`/location-area/${context.location_area.name}`}>
                 {titleCase(context.location_area.name)}
               </Link>,
-              Page.tabs.versionDetails(context.version_details)[1],
+              Page.tabs.versionDetails(
+                context.version_details,
+                Page.tabs.RAW_CONTENT
+              ),
             ],
             thead: [undefined, "version_details"],
           }

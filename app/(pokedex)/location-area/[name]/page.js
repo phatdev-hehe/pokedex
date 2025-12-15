@@ -48,7 +48,10 @@ export default Page(({ context }) => {
             <Link href={`/pokemon/${context.pokemon.name}`}>
               {titleCase(context.pokemon.name)}
             </Link>,
-            Page.tabs.versionDetails(context.version_details)[1],
+            Page.tabs.versionDetails(
+              context.version_details,
+              Page.tabs.RAW_CONTENT
+            ),
           ],
           thead: [undefined, "version_details"],
         }),
