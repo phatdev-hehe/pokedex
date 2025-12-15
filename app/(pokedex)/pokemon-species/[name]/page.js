@@ -6,7 +6,7 @@ import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.defineDetailPage("pokemon-species");
 
-export const { generateMetadata, generateStaticParams } = Page;
+export const { generateStaticParams } = Page;
 
 export default Page(async ({ context }) => {
   /** @type PokemonSpecies */

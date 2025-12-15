@@ -11,7 +11,7 @@ const Page = await Pokedex.defineDetailPage("type", {
   },
 });
 
-export const { generateMetadata, generateStaticParams } = Page;
+export const { generateStaticParams } = Page;
 
 export default Page(({ context }) => {
   /** @type Type */

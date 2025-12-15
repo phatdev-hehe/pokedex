@@ -3,7 +3,7 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.defineDetailPage("pokemon-color");
 
-export const { generateMetadata, generateStaticParams } = Page;
+export const { generateStaticParams } = Page;
 
 export default Page(({ context }) => {
   /** @type PokemonColor */

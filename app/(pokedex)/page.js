@@ -50,8 +50,6 @@ const content = tabs(
   )
 );
 
-export const generateMetadata = () => ({ title });
-
 export default () => (
   <Pokedex
     descriptions={[

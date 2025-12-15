@@ -6,7 +6,7 @@ const Page = await Pokedex.defineDetailPage("machine", {
   staticLimit: process.env.DEFAULT_STATIC_LIMIT,
 });
 
-export const { generateMetadata, generateStaticParams } = Page;
+export const { generateStaticParams } = Page;
 
 export default Page(({ context }) => {
   /** @type Machine */

@@ -6,7 +6,7 @@ const Page = await Pokedex.defineDetailPage("evolution-chain", {
   staticLimit: process.env.DEFAULT_STATIC_LIMIT,
 });
 
-export const { generateMetadata, generateStaticParams } = Page;
+export const { generateStaticParams } = Page;
 
 export const evolutionChainPage = (evolution_chain) => {
   /** @type EvolutionChain */

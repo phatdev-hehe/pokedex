@@ -7,12 +7,14 @@ import "./css/globals.css";
 
 const font = Geist();
 
+export const metadata = {
+  verification: {
+    google: "0g4xOknHTsS3aWczVHDj-smtRc9MUBhqsnVTeQVAkKE",
+  },
+};
+
 export default ({ children }) => (
   <html className={font.className} lang="en" suppressHydrationWarning>
-    <meta
-      content="0g4xOknHTsS3aWczVHDj-smtRc9MUBhqsnVTeQVAkKE"
-      name="google-site-verification"
-    />
     <body
       // https://fumadocs.dev/docs/ui/manual-installation/next#root-layout
       style={{

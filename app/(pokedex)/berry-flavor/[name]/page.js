@@ -4,7 +4,7 @@ import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.defineDetailPage("berry-flavor");
 
-export const { generateMetadata, generateStaticParams } = Page;
+export const { generateStaticParams } = Page;
 
 export default Page(({ context }) => {
   /** @type BerryFlavor */
