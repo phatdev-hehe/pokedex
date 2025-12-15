@@ -52,6 +52,7 @@ const content = tabs(
 
 export default () => (
   <Pokedex
+    canonical={process.env.NEXT_PUBLIC_SITE_URL}
     descriptions={[
       ["groups", groupCount],
       ["routes", routeCount],

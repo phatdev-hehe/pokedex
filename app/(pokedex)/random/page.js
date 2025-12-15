@@ -2,7 +2,10 @@ import { Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export default () => (
-  <Pokedex title="Random">
+  <Pokedex
+    canonical={`${process.env.NEXT_PUBLIC_SITE_URL}/random`}
+    title="Random"
+  >
     {tabs(
       Object.fromEntries(
         Object.entries(Pokedex.api.routeMap).map(([key, value]) => [
