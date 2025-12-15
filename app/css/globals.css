@@ -21,6 +21,7 @@
 
   table th {
     text-wrap: nowrap;
+    background-color: var(--color-fd-card);
   }
 
   .prose {
