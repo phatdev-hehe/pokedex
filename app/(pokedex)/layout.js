@@ -35,6 +35,10 @@ export default ({ children }) => (
           url: "/",
         },
         {
+          name: "Random",
+          url: "/random",
+        },
+        {
           name: "sitemap.xml",
           url: "/sitemap.xml",
         },
