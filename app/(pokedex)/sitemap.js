@@ -4,7 +4,7 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const withDefaultProps = ({ url, ...rest }) => ({
   changeFrequency: "yearly",
-  lastModified: new Date(),
+  lastModified: Pokedex.date,
   url: encode(url),
   ...rest,
 });
