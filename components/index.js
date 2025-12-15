@@ -3,7 +3,7 @@ import convert from "convert";
 import { chunk, flow, isPlainObject, noop } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { useId } from "react";
+import { Fragment, useId } from "react";
 import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
@@ -172,3 +172,12 @@ export const unit = (quantity, from, to = "best") => (
 );
 
 export const noContent = () => <Callout title="No Content" />;
+
+export const inlineList = (...items) =>
+  items.map((item, index) => (
+    <Fragment key={index}>
+      {item}
+      {index < items.length - 2 && ", "}
+      {index === items.length - 2 && " and "}
+    </Fragment>
+  ));
