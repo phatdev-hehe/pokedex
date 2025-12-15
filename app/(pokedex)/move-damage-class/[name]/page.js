@@ -1,7 +1,7 @@
 import { tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createDetailPage("move-damage-class");
+const Page = await Pokedex.defineDetailPage("move-damage-class");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

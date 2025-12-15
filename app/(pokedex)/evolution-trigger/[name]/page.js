@@ -1,7 +1,7 @@
 import { tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createDetailPage("evolution-trigger");
+const Page = await Pokedex.defineDetailPage("evolution-trigger");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

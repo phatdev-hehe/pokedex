@@ -2,7 +2,7 @@ import { highlighter, Link, table, tabs, ul } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("type", {
+const Page = await Pokedex.defineDetailPage("type", {
   getAvatar: ({ context }) => {
     /** @type Type */
     const type = context.data;

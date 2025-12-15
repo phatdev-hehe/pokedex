@@ -2,7 +2,7 @@ import { Checkbox, Link, table, tabs, ul } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("evolution-chain", {
+const Page = await Pokedex.defineDetailPage("evolution-chain", {
   staticLimit: process.env.DEFAULT_STATIC_LIMIT,
 });
 

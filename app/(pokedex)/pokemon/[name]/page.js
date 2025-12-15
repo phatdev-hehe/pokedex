@@ -13,7 +13,7 @@ import { Chart } from "@/components/chart";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("pokemon", {
+const Page = await Pokedex.defineDetailPage("pokemon", {
   getAvatar: ({ context }) => {
     /** @type Pokemon */
     const pokemon = context.data;

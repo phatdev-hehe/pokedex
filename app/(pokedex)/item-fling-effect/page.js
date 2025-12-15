@@ -1,6 +1,6 @@
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createListPage("item-fling-effect");
+const Page = await Pokedex.defineListPage("item-fling-effect");
 
 export const { generateMetadata } = Page;
 export default Page;

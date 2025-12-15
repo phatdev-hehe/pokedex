@@ -2,7 +2,7 @@ import { Checkbox, highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("pokedex");
+const Page = await Pokedex.defineDetailPage("pokedex");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

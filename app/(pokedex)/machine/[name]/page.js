@@ -2,7 +2,7 @@ import { highlighter, Link, table } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("machine", {
+const Page = await Pokedex.defineDetailPage("machine", {
   staticLimit: process.env.DEFAULT_STATIC_LIMIT,
 });
 

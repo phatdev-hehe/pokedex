@@ -1,7 +1,7 @@
 import { highlighter, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createDetailPage("super-contest-effect");
+const Page = await Pokedex.defineDetailPage("super-contest-effect");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

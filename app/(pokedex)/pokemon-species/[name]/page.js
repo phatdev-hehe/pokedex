@@ -4,7 +4,7 @@ import { languageLink } from "@/components/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("pokemon-species");
+const Page = await Pokedex.defineDetailPage("pokemon-species");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

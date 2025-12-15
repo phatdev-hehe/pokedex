@@ -1,6 +1,6 @@
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createListPage("pokemon-color");
+const Page = await Pokedex.defineListPage("pokemon-color");
 
 export const { generateMetadata } = Page;
 export default Page;

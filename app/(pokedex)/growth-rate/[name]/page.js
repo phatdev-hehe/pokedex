@@ -2,7 +2,7 @@ import { highlighter, table, tabs } from "@/components";
 import { math } from "@/components/katex";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createDetailPage("growth-rate");
+const Page = await Pokedex.defineDetailPage("growth-rate");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

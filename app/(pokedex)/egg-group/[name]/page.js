@@ -1,7 +1,7 @@
 import { tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createDetailPage("egg-group");
+const Page = await Pokedex.defineDetailPage("egg-group");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

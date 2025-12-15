@@ -1,6 +1,6 @@
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
-const Page = await Pokedex.createListPage("growth-rate");
+const Page = await Pokedex.defineListPage("growth-rate");
 
 export const { generateMetadata } = Page;
 export default Page;

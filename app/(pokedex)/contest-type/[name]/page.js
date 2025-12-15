@@ -3,7 +3,7 @@ import { languageLink } from "@/components/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("contest-type");
+const Page = await Pokedex.defineDetailPage("contest-type");
 
 export const { generateMetadata, generateStaticParams } = Page;
 

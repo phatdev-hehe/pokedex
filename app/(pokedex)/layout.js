@@ -39,18 +39,6 @@ export default ({ children }) => (
           url: "/random",
         },
         {
-          name: "sitemap.xml",
-          url: "/sitemap.xml",
-        },
-        {
-          name: "robots.txt",
-          url: "/robots.txt",
-        },
-        {
-          name: "local-data.js",
-          url: "/api/local-data",
-        },
-        {
           children: [
             {
               name: "rss2.xml",
@@ -67,6 +55,18 @@ export default ({ children }) => (
           ],
           name: "Feed",
           type: "folder",
+        },
+        {
+          name: "sitemap.xml",
+          url: "/sitemap.xml",
+        },
+        {
+          name: "robots.txt",
+          url: "/robots.txt",
+        },
+        {
+          name: "local-data.js",
+          url: "/api/local-data",
         },
         ...sidebar,
       ],

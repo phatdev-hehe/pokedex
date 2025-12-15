@@ -2,7 +2,7 @@ import { Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const Page = await Pokedex.createDetailPage("berry-firmness");
+const Page = await Pokedex.defineDetailPage("berry-firmness");
 
 export const { generateMetadata, generateStaticParams } = Page;
 
