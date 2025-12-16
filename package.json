@@ -12,7 +12,7 @@
     "@highcharts/react": "^4.1.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "change-case": "^5.4.4",
-    "convert": "^5.13.1",
+    "convert": "^5.14.1",
     "cycled": "^2.0.0",
     "deromanize": "^1.0.0",
     "entities": "^7.0.0",

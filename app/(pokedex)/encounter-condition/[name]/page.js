@@ -1,4 +1,4 @@
-import { Link, table, tabs } from "@/components";
+import { descriptionList, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -11,13 +11,21 @@ export default Page(({ context }) => {
   const encounterCondition = context.data;
 
   return tabs({
-    values: table.pagination(encounterCondition.values, {
-      renderRows: ({ context }) => [
-        <Link href={`/encounter-condition-value/${context.name}`}>
-          {titleCase(context.name)}
-        </Link>,
-      ],
-    }),
+    values: (
+      <>
+        {descriptionList(
+          undefined,
+          "A list of possible values for this encounter condition."
+        )}
+        {table.pagination(encounterCondition.values, {
+          renderRows: ({ context }) => [
+            <Link href={`/encounter-condition-value/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        })}
+      </>
+    ),
     ...Page.tabs.names(encounterCondition.names),
   });
 });

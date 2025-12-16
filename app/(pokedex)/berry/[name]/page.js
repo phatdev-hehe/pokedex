@@ -14,7 +14,10 @@ export default Page(({ context }) => {
     <>
       {table(undefined, [
         [
-          "Berries are actually items. This is a reference to the item specific data for this berry.",
+          highlighter(
+            "Berries are actually items. This is a reference to the item specific data for this berry.",
+            "the item"
+          ),
           <Link href={`/item/${berry.item.name}`}>
             {titleCase(berry.item.name)}
           </Link>,
@@ -37,11 +40,17 @@ export default Page(({ context }) => {
           berry.max_harvest,
         ],
         [
-          'The power of the move "Natural Gift" when used with this Berry.',
+          highlighter(
+            'The power of the move "Natural Gift" when used with this Berry.',
+            "power"
+          ),
           berry.natural_gift_power,
         ],
         [
-          `The type inherited by "Natural Gift" when used with this Berry.`,
+          highlighter(
+            `The type inherited by "Natural Gift" when used with this Berry.`,
+            "type"
+          ),
           <Link href={`/type/${berry.natural_gift_type.name}`}>
             {titleCase(berry.natural_gift_type.name)}
           </Link>,
@@ -58,7 +67,10 @@ export default Page(({ context }) => {
           berry.smoothness,
         ],
         [
-          "The speed at which this Berry dries out the soil as it grows. A higher rate means the soil dries more quickly.",
+          highlighter(
+            "The speed at which this Berry dries out the soil as it grows. A higher rate means the soil dries more quickly.",
+            "soil dries"
+          ),
           berry.soil_dryness,
         ],
       ])}

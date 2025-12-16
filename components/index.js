@@ -133,10 +133,10 @@ export const tabs = (tabs = {}) => {
     );
 };
 
-export const ul = (...values) => (
+export const ul = (...items) => (
   <ul>
-    {values.map((value, index) => (
-      <li key={index}>{value}</li>
+    {items.map((item, index) => (
+      <li key={index}>{item}</li>
     ))}
   </ul>
 );
@@ -181,3 +181,22 @@ export const inlineList = (...items) =>
       {index === items.length - 2 && " and "}
     </Fragment>
   ));
+
+export const descriptionList = (term, ...descriptions) => (
+  <dl>
+    <dt>{term}</dt>
+    <dd>
+      {descriptions.map((description, index) => (
+        <blockquote
+          key={index}
+          style={{
+            fontStyle: "initial",
+            fontWeight: "initial",
+          }}
+        >
+          {description}
+        </blockquote>
+      ))}
+    </dd>
+  </dl>
+);

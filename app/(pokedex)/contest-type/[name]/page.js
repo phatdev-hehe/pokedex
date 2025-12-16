@@ -28,10 +28,10 @@ export default Page(({ context }) => {
         names: table.pagination(contestType.names, {
           renderRows: ({ context }) => [
             context.name,
-            languageLink(context.language),
             context.color,
+            languageLink(context.language),
           ],
-          thead: [undefined, "language", "color"],
+          thead: [undefined, "color", "language"],
         }),
       })}
     </>
