@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@highcharts/react": "^4.1.0",
+    "@uidotdev/usehooks": "^2.4.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "change-case": "^5.4.4",
     "convert": "^5.14.1",
