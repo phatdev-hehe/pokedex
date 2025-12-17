@@ -151,7 +151,6 @@ export async function GET(req) {
                 gap: 30,
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="Payload CMS"
                 height="40"

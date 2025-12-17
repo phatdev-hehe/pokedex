@@ -1,5 +1,6 @@
 import { Link, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
+import { LazyImage } from "@/components/lazy-image";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -58,7 +59,7 @@ export default () => (
       pages: pageCount, // eslint-disable-line perfectionist/sort-objects
       status: (
         <Link href="https://pokeapi.statuspage.io/">
-          <img
+          <LazyImage
             src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
             style={{ margin: "initial" }}
           />
