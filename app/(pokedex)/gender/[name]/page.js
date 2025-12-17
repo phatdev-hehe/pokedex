@@ -1,4 +1,4 @@
-import { Link, table, tabs } from "@/components";
+import { descriptionList, highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -20,12 +20,23 @@ export default Page(({ context }) => {
       ],
       thead: [undefined, "rate"],
     }),
-    required_for_evolution: table.pagination(gender.required_for_evolution, {
-      renderRows: ({ context }) => [
-        <Link href={`/pokemon-species/${context.name}`}>
-          {titleCase(context.name)}
-        </Link>,
-      ],
-    }),
+    required_for_evolution: (
+      <>
+        {descriptionList(
+          undefined,
+          highlighter(
+            "A list of Pokémon species that required this gender in order for a Pokémon to evolve into them.",
+            "Pokémon species"
+          )
+        )}
+        {table.pagination(gender.required_for_evolution, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon-species/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        })}
+      </>
+    ),
   });
 });

@@ -1,6 +1,6 @@
 @import url("./theme.css");
 @import url("./docs-layout.css");
-@import url("./search-dialog.css");
+@import url("./components.css");
 
 :root {
   --fd-page-width: 1100px;
@@ -8,7 +8,7 @@
 
   a {
     text-underline-offset: var(--spacing);
-    text-decoration: initial;
+    text-decoration: unset;
 
     &:hover {
       text-decoration: underline;

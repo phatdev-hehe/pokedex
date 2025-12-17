@@ -195,8 +195,8 @@ export const descriptionList = (term, ...descriptions) => (
         <blockquote
           key={index}
           style={{
-            fontStyle: "initial",
-            fontWeight: "initial",
+            fontStyle: "unset",
+            fontWeight: "unset",
           }}
         >
           {description}

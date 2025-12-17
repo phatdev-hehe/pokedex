@@ -61,7 +61,7 @@ export default () => (
         <Link href="https://pokeapi.statuspage.io/">
           <LazyImage
             src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
-            style={{ margin: "initial" }}
+            style={{ margin: "unset" }}
           />
         </Link>
       ),
