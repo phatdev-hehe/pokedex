@@ -1,27 +1,22 @@
 "use client";
 
-import { useIntersectionObserver } from "@uidotdev/usehooks";
-import { useEffect, useState } from "react";
+import { useIntersectionObserver, useIsClient } from "@uidotdev/usehooks";
+import { Activity } from "react";
 
 const ClientOnly =
   // https://chakra-ui.com/docs/components/client-only
-  ({ children, fallback }) => {
-    const [state, setState] = useState();
-
-    useEffect(() => {
-      setState(true);
-    }, []);
-
-    return state ? children : fallback;
-  };
+  ({ children, fallback }) =>
+    useIsClient() ? <Activity>{children}</Activity> : fallback;
 
 export const InView = ({
   children,
-  persist, // https://react.dev/reference/react/Activity
+  persist,
   triggerOnce,
   unwrap = true,
   wrapper: Wrapper = "div",
 }) => {
+  children = <Activity>{children}</Activity>;
+
   const [ref, entry] = useIntersectionObserver();
 
   const WrapperProps = {
@@ -33,7 +28,13 @@ export const InView = ({
 
   return (
     <Wrapper ref={ref} {...WrapperProps}>
-      {WrapperProps["data-inview"] && children}
+      {persist ? (
+        <Activity mode={WrapperProps["data-inview"] ? "visible" : "hidden"}>
+          {children}
+        </Activity>
+      ) : (
+        WrapperProps["data-inview"] && children
+      )}
     </Wrapper>
   );
 };

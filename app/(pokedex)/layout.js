@@ -22,7 +22,7 @@ for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
 
 export default ({ children }) => (
   <DocsLayout
-    githubUrl="https://github.com/phatdev-hehe/pokedex"
+    githubUrl={process.env.NEXT_PUBLIC_GITHUB_URL}
     nav={{
       title: <Logo />,
       url: "/random/pokemon",
