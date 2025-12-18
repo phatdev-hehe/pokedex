@@ -1,4 +1,4 @@
-import { Link, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -16,7 +16,10 @@ export default Page(({ context }) => {
     <>
       {table(undefined, [
         [
-          "The region this location area can be found in.",
+          highlighter(
+            "The region this location area can be found in.",
+            "location"
+          ),
           <Link href={`/location/${locationArea.location.name}`}>
             {titleCase(locationArea.location.name)}
           </Link>,

@@ -1,10 +1,11 @@
 /* Tabs */
 [dir][data-orientation][class="flex flex-col overflow-hidden rounded-xl border bg-fd-secondary my-4"] {
-  background-color: var(--color-fd-background);
+  background-color: unset;
   border: unset;
 
   [role="tablist"] {
     padding-inline: unset;
+    gap: calc(var(--spacing) * 2);
 
     [role="tab"] {
       border: unset;
@@ -19,6 +20,7 @@
     }
 
     + [role="tabpanel"] {
+      background-color: unset;
     }
   }
 }
