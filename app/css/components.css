@@ -4,6 +4,8 @@
   border: unset;
 
   [role="tablist"] {
+    padding-inline: unset;
+
     [role="tab"] {
       border: unset;
       border-radius: 100dvw;

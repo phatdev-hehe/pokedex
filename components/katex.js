@@ -3,7 +3,7 @@ import { InlineMath } from "react-katex";
 
 import { InViewClientOnly } from "@/components/in-view";
 
-export const math = (
+export const inlineMath = (
   math // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/raw
 ) => (
   <InViewClientOnly>

@@ -1,4 +1,4 @@
-import { highlighter, Link, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs, unnamedLink } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -23,8 +23,6 @@ export default Page(({ context }) => {
 
   const flingEffect = item.fling_effect?.name;
 
-  item.machines;
-
   return (
     <>
       {table(undefined, [
@@ -38,6 +36,13 @@ export default Page(({ context }) => {
           </Link>,
         ],
         [highlighter("The price of this item in stores.", "price"), item.cost],
+        [
+          highlighter(
+            "An evolution chain this item requires to produce a bay during mating.",
+            "evolution chain"
+          ),
+          unnamedLink(item.baby_trigger_for?.url),
+        ],
         [
           "The effect of the move Fling when used with this item.",
           <Link href={`/item-fling-effect/${flingEffect}`}>
@@ -73,6 +78,15 @@ export default Page(({ context }) => {
             }),
           ],
           thead: [undefined, "version_details"],
+        }),
+        machines: table.pagination(item.machines, {
+          renderRows: ({ context }) => [
+            unnamedLink(context.machine.url),
+            <Link href={`/version-group/${context.version_group.name}`}>
+              {titleCase(context.version_group.name)}
+            </Link>,
+          ],
+          thead: [undefined, "version_group"],
         }),
         ...Page.tabs.effectEntries(item.effect_entries),
         ...Page.tabs.flavorTextEntries(item.flavor_text_entries),

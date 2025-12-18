@@ -1,5 +1,5 @@
 import { highlighter, table, tabs } from "@/components";
-import { math } from "@/components/katex";
+import { inlineMath } from "@/components/katex";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.defineDetailPage("growth-rate");
@@ -18,7 +18,7 @@ export default Page(({ context }) => {
             "The formula used to calculate the rate at which the Pokémon species gains level.",
             "formula"
           ),
-          math(String.raw`${growthRate.formula}`),
+          inlineMath(String.raw`${growthRate.formula}`),
         ],
       ])}
       {tabs({
