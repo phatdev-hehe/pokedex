@@ -2,16 +2,20 @@
 
 import { sample } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { RouterActions, RouterPush } from "@/components/router";
 
 export default ({ links }) => {
   const [state, setState] = useState();
 
-  useEffect(() => {
-    setState(sample(links));
-  }, []);
+  const effectEvent = useEffectEvent(() => {
+    startTransition(() => {
+      setState(sample(links));
+    });
+  });
+
+  useEffect(effectEvent, []);
 
   return (
     <Callout title="Redirecting to" type="warn">
