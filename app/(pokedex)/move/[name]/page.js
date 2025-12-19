@@ -1,4 +1,4 @@
-import { highlighter, Link, table, tabs } from "@/components";
+import { highlighter, Link, table, tabs, unnamedLink } from "@/components";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -16,9 +16,6 @@ export default Page(({ context }) => {
   const ailment = move.meta?.ailment.name;
   const category = move.meta?.category.name;
 
-  move.machines;
-  move.super_contest_effect;
-
   return (
     <>
       {table(undefined, [
@@ -27,13 +24,21 @@ export default Page(({ context }) => {
           move.accuracy,
         ],
         [
-          highlighter(
-            "The type of appeal this move gives a Pokémon when used in a contest.",
-            "contest"
-          ),
+          "The type of appeal this move gives a Pokémon when used in a contest.",
           <Link href={`/contest-type/${contestType}`}>
             {titleCase(contestType)}
           </Link>,
+        ],
+        [
+          "The effect the move has when used in a contest.",
+          unnamedLink(move.contest_effect?.url),
+        ],
+        [
+          highlighter(
+            "The effect the move has when used in a super contest.",
+            "super contest"
+          ),
+          unnamedLink(move.super_contest_effect?.url),
         ],
         [
           "The type of damage the move inflicts on the target.",
@@ -42,20 +47,23 @@ export default Page(({ context }) => {
           </Link>,
         ],
         [
-          highlighter(
-            "The percent value of how likely it is this moves effect will happen.",
-            "effect"
-          ),
+          "The percent value of how likely it is this moves effect will happen.",
           move.effect_chance,
         ],
         [
-          "The generation in which this move was introduced.",
+          highlighter(
+            "The generation in which this move was introduced.",
+            "generation"
+          ),
           <Link href={`/generation/${move.generation.name}`}>
             {titleCase(move.generation.name)}
           </Link>,
         ],
         [
-          "The base power of this move with a value of 0 if it does not have a base power.",
+          highlighter(
+            "The base power of this move with a value of 0 if it does not have a base power.",
+            "The base power"
+          ),
           move.power,
         ],
         [
@@ -115,28 +123,31 @@ export default Page(({ context }) => {
             </Link>,
           ],
         }),
-        meta: table(undefined, [
-          ["Ailment Chance", move.meta?.ailment_chance],
-          [
-            "Ailment",
-            <Link href={`/move-ailment/${ailment}`}>{titleCase(ailment)}</Link>,
-          ],
-          [
-            "Category",
-            <Link href={`/move-category/${category}`}>
-              {titleCase(category)}
-            </Link>,
-          ],
-          ["Crit Rate", move.meta?.crit_rate],
-          ["Drain", move.meta?.drain],
-          ["Flinch Chance", move.meta?.flinch_chance],
-          ["Healing", move.meta?.healing],
-          ["Max Hits", move.meta?.max_hits],
-          ["Max Turns", move.meta?.max_turns],
-          ["Min Hits", move.meta?.min_hits],
-          ["Min Turns", move.meta?.min_turns],
-          ["Stat Chance", move.meta?.stat_chance],
-        ]),
+        meta: table(
+          undefined,
+          Object.entries({
+            ailment: (
+              <Link href={`/move-ailment/${ailment}`}>
+                {titleCase(ailment)}
+              </Link>
+            ),
+            ailment_chance: move.meta?.ailment_chance,
+            category: (
+              <Link href={`/move-category/${category}`}>
+                {titleCase(category)}
+              </Link>
+            ),
+            crit_rate: move.meta?.crit_rate,
+            drain: move.meta?.drain,
+            flinch_chance: move.meta?.flinch_chance,
+            healing: move.meta?.healing,
+            max_hits: move.meta?.max_hits,
+            max_turns: move.meta?.max_turns,
+            min_hits: move.meta?.min_hits,
+            min_turns: move.meta?.min_turns,
+            stat_chance: move.meta?.stat_chance,
+          }).map(([key, value]) => [titleCase(key), value])
+        ),
         stat_changes: table.pagination(move.stat_changes, {
           renderRows: ({ context }) => [
             <Link href={`/stat/${context.stat.name}`}>
@@ -146,10 +157,11 @@ export default Page(({ context }) => {
           ],
           thead: [undefined, "change"],
         }),
-        ...Page.tabs.names(move.names),
         ...Page.tabs.effectChanges(move.effect_changes),
         ...Page.tabs.effectEntries(move.effect_entries),
         ...Page.tabs.flavorTextEntries(move.flavor_text_entries),
+        ...Page.tabs.machines(move.machines),
+        ...Page.tabs.names(move.names),
       })}
     </>
   );

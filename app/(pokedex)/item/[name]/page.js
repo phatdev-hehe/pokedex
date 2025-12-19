@@ -79,18 +79,10 @@ export default Page(({ context }) => {
           ],
           thead: [undefined, "version_details"],
         }),
-        machines: table.pagination(item.machines, {
-          renderRows: ({ context }) => [
-            unnamedLink(context.machine.url),
-            <Link href={`/version-group/${context.version_group.name}`}>
-              {titleCase(context.version_group.name)}
-            </Link>,
-          ],
-          thead: [undefined, "version_group"],
-        }),
         ...Page.tabs.effectEntries(item.effect_entries),
         ...Page.tabs.flavorTextEntries(item.flavor_text_entries),
         ...Page.tabs.gameIndices(item.game_indices),
+        ...Page.tabs.machines(item.machines),
         ...Page.tabs.names(item.names),
       })}
     </>
