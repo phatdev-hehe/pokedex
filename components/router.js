@@ -1,7 +1,9 @@
 "use client";
 
+import { sample } from "es-toolkit";
+import { Callout } from "fumadocs-ui/components/callout";
 import { useRouter } from "next/navigation";
-import { useEffect, useEffectEvent } from "react";
+import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { Link, ul } from "@/components";
 
@@ -27,5 +29,38 @@ export const RouterActions = () => {
     <Link onClick={router.back}>Back</Link>,
     <Link onClick={router.forward}>Forward</Link>,
     <Link onClick={router.refresh}>Refresh</Link>
+  );
+};
+
+export const RandomLink = ({ children, links }) => {
+  const router = useRouter();
+
+  return (
+    <a
+      onClick={() => {
+        router.push(sample(links));
+      }}
+    >
+      {children}
+    </a>
+  );
+};
+
+export const RandomRedirect = ({ links }) => {
+  const [state, setState] = useState();
+
+  const effectEvent = useEffectEvent(() => {
+    startTransition(() => {
+      setState(sample(links));
+    });
+  });
+
+  useEffect(effectEvent, []);
+
+  return (
+    <Callout title="Redirecting to" type="warn">
+      <RouterPush href={state} />
+      <RouterActions />
+    </Callout>
   );
 };

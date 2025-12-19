@@ -1,10 +1,12 @@
-import { Link, table, tabs } from "@/components";
+import { inlineList, Link, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
 import { LazyImage } from "@/components/lazy-image";
+import { RandomLink } from "@/components/router";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 const pageSeriesData = [];
+const routeNames = [];
 
 let [groupCount, routeCount, pageCount] = [0, 0, 0];
 
@@ -24,6 +26,8 @@ const content = tabs(
 
                   ++routeCount;
                   pageCount += data.count;
+
+                  routeNames.push(routeName);
 
                   pageSeriesData.push({
                     name: routeName,
@@ -64,6 +68,14 @@ export default () => (
             style={{ margin: "unset" }}
           />
         </Link>
+      ),
+      // eslint-disable-next-line perfectionist/sort-objects
+      links: inlineList(
+        <RandomLink
+          links={routeNames.map((routeName) => `/random/${routeName}`)}
+        >
+          Random
+        </RandomLink>
       ),
     }}
     title="Home"

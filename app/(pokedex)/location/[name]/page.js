@@ -12,14 +12,14 @@ export default Page(({ context }) => {
   /** @type PokedexLocation */
   const location = context.data;
 
+  const region = location.region?.name;
+
   return (
     <>
       {table(undefined, [
         [
           highlighter("The region this location can be found in.", "region"),
-          <Link href={`/region/${location.region.name}`}>
-            {titleCase(location.region.name)}
-          </Link>,
+          <Link href={`/region/${region}`}>{titleCase(region)}</Link>,
         ],
       ])}
       {tabs({

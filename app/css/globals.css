@@ -9,6 +9,7 @@
   a {
     text-underline-offset: var(--spacing);
     text-decoration: unset;
+    cursor: pointer;
 
     &:hover {
       text-decoration: underline;
