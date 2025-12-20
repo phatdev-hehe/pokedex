@@ -1,7 +1,5 @@
-import Image from "next/image";
+import { LazyImage } from "@/components/lazy-image";
 
-import src from "./2.gif";
+import logo from "./2.gif";
 
-export const Logo = ({ size = 40 }) => (
-  <Image alt={process.env.NEXT_PUBLIC_SITE_TITLE} src={src} width={size} />
-);
+export const Logo = ({ size = 40 }) => <LazyImage src={logo} width={size} />;

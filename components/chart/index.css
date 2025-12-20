@@ -4,8 +4,6 @@
   --highcharts-background-color: var(--color-fd-background) !important;
 }
 
-[data-highcharts-chart] {
-  .highcharts-menu hr {
-    margin-block: calc((var(--spacing) * 2));
-  }
+[data-highcharts-chart] .highcharts-menu hr {
+  margin-block: calc((var(--spacing) * 2));
 }
