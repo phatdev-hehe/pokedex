@@ -119,7 +119,14 @@ export const tabs = (tabs = {}) => {
   if (Object.keys(tabs).length)
     return (
       <InViewClientOnly>
-        <Tabs items={Object.keys(tabs).map(titleCase)} updateAnchor>
+        <Tabs
+          items={Object.keys(tabs).map(titleCase)}
+          style={{
+            backgroundColor: "unset",
+            border: "unset",
+          }}
+          updateAnchor
+        >
           {Object.entries(tabs).map((tab) => {
             const id = formatId(tab[0]);
 
@@ -127,7 +134,11 @@ export const tabs = (tabs = {}) => {
               <Tab
                 id={id}
                 key={id}
-                style={{ overflow: "auto" }}
+                style={{
+                  backgroundColor: "unset",
+                  overflow: "auto",
+                  paddingInline: "unset",
+                }}
                 value={titleCase(tab[0])}
               >
                 <InViewClientOnly>{tab[1] ?? noContent()}</InViewClientOnly>
