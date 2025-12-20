@@ -11,12 +11,11 @@ export default Page(({ context }) => {
   const pokeathlonStat = context.data;
 
   return tabs({
-    affecting_natures: table.pagination(
-      Object.entries(pokeathlonStat.affecting_natures),
-      {
-        renderRows: ({ context }) => [
-          titleCase(context[0]),
-          table.pagination(context[1], {
+    affecting_natures: tabs(
+      Object.fromEntries(
+        Object.entries(pokeathlonStat.affecting_natures).map(([key, value]) => [
+          key,
+          table.pagination(value, {
             renderRows: ({ context }) => [
               <Link href={`/nature/${context.nature.name}`}>
                 {titleCase(context.nature.name)}
@@ -25,9 +24,8 @@ export default Page(({ context }) => {
             ],
             thead: [undefined, "max_change"],
           }),
-        ],
-        thead: ["set", undefined],
-      }
+        ])
+      )
     ),
     ...Page.tabs.names(pokeathlonStat.names),
   });

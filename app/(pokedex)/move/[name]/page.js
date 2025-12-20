@@ -94,12 +94,11 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs({
-        contest_combos: table.pagination(
-          Object.entries(move?.contest_combos ?? {}),
-          {
-            renderRows: ({ context }) => [
-              titleCase(context[0]),
-              table.pagination(Object.entries(context[1]), {
+        contest_combos: tabs(
+          Object.fromEntries(
+            Object.entries(move?.contest_combos ?? {}).map(([key, value]) => [
+              key,
+              table.pagination(Object.entries(value), {
                 renderRows: ({ context }) => [
                   titleCase(context[0]),
                   table.pagination(context[1], {
@@ -110,11 +109,10 @@ export default Page(({ context }) => {
                     ],
                   }),
                 ],
-                thead: [undefined, "move"],
+                thead: ["detail", "move"],
               }),
-            ],
-            thead: ["set", "detail"],
-          }
+            ])
+          )
         ),
         learned_by_pokemon: table.pagination(move.learned_by_pokemon, {
           renderRows: ({ context }) => [
