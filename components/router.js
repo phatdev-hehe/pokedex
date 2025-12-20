@@ -16,7 +16,7 @@ export const RouterPush = ({ href }) => {
     if (href) router.push(href);
   });
 
-  useEffect(effectEvent, [href]);
+  useEffect(effectEvent);
 
   return href;
 };

@@ -1,5 +1,13 @@
-import { redirect } from "next/navigation";
+import { Callout } from "fumadocs-ui/components/callout";
+import { DocsBody } from "fumadocs-ui/page";
 
-export default () => {
-  redirect("/");
-};
+import { Pathname, RouterActions } from "@/components/router";
+
+export default () => (
+  <DocsBody>
+    <Callout title="???" type="warn">
+      <Pathname />
+      <RouterActions />
+    </Callout>
+  </DocsBody>
+);

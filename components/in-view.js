@@ -1,12 +1,23 @@
 "use client";
 
+import { useProgress } from "@bprogress/next";
 import { useIntersectionObserver, useIsClient } from "@uidotdev/usehooks";
-import { Activity } from "react";
+import { Activity, useEffect, useEffectEvent } from "react";
 
 const ClientOnly =
   // https://chakra-ui.com/docs/components/client-only
-  ({ children, fallback }) =>
-    useIsClient() ? <Activity>{children}</Activity> : fallback;
+  ({ children, fallback }) => {
+    const isClient = useIsClient();
+    const progress = useProgress();
+
+    const effectEvent = useEffectEvent(() => {
+      progress[isClient ? "stop" : "start"]();
+    });
+
+    useEffect(effectEvent);
+
+    return isClient ? <Activity>{children}</Activity> : fallback;
+  };
 
 export const InView = ({
   children,

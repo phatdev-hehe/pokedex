@@ -9,6 +9,7 @@
     "react-dom": "^19.2.3"
   },
   "devDependencies": {
+    "@bprogress/next": "^3.2.12",
     "@highcharts/react": "^4.1.0",
     "@uidotdev/usehooks": "^2.4.1",
     "babel-plugin-react-compiler": "^1.0.0",
