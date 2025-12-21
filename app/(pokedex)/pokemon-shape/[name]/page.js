@@ -1,5 +1,5 @@
 import { table, tabs } from "@/components";
-import { languageLink } from "@/components/language-link";
+import { languageLink } from "@/components/link/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 const Page = await Pokedex.defineDetailPage("pokemon-shape");
