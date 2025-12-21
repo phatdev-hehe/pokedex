@@ -1,15 +1,8 @@
 import { maxBy, minBy, sumBy } from "es-toolkit";
 
-import {
-  audio,
-  Checkbox,
-  highlighter,
-  Link,
-  table,
-  tabs,
-  unit,
-} from "@/components";
+import { audio, Checkbox, highlighter, table, tabs, unit } from "@/components";
 import { Chart } from "@/components/chart";
+import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 

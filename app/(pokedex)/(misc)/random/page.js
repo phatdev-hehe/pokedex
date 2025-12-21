@@ -1,4 +1,5 @@
-import { Link, table, tabs } from "@/components";
+import { table, tabs } from "@/components";
+import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export default () => (

@@ -5,7 +5,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
-import { Link, ul } from "@/components";
+import { ul } from "@/components";
+import { Link } from "@/components/link";
 
 export const RouterPush = ({ href }) => {
   const router = useRouter();

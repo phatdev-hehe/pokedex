@@ -1,4 +1,5 @@
-import { highlighter, Link, table } from "@/components";
+import { highlighter, table } from "@/components";
+import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
