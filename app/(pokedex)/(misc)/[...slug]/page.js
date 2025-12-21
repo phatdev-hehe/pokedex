@@ -1,13 +1,18 @@
 import { Callout } from "fumadocs-ui/components/callout";
 import { DocsBody } from "fumadocs-ui/page";
+import { usePathname } from "next/navigation";
 
-import { Pathname, RouterActions } from "@/components/router";
+import { RouterActions } from "@/components/router";
 
-export default () => (
-  <DocsBody>
-    <Callout title="???" type="warn">
-      <Pathname />
-      <RouterActions />
-    </Callout>
-  </DocsBody>
-);
+export default () => {
+  const pathname = usePathname();
+
+  return (
+    <DocsBody>
+      <Callout title="???" type="warn">
+        {pathname}
+        <RouterActions />
+      </Callout>
+    </DocsBody>
+  );
+};

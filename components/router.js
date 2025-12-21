@@ -7,8 +7,6 @@ import { startTransition, useEffect, useEffectEvent, useState } from "react";
 
 import { Link, ul } from "@/components";
 
-export { usePathname as Pathname } from "next/navigation";
-
 export const RouterPush = ({ href }) => {
   const router = useRouter();
 
