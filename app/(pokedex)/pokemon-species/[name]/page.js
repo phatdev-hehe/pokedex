@@ -1,5 +1,12 @@
-import { evolutionChainPage } from "@/app/(pokedex)/evolution-chain/[name]/page";
-import { Checkbox, highlighter, Link, table, tabs } from "@/components";
+import {
+  Checkbox,
+  highlighter,
+  Link,
+  table,
+  tabs,
+  ul,
+  unnamedLink,
+} from "@/components";
 import { languageLink } from "@/components/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
@@ -8,7 +15,38 @@ const Page = await Pokedex.defineDetailPage("pokemon-species");
 
 export const { generateStaticParams } = Page;
 
-export default Page(async ({ context }) => {
+const EvolutionChainTree = async ({ url }) => {
+  const content = (...chains) =>
+    ul(
+      ...chains.map((chain) => (
+        <div
+          style={{
+            alignItems: "baseline",
+            display: "flex",
+            gap: "calc(var(--spacing) * 4)",
+          }}
+        >
+          <Link href={`/pokemon-species/${chain.species.name}`}>
+            {titleCase(chain.species.name)}
+          </Link>
+          {Boolean(chain.evolves_to.length) && (
+            <span
+              style={{
+                color: "var(--color-fd-muted-foreground)",
+              }}
+            >
+              {">"}
+            </span>
+          )}
+          {content(...chain.evolves_to)}
+        </div>
+      ))
+    );
+
+  return content((await Pokedex.api.getResource(url)).chain);
+};
+
+export default Page(({ context }) => {
   /** @type PokemonSpecies */
   const pokemonSpecies = context.data;
 
@@ -35,6 +73,16 @@ export default Page(async ({ context }) => {
           <Link href={`/generation/${pokemonSpecies.generation.name}`}>
             {titleCase(pokemonSpecies.generation.name)}
           </Link>,
+        ],
+        [
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {highlighter(
+              "The evolution chain this Pokémon species is a member of.",
+              "evolution chain"
+            )}
+            {unnamedLink(pokemonSpecies.evolution_chain.url)}
+          </div>,
+          <EvolutionChainTree url={pokemonSpecies.evolution_chain.url} />,
         ],
         [
           highlighter("Whether or not this is a baby Pokémon.", "baby"),
@@ -123,9 +171,6 @@ export default Page(async ({ context }) => {
             </Link>,
           ],
         }),
-        evolution_chain: evolutionChainPage(
-          await Pokedex.api.getResource(pokemonSpecies.evolution_chain.url)
-        ),
         genera: table.pagination(pokemonSpecies.genera, {
           renderRows: ({ context }) => [
             context.genus,

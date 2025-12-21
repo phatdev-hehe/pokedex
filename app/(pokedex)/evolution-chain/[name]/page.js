@@ -8,9 +8,9 @@ const Page = await Pokedex.defineDetailPage("evolution-chain", {
 
 export const { generateStaticParams } = Page;
 
-export const evolutionChainPage = (evolution_chain) => {
+export default Page(({ context }) => {
   /** @type EvolutionChain */
-  const evolutionChain = evolution_chain;
+  const evolutionChain = context.data;
 
   const babyTriggerItem = evolutionChain.baby_trigger_item?.name;
   const [evolutionDetail] = evolutionChain.chain.evolution_details;
@@ -144,6 +144,4 @@ export const evolutionChainPage = (evolution_chain) => {
       {chainTabs(evolutionChain.chain)}
     </>
   );
-};
-
-export default Page(({ context }) => evolutionChainPage(context.data));
+});

@@ -38,10 +38,10 @@ export default Page(({ context }) => {
             </Link>,
             context.entry_number,
           ],
-          thead: [undefined, "entry_number"],
+          thead: ["pokemon_species", "entry_number"],
         }),
-        ...Page.tabs.names(pokedex.names),
         ...Page.tabs.descriptions(pokedex.descriptions),
+        ...Page.tabs.names(pokedex.names),
         ...Page.tabs.versionGroups(pokedex.version_groups),
       })}
     </>
