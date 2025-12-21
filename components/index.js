@@ -1,7 +1,6 @@
 import { kebabCase } from "change-case";
 import convert from "convert";
-import { chunk, compact, flow, isPlainObject, noop } from "es-toolkit";
-import Link from "fumadocs-core/link";
+import { chunk, flow, isPlainObject, noop } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Fragment, useId } from "react";
@@ -13,8 +12,6 @@ import { InViewClientOnly } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
 
 const formatId = flow(removeAccents, kebabCase);
-
-export { Link };
 
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
@@ -217,12 +214,3 @@ export const descriptionList = (term, ...descriptions) => (
     </dd>
   </dl>
 );
-
-export const unnamedLink = (url) => {
-  if (url) {
-    const [a, b] = compact(new URL(url).pathname.split("/")).slice(-2);
-    const href = `/${a}/${a}-${b}`;
-
-    return <Link href={href}>{href}</Link>;
-  }
-};
