@@ -8,6 +8,8 @@ import { startTransition, useEffect, useEffectEvent, useState } from "react";
 import { ul } from "@/components";
 import { Link } from "@/components/link";
 
+export { usePathname as Pathname } from "next/navigation";
+
 export const RouterPush = ({ href }) => {
   const router = useRouter();
 
