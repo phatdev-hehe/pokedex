@@ -161,7 +161,7 @@ export default Page(async ({ context }) => {
               statElement.effort,
             ]),
             <tr>
-              <th>Min/Max/Total</th>
+              <td>Min/Max/Total</td>
               <td>
                 {[
                   minBy(pokemon.stats, (statElement) => statElement.base_stat)
