@@ -1,4 +1,5 @@
-import { Checkbox, highlighter, table, tabs, ul } from "@/components";
+import { EvolutionChainTree } from "@/app/(pokedex)/evolution-chain/[name]/page";
+import { Checkbox, highlighter, table, tabs } from "@/components";
 import { Link, unnamedLink } from "@/components/link";
 import { languageLink } from "@/components/link/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -7,37 +8,6 @@ import { titleCase } from "@/utils/title-case";
 const Page = await Pokedex.defineDetailPage("pokemon-species");
 
 export const { generateStaticParams } = Page;
-
-const EvolutionChainTree = async ({ url }) => {
-  const content = (...chains) =>
-    ul(
-      ...chains.map((chain) => (
-        <div
-          style={{
-            alignItems: "baseline",
-            display: "flex",
-            gap: "calc(var(--spacing) * 4)",
-          }}
-        >
-          <Link href={`/pokemon-species/${chain.species.name}`}>
-            {titleCase(chain.species.name)}
-          </Link>
-          {Boolean(chain.evolves_to.length) && (
-            <span
-              style={{
-                color: "var(--color-fd-muted-foreground)",
-              }}
-            >
-              {">"}
-            </span>
-          )}
-          {content(...chain.evolves_to)}
-        </div>
-      ))
-    );
-
-  return content((await Pokedex.api.getResource(url)).chain);
-};
 
 export default Page(({ context }) => {
   /** @type PokemonSpecies */
@@ -68,7 +38,12 @@ export default Page(({ context }) => {
           </Link>,
         ],
         [
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             {highlighter(
               "The evolution chain this Pokémon species is a member of.",
               "evolution chain"
@@ -139,7 +114,10 @@ export default Page(({ context }) => {
           </Link>,
         ],
         [
-          "Whether or not this Pokémon has visual gender differences.",
+          highlighter(
+            "Whether or not this Pokémon has visual gender differences.",
+            "gender differences"
+          ),
           <Checkbox checked={pokemonSpecies.has_gender_differences} />,
         ],
         [
@@ -169,7 +147,7 @@ export default Page(({ context }) => {
             context.genus,
             languageLink(context.language),
           ],
-          thead: [undefined, "language"],
+          thead: ["genus", "language"],
         }),
         pal_park_encounters: table.pagination(
           pokemonSpecies.pal_park_encounters,

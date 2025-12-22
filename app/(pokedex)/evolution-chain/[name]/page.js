@@ -3,6 +3,37 @@ import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
+export const EvolutionChainTree = async ({ chain, url }) => {
+  const content = (...chains) =>
+    ul(
+      ...chains.map((chain) => (
+        <div
+          style={{
+            alignItems: "baseline",
+            display: "flex",
+            gap: "calc(var(--spacing) * 4)",
+          }}
+        >
+          <Link href={`/pokemon-species/${chain.species.name}`}>
+            {titleCase(chain.species.name)}
+          </Link>
+          {Boolean(chain.evolves_to.length) && (
+            <span
+              style={{
+                color: "var(--color-fd-muted-foreground)",
+              }}
+            >
+              {">"}
+            </span>
+          )}
+          {content(...chain.evolves_to)}
+        </div>
+      ))
+    );
+
+  return content(chain ?? (await Pokedex.api.getResource(url)).chain);
+};
+
 const Page = await Pokedex.defineDetailPage("evolution-chain", {
   staticLimit: process.env.MIN_STATIC_LIMIT,
 });
@@ -23,12 +54,6 @@ export default Page(({ context }) => {
           chain.species.name,
           <>
             {table(undefined, [
-              [
-                "species",
-                <Link href={`/pokemon-species/${chain.species.name}`}>
-                  {titleCase(chain.species.name)}
-                </Link>,
-              ],
               ["is_baby", <Checkbox checked={chain.is_baby} />],
               [
                 "evolution_details",
@@ -141,6 +166,7 @@ export default Page(({ context }) => {
             {titleCase(babyTriggerItem)}
           </Link>,
         ],
+        ["tree", <EvolutionChainTree chain={evolutionChain.chain} />],
       ])}
       {chainTabs(evolutionChain.chain)}
     </>
