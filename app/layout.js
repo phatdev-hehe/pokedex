@@ -3,8 +3,8 @@ import "fumadocs-ui/style.css";
 import { Geist } from "next/font/google";
 import { Provider as ReactWrapBalancerProvider } from "react-wrap-balancer";
 
-import { ProgressProvider } from "./client-providers";
 import "./css/globals.css";
+import ProgressProvider from "./progress-provider";
 
 const font = Geist();
 

@@ -1,0 +1,13 @@
+/* https://bprogress.vercel.app/docs/style */
+
+:root {
+  --bprogress-color: var(--tw-prose-links);
+
+  --bprogress-color: blue;
+  --bprogress-box-shadow: 0 0 10px var(--bprogress-color),
+    0 0 5px var(--bprogress-color);
+
+  &.dark {
+    --bprogress-color: cornflowerblue;
+  }
+}
