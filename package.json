@@ -24,6 +24,7 @@
     "eslint-plugin-perfectionist": "^4.15.1",
     "feed": "^5.1.0",
     "fumadocs-ui": "^16.1.0",
+    "js.foresight": "^3.3.4",
     "next": "^16.1.1",
     "pokedex-promise-v2": "^4.2.1",
     "react-highlight-words": "^0.21.0",

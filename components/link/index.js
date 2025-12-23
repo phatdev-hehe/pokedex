@@ -3,39 +3,48 @@
 import { useProgress } from "@bprogress/next";
 import { compact } from "es-toolkit";
 import FumadocsLink from "fumadocs-core/link";
+import { ForesightManager } from "js.foresight";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useEffect, useRef } from "react";
 
-const usePrefetchOnHover = (href) => {
+const useForesightRef = (options) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (element)
+      ForesightManager.instance.register({
+        element,
+        hitSlop: 20,
+        ...options,
+      });
+
+    return () => {
+      if (element) ForesightManager.instance.unregister(element);
+    };
+  }, [ref, options]);
+
+  return ref;
+};
+
+export const Link = ({ href, ...props }) => {
   const router = useRouter();
   const progress = useProgress();
 
-  const prefetchOnHover = useCallback(() => {
-    progress.start();
+  const foresightRef = useForesightRef({
+    callback() {
+      progress.start();
 
-    router.prefetch(href, {
-      onInvalidate: prefetchOnHover,
-    });
+      router.prefetch(href, {
+        onInvalidate: this.callback,
+      });
 
-    progress.stop();
-  }, [router, href]);
+      progress.stop();
+    },
+  });
 
-  return prefetchOnHover;
-};
-
-export const Link = ({ href, prefetch = false, ...props }) => {
-  const prefetchOnHover = usePrefetchOnHover(href);
-  const onMouseEnter = prefetch ? undefined : prefetchOnHover;
-
-  return (
-    <FumadocsLink
-      href={href}
-      onFocus={onMouseEnter}
-      onMouseEnter={onMouseEnter}
-      prefetch={prefetch}
-      {...props}
-    />
-  );
+  return <FumadocsLink href={href} ref={foresightRef} {...props} />;
 };
 
 export const UnnamedLink = ({ href }) => {
