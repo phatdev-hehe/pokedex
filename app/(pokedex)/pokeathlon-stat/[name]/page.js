@@ -1,3 +1,5 @@
+import { mapValues } from "es-toolkit";
+
 import { table, tabs } from "@/components";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -13,19 +15,16 @@ export default Page(({ context }) => {
 
   return tabs({
     affecting_natures: tabs(
-      Object.fromEntries(
-        Object.entries(pokeathlonStat.affecting_natures).map(([key, value]) => [
-          key,
-          table.pagination(value, {
-            renderRows: ({ context }) => [
-              <Link href={`/nature/${context.nature.name}`}>
-                {titleCase(context.nature.name)}
-              </Link>,
-              context.max_change,
-            ],
-            thead: [undefined, "max_change"],
-          }),
-        ])
+      mapValues(pokeathlonStat.affecting_natures, (value) =>
+        table.pagination(value, {
+          renderRows: ({ context }) => [
+            <Link href={`/nature/${context.nature.name}`}>
+              {titleCase(context.nature.name)}
+            </Link>,
+            context.max_change,
+          ],
+          thead: [undefined, "max_change"],
+        })
       )
     ),
     ...Page.tabs.names(pokeathlonStat.names),

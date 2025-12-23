@@ -1,3 +1,5 @@
+import { mapValues } from "es-toolkit";
+
 import { highlighter, table, tabs } from "@/components";
 import { Link, unnamedLink } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -96,23 +98,18 @@ export default Page(({ context }) => {
       ])}
       {tabs({
         contest_combos: tabs(
-          Object.fromEntries(
-            Object.entries(move?.contest_combos ?? {}).map(([key, value]) => [
-              key,
-              table.pagination(Object.entries(value), {
-                renderRows: ({ context }) => [
-                  titleCase(context[0]),
-                  table.pagination(context[1], {
-                    renderRows: ({ context }) => [
-                      <Link href={`/move/${context.name}`}>
-                        {titleCase(context.name)}
-                      </Link>,
-                    ],
-                  }),
-                ],
-                thead: ["detail", "move"],
-              }),
-            ])
+          mapValues(move?.contest_combos ?? {}, (value) =>
+            tabs(
+              mapValues(value, (value) =>
+                table.pagination(value, {
+                  renderRows: ({ context }) => [
+                    <Link href={`/move/${context.name}`}>
+                      {titleCase(context.name)}
+                    </Link>,
+                  ],
+                })
+              )
+            )
           )
         ),
         learned_by_pokemon: table.pagination(move.learned_by_pokemon, {

@@ -1,3 +1,5 @@
+import { mapValues } from "es-toolkit";
+
 import { table, tabs } from "@/components";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -8,17 +10,14 @@ export default () => (
     title="Random"
   >
     {tabs(
-      Object.fromEntries(
-        Object.entries(Pokedex.api.routeMap).map(([key, value]) => [
-          key,
-          table.pagination(Object.keys(value), {
-            renderRows: ({ context }) => {
-              const href = `/random/${context}`;
+      mapValues(Pokedex.api.routeMap, (value) =>
+        table.pagination(Object.keys(value), {
+          renderRows: ({ context }) => {
+            const href = `/random/${context}`;
 
-              return [<Link href={href}>{href}</Link>];
-            },
-          }),
-        ])
+            return [<Link href={href}>{href}</Link>];
+          },
+        })
       )
     )}
   </Pokedex>
