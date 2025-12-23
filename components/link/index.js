@@ -7,7 +7,7 @@ import { startTransition, useState } from "react";
 export const Link =
   // https://nextjs.org/docs/app/getting-started/linking-and-navigating#disabling-prefetching
   (props) => {
-    const [state, setState] = useState();
+    const [state, setState] = useState(false);
 
     return (
       <FumadocsLink
