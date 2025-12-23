@@ -34,13 +34,15 @@ export const Link = ({ href, ...props }) => {
 
   const foresightRef = useForesightRef({
     callback() {
-      progress.start();
+      if (href) {
+        progress.start();
 
-      router.prefetch(href, {
-        onInvalidate: this.callback,
-      });
+        router.prefetch(href, {
+          onInvalidate: this.callback,
+        });
 
-      progress.stop();
+        progress.stop();
+      }
     },
   });
 
