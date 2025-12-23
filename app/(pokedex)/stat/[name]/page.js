@@ -30,6 +30,13 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs({
+        affecting_items: table.pagination(stat.affecting_items, {
+          renderRows: ({ context }) => [
+            <Link href={`/item/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         affecting_moves: tabs(
           mapValues(stat.affecting_moves, (value) =>
             table.pagination(value, {
@@ -57,7 +64,6 @@ export default Page(({ context }) => {
         characteristics: table.pagination(stat.characteristics, {
           renderRows: ({ context }) => [unnamedLink(context.url)],
         }),
-        ...Page.tabs.items(stat.affecting_items, "affecting_items"),
         ...Page.tabs.names(stat.names),
       })}
     </>

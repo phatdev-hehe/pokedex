@@ -20,9 +20,13 @@
     accent-color: var(--tw-prose-links);
   }
 
-  table th {
-    text-wrap: nowrap;
+  table {
     background-color: var(--color-fd-card);
+
+    th {
+      text-wrap: nowrap;
+      background-color: inherit;
+    }
   }
 
   .prose {

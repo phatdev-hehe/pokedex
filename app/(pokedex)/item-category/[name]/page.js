@@ -25,7 +25,13 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs({
-        ...Page.tabs.items(itemCategory.items),
+        items: table.pagination(itemCategory.items, {
+          renderRows: ({ context }) => [
+            <Link href={`/item/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         ...Page.tabs.names(itemCategory.names),
       })}
     </>
