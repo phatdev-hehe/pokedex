@@ -1,6 +1,6 @@
 import { highlighter, table, tabs } from "@/components";
 import { Link } from "@/components/link";
-import { languageLink } from "@/components/link/language-link";
+import { LanguageLink } from "@/components/link/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -30,7 +30,7 @@ export default Page(({ context }) => {
           renderRows: ({ context }) => [
             context.name,
             context.color,
-            languageLink(context.language),
+            <LanguageLink language={context.language} />,
           ],
           thead: [undefined, "color", "language"],
         }),

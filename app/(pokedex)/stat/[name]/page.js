@@ -1,7 +1,7 @@
 import { mapValues } from "es-toolkit";
 
 import { Checkbox, table, tabs } from "@/components";
-import { Link, unnamedLink } from "@/components/link";
+import { Link, UnnamedLink } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -62,7 +62,7 @@ export default Page(({ context }) => {
           )
         ),
         characteristics: table.pagination(stat.characteristics, {
-          renderRows: ({ context }) => [unnamedLink(context.url)],
+          renderRows: ({ context }) => [<UnnamedLink href={context.url} />],
         }),
         ...Page.tabs.names(stat.names),
       })}

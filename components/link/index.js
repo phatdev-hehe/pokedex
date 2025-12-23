@@ -1,12 +1,32 @@
+"use client";
+
 import { compact } from "es-toolkit";
-import Link from "fumadocs-core/link";
+import FumadocsLink from "fumadocs-core/link";
+import { startTransition, useState } from "react";
 
-export { Link };
+export const Link =
+  // https://nextjs.org/docs/app/getting-started/linking-and-navigating#disabling-prefetching
+  (props) => {
+    const [state, setState] = useState();
 
-export const unnamedLink = (url) => {
-  if (url) {
-    const [a, b] = compact(new URL(url).pathname.split("/")).slice(-2);
-    const href = `/${a}/${a}-${b}`;
+    return (
+      <FumadocsLink
+        onMouseEnter={() => {
+          startTransition(() => {
+            setState(true);
+          });
+        }}
+        prefetch={state}
+        {...props}
+      />
+    );
+  };
+
+export const UnnamedLink = ({ href }) => {
+  if (href) {
+    const [a, b] = compact(new URL(href).pathname.split("/")).slice(-2);
+
+    href = `/${a}/${a}-${b}`;
 
     return <Link href={href}>{href}</Link>;
   }

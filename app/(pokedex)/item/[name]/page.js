@@ -1,5 +1,5 @@
 import { highlighter, table, tabs } from "@/components";
-import { Link, unnamedLink } from "@/components/link";
+import { Link, UnnamedLink } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -42,7 +42,7 @@ export default Page(({ context }) => {
             "An evolution chain this item requires to produce a bay during mating.",
             "evolution chain"
           ),
-          unnamedLink(item.baby_trigger_for?.url),
+          <UnnamedLink href={item.baby_trigger_for?.url} />,
         ],
         [
           "The effect of the move Fling when used with this item.",

@@ -1,7 +1,7 @@
 import { EvolutionChainTree } from "@/app/(pokedex)/evolution-chain/[name]/page";
 import { Checkbox, highlighter, table, tabs } from "@/components";
-import { Link, unnamedLink } from "@/components/link";
-import { languageLink } from "@/components/link/language-link";
+import { Link, UnnamedLink } from "@/components/link";
+import { LanguageLink } from "@/components/link/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -48,7 +48,7 @@ export default Page(({ context }) => {
               "The evolution chain this Pokémon species is a member of.",
               "evolution chain"
             )}
-            {unnamedLink(pokemonSpecies.evolution_chain.url)}
+            <UnnamedLink href={pokemonSpecies.evolution_chain.url} />
           </div>,
           <EvolutionChainTree url={pokemonSpecies.evolution_chain.url} />,
         ],
@@ -145,7 +145,7 @@ export default Page(({ context }) => {
         genera: table.pagination(pokemonSpecies.genera, {
           renderRows: ({ context }) => [
             context.genus,
-            languageLink(context.language),
+            <LanguageLink language={context.language} />,
           ],
           thead: ["genus", "language"],
         }),

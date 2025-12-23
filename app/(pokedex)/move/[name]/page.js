@@ -1,7 +1,7 @@
 import { mapValues } from "es-toolkit";
 
 import { highlighter, table, tabs } from "@/components";
-import { Link, unnamedLink } from "@/components/link";
+import { Link, UnnamedLink } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -34,14 +34,14 @@ export default Page(({ context }) => {
         ],
         [
           "The effect the move has when used in a contest.",
-          unnamedLink(move.contest_effect?.url),
+          <UnnamedLink href={move.contest_effect?.url} />,
         ],
         [
           highlighter(
             "The effect the move has when used in a super contest.",
             "super contest"
           ),
-          unnamedLink(move.super_contest_effect?.url),
+          <UnnamedLink href={move.super_contest_effect?.url} />,
         ],
         [
           "The type of damage the move inflicts on the target.",
