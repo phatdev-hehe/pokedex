@@ -1,5 +1,7 @@
+import { mapValues } from "es-toolkit";
+
 import { Checkbox, table, tabs } from "@/components";
-import { Link } from "@/components/link";
+import { Link, unnamedLink } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -28,40 +30,33 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs({
-        affecting_moves: table.pagination(
-          Object.entries(stat.affecting_moves),
-          {
-            renderRows: ({ context }) => [
-              titleCase(context[0]),
-              table.pagination(Object.values(context[1]), {
-                renderRows: ({ context }) => [
-                  <Link href={`/move/${context.move.name}`}>
-                    {titleCase(context.move.name)}
-                  </Link>,
-                  context.change,
-                ],
-                thead: [undefined, "change"],
-              }),
-            ],
-            thead: ["set", undefined],
-          }
+        affecting_moves: tabs(
+          mapValues(stat.affecting_moves, (value) =>
+            table.pagination(value, {
+              renderRows: ({ context }) => [
+                <Link href={`/move/${context.move.name}`}>
+                  {titleCase(context.move.name)}
+                </Link>,
+                context.change,
+              ],
+              thead: [undefined, "change"],
+            })
+          )
         ),
-        affecting_natures: table.pagination(
-          Object.entries(stat.affecting_natures),
-          {
-            renderRows: ({ context }) => [
-              titleCase(context[0]),
-              table.pagination(Object.values(context[1]), {
-                renderRows: ({ context }) => [
-                  <Link href={`/nature/${context.name}`}>
-                    {titleCase(context.name)}
-                  </Link>,
-                ],
-              }),
-            ],
-            thead: ["set", undefined],
-          }
+        affecting_natures: tabs(
+          mapValues(stat.affecting_natures, (value) =>
+            table.pagination(value, {
+              renderRows: ({ context }) => [
+                <Link href={`/nature/${context.name}`}>
+                  {titleCase(context.name)}
+                </Link>,
+              ],
+            })
+          )
         ),
+        characteristics: table.pagination(stat.characteristics, {
+          renderRows: ({ context }) => [unnamedLink(context.url)],
+        }),
         ...Page.tabs.items(stat.affecting_items, "affecting_items"),
         ...Page.tabs.names(stat.names),
       })}

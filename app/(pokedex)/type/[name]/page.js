@@ -1,4 +1,6 @@
-import { highlighter, table, tabs, ul } from "@/components";
+import { mapValues } from "es-toolkit";
+
+import { highlighter, table, tabs } from "@/components";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
@@ -40,21 +42,16 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs({
-        damage_relations: table.pagination(
-          Object.entries(type.damage_relations),
-          {
-            renderRows: ({ context }) => [
-              titleCase(context[0]),
-              ul(
-                ...context[1].map((type) => (
-                  <Link href={`/type/${type.name}`}>
-                    {titleCase(type.name)}
-                  </Link>
-                ))
-              ),
-            ],
-            thead: [undefined, "type"],
-          }
+        damage_relations: tabs(
+          mapValues(type.damage_relations, (value) =>
+            table.pagination(value, {
+              renderRows: ({ context }) => [
+                <Link href={`/type/${context.name}`}>
+                  {titleCase(context.name)}
+                </Link>,
+              ],
+            })
+          )
         ),
         pokemon: table.pagination(type.pokemon, {
           renderRows: ({ context }) => [
