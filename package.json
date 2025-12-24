@@ -32,7 +32,6 @@
     "react-wrap-balancer": "^1.1.1",
     "remove-accents": "^0.5.0",
     "romanize": "^1.1.1",
-    "server-only": "^0.0.1",
     "title-case": "^4.3.2"
   }
 }
