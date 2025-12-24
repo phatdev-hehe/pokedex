@@ -1,6 +1,8 @@
 import { highlighter, table, tabs } from "@/components";
 import { inlineMath } from "@/components/katex";
+import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.defineDetailPage("growth-rate");
 
@@ -27,8 +29,14 @@ export default Page(({ context }) => {
           showIndex: false,
           thead: [undefined, "experience"],
         }),
+        pokemon_species: table.pagination(growthRate.pokemon_species, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokemon-species/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         ...Page.tabs.descriptions(growthRate.descriptions),
-        ...Page.tabs.pokemonSpecies(growthRate.pokemon_species),
       })}
     </>
   );
