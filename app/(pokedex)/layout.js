@@ -15,7 +15,9 @@ for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
 
   for (const key of Object.keys(value))
     sidebar.push({
-      name: titleCase(key),
+      name: `${titleCase(key)} (${
+        (await Pokedex.api(key, "rootEndpoint")()).count
+      })`,
       url: `/${key}`,
     });
 }
