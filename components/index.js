@@ -1,6 +1,6 @@
 import { kebabCase } from "change-case";
 import convert from "convert";
-import { chunk, flow, isPlainObject, noop } from "es-toolkit";
+import { chunk, flow, isPlainObject, noop, pick } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Fragment, useId } from "react";
@@ -213,4 +213,17 @@ export const descriptionList = (term, ...descriptions) => (
       ))}
     </dd>
   </dl>
+);
+
+export const LazyImage = ({ src, ...props }) => (
+  <InViewClientOnly>
+    <img
+      decoding="async"
+      loading="lazy"
+      {...(isPlainObject(src)
+        ? pick(src, ["height", "width", "src"])
+        : { src })}
+      {...props}
+    />
+  </InViewClientOnly>
 );
