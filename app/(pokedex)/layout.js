@@ -5,20 +5,20 @@ import { Logo } from "@/components/logo";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const sidebar = [];
+const pokedexNavTree = [];
 
 for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
-  sidebar.push({
+  pokedexNavTree.push({
     name: titleCase(key),
     type: "separator",
   });
 
-  for (const key of Object.keys(value))
-    sidebar.push({
-      name: `${titleCase(key)} (${
-        (await Pokedex.api(key, "rootEndpoint")()).count
+  for (const routeName of Object.keys(value))
+    pokedexNavTree.push({
+      name: `${titleCase(routeName)} (${
+        (await Pokedex.api(routeName, "rootEndpoint")()).count
       })`,
-      url: `/${key}`,
+      url: `/${routeName}`,
     });
 }
 
@@ -43,41 +43,48 @@ export default ({ children }) => (
         {
           children: [
             {
-              name: "rss2.xml",
-              url: "/api/feed/rss2",
+              name: "sitemap.xml",
+              url: "/sitemap.xml",
             },
             {
-              name: "atom1.xml",
-              url: "/api/feed/atom1",
+              name: "robots.txt",
+              url: "/robots.txt",
             },
             {
-              name: "json1.json",
-              url: "/api/feed/json1",
+              children: [
+                {
+                  name: "local-data.js",
+                  url: "/api/local-data",
+                },
+                {
+                  name: "Feed",
+                  type: "separator",
+                },
+                {
+                  name: "rss2.xml",
+                  url: "/api/feed/rss2",
+                },
+                {
+                  name: "atom1.xml",
+                  url: "/api/feed/atom1",
+                },
+                {
+                  name: "json1.json",
+                  url: "/api/feed/json1",
+                },
+              ],
+              name: "API",
+              type: "folder",
             },
           ],
-          name: "Feed",
+          name: "More",
           type: "folder",
         },
-        {
-          name: "sitemap.xml",
-          url: "/sitemap.xml",
-        },
-        {
-          name: "robots.txt",
-          url: "/robots.txt",
-        },
-        {
-          name: "local-data.js",
-          url: "/api/local-data",
-        },
-        ...sidebar,
+        ...pokedexNavTree,
       ],
     }}
   >
-    <div
-      className="prose" // https://fumadocs.dev/docs/ui/theme#typography
-      style={{ width: "100%" }}
-    >
+    <div className="prose" style={{ width: "100%" }}>
       <DocsPage>{children}</DocsPage>
     </div>
   </DocsLayout>

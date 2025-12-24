@@ -8,6 +8,12 @@ import ProgressProvider from "./progress-provider";
 
 const font = Geist();
 
+const requiredStyles = {
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "100dvh",
+};
+
 export const metadata = {
   verification: {
     google: "0g4xOknHTsS3aWczVHDj-smtRc9MUBhqsnVTeQVAkKE",
@@ -16,14 +22,7 @@ export const metadata = {
 
 export default ({ children }) => (
   <html className={font.className} lang="en" suppressHydrationWarning>
-    <body
-      // https://fumadocs.dev/docs/ui/manual-installation/next#root-layout
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100dvh",
-      }}
-    >
+    <body style={requiredStyles}>
       <ProgressProvider>
         <FumadocsUIProvider>
           <ReactWrapBalancerProvider>{children}</ReactWrapBalancerProvider>
