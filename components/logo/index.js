@@ -1,6 +1,6 @@
 import { LazyImage } from "@/components/lazy-image";
 
-import logo from "./cmon-cat.gif";
+import logo from "./cat-dance.gif";
 
 export const Logo = ({ size = 30 }) => (
   <LazyImage

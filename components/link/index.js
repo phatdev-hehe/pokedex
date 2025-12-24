@@ -16,7 +16,7 @@ const useForesightRef = (options) => {
     if (element)
       ForesightManager.instance.register({
         element,
-        hitSlop: 20,
+        hitSlop: 50,
         ...options,
       });
 
