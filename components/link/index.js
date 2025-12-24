@@ -28,13 +28,13 @@ const useForesightRef = (options) => {
   return ref;
 };
 
-export const Link = ({ href, ...props }) => {
+export const Link = ({ href, prefetch = false, ...props }) => {
   const router = useRouter();
   const progress = useProgress();
 
   const foresightRef = useForesightRef({
     callback() {
-      if (href) {
+      if (href && !prefetch) {
         progress.start();
 
         router.prefetch(href, {
@@ -46,7 +46,14 @@ export const Link = ({ href, ...props }) => {
     },
   });
 
-  return <FumadocsLink href={href} ref={foresightRef} {...props} />;
+  return (
+    <FumadocsLink
+      href={href}
+      prefetch={prefetch}
+      ref={foresightRef}
+      {...props}
+    />
+  );
 };
 
 export const UnnamedLink = ({ href }) => {
