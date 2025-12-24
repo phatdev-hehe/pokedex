@@ -11,7 +11,7 @@ import {
 import { Accessibility } from "@highcharts/react/options/Accessibility";
 import { Exporting } from "@highcharts/react/options/Exporting";
 
-import { InViewClientOnly } from "@/components/in-view";
+import { PrerenderInView } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
 
 import "./index.css";
@@ -25,7 +25,7 @@ export const Chart = ({
   YAxisProps,
   ...props
 }) => (
-  <InViewClientOnly>
+  <PrerenderInView>
     <Chart1 options={{ ...themeOptions, ...props }}>
       <Title>{titleCase(title)}</Title>
       <Subtitle>{subtitle}</Subtitle>
@@ -43,5 +43,5 @@ export const Chart = ({
       <Accessibility />
       <Exporting />
     </Chart1>
-  </InViewClientOnly>
+  </PrerenderInView>
 );

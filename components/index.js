@@ -8,7 +8,7 @@ import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
 
-import { InViewClientOnly } from "@/components/in-view";
+import { PrerenderInView } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
 
 const formatId = flow(removeAccents, kebabCase);
@@ -31,7 +31,7 @@ export const table = Object.assign(
   (thead = [], tbody = thead, tfoot) => {
     if (thead.length || tbody.length)
       return (
-        <InViewClientOnly>
+        <PrerenderInView>
           <table>
             <thead>
               <tr>
@@ -51,7 +51,7 @@ export const table = Object.assign(
             </tbody>
             <tfoot>{tfoot}</tfoot>
           </table>
-        </InViewClientOnly>
+        </PrerenderInView>
       );
   },
   {
@@ -115,7 +115,7 @@ export const table = Object.assign(
 export const tabs = (tabs = {}) => {
   if (Object.keys(tabs).length)
     return (
-      <InViewClientOnly>
+      <PrerenderInView>
         <Tabs
           items={Object.keys(tabs).map(titleCase)}
           style={{
@@ -138,12 +138,12 @@ export const tabs = (tabs = {}) => {
                 }}
                 value={titleCase(tab[0])}
               >
-                <InViewClientOnly>{tab[1] ?? noContent()}</InViewClientOnly>
+                <PrerenderInView>{tab[1] ?? noContent()}</PrerenderInView>
               </Tab>
             );
           })}
         </Tabs>
-      </InViewClientOnly>
+      </PrerenderInView>
     );
 };
 
@@ -216,7 +216,7 @@ export const descriptionList = (term, ...descriptions) => (
 );
 
 export const LazyImage = ({ src, ...props }) => (
-  <InViewClientOnly>
+  <PrerenderInView>
     <img
       decoding="async"
       loading="lazy"
@@ -225,5 +225,5 @@ export const LazyImage = ({ src, ...props }) => (
         : { src })}
       {...props}
     />
-  </InViewClientOnly>
+  </PrerenderInView>
 );

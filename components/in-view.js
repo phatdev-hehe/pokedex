@@ -55,7 +55,7 @@ export const InView = ({
   );
 };
 
-export const InViewClientOnly = ({
+export const PrerenderInView = ({
   children,
   fallback = children,
   triggerOnce = true,
