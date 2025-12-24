@@ -41,8 +41,14 @@ export default Page(({ context }) => {
             </Link>,
           ],
         }),
+        version_groups: table.pagination(region.version_groups, {
+          renderRows: ({ context }) => [
+            <Link href={`/version-group/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         ...Page.tabs.names(region.names),
-        ...Page.tabs.versionGroups(region.version_groups),
       })}
     </>
   );

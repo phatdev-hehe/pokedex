@@ -41,9 +41,15 @@ export default Page(({ context }) => {
           ],
           thead: ["pokemon_species", "entry_number"],
         }),
+        version_groups: table.pagination(pokedex.version_groups, {
+          renderRows: ({ context }) => [
+            <Link href={`/version-group/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         ...Page.tabs.descriptions(pokedex.descriptions),
         ...Page.tabs.names(pokedex.names),
-        ...Page.tabs.versionGroups(pokedex.version_groups),
       })}
     </>
   );
