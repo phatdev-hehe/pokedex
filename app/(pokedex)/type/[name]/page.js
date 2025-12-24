@@ -53,6 +53,13 @@ export default Page(({ context }) => {
             })
           )
         ),
+        moves: table.pagination(type.moves, {
+          renderRows: ({ context }) => [
+            <Link href={`/move/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         pokemon: table.pagination(type.pokemon, {
           renderRows: ({ context }) => [
             <Link href={`/pokemon/${context.pokemon.name}`}>
@@ -63,7 +70,6 @@ export default Page(({ context }) => {
           thead: [undefined, "slot"],
         }),
         ...Page.tabs.gameIndices(type.game_indices),
-        ...Page.tabs.moves(type.moves),
         ...Page.tabs.names(type.names),
         ...Page.tabs.sprites(type.sprites),
       })}

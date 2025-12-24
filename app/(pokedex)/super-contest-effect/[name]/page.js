@@ -1,5 +1,7 @@
 import { highlighter, table, tabs } from "@/components";
+import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.defineDetailPage("super-contest-effect");
 
@@ -21,8 +23,14 @@ export default Page(({ context }) => {
         ],
       ])}
       {tabs({
+        moves: table.pagination(superContestEffect.moves, {
+          renderRows: ({ context }) => [
+            <Link href={`/move/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         ...Page.tabs.flavorTextEntries(superContestEffect.flavor_text_entries),
-        ...Page.tabs.moves(superContestEffect.moves),
       })}
     </>
   );

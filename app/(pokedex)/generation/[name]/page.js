@@ -32,6 +32,13 @@ export default Page(({ context }) => {
             </Link>,
           ],
         }),
+        moves: table.pagination(generation.moves, {
+          renderRows: ({ context }) => [
+            <Link href={`/move/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         types: table.pagination(generation.types, {
           renderRows: ({ context }) => [
             <Link href={`/type/${context.name}`}>
@@ -39,7 +46,6 @@ export default Page(({ context }) => {
             </Link>,
           ],
         }),
-        ...Page.tabs.moves(generation.moves),
         ...Page.tabs.names(generation.names),
         ...Page.tabs.pokemonSpecies(generation.pokemon_species),
         ...Page.tabs.versionGroups(generation.version_groups),

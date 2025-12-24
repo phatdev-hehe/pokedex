@@ -1,5 +1,7 @@
 import { tabs } from "@/components";
+import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
+import { titleCase } from "@/utils/title-case";
 
 const Page = await Pokedex.defineDetailPage("move-target");
 
@@ -10,8 +12,12 @@ export default Page(({ context }) => {
   const moveTarget = context.data;
 
   return tabs({
+    moves: table.pagination(moveTarget.moves, {
+      renderRows: ({ context }) => [
+        <Link href={`/move/${context.name}`}>{titleCase(context.name)}</Link>,
+      ],
+    }),
     ...Page.tabs.descriptions(moveTarget.descriptions),
-    ...Page.tabs.moves(moveTarget.moves),
     ...Page.tabs.names(moveTarget.names),
   });
 });
