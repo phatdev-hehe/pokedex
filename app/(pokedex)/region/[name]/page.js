@@ -34,8 +34,14 @@ export default Page(({ context }) => {
             </Link>,
           ],
         }),
+        pokedexes: table.pagination(region.pokedexes, {
+          renderRows: ({ context }) => [
+            <Link href={`/pokedex/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        }),
         ...Page.tabs.names(region.names),
-        ...Page.tabs.pokedexes(region.pokedexes),
         ...Page.tabs.versionGroups(region.version_groups),
       })}
     </>
