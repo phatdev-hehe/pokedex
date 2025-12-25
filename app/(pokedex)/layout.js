@@ -1,7 +1,6 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
 
-import { Logo } from "@/components/logo";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
@@ -22,11 +21,11 @@ for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
     });
 }
 
-export default ({ children }) => (
+export default ({ children, logo }) => (
   <DocsLayout
     githubUrl={process.env.NEXT_PUBLIC_GITHUB_URL}
     nav={{
-      title: <Logo />,
+      title: logo,
       url: "/random/pokemon",
     }}
     themeSwitch={{ mode: "light-dark-system" }}
