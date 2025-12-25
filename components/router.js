@@ -3,7 +3,7 @@
 import { sample } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { useRouter } from "next/navigation";
-import { startTransition, useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 import { ul } from "@/components";
 import { Link } from "@/components/link";
@@ -47,21 +47,9 @@ export const RandomLink = ({ children, links }) => {
   );
 };
 
-export const RandomRedirect = ({ links }) => {
-  const [state, setState] = useState();
-
-  const effectEvent = useEffectEvent(() => {
-    startTransition(() => {
-      setState(sample(links));
-    });
-  });
-
-  useEffect(effectEvent, []);
-
-  return (
-    <Callout title="Redirecting to" type="warn">
-      <RouterPush href={state} />
-      <RouterActions />
-    </Callout>
-  );
-};
+export const RandomRedirect = ({ links }) => (
+  <Callout title="Redirecting to" type="warn">
+    <RouterPush href={sample(links)} />
+    <RouterActions />
+  </Callout>
+);

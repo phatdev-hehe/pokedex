@@ -11,7 +11,7 @@ import romanize from "romanize";
 import { PrerenderInView } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
 
-const formatId = flow(removeAccents, kebabCase);
+const toId = flow(removeAccents, kebabCase);
 
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
@@ -125,7 +125,7 @@ export const tabs = (tabs = {}) => {
           updateAnchor
         >
           {Object.entries(tabs).map((tab) => {
-            const id = formatId(tab[0]);
+            const id = toId(tab[0]);
 
             return (
               <Tab
