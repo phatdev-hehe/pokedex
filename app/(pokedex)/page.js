@@ -1,5 +1,6 @@
-import { inlineList, LazyImage, table, tabs } from "@/components";
+import { inlineList, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
+import { LazyImage } from "@/components/lazy-image";
 import { Link } from "@/components/link";
 import { RandomLink } from "@/components/router";
 import { Pokedex } from "@/lib/pokedex-promise-v2";

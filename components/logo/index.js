@@ -1,4 +1,4 @@
-import { LazyImage } from "@/components";
+import { LazyImage } from "@/components/lazy-image";
 
 import logo from "./cat-dance.gif";
 
