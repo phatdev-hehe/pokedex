@@ -1,18 +1,9 @@
 "use client";
 
-import { useProgress } from "@bprogress/next";
 import { useIntersectionObserver, useIsClient } from "@uidotdev/usehooks";
-import { Activity, useEffect, useEffectEvent } from "react";
+import { Activity } from "react";
 
-const useProgressWhen = (isLoading) => {
-  const progress = useProgress();
-
-  const effectEvent = useEffectEvent(() => {
-    progress[isLoading ? "start" : "stop"]();
-  });
-
-  useEffect(effectEvent);
-};
+import { useProgressWhen } from "@/hooks";
 
 const ClientOnly =
   // https://chakra-ui.com/docs/components/client-only
