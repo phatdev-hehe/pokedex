@@ -2,6 +2,16 @@
 @import url("./components.css");
 
 :root {
+  --color-fd-background: white;
+  --color-fd-card: #f9f9f9;
+
+  &.dark {
+    --color-fd-background: hsl(0, 0%, 2%);
+    --color-fd-card: hsl(0, 0%, 4%);
+  }
+}
+
+:root {
   --fd-page-width: 1100px;
   /* --fd-layout-width: 100%; */
 
