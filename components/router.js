@@ -1,26 +1,12 @@
 "use client";
 
 import { sample } from "es-toolkit";
-import { Callout } from "fumadocs-ui/components/callout";
 import { useRouter } from "next/navigation";
-import { useEffect, useEffectEvent } from "react";
 
 import { list } from "@/components";
 import { Link } from "@/components/link";
 
 export { usePathname as Pathname } from "next/navigation";
-
-export const RouterPush = ({ href }) => {
-  const router = useRouter();
-
-  const effectEvent = useEffectEvent(() => {
-    if (href) router.push(href);
-  });
-
-  useEffect(effectEvent);
-
-  return href;
-};
 
 export const RouterActions = () => {
   const router = useRouter();
@@ -46,10 +32,3 @@ export const RandomLink = ({ children, links }) => {
     </a>
   );
 };
-
-export const RandomRedirect = ({ links }) => (
-  <Callout title="Redirecting to" type="warn">
-    <RouterPush href={sample(links)} />
-    <RouterActions />
-  </Callout>
-);

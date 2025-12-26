@@ -1,8 +1,9 @@
 import { DocsBody } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
 
-import { RandomRedirect } from "@/components/router";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
+
+import RandomRedirect from "./random-redirect";
 
 export default async ({ params }) => {
   params = await params;
