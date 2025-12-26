@@ -157,13 +157,17 @@ export const list = Object.assign(
   ),
   {
     inline: (...items) =>
-      items.map((item, index) => (
-        <Fragment key={index}>
-          {item}
-          {index < items.length - 2 && ", "}
-          {index === items.length - 2 && " and "}
-        </Fragment>
-      )),
+      items.map((item, index) => {
+        const penultimateIndex = items.length - 2;
+
+        return (
+          <Fragment key={index}>
+            {item}
+            {index < penultimateIndex && ", "}
+            {index === penultimateIndex && " and "}
+          </Fragment>
+        );
+      }),
   }
 );
 
