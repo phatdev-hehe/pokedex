@@ -1,4 +1,4 @@
-import { descriptionList, highlighter, table, tabs, ul } from "@/components";
+import { descriptionList, highlighter, list, table, tabs } from "@/components";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
@@ -32,7 +32,7 @@ export default Page(({ context }) => {
               undefined,
               "The possible values of the highest stat that would result in a Pokémon recieving this characteristic when divided by 5."
             )}
-            {ul(...characteristic.possible_values)}
+            {list(...characteristic.possible_values)}
           </>
         ),
         ...Page.tabs.descriptions(characteristic.descriptions),

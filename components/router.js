@@ -5,7 +5,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { useRouter } from "next/navigation";
 import { useEffect, useEffectEvent } from "react";
 
-import { ul } from "@/components";
+import { list } from "@/components";
 import { Link } from "@/components/link";
 
 export { usePathname as Pathname } from "next/navigation";
@@ -25,7 +25,7 @@ export const RouterPush = ({ href }) => {
 export const RouterActions = () => {
   const router = useRouter();
 
-  return ul(
+  return list(
     <Link href="/">Go to the homepage</Link>,
     <Link onClick={router.back}>Back</Link>,
     <Link onClick={router.forward}>Forward</Link>,

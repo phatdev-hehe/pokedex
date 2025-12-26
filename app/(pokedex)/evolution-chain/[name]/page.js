@@ -1,11 +1,11 @@
-import { Checkbox, table, tabs, ul } from "@/components";
+import { Checkbox, list, table, tabs } from "@/components";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 export const EvolutionChainTree = async ({ chain, url }) => {
   const content = (...chains) =>
-    ul(
+    list(
       ...chains.map((chain) => (
         <div
           style={{
@@ -68,7 +68,7 @@ export default Page(({ context }) => {
                   const tradeSpecies = evolutionDetail.trade_species?.name;
                   const trigger = evolutionDetail.trigger?.name;
 
-                  return ul(
+                  return list(
                     ...[
                       ["base_form_id", evolutionDetail.base_form_id],
                       ["gender", evolutionDetail.gender],

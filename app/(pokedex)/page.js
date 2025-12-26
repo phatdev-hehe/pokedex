@@ -1,4 +1,4 @@
-import { inlineList, table, tabs } from "@/components";
+import { list, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
 import { LazyImage } from "@/components/lazy-image";
 import { Link } from "@/components/link";
@@ -71,7 +71,7 @@ export default () => (
         </Link>
       ),
       // eslint-disable-next-line perfectionist/sort-objects
-      links: inlineList(
+      links: list.inline(
         <RandomLink
           links={routeNames.map((routeName) => `/random/${routeName}`)}
         >

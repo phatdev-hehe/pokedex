@@ -147,12 +147,24 @@ export const tabs = (tabs = {}) => {
     );
 };
 
-export const ul = (...items) => (
-  <ul>
-    {items.map((item, index) => (
-      <li key={index}>{item}</li>
-    ))}
-  </ul>
+export const list = Object.assign(
+  (...items) => (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  ),
+  {
+    inline: (...items) =>
+      items.map((item, index) => (
+        <Fragment key={index}>
+          {item}
+          {index < items.length - 2 && ", "}
+          {index === items.length - 2 && " and "}
+        </Fragment>
+      )),
+  }
 );
 
 export const audio = (src) => <audio controls src={src} />;
@@ -186,15 +198,6 @@ export const unit = (quantity, from, to = "best") => (
 );
 
 export const noContent = () => <Callout title="No Content" />;
-
-export const inlineList = (...items) =>
-  items.map((item, index) => (
-    <Fragment key={index}>
-      {item}
-      {index < items.length - 2 && ", "}
-      {index === items.length - 2 && " and "}
-    </Fragment>
-  ));
 
 export const descriptionList = (term, ...descriptions) => (
   <dl>
