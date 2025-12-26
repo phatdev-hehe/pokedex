@@ -16,7 +16,7 @@ export const GET = async () => {
     }, {})
   );
 
-  fs.writeFileSync("app/api/local-data/data.json", data);
+  fs.writeFileSync("app/api/(more)/local-data/data.json", data);
 
   return new NextResponse(data, {
     headers: new Headers({ "content-type": "application/json" }),
