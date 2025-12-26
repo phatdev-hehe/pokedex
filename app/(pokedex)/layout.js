@@ -52,6 +52,10 @@ export default ({ children, logo }) => (
             {
               children: [
                 {
+                  name: "get.js",
+                  url: "/api/get/pokemon?encodedName=pikachu",
+                },
+                {
                   name: "local-data.js",
                   url: "/api/local-data",
                 },
