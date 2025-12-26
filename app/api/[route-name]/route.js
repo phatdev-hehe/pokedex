@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { GET as getRouteNames } from "@/app/api/get/route";
+import { GET as getRouteNames } from "@/app/api/route";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export const revalidate = 0;
