@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import fs from "node:fs";
-import path from "node:path";
 
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
@@ -17,7 +16,7 @@ export const GET = async () => {
     }, {})
   );
 
-  fs.writeFileSync(path.join("app", "api", "local-data", "data.json"), data);
+  fs.writeFileSync("app/api/local-data/data.json", data);
 
   return new NextResponse(data, {
     headers: new Headers({ "content-type": "application/json" }),
