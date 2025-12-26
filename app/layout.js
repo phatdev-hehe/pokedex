@@ -1,10 +1,9 @@
-import { RootProvider as FumadocsUIProvider } from "fumadocs-ui/provider/next";
-import "fumadocs-ui/style.css";
 import { Geist } from "next/font/google";
 import { Provider as ReactWrapBalancerProvider } from "react-wrap-balancer";
 
 import "./css/globals.css";
-import ProgressProvider from "./progress-provider";
+import FumadocsUIProvider from "./providers/fumadocs-ui-provider";
+import ProgressProvider from "./providers/progress-provider";
 
 const font = Geist();
 
