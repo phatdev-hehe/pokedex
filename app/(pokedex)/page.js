@@ -1,6 +1,5 @@
 import { list, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
-import { LazyImage } from "@/components/lazy-image";
 import { Link } from "@/components/link";
 import { RandomLink } from "@/components/router";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -62,14 +61,6 @@ export default () => (
       groups: groupCount,
       routes: routeCount,
       pages: pageCount, // eslint-disable-line perfectionist/sort-objects
-      status: (
-        <Link href="https://pokeapi.statuspage.io/">
-          <LazyImage
-            src="https://img.shields.io/badge/dynamic/json?label=PokeAPI&query=$.status.description&url=https://zlfyqp3hlvly.statuspage.io/api/v2/summary.json"
-            style={{ margin: "unset" }}
-          />
-        </Link>
-      ),
       // eslint-disable-next-line perfectionist/sort-objects
       links: list.inline(
         <RandomLink
