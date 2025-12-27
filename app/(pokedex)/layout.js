@@ -52,9 +52,7 @@ export default ({ children, logo }) => (
             {
               children: [
                 {
-                  get name() {
-                    return this.url;
-                  },
+                  name: "pikachu.json",
                   url: "/api/pokemon?encodedName=pikachu",
                 },
                 {
