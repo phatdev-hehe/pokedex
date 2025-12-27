@@ -20,16 +20,16 @@
 }
 
 /* SearchDialog */
-[data-state="open"]
-  + [role="dialog"]
-  [data-empty]
-  button
-  p[class="min-w-0 truncate font-medium"] {
-  color: var(--color-fd-muted-foreground);
+[data-state="open"] + [role="dialog"] {
+  background-color: var(--color-fd-background);
 
-  span[class="text-fd-primary underline"] {
-    text-decoration: unset;
-    color: var(--color-fd-foreground);
+  [data-empty="false"] button p[class="min-w-0 truncate font-medium"] {
+    color: var(--color-fd-muted-foreground);
+
+    span {
+      text-decoration: unset;
+      color: var(--color-fd-foreground);
+    }
   }
 }
 
