@@ -1,13 +1,1 @@
-import { Callout } from "fumadocs-ui/components/callout";
-import { DocsBody } from "fumadocs-ui/page";
-
-import { Pathname, RouterActions } from "@/components/router";
-
-export default () => (
-  <DocsBody>
-    <Callout title="???" type="warn">
-      <Pathname />
-      <RouterActions />
-    </Callout>
-  </DocsBody>
-);
+export { notFound as default } from "next/navigation";
