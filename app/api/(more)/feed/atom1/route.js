@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { feed } from "@/lib/feed";
+import { feed } from "@/lib/pokedex-promise-v2/feed";
 
 export const GET = () =>
   new NextResponse(feed.atom1(), {
