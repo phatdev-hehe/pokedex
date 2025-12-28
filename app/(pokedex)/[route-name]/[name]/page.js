@@ -36,6 +36,7 @@ export default async ({ params }) => {
   const context = {
     data: await Pokedex.api.getResource(item.url),
     index,
+    routeParams: params,
   };
 
   const avatarSrc = config.getAvatar({ context });
