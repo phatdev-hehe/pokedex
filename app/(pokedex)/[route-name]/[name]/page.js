@@ -8,16 +8,17 @@ import { getOgUrl } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 
 import Avatar from "./avatar";
-import registry from "./registry";
+import configs from "./configs";
 
 export const generateStaticParams = async ({ params }) =>
   (await Pokedex.api(params["route-name"], "rootEndpoint")()).results
-    .slice(0, registry[params["route-name"]].prerenderLimit)
+    .slice(0, configs[params["route-name"]].prerenderLimit)
     .map((item) => ({ name: item.name }));
 
 export default async ({ params }) => {
   params = await params;
 
+  const config = configs[params["route-name"]];
   const items = await Pokedex.api(params["route-name"], "rootEndpoint")();
   const names = items.results.map((item) => item.name);
 
@@ -37,7 +38,7 @@ export default async ({ params }) => {
     index,
   };
 
-  const avatarSrc = registry[params["route-name"]].getAvatar({ context });
+  const avatarSrc = config.getAvatar({ context });
   const [nextName, previousName] = [cycled.peek(1), cycled.peek(-1)];
 
   return (
@@ -84,7 +85,7 @@ export default async ({ params }) => {
             <Link href={item.url}>API</Link>
           ),
         }}
-        favicon={registry[params["route-name"]].getFavicon({ context })}
+        favicon={config.getFavicon({ context })}
         ogUrl={getOgUrl({
           title: titleCase(params.name),
           topic: titleCase(params["route-name"]),
@@ -109,16 +110,14 @@ export default async ({ params }) => {
           (item) => item.name === params.name
         ) || (
           <Callout
-            title={`Static limit exceeded (${
-              registry[params["route-name"]].prerenderLimit
-            })`}
+            title={`Static limit exceeded (${config.prerenderLimit})`}
             type="warn"
           >
             This page wasn’t pre-built because it’s outside the static
             generation limit. Data changes may cause inconsistent results.
           </Callout>
         )}
-        {await registry[params["route-name"]].getContent({ context })}
+        {await config.getContent({ context })}
       </Pokedex>
     </>
   );
