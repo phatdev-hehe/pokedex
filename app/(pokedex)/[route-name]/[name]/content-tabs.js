@@ -1,9 +1,9 @@
 import { table } from "@/components";
 import { Link } from "@/components/link";
-import { LanguageLink } from "@/components/link/language-link";
 import { titleCase } from "@/utils/title-case";
 
 import { Avatar, unnamedLink } from "./components";
+import languageLink from "./components/language-link";
 
 const RAW_CONTENT = Symbol();
 
@@ -20,7 +20,7 @@ export default {
     table.pagination(context, {
       renderRows: ({ context }) => [
         context.description,
-        <LanguageLink language={context.language} />,
+        languageLink(context.language),
       ],
       thead: [undefined, "language"],
     })
@@ -46,7 +46,7 @@ export default {
         ) : (
           context.effect
         ),
-        <LanguageLink language={context.language} />,
+        languageLink(context.language),
       ],
       thead: [undefined, "language"],
     })
@@ -100,7 +100,7 @@ export default {
           <Link href={`/version-group/${versionGroup}`}>
             {titleCase(versionGroup)}
           </Link>,
-          <LanguageLink language={context.language} />,
+          languageLink(context.language),
         ];
       },
       thead: [undefined, "version", "version_group", "language"],
@@ -139,7 +139,7 @@ export default {
     table.pagination(context, {
       renderRows: ({ context }) => [
         context.name,
-        <LanguageLink language={context.language} />,
+        languageLink(context.language),
       ],
       thead: [undefined, "language"],
     })

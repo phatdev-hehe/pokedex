@@ -4,7 +4,7 @@ const names = new Intl.DisplayNames(["en"], {
   type: "language",
 });
 
-export const LanguageLink = ({ language }) => {
+export default (language) => {
   let name;
 
   try {

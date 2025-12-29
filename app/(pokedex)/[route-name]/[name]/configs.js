@@ -14,11 +14,11 @@ import {
 import { Chart } from "@/components/chart";
 import { inlineMath } from "@/components/katex";
 import { Link } from "@/components/link";
-import { LanguageLink } from "@/components/link/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 import { unnamedLink } from "./components";
+import languageLink from "./components/language-link";
 import contentTabs from "./content-tabs";
 
 const minPrerenderLimit = 100;
@@ -329,7 +329,7 @@ export default mapValues(
                 renderRows: ({ context }) => [
                   context.name,
                   context.color,
-                  <LanguageLink language={context.language} />,
+                  languageLink(context.language),
                 ],
                 thead: [undefined, "color", "language"],
               }),
@@ -1790,7 +1790,7 @@ export default mapValues(
           awesome_names: table.pagination(pokemonShape.awesome_names, {
             renderRows: ({ context }) => [
               context.awesome_name,
-              <LanguageLink language={context.language} />,
+              languageLink(context.language),
             ],
             thead: [undefined, "language"],
           }),
@@ -1952,7 +1952,7 @@ export default mapValues(
               genera: table.pagination(pokemonSpecies.genera, {
                 renderRows: ({ context }) => [
                   context.genus,
-                  <LanguageLink language={context.language} />,
+                  languageLink(context.language),
                 ],
                 thead: ["genus", "language"],
               }),
