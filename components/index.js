@@ -1,10 +1,8 @@
 import { kebabCase } from "change-case";
-import convert from "convert";
 import { chunk, flow, isPlainObject, noop } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Fragment, useId } from "react";
-import Highlighter from "react-highlight-words";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
 
@@ -13,22 +11,8 @@ import { titleCase } from "@/utils/title-case";
 
 const toId = flow(removeAccents, kebabCase);
 
-export const highlighter = (textToHighlight, ...searchWords) => (
-  <Highlighter
-    caseSensitive
-    highlightStyle={{
-      backgroundColor: "var(--color-fd-accent)",
-      color: "var(--color-fd-accent-foreground)",
-      letterSpacing: "-0.05ch",
-    }}
-    highlightTag="code"
-    searchWords={searchWords}
-    textToHighlight={textToHighlight}
-  />
-);
-
 export const table = Object.assign(
-  (thead = [], tbody = thead, tfoot) => {
+  (thead = [], tbody = [], tfoot) => {
     if (thead.length || tbody.length)
       return (
         <PrerenderInView>
@@ -171,8 +155,6 @@ export const list = Object.assign(
   }
 );
 
-export const audio = (src) => <audio controls src={src} />;
-
 export const Checkbox = ({ checked, children }) => {
   const id = useId();
 
@@ -195,29 +177,4 @@ export const Checkbox = ({ checked, children }) => {
   );
 };
 
-export const unit = (quantity, from, to = "best") => (
-  <span title={`${quantity} ${from}`}>
-    {convert(quantity, from).to(to).toString(1)}
-  </span>
-);
-
 export const noContent = () => <Callout title="No Content" />;
-
-export const descriptionList = (term, ...descriptions) => (
-  <dl>
-    <dt>{term}</dt>
-    <dd>
-      {descriptions.map((description, index) => (
-        <blockquote
-          key={index}
-          style={{
-            fontStyle: "unset",
-            fontWeight: "unset",
-          }}
-        >
-          {description}
-        </blockquote>
-      ))}
-    </dd>
-  </dl>
-);

@@ -1,22 +1,18 @@
 import { asyncNoop, mapValues, maxBy, minBy, noop, sumBy } from "es-toolkit";
 
-import {
-  audio,
-  Checkbox,
-  descriptionList,
-  highlighter,
-  list,
-  noContent,
-  table,
-  tabs,
-  unit,
-} from "@/components";
+import { Checkbox, list, noContent, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-import { unnamedLink } from "./components";
+import {
+  audio,
+  descriptionList,
+  highlighter,
+  unit,
+  unnamedLink,
+} from "./components";
 import inlineMath from "./components/inline-math";
 import languageLink from "./components/language-link";
 import contentTabs from "./content-tabs";
