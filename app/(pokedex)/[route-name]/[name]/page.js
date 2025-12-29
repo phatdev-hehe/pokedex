@@ -7,7 +7,7 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { getOgUrl } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 
-import Avatar from "./avatar";
+import { Avatar } from "./components";
 import configs from "./configs";
 
 export const generateStaticParams = async ({ params }) =>

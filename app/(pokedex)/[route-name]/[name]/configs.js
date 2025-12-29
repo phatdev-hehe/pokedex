@@ -13,11 +13,12 @@ import {
 } from "@/components";
 import { Chart } from "@/components/chart";
 import { inlineMath } from "@/components/katex";
-import { Link, UnnamedLink } from "@/components/link";
+import { Link } from "@/components/link";
 import { LanguageLink } from "@/components/link/language-link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
+import { unnamedLink } from "./components";
 import contentTabs from "./content-tabs";
 
 const minPrerenderLimit = 100;
@@ -744,7 +745,7 @@ export default mapValues(
                   "An evolution chain this item requires to produce a bay during mating.",
                   "evolution chain"
                 ),
-                <UnnamedLink href={item.baby_trigger_for?.url} />,
+                unnamedLink(item.baby_trigger_for?.url),
               ],
               [
                 "The effect of the move Fling when used with this item.",
@@ -1067,14 +1068,14 @@ export default mapValues(
               ],
               [
                 "The effect the move has when used in a contest.",
-                <UnnamedLink href={move.contest_effect?.url} />,
+                unnamedLink(move.contest_effect?.url),
               ],
               [
                 highlighter(
                   "The effect the move has when used in a super contest.",
                   "super contest"
                 ),
-                <UnnamedLink href={move.super_contest_effect?.url} />,
+                unnamedLink(move.super_contest_effect?.url),
               ],
               [
                 "The type of damage the move inflicts on the target.",
@@ -1845,7 +1846,7 @@ export default mapValues(
                     "The evolution chain this Pokémon species is a member of.",
                     "evolution chain"
                   )}
-                  <UnnamedLink href={pokemonSpecies.evolution_chain.url} />
+                  {unnamedLink(pokemonSpecies.evolution_chain.url)}
                 </div>,
                 <EvolutionChainTree url={pokemonSpecies.evolution_chain.url} />,
               ],
@@ -2104,9 +2105,7 @@ export default mapValues(
                 )
               ),
               characteristics: table.pagination(stat.characteristics, {
-                renderRows: ({ context }) => [
-                  <UnnamedLink href={context.url} />,
-                ],
+                renderRows: ({ context }) => [unnamedLink(context.url)],
               }),
               ...contentTabs.names(stat.names),
             })}

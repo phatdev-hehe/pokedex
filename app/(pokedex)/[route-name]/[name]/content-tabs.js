@@ -1,9 +1,9 @@
 import { table } from "@/components";
-import { Link, UnnamedLink } from "@/components/link";
+import { Link } from "@/components/link";
 import { LanguageLink } from "@/components/link/language-link";
 import { titleCase } from "@/utils/title-case";
 
-import Avatar from "./avatar";
+import { Avatar, unnamedLink } from "./components";
 
 const RAW_CONTENT = Symbol();
 
@@ -127,7 +127,7 @@ export default {
   machines: defineTab("machines", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => [
-        <UnnamedLink href={context.machine.url} />,
+        unnamedLink(context.machine.url),
         <Link href={`/version-group/${context.version_group.name}`}>
           {titleCase(context.version_group.name)}
         </Link>,

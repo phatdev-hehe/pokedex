@@ -1,7 +1,6 @@
 "use client";
 
 import { useProgress } from "@bprogress/next";
-import { compact } from "es-toolkit";
 import FumadocsLink from "fumadocs-core/link";
 import { ForesightManager } from "js.foresight";
 import { useRouter } from "next/navigation";
@@ -54,14 +53,4 @@ export const Link = ({ href, prefetch = false, ...props }) => {
       {...props}
     />
   );
-};
-
-export const UnnamedLink = ({ href }) => {
-  if (href) {
-    const [a, b] = compact(new URL(href).pathname.split("/")).slice(-2);
-
-    href = `/${a}/${a}-${b}`;
-
-    return <Link href={href}>{href}</Link>;
-  }
 };
