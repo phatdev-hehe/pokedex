@@ -12,12 +12,12 @@ import {
   unit,
 } from "@/components";
 import { Chart } from "@/components/chart";
-import { inlineMath } from "@/components/katex";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 import { unnamedLink } from "./components";
+import inlineMath from "./components/inline-math";
 import languageLink from "./components/language-link";
 import contentTabs from "./content-tabs";
 

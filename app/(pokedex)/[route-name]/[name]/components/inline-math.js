@@ -3,7 +3,7 @@ import { InlineMath } from "react-katex";
 
 import { PrerenderInView } from "@/components/in-view";
 
-export const inlineMath = (
+export default (
   math // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/raw
 ) => (
   <PrerenderInView>
