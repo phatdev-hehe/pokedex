@@ -1,5 +1,6 @@
 import convert from "convert";
 import { compact } from "es-toolkit";
+import { useId } from "react";
 import Highlighter from "react-highlight-words";
 
 import { LazyImage } from "@/components/lazy-image";
@@ -62,3 +63,25 @@ export const descriptionList = (term, ...descriptions) => (
     </dd>
   </dl>
 );
+
+export const Checkbox = ({ checked, children }) => {
+  const id = useId();
+
+  return (
+    <div
+      style={{
+        display: "inline-flex",
+        gap: "var(--spacing)",
+      }}
+    >
+      <input
+        checked={checked}
+        disabled={!checked}
+        id={id}
+        readOnly
+        type="checkbox"
+      />
+      <label htmlFor={id}>{children}</label>
+    </div>
+  );
+};

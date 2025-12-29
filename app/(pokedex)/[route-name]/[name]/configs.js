@@ -1,6 +1,6 @@
 import { asyncNoop, mapValues, maxBy, minBy, noop, sumBy } from "es-toolkit";
 
-import { Checkbox, list, noContent, table, tabs } from "@/components";
+import { list, noContent, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -8,6 +8,7 @@ import { titleCase } from "@/utils/title-case";
 
 import {
   audio,
+  Checkbox,
   descriptionList,
   highlighter,
   unit,

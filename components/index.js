@@ -2,7 +2,7 @@ import { kebabCase } from "change-case";
 import { chunk, flow, isPlainObject, noop } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { Fragment, useId } from "react";
+import { Fragment } from "react";
 import removeAccents from "remove-accents";
 import romanize from "romanize";
 
@@ -154,27 +154,5 @@ export const list = Object.assign(
       }),
   }
 );
-
-export const Checkbox = ({ checked, children }) => {
-  const id = useId();
-
-  return (
-    <div
-      style={{
-        display: "inline-flex",
-        gap: "var(--spacing)",
-      }}
-    >
-      <input
-        checked={checked}
-        disabled={!checked}
-        id={id}
-        readOnly
-        type="checkbox"
-      />
-      <label htmlFor={id}>{children}</label>
-    </div>
-  );
-};
 
 export const noContent = () => <Callout title="No Content" />;

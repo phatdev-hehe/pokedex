@@ -1,4 +1,4 @@
-import { Checkbox, list, table } from "@/components";
+import { list, table } from "@/components";
 import { Link } from "@/components/link";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { getOgUrl } from "@/utils";
@@ -16,8 +16,6 @@ export default async ({ params }) => {
       canonical={`/${params["route-name"]}`}
       descriptions={{
         count: items.count,
-        unnamed: <Checkbox checked={items.isUnnamed} />,
-        // eslint-disable-next-line perfectionist/sort-objects
         links: list.inline(
           <Link href={`/random/${params["route-name"]}`}>Random</Link>
         ),
