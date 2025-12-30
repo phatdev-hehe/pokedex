@@ -16,13 +16,8 @@ export const GET = async (request, { params }) => {
     const items = await Pokedex.api(params.resource, "rootEndpoint")();
     const item = items.results.find((item) => item.name === name) ?? {};
 
-    return new NextResponse(
-      JSON.stringify(
-        "url" in item ? await Pokedex.api.getResource(item.url) : items
-      ),
-      {
-        headers: new Headers({ "content-type": "application/json" }),
-      }
+    return NextResponse.json(
+      "url" in item ? await Pokedex.api.getResource(item.url) : items
     );
   }
 
