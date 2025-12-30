@@ -26,7 +26,7 @@ import inlineMath from "./components/inline-math";
 import languageLink from "./components/language-link";
 import contentTabs from "./content-tabs";
 
-const minPrerenderLimit = 100;
+const minLimit = 100;
 
 const EvolutionChainTree = async ({ chain, url }) => {
   const content = (...chains) =>
@@ -536,7 +536,7 @@ export default mapValues(
           </>
         );
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     "evolution-trigger": ({ context }) => {
       /** @type EvolutionTrigger */
@@ -765,7 +765,7 @@ export default mapValues(
       get getFavicon() {
         return this.getAvatar;
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     "item-attribute": ({ context }) => {
       /** @type ItemAttribute */
@@ -905,7 +905,7 @@ export default mapValues(
           </>
         );
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     "location-area": {
       getContent: ({ context }) => {
@@ -968,7 +968,7 @@ export default mapValues(
           </>
         );
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     machine: {
       getContent: ({ context }) => {
@@ -1002,7 +1002,7 @@ export default mapValues(
           ],
         ]);
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     move: {
       getContent: ({ context }) => {
@@ -1156,7 +1156,7 @@ export default mapValues(
           </>
         );
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     "move-ailment": ({ context }) => {
       /** @type MoveAilment */
@@ -1698,7 +1698,7 @@ export default mapValues(
       get getFavicon() {
         return this.getAvatar;
       },
-      prerenderLimit: minPrerenderLimit,
+      limit: minLimit,
     },
     "pokemon-habitat": ({ context }) => {
       /** @type PokemonHabitat */
@@ -2216,7 +2216,7 @@ export default mapValues(
       getAvatar: noop,
       getContent: asyncNoop,
       getFavicon: noop,
-      prerenderLimit: Infinity,
+      limit: Infinity,
       ...value,
     };
 

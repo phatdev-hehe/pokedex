@@ -13,7 +13,7 @@ import configs from "./configs";
 
 export const generateStaticParams = async ({ params }) =>
   (await Pokedex.api(params["route-name"], "rootEndpoint")()).results
-    .slice(0, configs[params["route-name"]].prerenderLimit)
+    .slice(0, configs[params["route-name"]].limit)
     .map((item) => ({ name: item.name }));
 
 export default async ({ params }) => {
@@ -115,7 +115,7 @@ export default async ({ params }) => {
             (item) => item.name === params.name
           ) || (
             <Callout
-              title={`Static limit exceeded (${config.prerenderLimit})`}
+              title={`Static limit exceeded (${config.limit})`}
               type="warn"
             >
               This page wasn’t pre-built because it’s outside the static
