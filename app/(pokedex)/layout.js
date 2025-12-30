@@ -56,8 +56,8 @@ export default ({ children, logo }) => (
                   url: "/api/pokemon?encodedName=pikachu",
                 },
                 {
-                  name: "local-data.js",
-                  url: "/api/local-data",
+                  name: "names.js",
+                  url: "/api/names",
                 },
                 {
                   name: "Feed",
