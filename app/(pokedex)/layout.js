@@ -36,18 +36,10 @@ export default ({ children, logo }) => (
           url: "/",
         },
         {
-          name: "Random",
-          url: "/random",
-        },
-        {
           children: [
             {
-              name: "sitemap.xml",
-              url: "/sitemap.xml",
-            },
-            {
-              name: "robots.txt",
-              url: "/robots.txt",
+              name: "Random",
+              url: "/random",
             },
             {
               children: [
@@ -78,6 +70,14 @@ export default ({ children, logo }) => (
               ],
               name: "API",
               type: "folder",
+            },
+            {
+              name: "sitemap.xml",
+              url: "/sitemap.xml",
+            },
+            {
+              name: "robots.txt",
+              url: "/robots.txt",
             },
           ],
           name: "More",
