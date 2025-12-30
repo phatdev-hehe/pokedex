@@ -8,12 +8,12 @@ export const revalidate = 0;
 export const GET = async (request, { params }) => {
   params = await params;
 
-  if (Pokedex.api.routeNames.includes(params["route-name"])) {
+  if (Pokedex.api.routeNames.includes(params.resource)) {
     const name =
       request.nextUrl.searchParams.get("encodedName") ??
       request.nextUrl.searchParams.get("name");
 
-    const items = await Pokedex.api(params["route-name"], "rootEndpoint")();
+    const items = await Pokedex.api(params.resource, "rootEndpoint")();
     const item = items.results.find((item) => item.name === name) ?? {};
 
     return new NextResponse(

@@ -12,14 +12,14 @@ import { Avatar } from "./components";
 import configs from "./configs";
 
 export const generateStaticParams = async ({ params }) =>
-  (await Pokedex.api(params["route-name"], "rootEndpoint")()).results
-    .slice(0, configs[params["route-name"]].limit)
+  (await Pokedex.api(params.resource, "rootEndpoint")()).results
+    .slice(0, configs[params.resource].limit)
     .map((item) => ({ name: item.name }));
 
 export default async ({ params }) => {
   params = await params;
 
-  const items = await Pokedex.api(params["route-name"], "rootEndpoint")();
+  const items = await Pokedex.api(params.resource, "rootEndpoint")();
   const names = items.results.map((item) => item.name);
 
   params.name =
@@ -28,7 +28,7 @@ export default async ({ params }) => {
     decodeURIComponent(params.name);
 
   if (names.includes(params.name)) {
-    const config = configs[params["route-name"]];
+    const config = configs[params.resource];
     const cycled = new Cycled(names);
     const index = names.findIndex((name) => name === params.name);
     const item = items.results[index];
@@ -57,7 +57,7 @@ export default async ({ params }) => {
           />
         )}
         <Pokedex
-          canonical={`/${params["route-name"]}/${params.name}`}
+          canonical={`/${params.resource}/${params.name}`}
           descriptions={{
             game_index: context.data.game_index,
             id: context.data.id,
@@ -71,27 +71,27 @@ export default async ({ params }) => {
             ),
             order: context.data.order,
             previous: (
-              <Link href={`/${params["route-name"]}/${previousName}`}>
+              <Link href={`/${params.resource}/${previousName}`}>
                 {titleCase(previousName)}
               </Link>
             ),
             // eslint-disable-next-line perfectionist/sort-objects
             next: (
-              <Link href={`/${params["route-name"]}/${nextName}`}>
+              <Link href={`/${params.resource}/${nextName}`}>
                 {titleCase(nextName)}
               </Link>
             ),
             // eslint-disable-next-line perfectionist/sort-objects
             links: list.inline(
-              <Link href={`/${params["route-name"]}`}>List</Link>,
-              <Link href={`/random/${params["route-name"]}`}>Random</Link>,
+              <Link href={`/${params.resource}`}>List</Link>,
+              <Link href={`/random/${params.resource}`}>Random</Link>,
               <Link href={item.url}>API</Link>
             ),
           }}
           favicon={config.getFavicon({ context })}
           ogUrl={getOgUrl({
             title: titleCase(params.name),
-            topic: titleCase(params["route-name"]),
+            topic: titleCase(params.resource),
           })}
           renderTitle={() => (
             <span>
@@ -102,14 +102,12 @@ export default async ({ params }) => {
                 }}
               >
                 {" ("}
-                {titleCase(params["route-name"])}
+                {titleCase(params.resource)}
                 {")"}
               </span>
             </span>
           )}
-          title={`${titleCase(params.name)} (${titleCase(
-            params["route-name"]
-          )})`}
+          title={`${titleCase(params.name)} (${titleCase(params.resource)})`}
         >
           {(await generateStaticParams({ params })).some(
             (item) => item.name === params.name
