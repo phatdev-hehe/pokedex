@@ -14,10 +14,7 @@ import configs from "./configs";
 export const generateStaticParams = async ({ params }) =>
   (await Pokedex.api(params["route-name"], "rootEndpoint")()).results
     .slice(0, configs[params["route-name"]].prerenderLimit)
-    .map((item) => ({
-      name: item.name,
-      "route-name": params["route-name"], // ?
-    }));
+    .map((item) => ({ name: item.name }));
 
 export default async ({ params }) => {
   params = await params;
