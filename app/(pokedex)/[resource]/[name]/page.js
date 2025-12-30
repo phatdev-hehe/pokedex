@@ -8,8 +8,8 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { getOgUrl } from "@/utils";
 import { titleCase } from "@/utils/title-case";
 
-import { Avatar } from "./components";
 import configs from "./configs";
+import { Avatar } from "./configs/components";
 
 export const generateStaticParams = async ({ params }) =>
   (await Pokedex.api(params.resource, "rootEndpoint")()).results
