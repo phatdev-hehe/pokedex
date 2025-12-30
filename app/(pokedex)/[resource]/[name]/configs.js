@@ -765,6 +765,7 @@ export default mapValues(
       get getFavicon() {
         return this.getAvatar;
       },
+      limit: minLimit,
     },
     "item-attribute": ({ context }) => {
       /** @type ItemAttribute */

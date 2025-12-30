@@ -1,1 +1,1 @@
-export { default } from "./not-found";
+export { notFound as default } from "next/navigation";
