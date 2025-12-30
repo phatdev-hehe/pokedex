@@ -1,3 +1,5 @@
+import { mapValues } from "es-toolkit";
+
 import { list, table, tabs } from "@/components";
 import { Chart } from "@/components/chart";
 import { Link } from "@/components/link";
@@ -6,49 +8,29 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 const pageSeriesData = [];
-const routeNames = [];
 
-let [groupCount, routeCount, pageCount] = [0, 0, 0];
+let pageCount = 0;
 
 const content = tabs(
-  Object.fromEntries(
-    await Promise.all(
-      Object.entries(Pokedex.api.routeMap).map(async ([key, value]) => {
-        ++groupCount;
+  mapValues(Pokedex.api.routeMap, (value) =>
+    tabs(
+      mapValues(value, async (value, key) => {
+        const items = await Pokedex.api(key, "rootEndpoint")();
 
-        return [
-          key,
-          tabs(
-            Object.fromEntries(
-              await Promise.all(
-                Object.keys(value).map(async (routeName) => {
-                  const data = await Pokedex.api(routeName, "rootEndpoint")();
+        pageCount += items.count;
 
-                  ++routeCount;
-                  pageCount += data.count;
+        pageSeriesData.push({
+          name: key,
+          y: items.count,
+        });
 
-                  routeNames.push(routeName);
-
-                  pageSeriesData.push({
-                    name: routeName,
-                    y: data.count,
-                  });
-
-                  return [
-                    routeName,
-                    table.pagination(data.results, {
-                      renderRows: ({ context }) => [
-                        <Link href={`/${routeName}/${context.name}`}>
-                          {titleCase(context.name)}
-                        </Link>,
-                      ],
-                    }),
-                  ];
-                })
-              )
-            )
-          ),
-        ];
+        return table.pagination(items.results, {
+          renderRows: ({ context }) => [
+            <Link href={`/${key}/${context.name}`}>
+              {titleCase(context.name)}
+            </Link>,
+          ],
+        });
       })
     )
   )
@@ -58,13 +40,15 @@ export default () => (
   <Pokedex
     canonical="/"
     descriptions={{
-      groups: groupCount,
-      routes: routeCount,
+      groups: Object.keys(Pokedex.api.routeMap).length,
+      routes: Pokedex.api.routeNames.length,
       pages: pageCount, // eslint-disable-line perfectionist/sort-objects
       // eslint-disable-next-line perfectionist/sort-objects
       links: list.inline(
         <RandomLink
-          links={routeNames.map((routeName) => `/random/${routeName}`)}
+          links={Pokedex.api.routeNames.map(
+            (routeName) => `/random/${routeName}`
+          )}
         >
           Random
         </RandomLink>
