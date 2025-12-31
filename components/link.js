@@ -4,12 +4,12 @@ import { useProgress } from "@bprogress/next";
 import FumadocsLink from "fumadocs-core/link";
 import { ForesightManager } from "js.foresight";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 
 const useForesightRef = (options) => {
   const ref = useRef();
 
-  useEffect(() => {
+  const effectEvent = useEffectEvent(() => {
     const element = ref.current;
 
     if (element)
@@ -22,7 +22,9 @@ const useForesightRef = (options) => {
     return () => {
       if (element) ForesightManager.instance.unregister(element);
     };
-  }, [ref, options]);
+  });
+
+  useEffect(effectEvent);
 
   return ref;
 };

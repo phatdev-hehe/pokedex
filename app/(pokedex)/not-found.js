@@ -1,7 +1,7 @@
 import { Callout } from "fumadocs-ui/components/callout";
 import { DocsBody } from "fumadocs-ui/page";
 
-import { RouterActions } from "@/components/router";
+import { RouterActions } from "@/components/client";
 
 export default () => (
   <DocsBody>

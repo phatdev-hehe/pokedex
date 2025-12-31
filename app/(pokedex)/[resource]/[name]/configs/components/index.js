@@ -3,7 +3,7 @@ import { compact } from "es-toolkit";
 import { useId } from "react";
 import Highlighter from "react-highlight-words";
 
-import { LazyImage } from "@/components/lazy-image";
+import { LazyImage } from "@/components/client";
 import { Link } from "@/components/link";
 
 export const audio = (src) => <audio controls src={src} />;

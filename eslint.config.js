@@ -9,7 +9,6 @@ export default defineConfig([
   {
     rules: {
       "import/no-anonymous-default-export": "off",
-      "jsx-a11y/alt-text": "off",
       "react/display-name": "off",
       "react/jsx-key": "off",
     },

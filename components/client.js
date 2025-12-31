@@ -1,10 +1,13 @@
 "use client";
 
-import { sample } from "es-toolkit";
+import { useImagePreload } from "@madeinhaus/hooks";
+import { isPlainObject, pick, sample } from "es-toolkit";
 import { useRouter } from "next/navigation";
 
 import { list } from "@/components";
+import { PrerenderInView } from "@/components/in-view";
 import { Link } from "@/components/link";
+import { useProgressWhen } from "@/hooks";
 
 export { usePathname as Pathname } from "next/navigation";
 
@@ -30,5 +33,30 @@ export const RandomLink = ({ children, links }) => {
     >
       {children}
     </a>
+  );
+};
+
+export const LazyImage = ({
+  decoding = "async",
+  loading = "lazy",
+  src,
+  ...props
+}) => {
+  const [loaded, fnRef] = useImagePreload();
+
+  useProgressWhen(!loaded);
+
+  return (
+    <PrerenderInView>
+      <img
+        decoding={decoding}
+        loading={loading}
+        ref={fnRef}
+        {...(isPlainObject(src)
+          ? pick(src, ["height", "width", "src"])
+          : { src })}
+        {...props}
+      />
+    </PrerenderInView>
   );
 };
