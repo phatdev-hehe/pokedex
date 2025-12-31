@@ -1,15 +1,10 @@
-import { kebabCase } from "change-case";
-import { chunk, flow, isPlainObject, noop } from "es-toolkit";
+import { chunk, isPlainObject, noop } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Fragment } from "react";
-import removeAccents from "remove-accents";
 import romanize from "romanize";
 
 import { PrerenderInView } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
-
-const toId = flow(removeAccents, kebabCase);
 
 export const table = Object.assign(
   (thead = [], tbody = [], tfoot) => {
@@ -95,41 +90,6 @@ export const table = Object.assign(
     ),
   }
 );
-
-export const tabs = (tabs = {}) => {
-  if (Object.keys(tabs).length)
-    return (
-      <PrerenderInView>
-        <Tabs
-          items={Object.keys(tabs).map(titleCase)}
-          style={{
-            backgroundColor: "unset",
-            border: "unset",
-          }}
-          updateAnchor
-        >
-          {Object.entries(tabs).map((tab) => {
-            const id = toId(tab[0]);
-
-            return (
-              <Tab
-                id={id}
-                key={id}
-                style={{
-                  backgroundColor: "unset",
-                  overflow: "auto",
-                  paddingInline: "unset",
-                }}
-                value={titleCase(tab[0])}
-              >
-                <PrerenderInView>{tab[1] ?? noContent()}</PrerenderInView>
-              </Tab>
-            );
-          })}
-        </Tabs>
-      </PrerenderInView>
-    );
-};
 
 export const list = Object.assign(
   (...items) => (
