@@ -8,9 +8,17 @@
   --color-fd-background: white;
   --color-fd-card: #f9f9f9;
 
+  .prose {
+    --tw-prose-links: blue;
+  }
+
   &.dark {
     --color-fd-background: hsl(0, 0%, 2%);
     --color-fd-card: hsl(0, 0%, 4%);
+
+    .prose {
+      --tw-prose-links: cornflowerblue;
+    }
   }
 }
 
@@ -38,13 +46,5 @@
       text-wrap: nowrap;
       background-color: inherit;
     }
-  }
-
-  .prose {
-    --tw-prose-links: blue;
-  }
-
-  &.dark .prose {
-    --tw-prose-links: cornflowerblue;
   }
 }
