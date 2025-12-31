@@ -24,7 +24,9 @@ export const InView = ({
 }) => {
   children = <Activity>{children}</Activity>;
 
-  const [ref, entry] = useIntersectionObserver();
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 0,
+  });
 
   const WrapperProps = {
     "data-inview": entry?.isIntersecting,
