@@ -12,21 +12,21 @@ const pageSeriesData = [];
 let pageCount = 0;
 
 const content = tabs(
-  mapValues(Pokedex.api.routeMap, (value) =>
+  mapValues(Pokedex.api.routeGroups, (routes) =>
     tabs(
-      mapValues(value, async (value, key) => {
-        const items = await Pokedex.api(key, "rootEndpoint")();
+      mapValues(routes, async (value, route) => {
+        const items = await Pokedex.api(route, "rootEndpoint")();
 
         pageCount += items.count;
 
         pageSeriesData.push({
-          name: key,
+          name: route,
           y: items.count,
         });
 
         return table.pagination(items.results, {
           renderRows: ({ context }) => [
-            <Link href={`/${key}/${context.name}`}>
+            <Link href={`/${route}/${context.name}`}>
               {titleCase(context.name)}
             </Link>,
           ],
@@ -40,15 +40,13 @@ export default () => (
   <Pokedex
     canonical="/"
     descriptions={{
-      groups: Object.keys(Pokedex.api.routeMap).length,
-      routes: Pokedex.api.routeNames.length,
+      groups: Object.keys(Pokedex.api.routeGroups).length,
+      routes: Pokedex.api.routes.length,
       pages: pageCount, // eslint-disable-line perfectionist/sort-objects
       // eslint-disable-next-line perfectionist/sort-objects
       links: list.inline(
         <RandomLink
-          links={Pokedex.api.routeNames.map(
-            (routeName) => `/random/${routeName}`
-          )}
+          links={Pokedex.api.routes.map((route) => `/random/${route}`)}
         >
           Random
         </RandomLink>

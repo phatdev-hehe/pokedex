@@ -4,7 +4,7 @@ import fs from "node:fs";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export const GET = async () => {
-  const data = await Pokedex.api.routeNames.reduce(async (a, b) => {
+  const data = await Pokedex.api.routes.reduce(async (a, b) => {
     a = await a;
 
     a[b] = (await Pokedex.api(b, "rootEndpoint")()).results.map(

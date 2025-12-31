@@ -5,9 +5,9 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 // export const dynamicParams = false;
 
 export const generateStaticParams = () =>
-  Pokedex.api.routeNames.map((resource) => ({ resource }));
+  Pokedex.api.routes.map((resource) => ({ resource }));
 
 export default async ({ children, params }) => {
-  if (Pokedex.api.routeNames.includes((await params).resource)) return children;
+  if (Pokedex.api.routes.includes((await params).resource)) return children;
   else notFound();
 };

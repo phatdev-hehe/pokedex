@@ -9,14 +9,14 @@ export const revalidate = 0;
 export default () => (
   <Pokedex canonical="/api-page" title="API">
     {tabs(
-      mapValues(Pokedex.api.routeMap, (value) =>
+      mapValues(Pokedex.api.routeGroups, (routes) =>
         tabs(
-          mapValues(value, async (value, key) =>
+          mapValues(routes, async (value, route) =>
             table.pagination(
-              (await Pokedex.api(key, "rootEndpoint")()).results,
+              (await Pokedex.api(route, "rootEndpoint")()).results,
               {
                 renderRows: ({ context }) => {
-                  const href = `/api/${key}?name=${encodeURIComponent(
+                  const href = `/api/${route}?name=${encodeURIComponent(
                     context.name
                   )}`;
 

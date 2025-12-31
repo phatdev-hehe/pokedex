@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const GET = async (request, { params }) => {
   params = await params;
 
-  if (Pokedex.api.routeNames.includes(params.resource)) {
+  if (Pokedex.api.routes.includes(params.resource)) {
     const items = await Pokedex.api(params.resource, "rootEndpoint")();
 
     const item =

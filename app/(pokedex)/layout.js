@@ -6,18 +6,18 @@ import { titleCase } from "@/utils/title-case";
 
 const pokedexNavTree = [];
 
-for (const [key, value] of Object.entries(Pokedex.api.routeMap)) {
+for (const [routeGroup, routes] of Object.entries(Pokedex.api.routeGroups)) {
   pokedexNavTree.push({
-    name: titleCase(key),
+    name: titleCase(routeGroup),
     type: "separator",
   });
 
-  for (const routeName of Object.keys(value))
+  for (const route of Object.keys(routes))
     pokedexNavTree.push({
-      name: `${titleCase(routeName)} (${
-        (await Pokedex.api(routeName, "rootEndpoint")()).count
+      name: `${titleCase(route)} (${
+        (await Pokedex.api(route, "rootEndpoint")()).count
       })`,
-      url: `/${routeName}`,
+      url: `/${route}`,
     });
 }
 

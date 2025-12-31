@@ -8,7 +8,7 @@ import RandomRedirect from "./random-redirect";
 export default async ({ params }) => {
   params = await params;
 
-  if (Pokedex.api.routeNames.includes(params.resource))
+  if (Pokedex.api.routes.includes(params.resource))
     return (
       <DocsBody>
         <RandomRedirect

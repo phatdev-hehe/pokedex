@@ -9,7 +9,7 @@ import { titleCase } from "@/utils/title-case";
 export default async ({ params }) => {
   params = await params;
 
-  if (Pokedex.api.routeNames.includes(params.resource)) {
+  if (Pokedex.api.routes.includes(params.resource)) {
     const title = `${titleCase(`${params.resource} list`)}`;
     const items = await Pokedex.api(params.resource, "rootEndpoint")();
     const names = items.results.map((item) => item.name);

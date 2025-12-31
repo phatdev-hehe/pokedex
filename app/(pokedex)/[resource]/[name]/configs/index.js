@@ -61,7 +61,7 @@ const EvolutionChainTree = async ({ chain, url }) => {
 
 export default mapValues(
   {
-    ...Pokedex.api.routeNames.reduce((a, b) => {
+    ...Pokedex.api.routes.reduce((a, b) => {
       a[b] = {};
 
       return a;

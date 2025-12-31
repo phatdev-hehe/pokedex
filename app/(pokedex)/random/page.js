@@ -7,8 +7,8 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 export default () => (
   <Pokedex canonical="/random" title="Random">
     {tabs(
-      mapValues(Pokedex.api.routeMap, (value) =>
-        table.pagination(Object.keys(value), {
+      mapValues(Pokedex.api.routeGroups, (routes) =>
+        table.pagination(Object.keys(routes), {
           renderRows: ({ context }) => {
             const href = `/random/${context}`;
 

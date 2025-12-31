@@ -10,19 +10,19 @@ const withDefaultProps = ({ url, ...rest }) => ({
 });
 
 export default async () => [
-  ...Pokedex.api.routeNames.map((routeName) =>
+  ...Pokedex.api.routes.map((route) =>
     withDefaultProps({
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${routeName}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${route}`,
     })
   ),
   ...(
     await Promise.all(
-      Pokedex.api.routeNames.map(async (routeName) =>
+      Pokedex.api.routes.map(async (route) =>
         (
-          await Pokedex.api(routeName, "rootEndpoint")()
+          await Pokedex.api(route, "rootEndpoint")()
         ).results.map((item) =>
           withDefaultProps({
-            url: `${process.env.NEXT_PUBLIC_SITE_URL}/${routeName}/${item.name}`,
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/${route}/${item.name}`,
           })
         )
       )
