@@ -1,7 +1,8 @@
 import { mapValues } from "es-toolkit";
 
-import { table, tabs } from "@/components";
+import { table } from "@/components";
 import { Link } from "@/components/link";
+import { tabs } from "@/components/tabs";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export const revalidate = 0;

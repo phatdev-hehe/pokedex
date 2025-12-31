@@ -2,6 +2,7 @@ import { kebabCase } from "change-case";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import removeAccents from "remove-accents";
 
+import { noContent } from "@/components";
 import { PrerenderInView } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
 

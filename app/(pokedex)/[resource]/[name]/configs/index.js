@@ -8,9 +8,10 @@ import {
   sumBy,
 } from "es-toolkit";
 
-import { list, noContent, table, tabs } from "@/components";
+import { list, noContent, table } from "@/components";
 import { Chart } from "@/components/chart";
 import { Link } from "@/components/link";
+import { tabs } from "@/components/tabs";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 

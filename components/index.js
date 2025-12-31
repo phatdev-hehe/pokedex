@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import romanize from "romanize";
 
 import { PrerenderInView } from "@/components/in-view";
+import { tabs } from "@/components/tabs";
 import { titleCase } from "@/utils/title-case";
 
 export const table = Object.assign(

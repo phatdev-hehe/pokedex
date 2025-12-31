@@ -1,9 +1,10 @@
 import { mapValues } from "es-toolkit";
 
-import { list, table, tabs } from "@/components";
+import { list, table } from "@/components";
 import { Chart } from "@/components/chart";
 import { RandomLink } from "@/components/client";
 import { Link } from "@/components/link";
+import { tabs } from "@/components/tabs";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
