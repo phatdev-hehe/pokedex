@@ -26,13 +26,13 @@ export const RandomLink = ({ children, links }) => {
   const router = useRouter();
 
   return (
-    <a
+    <Link
       onClick={() => {
         router.push(sample(links));
       }}
     >
       {children}
-    </a>
+    </Link>
   );
 };
 
