@@ -15,5 +15,9 @@ export default ({ children, href, keys }) => {
 
   useHotkeys(keys, effectEvent);
 
-  return <Link href={href}>{children}</Link>;
+  return (
+    <Link href={href} prefetch>
+      {children}
+    </Link>
+  );
 };
