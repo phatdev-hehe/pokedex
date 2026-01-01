@@ -12,10 +12,10 @@ for (const [routeGroup, routes] of Object.entries(Pokedex.api.routeGroups)) {
     type: "separator",
   });
 
-  for (const route of Object.keys(routes))
+  for (const [route, { rootEndpoint }] of Object.entries(routes))
     pokedexNavTree.push({
       name: `${titleCase(route)} (${
-        (await Pokedex.api(route, "rootEndpoint")()).count
+        (await Pokedex.api[rootEndpoint]()).count
       })`,
       url: `/${route}`,
     });

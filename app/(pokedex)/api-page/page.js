@@ -8,23 +8,24 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 export const revalidate = 0;
 
 export default () => (
-  <Pokedex canonical="/api-page" title="API">
+  <Pokedex
+    canonical="/api-page"
+    descriptions={{ versionPath: process.env.NEXT_PUBLIC_API_VERSION_PATH }}
+    title="API"
+  >
     {tabs(
       mapValues(Pokedex.api.routeGroups, (routes) =>
         tabs(
-          mapValues(routes, async (value, route) =>
-            table.pagination(
-              (await Pokedex.api(route, "rootEndpoint")()).results,
-              {
-                renderRows: ({ context }) => {
-                  const href = `/api/${route}?name=${encodeURIComponent(
-                    context.name
-                  )}`;
+          mapValues(routes, async ({ rootEndpoint }, route) =>
+            table.pagination((await Pokedex.api[rootEndpoint]()).results, {
+              renderRows: ({ context }) => {
+                const href = `/api/${route}?name=${encodeURIComponent(
+                  context.name
+                )}`;
 
-                  return [<Link href={href}>{href}</Link>];
-                },
-              }
-            )
+                return [<Link href={href}>{href}</Link>];
+              },
+            })
           )
         )
       )

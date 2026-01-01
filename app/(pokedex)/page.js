@@ -15,8 +15,8 @@ let pageCount = 0;
 const content = tabs(
   mapValues(Pokedex.api.routeGroups, (routes) =>
     tabs(
-      mapValues(routes, async (value, route) => {
-        const items = await Pokedex.api(route, "rootEndpoint")();
+      mapValues(routes, async ({ rootEndpoint }, route) => {
+        const items = await Pokedex.api[rootEndpoint]();
 
         pageCount += items.count;
 
