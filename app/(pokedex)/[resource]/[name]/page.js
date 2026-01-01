@@ -10,6 +10,7 @@ import { titleCase } from "@/utils/title-case";
 
 import configs from "./configs";
 import { Avatar } from "./configs/components";
+import HotkeyLink from "./hotkey-link";
 
 export const generateStaticParams = async ({ params }) =>
   (await Pokedex.api(params.resource, "rootEndpoint")()).results
@@ -71,15 +72,18 @@ export default async ({ params }) => {
             ),
             order: context.data.order,
             previous: (
-              <Link href={`/${params.resource}/${previousName}`}>
+              <HotkeyLink
+                href={`/${params.resource}/${previousName}`}
+                keys="left"
+              >
                 {titleCase(previousName)}
-              </Link>
+              </HotkeyLink>
             ),
             // eslint-disable-next-line perfectionist/sort-objects
             next: (
-              <Link href={`/${params.resource}/${nextName}`}>
+              <HotkeyLink href={`/${params.resource}/${nextName}`} keys="right">
                 {titleCase(nextName)}
-              </Link>
+              </HotkeyLink>
             ),
             // eslint-disable-next-line perfectionist/sort-objects
             links: list.inline(
