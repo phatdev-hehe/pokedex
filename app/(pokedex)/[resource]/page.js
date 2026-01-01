@@ -27,6 +27,14 @@ export default async ({ params }) => {
           title,
           topic: items.count,
         })}
+        renderTitle={() => (
+          <>
+            {titleCase(params.resource)}{" "}
+            <span style={{ color: "var(--color-fd-muted-foreground)" }}>
+              List
+            </span>
+          </>
+        )}
         title={title}
       >
         {table.pagination(names, {

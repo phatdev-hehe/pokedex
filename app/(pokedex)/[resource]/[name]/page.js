@@ -94,7 +94,7 @@ export default async ({ params }) => {
             topic: titleCase(params.resource),
           })}
           renderTitle={() => (
-            <span>
+            <>
               {titleCase(params.name)}
               <span
                 style={{
@@ -105,7 +105,7 @@ export default async ({ params }) => {
                 {titleCase(params.resource)}
                 {")"}
               </span>
-            </span>
+            </>
           )}
           title={`${titleCase(params.name)} (${titleCase(params.resource)})`}
         >
