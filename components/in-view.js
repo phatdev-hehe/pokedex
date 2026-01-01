@@ -48,7 +48,7 @@ export const InView = ({
   );
 };
 
-export const PrerenderInView = ({
+export const ClientInView = ({
   children,
   fallback = children,
   triggerOnce = true,

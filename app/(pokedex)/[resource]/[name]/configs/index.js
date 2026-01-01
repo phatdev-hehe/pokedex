@@ -16,7 +16,6 @@ import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
 import {
-  audio,
   Checkbox,
   descriptionList,
   highlighter,
@@ -1473,7 +1472,7 @@ export default mapValues(
               cries: table.pagination(Object.entries(pokemon.cries), {
                 renderRows: ({ context }) => [
                   titleCase(context[0]),
-                  audio(context[1]),
+                  <audio controls src={context[1]} />,
                 ],
               }),
               forms: table.pagination(pokemon.forms, {

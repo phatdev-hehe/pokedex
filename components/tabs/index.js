@@ -3,7 +3,7 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import removeAccents from "remove-accents";
 
 import { noContent } from "@/components";
-import { PrerenderInView } from "@/components/in-view";
+import { ClientInView } from "@/components/in-view";
 import { titleCase } from "@/utils/title-case";
 
 import "./index.css";
@@ -11,7 +11,7 @@ import "./index.css";
 export const tabs = (tabs = {}) => {
   if (Object.keys(tabs).length)
     return (
-      <PrerenderInView>
+      <ClientInView>
         <Tabs
           items={Object.keys(tabs).map(titleCase)}
           style={{
@@ -34,11 +34,11 @@ export const tabs = (tabs = {}) => {
                 }}
                 value={titleCase(tab[0])}
               >
-                <PrerenderInView>{tab[1] ?? noContent()}</PrerenderInView>
+                <ClientInView>{tab[1] ?? noContent()}</ClientInView>
               </Tab>
             );
           })}
         </Tabs>
-      </PrerenderInView>
+      </ClientInView>
     );
 };

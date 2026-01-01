@@ -5,7 +5,7 @@ import { isPlainObject, pick, sample } from "es-toolkit";
 import { useRouter } from "next/navigation";
 
 import { list } from "@/components";
-import { PrerenderInView } from "@/components/in-view";
+import { ClientInView } from "@/components/in-view";
 import { Link } from "@/components/link";
 import { useProgressWhen } from "@/hooks";
 
@@ -47,7 +47,7 @@ export const LazyImage = ({
   useProgressWhen(!loaded);
 
   return (
-    <PrerenderInView>
+    <ClientInView>
       <img
         decoding={decoding}
         loading={loading}
@@ -57,6 +57,6 @@ export const LazyImage = ({
           : { src })}
         {...props}
       />
-    </PrerenderInView>
+    </ClientInView>
   );
 };

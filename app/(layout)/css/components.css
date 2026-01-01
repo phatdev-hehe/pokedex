@@ -6,7 +6,6 @@
     color: var(--color-fd-muted-foreground);
 
     span {
-      text-decoration: unset;
       color: var(--color-fd-foreground);
     }
   }

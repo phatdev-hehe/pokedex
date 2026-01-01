@@ -1,4 +1,5 @@
 import Cycled from "cycled";
+import { pick } from "es-toolkit";
 import { Callout } from "fumadocs-ui/components/callout";
 import { notFound } from "next/navigation";
 
@@ -24,8 +25,7 @@ export default async ({ params }) => {
   const names = items.results.map((item) => item.name);
 
   params.name =
-    // name: "a%2Bb" > "a+b"
-    // /move-category/damage+raise
+    // /move-category/damage%2Braise > /move-category/damage+raise
     decodeURIComponent(params.name);
 
   if (names.includes(params.name)) {
@@ -60,8 +60,6 @@ export default async ({ params }) => {
         <Pokedex
           canonical={`/${params.resource}/${params.name}`}
           descriptions={{
-            game_index: context.data.game_index,
-            id: context.data.id,
             index: (
               <>
                 {index + 1}
@@ -70,7 +68,7 @@ export default async ({ params }) => {
                 </span>
               </>
             ),
-            order: context.data.order,
+            ...pick(context.data, ["game_index", "id", "order"]),
             previous: (
               <HotkeyLink
                 href={`/${params.resource}/${previousName}`}

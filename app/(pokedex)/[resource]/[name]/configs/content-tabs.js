@@ -7,7 +7,7 @@ import languageLink from "./components/language-link";
 
 const RAW_CONTENT = Symbol();
 
-const defineTab =
+const tab =
   (name, render) =>
   (context, as = name) => {
     const content = render({ context });
@@ -16,7 +16,7 @@ const defineTab =
   };
 
 export default {
-  descriptions: defineTab("descriptions", ({ context }) =>
+  descriptions: tab("descriptions", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => [
         context.description,
@@ -26,7 +26,7 @@ export default {
     })
   ),
   get effectChanges() {
-    return defineTab("effect_changes", ({ context }) =>
+    return tab("effect_changes", ({ context }) =>
       table.pagination(context, {
         renderRows: ({ context }) => [
           <Link href={`/version-group/${context.version_group.name}`}>
@@ -38,7 +38,7 @@ export default {
       })
     );
   },
-  effectEntries: defineTab("effect_entries", ({ context }) =>
+  effectEntries: tab("effect_entries", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => [
         context.short_effect ? (
@@ -52,7 +52,7 @@ export default {
     })
   ),
   encounter: {
-    versionDetails: defineTab("version_details", ({ context }) =>
+    versionDetails: tab("version_details", ({ context }) =>
       table.pagination(context, {
         renderRows: ({ context }) => [
           <Link href={`/version/${context.version.name}`}>
@@ -88,7 +88,7 @@ export default {
       })
     ),
   },
-  flavorTextEntries: defineTab("flavor_text_entries", ({ context }) =>
+  flavorTextEntries: tab("flavor_text_entries", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => {
         const version = context.version?.name;
@@ -106,7 +106,7 @@ export default {
       thead: [undefined, "version", "version_group", "language"],
     })
   ),
-  gameIndices: defineTab("game_indices", ({ context }) =>
+  gameIndices: tab("game_indices", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => {
         const generation = context.generation?.name;
@@ -124,7 +124,7 @@ export default {
       thead: [undefined, "generation", "version"],
     })
   ),
-  machines: defineTab("machines", ({ context }) =>
+  machines: tab("machines", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => [
         unnamedLink(context.machine.url),
@@ -135,7 +135,7 @@ export default {
       thead: [undefined, "version_group"],
     })
   ),
-  names: defineTab("names", ({ context }) =>
+  names: tab("names", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => [
         context.name,
@@ -145,13 +145,13 @@ export default {
     })
   ),
   RAW_CONTENT,
-  sprites: defineTab("sprites", ({ context }) =>
+  sprites: tab("sprites", ({ context }) =>
     table.pagination.fromObject(context, {
       renderKey: titleCase,
       renderValue: (src) => <Avatar src={src} />,
     })
   ),
-  types: defineTab("types", ({ context }) =>
+  types: tab("types", ({ context }) =>
     table.pagination(context, {
       renderRows: ({ context }) => [
         <Link href={`/type/${context.type.name}`}>

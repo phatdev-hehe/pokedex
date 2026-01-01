@@ -3,7 +3,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { Fragment } from "react";
 import romanize from "romanize";
 
-import { PrerenderInView } from "@/components/in-view";
+import { ClientInView } from "@/components/in-view";
 import { tabs } from "@/components/tabs";
 import { titleCase } from "@/utils/title-case";
 
@@ -11,7 +11,7 @@ export const table = Object.assign(
   (thead = [], tbody = [], tfoot) => {
     if (thead.length || tbody.length)
       return (
-        <PrerenderInView>
+        <ClientInView>
           <table>
             <thead>
               <tr>
@@ -31,7 +31,7 @@ export const table = Object.assign(
             </tbody>
             <tfoot>{tfoot}</tfoot>
           </table>
-        </PrerenderInView>
+        </ClientInView>
       );
   },
   {

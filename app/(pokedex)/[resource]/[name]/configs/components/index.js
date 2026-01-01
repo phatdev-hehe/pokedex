@@ -6,8 +6,6 @@ import Highlighter from "react-highlight-words";
 import { LazyImage } from "@/components/client";
 import { Link } from "@/components/link";
 
-export const audio = (src) => <audio controls src={src} />;
-
 export const highlighter = (textToHighlight, ...searchWords) => (
   <Highlighter
     caseSensitive
@@ -34,14 +32,17 @@ export const unnamedLink = (href) => {
 
 export const Avatar = ({ style, ...props }) => (
   <LazyImage
-    style={{ maxWidth: "calc(var(--text-base) * 6)", ...style }}
+    style={{
+      maxWidth: "calc(var(--text-base) * 6)",
+      ...style,
+    }}
     {...props}
   />
 );
 
-export const unit = (quantity, from, to = "best") => (
+export const unit = (quantity, from, to = "best", toFixed = 1) => (
   <span title={`${quantity} ${from}`}>
-    {convert(quantity, from).to(to).toString(1)}
+    {convert(quantity, from).to(to).toString(toFixed)}
   </span>
 );
 
@@ -64,7 +65,7 @@ export const descriptionList = (term, ...descriptions) => (
   </dl>
 );
 
-export const Checkbox = ({ checked, children }) => {
+export const Checkbox = ({ checked, children, readOnly = true }) => {
   const id = useId();
 
   return (
@@ -78,7 +79,7 @@ export const Checkbox = ({ checked, children }) => {
         checked={checked}
         disabled={!checked}
         id={id}
-        readOnly
+        readOnly={readOnly}
         type="checkbox"
       />
       <label htmlFor={id}>{children}</label>

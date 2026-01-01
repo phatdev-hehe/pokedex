@@ -10,6 +10,8 @@
 
   .prose {
     --tw-prose-links: blue;
+
+    accent-color: var(--tw-prose-links);
   }
 
   &.dark {
@@ -33,10 +35,6 @@
     &:hover {
       text-decoration: underline;
     }
-  }
-
-  input {
-    accent-color: var(--tw-prose-links);
   }
 
   table {
