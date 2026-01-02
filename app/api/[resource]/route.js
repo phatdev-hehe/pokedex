@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { GET as getRouteNames } from "@/app/api/route";
+import { GET as fallback } from "@/app/api/route";
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export const dynamic = "force-dynamic";
@@ -21,5 +21,5 @@ export const GET = async (request, { params }) => {
     );
   }
 
-  return getRouteNames();
+  return fallback();
 };
