@@ -1,6 +1,5 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
-import { Suspense } from "react";
 
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
@@ -26,7 +25,7 @@ export default ({ children, logo }) => (
   <DocsLayout
     githubUrl={process.env.NEXT_PUBLIC_GITHUB_URL}
     nav={{
-      title: <Suspense>{logo}</Suspense>,
+      title: logo,
       url: "/random/pokemon",
     }}
     themeSwitch={{ mode: "light-dark-system" }}

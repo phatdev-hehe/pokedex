@@ -11,7 +11,7 @@ export default async ({ params }) => {
     return (
       <Pokedex>
         <RandomRedirect
-          links={(
+          hrefs={(
             await Pokedex.api(params.resource, "rootEndpoint")()
           ).results.map((item) => `/${params.resource}/${item.name}`)}
         />

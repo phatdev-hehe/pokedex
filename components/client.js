@@ -8,6 +8,7 @@ import { list } from "@/components";
 import { ClientInView } from "@/components/in-view";
 import { Link } from "@/components/link";
 import { useProgressWhen } from "@/hooks";
+import { titleCase } from "@/utils/title-case";
 
 export { usePathname as Pathname } from "next/navigation";
 
@@ -16,19 +17,19 @@ export const RouterActions = () => {
 
   return list(
     <Link href="/">Go to the homepage</Link>,
-    <Link onClick={router.back}>Back</Link>,
-    <Link onClick={router.forward}>Forward</Link>,
-    <Link onClick={router.refresh}>Refresh</Link>
+    ...Object.entries(pick(router, ["back", "forward", "refresh"])).map(
+      ([key, value]) => <Link onClick={value}>{titleCase(key)}</Link>
+    )
   );
 };
 
-export const RandomLink = ({ children, links }) => {
+export const RandomLink = ({ children, hrefs }) => {
   const router = useRouter();
 
   return (
     <a // ?
       onClick={() => {
-        router.push(sample(links));
+        router.push(sample(hrefs));
       }}
     >
       {children}

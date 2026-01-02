@@ -47,7 +47,7 @@ export default () => (
       // eslint-disable-next-line perfectionist/sort-objects
       links: list.inline(
         <RandomLink
-          links={Pokedex.api.routes.map((route) => `/random/${route}`)}
+          hrefs={Pokedex.api.routes.map((route) => `/random/${route}`)}
         >
           Random
         </RandomLink>

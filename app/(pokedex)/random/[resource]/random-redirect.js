@@ -17,8 +17,8 @@ const useRouterPush = (href) => {
   useEffect(effectEvent);
 };
 
-export default ({ links }) => {
-  const href = sample(links);
+export default ({ hrefs }) => {
+  const href = sample(hrefs);
 
   useRouterPush(href);
 
