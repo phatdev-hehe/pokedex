@@ -20,7 +20,11 @@ export const metadata = {
 };
 
 export default ({ children }) => (
-  <html className={font.className} lang="en" suppressHydrationWarning>
+  <html
+    className={font.className}
+    lang={process.env.NEXT_PUBLIC_LOCALE}
+    suppressHydrationWarning
+  >
     <body style={requiredStyles}>
       <ProgressProvider>
         <FumadocsUIProvider>

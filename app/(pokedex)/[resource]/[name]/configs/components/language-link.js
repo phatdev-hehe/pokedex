@@ -1,6 +1,6 @@
 import { Link } from "@/components/link";
 
-const names = new Intl.DisplayNames(["en"], {
+const names = new Intl.DisplayNames([process.env.NEXT_PUBLIC_LOCALE], {
   type: "language",
 });
 
