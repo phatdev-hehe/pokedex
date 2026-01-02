@@ -7,20 +7,15 @@ import { useEffect, useEffectEvent } from "react";
 
 import { RouterActions } from "@/components/client";
 
-const useRouterPush = (href) => {
+export default ({ hrefs }) => {
   const router = useRouter();
+  const href = sample(hrefs);
 
   const effectEvent = useEffectEvent(() => {
     if (href) router.push(href);
   });
 
   useEffect(effectEvent);
-};
-
-export default ({ hrefs }) => {
-  const href = sample(hrefs);
-
-  useRouterPush(href);
 
   return (
     <Callout title="Redirecting to" type="warn">
