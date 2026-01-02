@@ -1,13 +1,13 @@
 import { Callout } from "fumadocs-ui/components/callout";
-import { DocsBody } from "fumadocs-ui/page";
 
 import { Pathname, RouterActions } from "@/components/client";
+import { Pokedex } from "@/lib/pokedex-promise-v2";
 
 export default () => (
-  <DocsBody>
+  <Pokedex>
     <Callout title="Loading…">
       <Pathname />
       <RouterActions />
     </Callout>
-  </DocsBody>
+  </Pokedex>
 );

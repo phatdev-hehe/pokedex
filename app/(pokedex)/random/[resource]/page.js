@@ -1,4 +1,3 @@
-import { DocsBody } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
 
 import { Pokedex } from "@/lib/pokedex-promise-v2";
@@ -10,13 +9,13 @@ export default async ({ params }) => {
 
   if (Pokedex.api.routes.includes(params.resource))
     return (
-      <DocsBody>
+      <Pokedex>
         <RandomRedirect
           links={(
             await Pokedex.api(params.resource, "rootEndpoint")()
           ).results.map((item) => `/${params.resource}/${item.name}`)}
         />
-      </DocsBody>
+      </Pokedex>
     );
   else notFound();
 };
