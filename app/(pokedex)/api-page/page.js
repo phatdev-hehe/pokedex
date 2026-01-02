@@ -10,7 +10,10 @@ export const revalidate = 0;
 export default () => (
   <Pokedex
     canonical="/api-page"
-    descriptions={{ versionPath: process.env.NEXT_PUBLIC_API_VERSION_PATH }}
+    descriptions={{
+      revalidate,
+      versionPath: process.env.NEXT_PUBLIC_API_VERSION_PATH,
+    }}
     title="API"
   >
     {tabs(

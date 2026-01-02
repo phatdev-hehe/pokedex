@@ -1,19 +1,20 @@
 import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { DocsPage } from "fumadocs-ui/page";
+import { Suspense } from "react";
 
 import { Pokedex } from "@/lib/pokedex-promise-v2";
 import { titleCase } from "@/utils/title-case";
 
-const pokedexNavTree = [];
+const pokedexNav = [];
 
 for (const [routeGroup, routes] of Object.entries(Pokedex.api.routeGroups)) {
-  pokedexNavTree.push({
+  pokedexNav.push({
     name: titleCase(routeGroup),
     type: "separator",
   });
 
   for (const [route, { rootEndpoint }] of Object.entries(routes))
-    pokedexNavTree.push({
+    pokedexNav.push({
       name: `${titleCase(route)} (${
         (await Pokedex.api[rootEndpoint]()).count
       })`,
@@ -25,7 +26,7 @@ export default ({ children, logo }) => (
   <DocsLayout
     githubUrl={process.env.NEXT_PUBLIC_GITHUB_URL}
     nav={{
-      title: logo,
+      title: <Suspense>{logo}</Suspense>,
       url: "/random/pokemon",
     }}
     themeSwitch={{ mode: "light-dark-system" }}
@@ -83,7 +84,7 @@ export default ({ children, logo }) => (
           name: "More",
           type: "folder",
         },
-        ...pokedexNavTree,
+        ...pokedexNav,
       ],
     }}
   >
