@@ -1,0 +1,13 @@
+/* SearchDialog */
+[data-state="open"] + [role="dialog"] {
+  background-color: var(--color-fd-background);
+
+  [data-empty="false"] button p[class="min-w-0 truncate font-medium"] {
+    color: var(--color-fd-muted-foreground);
+
+    span {
+      text-decoration: unset;
+      color: var(--color-fd-foreground);
+    }
+  }
+}

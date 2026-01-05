@@ -1,0 +1,48 @@
+@import url("./theme.css");
+@import url("./components.css");
+
+:root {
+  --fd-page-width: 1100px;
+  /* --fd-layout-width: 100%; */
+
+  --color-fd-background: white;
+  --color-fd-card: #f9f9f9;
+
+  .prose {
+    --tw-prose-links: blue;
+
+    accent-color: var(--tw-prose-links);
+  }
+
+  &.dark {
+    --color-fd-background: hsl(0, 0%, 2%);
+    --color-fd-card: hsl(0, 0%, 4%);
+
+    .prose {
+      --tw-prose-links: cornflowerblue;
+    }
+  }
+}
+
+:root {
+  font-size: 1.88ch !important;
+
+  a {
+    text-underline-offset: var(--spacing);
+    text-decoration: unset;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  table {
+    background-color: var(--color-fd-card);
+
+    th {
+      text-wrap: nowrap;
+      background-color: inherit;
+    }
+  }
+}

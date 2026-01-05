@@ -1,0 +1,19 @@
+[role="tablist"] {
+  padding-inline: unset;
+  gap: calc(var(--spacing) * 2);
+
+  [role="tab"] {
+    border: unset;
+    border-radius: 100dvw;
+    padding: var(--spacing) calc(var(--spacing) * 2);
+    font-weight: normal;
+
+    &[aria-selected="true"] {
+      background-color: var(--color-fd-foreground);
+      color: var(--color-fd-background);
+    }
+  }
+
+  [role="tabpanel"] {
+  }
+}

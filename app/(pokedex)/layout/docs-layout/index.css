@@ -1,0 +1,19 @@
+#nd-docs-layout {
+  #nd-page {
+    margin-inline: unset;
+
+    /* DocsBody */
+    > article div[class="prose flex-1"] {
+      background-color: var(--color-fd-background);
+      position: relative;
+    }
+  }
+
+  [id^="nd-sidebar"] {
+    background-color: var(--color-fd-background);
+
+    [data-radix-scroll-area-viewport] a[data-active]:hover {
+      text-decoration: unset;
+    }
+  }
+}

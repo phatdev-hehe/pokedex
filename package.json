@@ -1,26 +1,40 @@
 {
-  "name": "pokedex",
-  "version": "0.0.0",
-  "private": true,
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start",
-    "postinstall": "fumadocs-mdx"
+    "start": "next start"
   },
   "dependencies": {
-    "next": "15.1.4",
-    "fumadocs-ui": "14.7.4",
-    "fumadocs-core": "14.7.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "fumadocs-mdx": "11.3.1"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
-    "@types/node": "22.10.6",
-    "@types/react": "^19.0.7",
-    "@types/react-dom": "^19.0.3",
-    "typescript": "^5.7.3",
-    "@types/mdx": "^2.0.13"
+    "@bprogress/next": "^3.2.12",
+    "@highcharts/react": "^4.1.0",
+    "@madeinhaus/hooks": "^2.2.0",
+    "@uidotdev/usehooks": "^2.4.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "change-case": "^5.4.4",
+    "convert": "^5.14.1",
+    "cycled": "^2.0.0",
+    "deromanize": "^1.0.0",
+    "entities": "^7.0.0",
+    "es-toolkit": "^1.43.0",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.1",
+    "eslint-plugin-perfectionist": "^4.15.1",
+    "feed": "^5.1.0",
+    "fumadocs-ui": "^16.1.0",
+    "fuse.js": "^7.1.0",
+    "js.foresight": "^3.3.4",
+    "next": "^16.1.1",
+    "pokedex-promise-v2": "^4.2.1",
+    "react-highlight-words": "^0.21.0",
+    "react-hotkeys-hook": "^5.2.1",
+    "react-katex": "^3.1.0",
+    "react-wrap-balancer": "^1.1.1",
+    "remove-accents": "^0.5.0",
+    "romanize": "^1.1.1",
+    "title-case": "^4.3.2"
   }
 }
