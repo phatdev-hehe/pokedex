@@ -13,12 +13,6 @@ const requiredStyles = {
   minHeight: "100dvh",
 };
 
-export const metadata = {
-  verification: {
-    google: "0g4xOknHTsS3aWczVHDj-smtRc9MUBhqsnVTeQVAkKE",
-  },
-};
-
 export default ({ children }) => (
   <html
     className={font.className}
